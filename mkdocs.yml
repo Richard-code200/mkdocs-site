@@ -1,0 +1,28 @@
+site_name: 我的技术博客
+theme:
+  name: material
+  language: zh # 设置中文界面
+  palette:
+    # 调色板配置，你可以根据喜好调整
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换至夜间模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换至日间模式
+  features:
+    - navigation.tabs # 启用顶部标签页
+    - content.code.copy # 启用代码块复制按钮
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
