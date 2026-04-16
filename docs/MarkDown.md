@@ -84,17 +84,3 @@ int main() {
 
 > 注意：在 Fedora 中使用 dnf 命令时通常需要 sudo 权限。
 > 这是一个多行引用，可以在里面换行。
-
-📊 5. 扩展语法 (很实用)
-
-    注：大多数现代编辑器 (VS Code, Typora, Obsidian) 都支持这些。
-
-表格
-快捷键 / 命令	功能描述	适用场景
-Ctrl + Alt + T	打开终端	Fedora GNOME
-Ctrl + C	终止进程	终端操作
-gcc -o main main.c	编译 C 代码	C 语言开发
-脚注
-
-这里提到了一项复杂的技术名词[^1]。
-[^1]: 这里是脚注的解释内容，比如 SELinux 的详细机制。
