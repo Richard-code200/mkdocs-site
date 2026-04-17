@@ -1,17 +1,20 @@
-# Welcome to MkDocs
+# 这是王佳贤的个人博客
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+这个博客从2026-04-15建立,用于记录个人学习到的内容和想记录的其他信息
 
-## Commands
+## 一点想法
 
-- `mkdocs new [dir-name]` - Create a new project.
-- `mkdocs serve` - Start the live-reloading docs server.
-- `mkdocs build` - Build the documentation site.
-- `mkdocs -h` - Print help message and exit.
+- 我也不知道这个博客能写多久写多少就是了
+- 但为了多少有点进步,还是想写些笔记啥的
+- 看看我能走多远吧
 
-## Project layout
+## 计划添加到这个博客的内容
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- [x] markdown的常用语法
+- [ ] git的常用指令
+- [ ] 在linux下常用的命令行工具
+- [ ] SQL语言和数据库相关的知识,sqlite之类的jj
+- [ ] 基于c语言的计算机算法设计
+- [ ] 基于Rust语言的算法和数据结构设计
+- [ ] 和计算机相关的线性代数知识
+- [ ] 计算机组成原理
