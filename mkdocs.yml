@@ -1,21 +1,8 @@
 site_name: 我的技术博客
 theme:
-  name: material
+  name: terminal
+  palette: gruvbox_dark
   language: zh # 设置中文界面
-  palette:
-    # 调色板配置，你可以根据喜好调整
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: 切换至夜间模式
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: 切换至日间模式
   features:
     - navigation.tabs # 启用顶部标签页
     - content.code.copy # 启用代码块复制按钮
@@ -26,3 +13,11 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js
+  - https://unpkg.com/highlightjs-cobol/dist/cobol.min.js
+  - add_hljs_highlight.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css
