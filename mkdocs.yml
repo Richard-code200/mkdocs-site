@@ -1,4 +1,5 @@
 site_name: My Mkdocs Site
+site_url: https://richard-code200.github.io/mkdocs-site/
 theme:
   name: terminal
   palette: gruvbox_dark
