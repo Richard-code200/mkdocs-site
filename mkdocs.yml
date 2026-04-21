@@ -1,4 +1,4 @@
-site_name: 我的技术博客
+site_name: My Mkdocs Site
 theme:
   name: terminal
   palette: gruvbox_dark
