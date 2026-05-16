@@ -1,6 +1,9 @@
 # MkDocs 构建输出
 site/
 
+# Agent
+Agent.md
+
 # Python 缓存
 __pycache__/
 *.pyc
