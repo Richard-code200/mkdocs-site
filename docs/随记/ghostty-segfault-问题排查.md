@@ -1,7 +1,7 @@
 # Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题
 
-**日期**: 2026-05-20  
-**环境**: Fedora 44, Wayland (niri), ghostty 1.3.1-2.fc44
+**日期**: 2026-05-20 初查 / 2026-05-21 修复完善  
+**环境**: Fedora 44, Wayland (niri), ghostty 1.3.1-2.fc44, clash-verge 2.5.1
 
 ## 现象
 
@@ -161,11 +161,142 @@ cat /proc/$(cat /run/user/1000/vicinae/vicinae-data-control-server.pid)/environ 
 
 ### 最终配置清单
 
-| 文件 | 用途 | 生效范围 |
-|------|------|----------|
-| `~/.zshrc` | 终端手动启动 | zsh 会话 |
-| `~/.config/niri/config.kdl` | niri spawn（重启 niri 后生效） | niri 直接启动的应用 |
+| 文件                                  | 用途                               | 生效范围                |
+| ------------------------------------- | ---------------------------------- | ----------------------- |
+| `~/.zshrc`                            | 终端手动启动                       | zsh 会话                |
+| `~/.config/niri/config.kdl`           | niri spawn（重启 niri 后生效）     | niri 直接启动的应用     |
 | `~/.config/environment.d/90-dms.conf` | systemd 用户服务（重启会话后生效） | vicinae 等 systemd 服务 |
+
+## 后续问题：GLYCIN_DATA_DIR 导致 clash-verge 崩溃
+
+**日期**: 2026-05-21
+
+### 现象
+
+设置 `GLYCIN_DATA_DIR` 后，clash-verge 启动崩溃：
+
+```
+Gtk:ERROR:../gtk/gtkiconhelper.c:495:ensure_surface_for_gicon: assertion failed (error == NULL):
+Failed to load .../image-missing.svg: No image loaders are configured.
+Used config: Config {
+    image_loader: {},
+    image_editor: {},
+}
+```
+
+### 根因分析
+
+1. **glycin 的图像加载器配置发现机制**：glycin 通过扫描 `XDG_DATA_DIRS` 下的 `<dir>/glycin-loaders/<compat-version>+/conf.d/*.conf` 来发现可用的图像加载器
+
+2. **`GLYCIN_DATA_DIR` 的副作用**：当 `GLYCIN_DATA_DIR` 被设置为自定义路径时，glycin **仅在**该路径下查找加载器配置，不再搜索系统路径 `/usr/share/glycin-loaders/2+/conf.d/`
+
+3. **原先工作目录为空**：`~/.cache/glycin-data/` 下没有任何 loader 配置，导致 glycin 的 `Config { image_loader: {}, image_editor: {} }` 为空
+
+4. **所有图像格式均受影响**：由于 Fedora 44 的 `libgdk_pixbuf-2.0.so.0` **直接链接** `libglycin-2.so.0`，glycin 成为所有图像加载的唯一后端。glycin 配置为空意味着 PNG、SVG、JPEG 等所有格式均无法加载
+
+5. **clash-verge 触发路径**：
+
+   ```
+   clash-verge: 创建系统托盘图标
+     → gtk_icon_theme_lookup_icon
+       → gdk_pixbuf_new_from_file (SVG)
+         → gly_loader_new → Config 为空 → 报错退出
+   ```
+
+### 验证方法
+
+通过 Python GDK-pixbuf 绑定测试图像加载：
+
+```python
+import gi
+gi.require_version('GdkPixbuf', '2.0')
+from gi.repository import GdkPixbuf, GLib
+
+# GLYCIN_DATA_DIR 未设置时：正常加载
+pb = GdkPixbuf.Pixbuf.new_from_file('/path/to/icon.svg')  # OK
+
+# GLYCIN_DATA_DIR 指向空目录时：所有格式均失败
+# Error: No image loaders are configured
+```
+
+### 解决方案演进
+
+#### 尝试一：在 GLYCIN_DATA_DIR 下补齐 glycin 配置
+
+在 `~/.cache/glycin-data/` 下创建 glycin 加载器配置目录结构，从系统复制配置文件：
+
+```sh
+mkdir -p ~/.cache/glycin-data/glycin-loaders/2+/conf.d/
+cp /usr/share/glycin-loaders/2+/conf.d/*.conf \
+   ~/.cache/glycin-data/glycin-loaders/2+/conf.d/
+```
+
+/// warning | 关键发现：路径不带 `share/` 前缀
+在 `GLYCIN_DATA_DIR` 下，glycin 查找的是 `<GLYCIN_DATA_DIR>/glycin-loaders/2+/conf.d/`，而非 `<GLYCIN_DATA_DIR>/share/glycin-loaders/2+/conf.d/`。这与 `XDG_DATA_DIRS` 下的标准路径 `<datadir>/share/glycin-loaders/...` 不同。
+///
+
+**结果**：clash-verge 恢复工作，glycin 正确发现加载器。但 ghostty 重新崩溃！
+
+#### 尝试二：去掉 Fontconfig=true 彻底绕过崩溃
+
+ghostty 重新崩溃的原因：glycin 能正常初始化后，在创建 bwrap 沙箱加载 SVG 时调用 `FcConfigGetCacheDirs()`，再次触发 fontconfig 2.17.0 的 double-free 崩溃。
+
+glycin SVG loader 配置中的 `Fontconfig=true` 指示 glycin 在沙箱中挂载字体缓存目录，这正是触发 `FcConfigGetCacheDirs()` 的代码路径。
+
+**最终方案**：拷贝系统配置到 `GLYCIN_DATA_DIR` 后，**移除 `Fontconfig=true`**：
+
+```ini
+# ~/.cache/glycin-data/glycin-loaders/2+/conf.d/glycin-svg.conf
+
+[loader:image/svg+xml]
+Exec=/usr/libexec/glycin-loaders/2+/glycin-svg
+ExposeBaseDir=true
+# Fontconfig=true  ← 移除此行，绕过 fontconfig 2.17.0 SIGSEGV
+
+[loader:image/svg+xml-compressed]
+Exec=/usr/libexec/glycin-loaders/2+/glycin-svg
+ExposeBaseDir=true
+```
+
+**结果**：ghostty 和 clash-verge 均正常启动，SVG 图标可正常渲染。
+
+/// info | Fontconfig 移除的影响
+移除 `Fontconfig=true` 后，glycin 不会在 bwrap 沙箱中挂载字体缓存目录。对于纯图形 SVG 图标（如系统图标主题中的图标），不影响渲染。但如果 SVG 中包含 `<text>` 元素需要字体渲染，则可能使用默认字体或渲染异常。日常使用中影响极小。
+///
+
+## 最终配置
+
+### 环境变量
+
+保持 `GLYCIN_DATA_DIR` 在三个层级中均设置，不做修改：
+
+| 文件                                  | 配置                                                     |
+| ------------------------------------- | -------------------------------------------------------- |
+| `~/.zshrc`                            | `export GLYCIN_DATA_DIR="$HOME/.cache/glycin-data"`      |
+| `~/.config/niri/config.kdl`           | `GLYCIN_DATA_DIR "/home/errorichard/.cache/glycin-data"` |
+| `~/.config/environment.d/90-dms.conf` | `GLYCIN_DATA_DIR=/home/errorichard/.cache/glycin-data`   |
+
+### 自定义 glycin 加载器配置目录
+
+```
+~/.cache/glycin-data/
+└── glycin-loaders/
+    └── 2+/
+        └── conf.d/
+            ├── glycin-heif.conf
+            ├── glycin-image-rs.conf
+            ├── glycin-jxl.conf
+            └── glycin-svg.conf        ← Fontconfig=true 已移除
+```
+
+### 系统配置同步
+
+还需将修改后的 SVG loader 配置同步到系统路径（需 sudo）：
+
+```sh
+sudo cp ~/.cache/glycin-data/glycin-loaders/2+/conf.d/glycin-svg.conf \
+        /usr/share/glycin-loaders/2+/conf.d/glycin-svg.conf
+```
 
 ## 永久修复方向
 
@@ -180,8 +311,8 @@ cat /proc/$(cat /run/user/1000/vicinae/vicinae-data-control-server.pid)/environ 
 # 查看 core dump 信息
 coredumpctl list ghostty
 
-# 查看崩溃栈回溯
-coredumpctl debug ghostty --debugger-arguments="-batch -ex 'bt full' -ex 'quit'"
+# 查看崩溃栈回溯（完整 gdb 调试）
+coredumpctl debug ghostty
 
 # 检查关键包版本
 rpm -q ghostty gtk4 libadwaita glycin-libs fontconfig bubblewrap
@@ -196,4 +327,40 @@ lib.FcConfigGetCacheDirs(lib.FcConfigGetCurrent())
 
 # 测试 GLYCIN_DATA_DIR 绕过效果
 GLYCIN_DATA_DIR=/tmp/glycin-data ghostty
+
+# 验证 gdk-pixbuf 能否加载图像（glycin 配置诊断）
+python3 -c "
+import gi
+gi.require_version('GdkPixbuf', '2.0')
+from gi.repository import GdkPixbuf, GLib
+try:
+    pb = GdkPixbuf.Pixbuf.new_from_file('/path/to/icon.svg')
+    print('OK:', pb.get_width(), 'x', pb.get_height())
+except GLib.Error as e:
+    print('FAIL:', e.message)
+"
+
+# 查看 gdk-pixbuf 已注册的图像格式（含 glycin 提供者）
+python3 -c "
+import gi
+gi.require_version('GdkPixbuf', '2.0')
+from gi.repository import GdkPixbuf
+for f in GdkPixbuf.Pixbuf.get_formats():
+    print(f.get_name(), f.get_mime_types())
+"
+
+# 检查 gdk-pixbuf 是否直接链接 libglycin
+ldd /lib64/libgdk_pixbuf-2.0.so.0 | grep glycin
+
+# 列出 glycin 导出的符号
+nm -D /lib64/libglycin-2.so.0 | grep 'gly_loader'
+
+# 查找 GLYCIN_DATA_DIR 的设置来源
+grep -r 'GLYCIN_DATA_DIR' ~/.config ~/.zshrc /etc/environment.d/ 2>/dev/null
+
+# 查看 glycin 加载器配置
+cat /usr/share/glycin-loaders/2+/conf.d/glycin-svg.conf
+
+# 查看完整的模块依赖链
+objdump -T /lib64/libgdk_pixbuf-2.0.so.0 | grep 'gly_' | awk '{print $NF}' | sort -u
 ```
