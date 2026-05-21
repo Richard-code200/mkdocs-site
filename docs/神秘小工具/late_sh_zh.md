@@ -16,8 +16,6 @@ ssh late.sh
 - 公开托管的 `late.sh` 服务仍然是官方部署。
 - 在 FSL 保护期内，代码为源码可见（source-available），非 OSI 开源许可。
 
-详情请阅读 [LICENSE](LICENSE)，通俗易懂的政策说明见 [LICENSING.md](LICENSING.md)，贡献规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
 ## 功能包含
 
 - 包含仪表盘、聊天、个人资料、新闻和街机界面的 SSH TUI
@@ -128,10 +126,6 @@ make check
 
 欢迎贡献，但请先阅读项目政策：
 
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [LICENSING.md](LICENSING.md)
-- [LICENSE](LICENSE)
-
 本仓库使用 DCO 签名提交：
 
 ```bash
@@ -141,8 +135,3 @@ git commit -s
 如果你分发 fork 版本，请勿将其宣称为官方的 `late.sh` 服务，或擅自使用项目品牌。
 
 ## 更多上下文
-
-- [CONTEXT.md](CONTEXT.md) — 架构、不变性和工作上下文。为 LLM 编写——将此文件提供给 AI 编辑器可获得最佳效果。
-- [CONTRIBUTING.md](CONTRIBUTING.md) — 工作流程、测试规则、模块模式以及 AI 辅助开发技巧。
-- [THEME.md](THEME.md) — 如何通过 PR 贡献新的内置 SSH 主题。
-- [late-cli/README.md](late-cli/README.md) — CLI 专属用法和行为说明。
