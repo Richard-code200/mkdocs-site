@@ -448,6 +448,34 @@ fn main() {
 }
 ```
 
+### if let ... else if let ... else
+
+`if let` 可以链式组合,依次尝试多个模式:
+
+```rust
+enum Foo {
+    Bar,
+    Baz,
+    Qux(u32),
+}
+
+fn main() {
+    let a = Foo::Qux(10);
+
+    if let Foo::Bar = a {
+        println!("match foo::bar");
+    } else if let Foo::Baz = a {
+        println!("match foo::baz");
+    } else {
+        println!("match others");
+    }
+}
+```
+
+/// info | if let 链 vs match
+`if let` 链适合变体较多但只关心少数几个的场景.如果变体不多且需要穷尽处理,`match` 更清晰.
+///
+
 ### 搭配 Option<T> 使用
 
 `if let` 最常用的场景是处理 `Option<T>`:
@@ -608,6 +636,18 @@ fn main() {
     }
 }
 ```
+
+/// info | 解构时重命名绑定变量
+`Point { x, y }` 是 `Point { x: x, y: y }` 的简写.也可以将字段绑定到不同名字的变量:
+
+```rust
+match p {
+    Point { x: a, y: b } => println!("a: {a}, b: {b}"),
+}
+```
+
+`x: a` 表示"将字段 `x` 的值绑定到变量 `a`".
+///
 
 #### 解构枚举
 
