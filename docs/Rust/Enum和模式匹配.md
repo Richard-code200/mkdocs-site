@@ -2,6 +2,8 @@
 
 ## 枚举(Enum)
 
+`enum` 是 enumeration(枚举)的缩写.
+
 枚举(Enum)允许你列举一组**可能的变体**(Variant),从而定义一个自定义类型.每个变体代表该类型的一种可能状态.
 
 /// info | 枚举的本质
@@ -154,7 +156,7 @@ Rust 在编译时按**最大变体**分配内存.即使当前实例是最小的�
 
 ## 枚举的方法
 
-和结构体一样,可以使用 `impl` 块为枚举定义方法:
+和结构体一样,可以使用 `impl`(implementation,实现)块为枚举定义方法:
 
 ```rust
 enum Message {
@@ -688,6 +690,37 @@ fn main() {
 }
 ```
 
+/// info | `..` 忽略剩余元素
+`..` 可以忽略不关心的部分元素,只匹配感兴趣的位置:
+
+```rust
+fn main() {
+    let numbers = (2, 4, 8, 16, 32, 128, 256, 512, 1024, 2048);
+
+    match numbers {
+        (first, .., last) => {
+            // first = 2, last = 2048,中间全部忽略
+            println!("first: {first}, last: {last}");
+        }
+    }
+}
+```
+
+`..` 同样适用于结构体和枚举的元组变体:
+
+```rust
+match msg {
+    Command::Move { .. } => println!("Move command"),       // 忽略所有字段
+    Command::ChangeColor(..) => println!("ChangeColor"),    // 忽略所有元素
+}
+```
+
+///
+
+/// warning | 解构引用时的移动问题
+对引用使用 `&` / `&mut` 模式解构时,如果内部类型没有实现 `Copy`(如 `String`),会尝试**移动**值,导致编译错误.通常直接省略 `&` / `&mut`,让 Rust 自动处理即可.
+///
+
 ### 匹配守卫(Match Guard)
 
 在模式后添加 `if 条件` 进一步过滤:
@@ -737,6 +770,33 @@ fn main() {
 
 /// info | @ 绑定的使用场景
 当你既需要**检查值的模式**,又需要在分支体中**使用整个值**时,`@` 非常有用.避免了重复解构或在分支体内再次引用原始变量.
+///
+
+`@` 也可以与 OR 模式配合使用:
+
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let p = Point { x: 0, y: 10 };
+
+    match p {
+        Point { x, y: 0 } => println!("On the x axis at {x}"),
+        Point { x: 0..=5, y: y @ (10 | 20 | 30) } => {
+            // x 在 0..=5 范围内,y 是 10、20 或 30 之一
+            // y 绑定了匹配到的值
+            println!("On the y axis at {y}")
+        }
+        Point { x, y } => println!("On neither axis ({x}, {y})"),
+    }
+}
+```
+
+/// info | 组合多种模式
+模式匹配可以自由组合:结构体解构 + 范围匹配 + `@` 绑定 + OR 模式,可以在同一个分支中同时使用,表达复杂的匹配条件.
 ///
 
 ## 综合示例
