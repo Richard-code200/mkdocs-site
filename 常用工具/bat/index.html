@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+     
+     
+    
+    <link rel="canonical" href="https://richard-code200.github.io/mkdocs-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/bat/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>bat - My Mkdocs Site</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- gruvbox_dark color palette -->
+<link href="../../css/palettes/gruvbox_dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
+    
+    <script src="https://unpkg.com/highlightjs-cobol/dist/cobol.min.js"></script>
+    
+    <script src="../../add_hljs_highlight.js"></script>
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://richard-code200.github.io/mkdocs-site/" class="no-style">My Mkdocs Site</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">这是王佳贤的个人博客</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="1">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">这是王佳贤的个人博客</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Linux</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Linux/%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7/">安全特性</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">MarkDown</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../MarkDown/MarkDown/">Markdown 核心语法速查表</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Rust</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Cargo%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%8E%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">Cargo工作区与依赖管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Enum%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/">Enum和模式匹配</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%B5%81/">函数与控制流</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%88%87%E7%89%87/">切片(Slice)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本语法与数据类型</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">Rust 学习项目计划</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/">引用与借用</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%89%80%E6%9C%89%E6%9D%83/">所有权</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">格式化输出</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/">模块系统</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E7%89%B9%E5%BE%81/">泛型与特征</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B5%8B%E8%AF%95/">测试</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体(Struct)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%9B%86%E5%90%88/">集合</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/">Rust 项目代码组织</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Zed</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/">Zed</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/%E5%BF%AB%E6%8D%B7%E9%94%AE/">Zed 快捷键</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Git使用指南</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Git%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">Git基础概念</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E8%AE%BE%E7%BD%AE/">初始设置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">基本操作命令</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%9A%82%E5%AD%98/">工作区暂存</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">忽略文件配置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E9%80%80/">撤销与回退</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/">标签管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">远程仓库操作</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">常用工具</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="terminal-mkdocs-side-nav-item--active">bat</span>
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../eza/">eza</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../fd/">fd</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../late_sh_zh/">late.sh</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../ripgrep/">ripgrep (rg)</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源协议</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/">开源协议概念总结</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源项目学习</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97/">流程指南</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">操作系统原理</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E7%AC%AC%E4%B8%80%E7%AB%A0/">📟 A PROGRAM is not a PROCESS</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E8%AF%BE%E7%A8%8B%E4%BF%A1%E6%81%AF/">📚 课程信息</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">算法笔记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">分发饼干</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">费曼学习法</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">Way To Learn</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">随记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-4-27/">2026-4-27</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-5-19/">2026-5-19</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-6-1/">随记</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-6-9/">课堂作业</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/Keygen%28%E6%B3%A8%E5%86%8C%E6%9C%BA%29/">注册机</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/ghostty-segfault-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#bat">bat</a></li>
+        <li><a href="#_1">优点</a></li><li><a href="#_5">如何使用</a></li><li><a href="#_7">安装</a></li><li><a href="#_8">自定义</a></li><li><a href="#_17">配置文件</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="bat">bat</h1>
+<p>类似cat，但带有 git 集成和语法高亮.</p>
+<h2 id="_1">优点</h2>
+<h3 id="_2">语法高亮</h3>
+<p><code>bat</code> 对大部分编程语言和标记语言提供语法高亮：</p>
+<p><img alt="Syntax highlighting example" src="https://imgur.com/rGsdnDe.png" /></p>
+<h3 id="git">Git 集成</h3>
+<p><code>bat</code> 能从 git 中获取文件的修改并展示在边栏（见下图）：</p>
+<p><img alt="Git integration example" src="https://i.imgur.com/2lSW4RE.png" /></p>
+<h3 id="non-printable">不可打印(non-printable)字符可视化</h3>
+<p>添加<code>-A</code>/<code>--show-all</code>参数可以文件文件中的不可打印字符:</p>
+<p><img alt="Non-printable character example" src="https://i.imgur.com/WndGp9H.png" /></p>
+<h3 id="_3">自动分页</h3>
+<p><code>bat</code>会在一般情况下将大于屏幕可显示范围的内容输出到分页器(pager, e.g. <code>less</code>)。</p>
+<p>你可以在调用时添加<code>--paging=never</code>参数来使<code>bat</code>不使用分页器（就像<code>cat</code>一样）。
+如果你想要用为<code>cat</code>使用<code>bat</code>别名，可以在 shell 配置文件（shell configuration）中添加<code>alias cat='bat --paging=never'</code>。</p>
+<h4 id="_4">智能输出</h4>
+<p><code>bat</code>能够在设置了分页器选项的同时进行管道:wink:。
+当<code>bat</code>检测到当前环境为非可交互终端或管道时（例如使用<code>bat</code>并将内容用管道输出到文件），<code>bat</code>会像<code>cat</code>一样，一次输出文件内容为纯文本且无视<code>--paging</code>参数。</p>
+<h2 id="_5">如何使用</h2>
+<p>在终端中查看一个文件</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;<span class="w"> </span>bat<span class="w"> </span>README.md
+</code></pre></div>
+<p>一次性展示多个文件</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;<span class="w"> </span>bat<span class="w"> </span>src/*.rs
+</code></pre></div>
+<p>从<code>stdin</code>读入流，自动为内容添加语法高亮（前提是输入内容的语言可以被正确识别，通常根据内容第一行的 shebang 标记，形如<code>#!bin/sh</code>）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;<span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>https://sh.rustup.rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>bat
+</code></pre></div>
+<p>显式指定<code>stdin</code>输入的语言</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;<span class="w"> </span>yaml2json<span class="w"> </span>.travis.yml<span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp<span class="w"> </span><span class="p">|</span><span class="w"> </span>bat<span class="w"> </span>-l<span class="w"> </span>json
+</code></pre></div>
+<p>显示不可打印字符</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;<span class="w"> </span>bat<span class="w"> </span>-A<span class="w"> </span>/etc/hosts
+</code></pre></div>
+<p>与<code>cat</code>的兼容性</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>bat<span class="w"> </span>&gt;<span class="w"> </span>note.md<span class="w">  </span><span class="c1"># 创建一个空文件</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>bat<span class="w"> </span>header.md<span class="w"> </span>content.md<span class="w"> </span>footer.md<span class="w"> </span>&gt;<span class="w"> </span>document.md
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>bat<span class="w"> </span>-n<span class="w"> </span>main.rs<span class="w">  </span><span class="c1"># 只显示行号</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>bat<span class="w"> </span>f<span class="w"> </span>-<span class="w"> </span>g<span class="w">  </span><span class="c1"># 输出 f，接着是标准输入流，最后 g</span>
+</code></pre></div>
+<h3 id="_6">第三方工具交互</h3>
+<h4 id="fzf"><code>fzf</code></h4>
+<p>你可以使用<code>bat</code>作为<code>fzf</code>的预览器。这需要在<code>bat</code>后添加<code>--color=always</code>选项，以及<code>--line-range</code> 选项来限制大文件的加载次数。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fzf<span class="w"> </span>--preview<span class="w"> </span><span class="s1">'bat --color=always --style=numbers --line-range=:500 {}'</span>
+</code></pre></div>
+<p>更多信息请参阅<a href="https://github.com/junegunn/fzf#preview-window"><code>fzf</code>的说明</a>。</p>
+<h4 id="find-fd"><code>find</code> 或 <code>fd</code></h4>
+<p>你可以使用<code>find</code>的<code>-exec</code>选项来用<code>bat</code>预览搜索结果：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>find<span class="w"> </span>…<span class="w"> </span>-exec<span class="w"> </span>bat<span class="w"> </span><span class="o">{}</span><span class="w"> </span>+
+</code></pre></div>
+<p>亦或者在用<code>fd</code>时添加<code>-X</code>/<code>--exec-batch</code>选项：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fd<span class="w"> </span>…<span class="w"> </span>-X<span class="w"> </span>bat
+</code></pre></div>
+<h4 id="ripgrep"><code>ripgrep</code></h4>
+<p><code>bat</code>也能用<code>batgrep</code>来显示<code>ripgrep</code>的搜索结果。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>batgrep<span class="w"> </span>needle<span class="w"> </span>src/
+</code></pre></div>
+<h4 id="tail-f"><code>tail -f</code></h4>
+<p>当与<code>tail -f</code>一起使用，<code>bat</code>可以持续监视文件内容并为其添加语法高亮。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/pacman.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>bat<span class="w"> </span>--paging<span class="o">=</span>never<span class="w"> </span>-l<span class="w"> </span>log
+</code></pre></div>
+<p>注意：这项功能需要在关闭分页时使用，同时要手动指定输入的内容语法（通过<code>-l log</code>）。</p>
+<h4 id="git_1"><code>git</code></h4>
+<p><code>bat</code>也能直接接受来自<code>git show</code>的输出并为其添加语法高亮（当然也需要手动指定语法）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git<span class="w"> </span>show<span class="w"> </span>v0.6.0:src/main.rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>bat<span class="w"> </span>-l<span class="w"> </span>rs
+</code></pre></div>
+<h4 id="git-diff"><code>git diff</code></h4>
+<p><code>bat</code>也可以和<code>git diff</code>一起使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>batdiff<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span>git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w"> </span>--relative<span class="w"> </span>--diff-filter<span class="o">=</span>d<span class="w"> </span>-z<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>bat<span class="w"> </span>--diff
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="o">}</span>
+</code></pre></div>
+<p>该功能也作为一个独立工具提供，你可以在<a href="https://github.com/eth-p/bat-extras"><code>bat-extras</code></a>中找到<code>batdiff</code>。</p>
+<p>如果你想了解更多 git 和 diff 的信息，参阅<a href="https://github.com/dandavison/delta"><code>delta</code></a>。</p>
+<h4 id="xclip"><code>xclip</code></h4>
+<p>当需要拷贝文件内容时，行号以及 git 标记会影响输出，此时可以使用<code>-p</code>/<code>--plain</code>参数来把纯文本传递给<code>xclip</code>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>bat<span class="w"> </span>main.cpp<span class="w"> </span><span class="p">|</span><span class="w"> </span>xclip
+</code></pre></div>
+<p><code>bat</code>会检测输出是否是管道重定向来决定是否使用纯文本输出。</p>
+<h4 id="man"><code>man</code></h4>
+<p><code>bat</code> 可以通过设置 <code>MANPAGER</code> 环境变量，用作 <code>man</code> 的彩色分页器：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">MANPAGER</span><span class="o">=</span><span class="s2">"sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>man<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="k">select</span>
+</code></pre></div>
+<p>（如果你使用 Debian 或 Ubuntu，请将 <code>batcat</code> 替换为 <code>bat</code>）</p>
+<p>如果你希望将其打包为一个新的命令，也可以使用 <a href="https://github.com/eth-p/bat-extras/blob/master/doc/batman.md"><code>batman</code></a>。</p>
+<blockquote>
+<p>[!WARNING]
+在使用 Mandoc 的 <code>man</code> 实现时，这<a href="https://github.com/sharkdp/bat/issues/1145">无法</a>直接工作。</p>
+<p>请使用 <code>batman</code>，或将此 Shell 脚本包装为 <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">Shebang 可执行文件</a>，并将 <code>MANPAGER</code> 指向该文件。</p>
+</blockquote>
+<p>注意，<a href="https://github.com/sharkdp/bat/blob/master/assets/syntaxes/02_Extra/Manpage.sublime-syntax">Manpage 语法</a>是在此仓库中开发的，仍需一些改进。</p>
+<h4 id="prettier-shfmt-rustfmt"><code>prettier</code> / <code>shfmt</code> / <code>rustfmt</code></h4>
+<p><code>prettybat</code>脚本能够格式化代码并用<code>bat</code>输出。</p>
+<h2 id="_7">安装</h2>
+<p>各平台安装方式请参阅 <a href="https://github.com/sharkdp/bat/releases">Release 发布页</a> 或各发行版的包管理器。</p>
+<h2 id="_8">自定义</h2>
+<h3 id="_9">语法高亮主题</h3>
+<p>使用 <code>bat --list-themes</code> 一份语法高亮主题的清单，然后用<code>--theme=TwoDark</code>来指定主题为<code>TwoDark</code>，也可以通过设置<code>BAT_THEME</code>环境变量来选定主题。
+把<code>export BAT_THEME="TwoDark"</code>添加到 shell 的启动脚本（shell startup file）来取得永久效果。或者使用<code>bat</code>的<a href="#配置文件">配置文件</a></p>
+<p>若想要查看所有主题在一个文件上的显示效果可以用一下命令（需要安装<code>fzf</code>）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>bat<span class="w"> </span>--list-themes<span class="w"> </span><span class="p">|</span><span class="w"> </span>fzf<span class="w"> </span>--preview<span class="o">=</span><span class="s2">"bat --theme={} --color=always /path/to/file"</span>
+</code></pre></div>
+<p><code>bat</code>在默认情况下能够在黑色主题背景下获得较好的效果，如果你的终端使用亮色背景，可以试试<code>GitHub</code>或<code>OneHalfLight</code>。想要添加自定义主题可以参考<a href="#添加主题">添加主题</a>。</p>
+<h3 id="8-bit">8-bit 主题</h3>
+<p><code>bat</code> 自带三个 <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#Colors">8-bit 色彩</a> 主题：</p>
+<ul>
+<li><code>ansi</code> 适应于大部分终端。它使用 3-bit 色彩：黑红绿黄蓝洋红靛青白。</li>
+<li><code>base16</code>专为 <a href="https://github.com/tinted-theming/home">base16</a> 终端设计。
+  它使用 4-bit 色彩（带有亮度的 3-bit 色彩）。
+  根据 <a href="https://github.com/tinted-theming/home/blob/main/styling.md">base16 styling guidelines</a> 制作。</li>
+<li><code>base16-25</code>专为 <a href="https://github.com/tinted-theming/base16-shell">base16-shell</a> 设计。
+  它把部分亮色替换为 8-bit 色彩。请不要直接使用该主题，除非你清楚你的256色终端是否使用 base16-shell。</li>
+</ul>
+<p>尽管这些主题具有诸多限制，但具有一些 truecolor 主题不具有的三个优点：</p>
+<ul>
+<li>享有最佳兼容性。并不是所有终端工具都支持高于 3-bit 的色彩。</li>
+<li>适应终端主题。</li>
+<li>视觉上和其他的终端工具更协调。</li>
+</ul>
+<h3 id="_10">输出样式</h3>
+<p>你可以用<code>--style</code>参数来控制<code>bat</code>输出的样式。使用<code>--style=numbers,changes</code>可以只开启 Git 修改和行号显示而不添加其他内容。<code>BAT_STYLE</code>环境变量具有相同功能。</p>
+<h3 id="_11">添加新的语言和语法</h3>
+<p>当现有的<code>bat</code>不支持某个语言或语法时你可以自己添加。</p>
+<p><code>bat</code>使用<code>syntect</code>库来支持语法高亮，该库使用 <a href="https://www.sublimetext.com/docs/3/syntax.html">Sublime Text <code>.sublime-syntax</code> 语法文件</a>和主题。
+而后者中的大部分可以在 <a href="https://packagecontrol.io/">Package Control</a> 找到。</p>
+<p>当你找到一份语法文件，按照下列方法：</p>
+<ol>
+<li>创建包含语法描述文件的目录：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>bat<span class="w"> </span>--config-dir<span class="k">)</span><span class="s2">/syntaxes"</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>bat<span class="w"> </span>--config-dir<span class="k">)</span><span class="s2">/syntaxes"</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Put new '.sublime-syntax' language definition files</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># in this folder (or its subdirectories), for example:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tellnobody1/sublime-purescript-syntax
+</code></pre></div>
+<ol>
+<li>调用下面指令把文件转换为二进制缓存：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>bat<span class="w"> </span>cache<span class="w"> </span>--build
+</code></pre></div>
+<ol>
+<li>最后用<code>bat --list-languages</code>来检查新的语法是否被成功导入。如果想要回滚到最初状态，执行：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>bat<span class="w"> </span>cache<span class="w"> </span>--clear
+</code></pre></div>
+<ol>
+<li>如果你觉得<code>bat</code>有必要自带该语法支持，请在阅读<a href="https://github.com/sharkdp/bat/blob/master/doc/assets.md">指导</a>后向仓库提交 <a href="https://github.com/sharkdp/bat/issues/new?labels=syntax-request&amp;template=syntax_request.md">Syntax Request</a>。</li>
+</ol>
+<h3 id="_12">添加主题</h3>
+<p>类似添加语法支持，第一步也是创建一个带有语法高亮的目录</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>bat<span class="w"> </span>--config-dir<span class="k">)</span><span class="s2">/themes"</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>bat<span class="w"> </span>--config-dir<span class="k">)</span><span class="s2">/themes"</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># 下载一个主题</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/greggb/sublime-snazzy
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># 更新二进制缓存</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>bat<span class="w"> </span>cache<span class="w"> </span>--build
+</code></pre></div>
+<p>然后用<code>bat --list-themes</code>检查添加是否成功。</p>
+<h3 id="_13">添加或修改文件关联</h3>
+<p>你可以用<code>--map-syntax</code>参数添加或修改文件名模板。
+它需要一个类似<code>pattern:syntax</code>的参数来指定，其中<code>pattern</code>是 glob 文件匹配模板，
+<code>syntax</code>则是支持的语法的完整名（使用<code>bat --list-languages</code>来查看获取一份清单）。</p>
+<p>注意：方便起见，你可能需要把参数添加到配置文件，而不是每次都在命令行中传递该参数。</p>
+<p>以下展示了把“INI”关联到具有<code>.conf</code>扩展名的文件</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>--map-syntax<span class="o">=</span><span class="s1">'*.conf:INI'</span>
+</code></pre></div>
+<p>把<code>.ignore</code>文件与“Git Ignore”关联</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>--map-syntax<span class="o">=</span><span class="s1">'.ignore:Git Ignore'</span>
+</code></pre></div>
+<p>把<code>/etc/apache2</code>内的<code>.conf</code>文件关联到“Apache Conf”语法（<code>bat</code>已默认绑定）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>--map-syntax<span class="o">=</span><span class="s1">'/etc/apache2/**/*.conf:Apache Conf'</span>
+</code></pre></div>
+<h3 id="_14">使用自定义分页器</h3>
+<p><code>bat</code>默认使用<code>PAGER</code>环境变量定义的分页器，如果没有定义则使用<code>less</code>。<code>bat</code>提供了<code>BAT_PAGER</code>环境变量来专为<code>bat</code>选择分页器（优先级高于<code>PAGER</code>）。</p>
+<p>注意：当<code>PAGER</code>设置为<code>more</code>或<code>most</code>时，<code>bat</code>会使用<code>less</code>来代替以确保能提供色彩支持。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">BAT_PAGER</span><span class="o">=</span><span class="s2">"less -RF"</span>
+</code></pre></div>
+<p>除了使用环境变量来改变<code>bat</code>使用的的分页器，也可以在配置文件中提供<code>--pager</code>参数。</p>
+<p>注意：<code>bat</code>会把部分命令行参数直接传递给分页器：<code>-R</code>/<code>--RAW-CONTROL-CHARS</code>,<code>-F</code>/<code>--quit-if-one-screen</code>以及<code>-X</code>/<code>--no-init</code>（该参数仅适用于高于530版本的<code>less</code>）。
+其中<code>-R</code> 参数需要在解释 ANSI 标准颜色时起作用。<code>-F</code>则指示<code>less</code>在输出内容的垂直尺寸小于终端尺寸时立即退出。
+当文件内容可以在一个屏幕里完全显示时，就不需要按<code>q</code>键退出阅读模式，很方便就是了。
+<code>-X</code>则能修复<code>-F</code>在<code>less</code>的老版本中的一些bug（代价是不支持鼠标滚轮，但可以用<code>-R</code>来取消<code>quit-if-one-screen</code>功能。）。</p>
+<h3 id="_15">缩进</h3>
+<p><code>bat</code> 使用四个空格宽的制表符，而不受分页器影响，同时也可以用<code>--tabs</code>参数来自定义。</p>
+<p>注意：通过其他方法针对分页器的制表符设置不会生效（例如通过<code>bat</code>的<code>--pager</code>参数传递或<code>less</code>使用的<code>LESS</code>环境变量）。因为在输出提交给分页器之前，内容中的制表符就已经被<code>bat</code>替换为了特定长度的空格以避免由于边栏导致的缩进问题。你可以用给<code>bat</code>传递<code>--tabs=0</code>参数来取消该设定并让分页器自己处理制表符。</p>
+<h3 id="_16">暗色模式</h3>
+<p>如果你用的 macOS 处于暗色模式，你可以为<code>bat</code>启用基于系统主题的主题。如下所示操作会让<code>bat</code>在系统处于亮色模式时加载<code>GitHub</code>主题和暗色模式时加载<code>default</code>主题。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nb">alias</span><span class="w"> </span><span class="nv">cat</span><span class="o">=</span><span class="s2">"bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &amp;&gt; /dev/null &amp;&amp; echo default || echo GitHub)"</span>
+</code></pre></div>
+<h2 id="_17">配置文件</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>bat<span class="w"> </span>--config-file
+</code></pre></div>
+<p>你也可以用<code>BAT_CONFIG_PATH</code>来为<code>bat</code>指定自定义位置的配置文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">BAT_CONFIG_PATH</span><span class="o">=</span><span class="s2">"/path/to/bat.conf"</span>
+</code></pre></div>
+<p>使用<code>--generate-config-file</code>参数调用<code>bat</code>会在指定位置生成一份默认的<code>bat</code>配置文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>bat<span class="w"> </span>--generate-config-file
+</code></pre></div>
+<h3 id="_18">格式</h3>
+<p>配置文件其实是一份按行分割的命令行参数列表。你可以用<code>bat --help</code>来查看所有可用的参数和适用的值。配置文件中<code>#</code>打头的行会被视为注释而不生效。</p>
+<p>以下是一份示例：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># 设置主题为 TwoDark</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>--theme<span class="o">=</span><span class="s2">"TwoDark"</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1"># 显示行号和 Git 修改信息， 但没有边框</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>--style<span class="o">=</span><span class="s2">"numbers,changes,header"</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="c1"># 在终端中以斜体输出文本（不是所有终端都支持）</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>--italic-text<span class="o">=</span>always
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="c1"># 使用 C++ 语法来给 Arduino 的 .ino 文件提供高亮</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>--map-syntax<span class="w"> </span><span class="s2">"*.ino:C++"</span>
+</code></pre></div>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>

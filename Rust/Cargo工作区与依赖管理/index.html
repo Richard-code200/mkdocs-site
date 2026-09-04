@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+     
+     
+    
+    <link rel="canonical" href="https://richard-code200.github.io/mkdocs-site/Rust/Cargo%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%8E%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Cargo工作区与依赖管理 - My Mkdocs Site</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- gruvbox_dark color palette -->
+<link href="../../css/palettes/gruvbox_dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
+    
+    <script src="https://unpkg.com/highlightjs-cobol/dist/cobol.min.js"></script>
+    
+    <script src="../../add_hljs_highlight.js"></script>
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://richard-code200.github.io/mkdocs-site/" class="no-style">My Mkdocs Site</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">这是王佳贤的个人博客</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="1">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">这是王佳贤的个人博客</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Linux</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Linux/%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7/">安全特性</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">MarkDown</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../MarkDown/MarkDown/">Markdown 核心语法速查表</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Rust</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="terminal-mkdocs-side-nav-item--active">Cargo工作区与依赖管理</span>
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../Enum%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/">Enum和模式匹配</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%B5%81/">函数与控制流</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E5%88%87%E7%89%87/">切片(Slice)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本语法与数据类型</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">Rust 学习项目计划</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/">引用与借用</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E6%89%80%E6%9C%89%E6%9D%83/">所有权</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">格式化输出</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/">模块系统</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E6%B3%9B%E5%9E%8B%E4%B8%8E%E7%89%B9%E5%BE%81/">泛型与特征</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E6%B5%8B%E8%AF%95/">测试</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E7%BB%93%E6%9E%84%E4%BD%93/">结构体(Struct)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E9%9B%86%E5%90%88/">集合</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/">Rust 项目代码组织</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Zed</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/">Zed</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/%E5%BF%AB%E6%8D%B7%E9%94%AE/">Zed 快捷键</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Git使用指南</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Git%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">Git基础概念</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E8%AE%BE%E7%BD%AE/">初始设置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">基本操作命令</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%9A%82%E5%AD%98/">工作区暂存</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">忽略文件配置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E9%80%80/">撤销与回退</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/">标签管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">远程仓库操作</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">常用工具</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/bat/">bat</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/eza/">eza</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/fd/">fd</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/late_sh_zh/">late.sh</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/ripgrep/">ripgrep (rg)</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源协议</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/">开源协议概念总结</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源项目学习</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97/">流程指南</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">操作系统原理</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E7%AC%AC%E4%B8%80%E7%AB%A0/">📟 A PROGRAM is not a PROCESS</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E8%AF%BE%E7%A8%8B%E4%BF%A1%E6%81%AF/">📚 课程信息</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">算法笔记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">分发饼干</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">费曼学习法</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">Way To Learn</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">随记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-4-27/">2026-4-27</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-5-19/">2026-5-19</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-6-1/">随记</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-6-9/">课堂作业</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/Keygen%28%E6%B3%A8%E5%86%8C%E6%9C%BA%29/">注册机</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/ghostty-segfault-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#cargo">Cargo工作区与依赖管理</a></li>
+        <li><a href="#packagecrate-workspace">Package、Crate 与 Workspace</a></li><li><a href="#virtual-workspace">Virtual Workspace</a></li><li><a href="#edition-2024">Edition 2024</a></li><li><a href="#_1">添加与管理依赖</a></li><li><a href="#cargolock">Cargo.lock</a></li><li><a href="#_3">常用验证命令</a></li><li><a href="#_4">常见配置错误</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="cargo">Cargo工作区与依赖管理</h1>
+<p>Cargo 负责创建、构建和验证 Rust 项目,也负责解析第三方依赖.理解 Package、Crate 和 Workspace 的边界,可以避免多项目仓库中常见的路径与命名问题.</p>
+<h2 id="packagecrate-workspace">Package、Crate 与 Workspace</h2>
+<h3 id="package">Package</h3>
+<p>Package 是由一个 <code>Cargo.toml</code> 清单描述的发布和管理单元.<code>[package]</code> 中定义名称、版本和 edition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[package]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"collections_learn"</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.1.0"</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2024"</span>
+</code></pre></div>
+<p>一个 Package 最多包含一个 library crate,可以包含多个 binary crate,但至少要包含一个 crate.常见 crate 根如下:</p>
+<ul>
+<li><code>src/lib.rs</code>:默认的 library crate 根.</li>
+<li><code>src/main.rs</code>:默认的 binary crate 根.</li>
+<li><code>src/bin/*.rs</code>:额外的 binary crate 根.</li>
+</ul>
+<h3 id="crate">Crate</h3>
+<p>Crate 是 Rust 编译器一次处理的编译单元.它可以生成库或可执行程序.源码中的 <code>crate</code> 路径关键字表示当前 crate 的根,并不表示整个 Package 或 Workspace.</p>
+<p>Package 名和默认 crate 名通常相同.当 Package 名包含连字符时,代码中的 crate 名会把连字符转换为下划线:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">[package]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"data-tools"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">use</span><span class="w"> </span><span class="n">data_tools</span><span class="p">::</span><span class="n">run</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="workspace">Workspace</h3>
+<p>Workspace 将多个相关 Package 作为一个整体管理.成员共享同一个 <code>Cargo.lock</code> 和根目录下的 <code>target/</code>,因此依赖版本和构建产物更容易保持一致.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Rust_Lang/
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├── Cargo.toml
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>├── Cargo.lock
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>├── collections_learn/
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>│   ├── Cargo.toml
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│   └── src/main.rs
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>└── guessing_game/
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    ├── Cargo.toml
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    └── src/main.rs
+</code></pre></div>
+<details class="terminal-alert">
+<summary>Workspace 成员是 Package</summary>
+<p><code>members</code> 指向包含 <code>Cargo.toml</code> 的 Package 目录,不是 <code>.rs</code> 文件或 crate 根文件.一个成员 Package 内部仍然可以包含多个 crate.</p>
+</details>
+<h2 id="virtual-workspace">Virtual Workspace</h2>
+<p>只有 <code>[workspace]</code>、没有 <code>[package]</code> 的根清单称为 virtual workspace.根目录只负责协调成员,自身不是可构建的 Package:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="s2">"collections_learn"</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="s2">"guessing_game"</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">]</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<p>因此 virtual workspace 根目录不需要 <code>src/main.rs</code> 或 <code>src/lib.rs</code>.运行 <code>cargo check --workspace</code> 时,Cargo 会检查所有成员.</p>
+<h3 id="members">members</h3>
+<p><code>members</code> 中的路径相对于 workspace 根目录,既可以逐项列出,也可以使用简单的 glob:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"apps/*"</span><span class="p">,</span><span class="w"> </span><span class="s2">"libs/*"</span><span class="p">]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<p>显式列表更容易审查成员变化;glob 适合目录结构统一且成员较多的仓库.无论选择哪种方式,每个匹配目录都必须包含有效的 Package 清单.</p>
+<h3 id="resolver">resolver</h3>
+<p><code>resolver</code> 指定 Cargo 的依赖特性解析器.使用 edition 2024 的 workspace 应设置:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<p>virtual workspace 没有自己的 <code>[package]</code> 和 <code>edition</code>,Cargo 无法从根 Package 推断 resolver,所以应在 <code>[workspace]</code> 中显式声明.</p>
+<details class="terminal-alert terminal-alert-primary">
+<summary>edition 与 resolver 属于不同层级</summary>
+<p><code>edition = "2024"</code> 写在每个成员的 <code>[package]</code> 中,控制该 Package 的 Rust edition;<code>resolver = "3"</code> 写在 <code>[workspace]</code> 中,控制整个 workspace 的依赖特性解析.二者不要互相替代.</p>
+</details>
+<h2 id="edition-2024">Edition 2024</h2>
+<p>新建成员时,Cargo 清单应明确使用 edition 2024:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">[package]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"guessing_game"</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.1.0"</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2024"</span>
+</code></pre></div>
+<p>Edition 控制语法和语言兼容规则,不等于编译器版本.同一个 workspace 可以包含不同 edition 的成员,但新项目统一 edition 通常更容易维护.</p>
+<h2 id="_1">添加与管理依赖</h2>
+<h3 id="rand-09">使用 rand 0.9</h3>
+<p>在需要随机数的成员 Package 中添加 <code>rand</code> 0.9:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">[package]</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"guessing_game"</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.1.0"</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2024"</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">[dependencies]</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">rand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.9"</span>
+</code></pre></div>
+<p>版本要求 <code>"0.9"</code> 表示接受兼容的 <code>0.9.x</code> 版本,实际选择的精确版本会记录到 <code>Cargo.lock</code>.</p>
+<p><code>rand</code> 0.9 的基本用法:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">use</span><span class="w"> </span><span class="n">rand</span><span class="p">::</span><span class="n">Rng</span><span class="p">;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">secret_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">::</span><span class="n">rng</span><span class="p">().</span><span class="n">random_range</span><span class="p">(</span><span class="mi">1</span><span class="o">..=</span><span class="mi">100</span><span class="p">);</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">"secret number: {secret_number}"</span><span class="p">);</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>也可以在成员目录运行命令添加依赖:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>cargo<span class="w"> </span>add<span class="w"> </span>rand@0.9
+</code></pre></div>
+<p>在 workspace 根目录操作时,使用 <code>-p</code> 明确目标 Package:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cargo<span class="w"> </span>add<span class="w"> </span>rand@0.9<span class="w"> </span>-p<span class="w"> </span>guessing_game
+</code></pre></div>
+<details class="terminal-alert terminal-alert-error">
+<summary>不要混用旧版 rand 示例</summary>
+<p><code>rand</code> 0.9 推荐使用 <code>rand::rng()</code> 和 <code>random_range</code>.旧示例中的 <code>thread_rng()</code>、<code>gen()</code> 或 <code>gen_range()</code> 可能已经重命名或弃用,应以当前依赖版本的 API 为准.</p>
+</details>
+<h3 id="_2">路径依赖</h3>
+<p>Workspace 成员之间可以使用相对路径依赖:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">[dependencies]</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">common</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"../common"</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>依赖键默认是代码中使用的 crate 名,<code>path</code> 则指向依赖 Package 的目录.如果目录名、Package 名和依赖键不同,可以显式指定 <code>package</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">[dependencies]</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">common_api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"shared-common"</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"../common"</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">use</span><span class="w"> </span><span class="n">common_api</span><span class="p">::</span><span class="n">run</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="cargolock">Cargo.lock</h2>
+<p><code>Cargo.toml</code> 描述允许使用哪些依赖版本,<code>Cargo.lock</code> 记录一次解析后实际采用的精确版本及校验信息.</p>
+<p>Workspace 通常只在根目录维护一个 <code>Cargo.lock</code>.成员目录不需要各自保存锁文件,Cargo 从 workspace 根统一解析依赖.</p>
+<ul>
+<li>应用程序和可执行项目通常应提交 <code>Cargo.lock</code>,保证 CI、部署和其他开发者使用一致版本.</li>
+<li>可复用库的独立仓库常不提交 <code>Cargo.lock</code>,让下游项目自行解析兼容版本.</li>
+<li>同一 workspace 同时包含库和程序时,通常提交根目录的 <code>Cargo.lock</code>.</li>
+<li>不要手工编辑锁文件;修改 <code>Cargo.toml</code> 后让 Cargo 重新生成或更新.</li>
+</ul>
+<p>常用更新命令:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>cargo<span class="w"> </span>update<span class="w">              </span><span class="c1"># 在清单约束内更新所有依赖</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>cargo<span class="w"> </span>update<span class="w"> </span>-p<span class="w"> </span>rand<span class="w">      </span><span class="c1"># 只更新 rand 及必要的关联依赖</span>
+</code></pre></div>
+<details class="terminal-alert">
+<summary>--locked 的作用</summary>
+<p>CI 中可使用 <code>cargo check --locked</code> 或 <code>cargo test --locked</code>.<code>--locked</code> 禁止 Cargo 修改 <code>Cargo.lock</code>;如果锁文件缺失或与清单不一致,命令会直接失败.</p>
+</details>
+<h2 id="_3">常用验证命令</h2>
+<p>在 workspace 根目录执行:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>cargo<span class="w"> </span>metadata<span class="w"> </span>--no-deps<span class="w">              </span><span class="c1"># 验证清单并查看 workspace 成员</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>cargo<span class="w"> </span>check<span class="w"> </span>--workspace<span class="w">               </span><span class="c1"># 检查所有成员</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>cargo<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--workspace<span class="w">                </span><span class="c1"># 测试所有成员</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>cargo<span class="w"> </span>check<span class="w"> </span>-p<span class="w"> </span>collections_learn<span class="w">      </span><span class="c1"># 按 Package 名检查单个成员</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>cargo<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span>collections_learn<span class="w">        </span><span class="c1"># 运行指定 Package 的默认 binary</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>cargo<span class="w"> </span>tree<span class="w"> </span>-p<span class="w"> </span>guessing_game<span class="w">           </span><span class="c1"># 查看指定成员的依赖树</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>cargo<span class="w"> </span>fmt<span class="w"> </span>--all<span class="w"> </span>--<span class="w"> </span>--check<span class="w">            </span><span class="c1"># 检查所有成员格式</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>cargo<span class="w"> </span>clippy<span class="w"> </span>--workspace<span class="w"> </span>--all-targets<span class="w"> </span><span class="c1"># 对所有目标运行 Clippy</span>
+</code></pre></div>
+<p>只运行某个明确的 binary 时可以添加 <code>--bin</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>cargo<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span>tools<span class="w"> </span>--bin<span class="w"> </span>importer
+</code></pre></div>
+<p>验证依赖锁定状态:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cargo<span class="w"> </span>check<span class="w"> </span>--workspace<span class="w"> </span>--locked
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>cargo<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--workspace<span class="w"> </span>--locked
+</code></pre></div>
+<h2 id="_4">常见配置错误</h2>
+<h3 id="_5">重复成员</h3>
+<p>不要在 <code>members</code> 中重复写同一个目录,也不要让显式路径与 glob 重复匹配同一个 Package:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="s2">"apps/demo"</span><span class="p">,</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="s2">"apps/demo"</span><span class="p">,</span><span class="w"> </span><span class="c1"># 重复</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">]</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<p>应删除重复项,确保每个 Package 只属于当前 workspace 一次.修改后使用下面的命令检查 Cargo 实际识别出的成员:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>cargo<span class="w"> </span>metadata<span class="w"> </span>--no-deps
+</code></pre></div>
+<p>如果嵌套目录中还有另一个 workspace,同一个 Package 也不能同时被两个 workspace 管理.应调整 workspace 边界,或使用 <code>exclude</code> 排除不属于当前 workspace 的目录.</p>
+<h3 id="members-package">members 写成 Package 名而不是目录</h3>
+<p>假设目录名为 <code>apps/guess</code>,其中的 Package 名为 <code>guessing_game</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>workspace/
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>└── apps/
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    └── guess/
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>        └── Cargo.toml
+</code></pre></div>
+<p>根清单必须填写目录路径:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"apps/guess"</span><span class="p">]</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<p>下面的命令则使用 <code>[package].name</code>,而不是目录名:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>cargo<span class="w"> </span>check<span class="w"> </span>-p<span class="w"> </span>guessing_game
+</code></pre></div>
+<details class="terminal-alert terminal-alert-error">
+<summary>路径和名称各有用途</summary>
+<p><code>members</code> 与路径依赖使用文件系统目录;<code>cargo check -p</code>、<code>cargo run -p</code> 使用 Package 名;Rust 源码中的 <code>use</code> 使用 crate 名.三者经常相同,但 Cargo 不要求它们完全一致.</p>
+</details>
+<h3 id="cargotoml">目录不存在或缺少 Cargo.toml</h3>
+<p>下面的成员路径只有在对应目录存在且包含有效 <code>Cargo.toml</code> 时才成立:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"collections_learn"</span><span class="p">]</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<p>如果移动或重命名目录,必须同步修改 <code>members</code> 和相关路径依赖.可以依次检查:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>cargo<span class="w"> </span>metadata<span class="w"> </span>--no-deps
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>cargo<span class="w"> </span>check<span class="w"> </span>--workspace
+</code></pre></div>
+<h3 id="package_1">Package 名重复</h3>
+<p>同一个 workspace 中的不同成员不应使用相同的 <code>[package].name</code>.即使目录名不同,<code>-p</code> 也无法明确选择重复名称:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">[package]</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tools"</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.1.0"</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2024"</span>
+</code></pre></div>
+<p>为每个 Package 设置唯一且稳定的名称,然后再使用目录层级表达其所属领域.</p>
+<h3 id="virtual-workspace-resolver">virtual workspace 遗漏 resolver</h3>
+<p>下面的配置虽然列出了成员,但没有明确依赖解析器:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"collections_learn"</span><span class="p">]</span>
+</code></pre></div>
+<p>edition 2024 项目应补充:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">[workspace]</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">members</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"collections_learn"</span><span class="p">]</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">resolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3"</span>
+</code></pre></div>
+<details class="terminal-alert terminal-alert-primary">
+<summary>排错顺序</summary>
+<p>先用 <code>cargo metadata --no-deps</code> 检查清单、成员路径和 Package 名,再用 <code>cargo check --workspace</code> 检查源码与依赖,最后运行 <code>cargo test --workspace</code>.分层验证比直接处理一长串后续错误更有效.</p>
+</details>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>

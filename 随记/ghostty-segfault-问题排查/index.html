@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+     
+     
+    
+    <link rel="canonical" href="https://richard-code200.github.io/mkdocs-site/%E9%9A%8F%E8%AE%B0/ghostty-segfault-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题 - My Mkdocs Site</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- gruvbox_dark color palette -->
+<link href="../../css/palettes/gruvbox_dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
+    
+    <script src="https://unpkg.com/highlightjs-cobol/dist/cobol.min.js"></script>
+    
+    <script src="../../add_hljs_highlight.js"></script>
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://richard-code200.github.io/mkdocs-site/" class="no-style">My Mkdocs Site</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">这是王佳贤的个人博客</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="1">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">这是王佳贤的个人博客</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Linux</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Linux/%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7/">安全特性</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">MarkDown</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../MarkDown/MarkDown/">Markdown 核心语法速查表</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Rust</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Cargo%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%8E%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">Cargo工作区与依赖管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Enum%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/">Enum和模式匹配</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%B5%81/">函数与控制流</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%88%87%E7%89%87/">切片(Slice)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本语法与数据类型</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">Rust 学习项目计划</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/">引用与借用</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%89%80%E6%9C%89%E6%9D%83/">所有权</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">格式化输出</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/">模块系统</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E7%89%B9%E5%BE%81/">泛型与特征</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B5%8B%E8%AF%95/">测试</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体(Struct)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%9B%86%E5%90%88/">集合</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/">Rust 项目代码组织</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Zed</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/">Zed</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/%E5%BF%AB%E6%8D%B7%E9%94%AE/">Zed 快捷键</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Git使用指南</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Git%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">Git基础概念</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E8%AE%BE%E7%BD%AE/">初始设置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">基本操作命令</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%9A%82%E5%AD%98/">工作区暂存</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">忽略文件配置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E9%80%80/">撤销与回退</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/">标签管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">远程仓库操作</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">常用工具</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/bat/">bat</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/eza/">eza</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/fd/">fd</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/late_sh_zh/">late.sh</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/ripgrep/">ripgrep (rg)</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源协议</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/">开源协议概念总结</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源项目学习</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97/">流程指南</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">操作系统原理</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E7%AC%AC%E4%B8%80%E7%AB%A0/">📟 A PROGRAM is not a PROCESS</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E8%AF%BE%E7%A8%8B%E4%BF%A1%E6%81%AF/">📚 课程信息</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">算法笔记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">分发饼干</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">费曼学习法</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">Way To Learn</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">随记</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-4-27/">2026-4-27</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-5-19/">2026-5-19</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-6-1/">随记</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-6-9/">课堂作业</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../Keygen%28%E6%B3%A8%E5%86%8C%E6%9C%BA%29/">注册机</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="terminal-mkdocs-side-nav-item--active">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</span>
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#ghostty-fedora-4344-segmentation-fault">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</a></li>
+        <li><a href="#_1">现象</a></li><li><a href="#_2">根因分析</a></li><li><a href="#_6">临时解决方案</a></li><li><a href="#vicinae-ghostty">补充排查：vicinae 启动 ghostty 仍崩溃</a></li><li><a href="#glycin_data_dir-clash-verge">后续问题：GLYCIN_DATA_DIR 导致 clash-verge 崩溃</a></li><li><a href="#_18">最终配置</a></li><li><a href="#_21">永久修复方向</a></li><li><a href="#_22">排查过程中用到的命令</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="ghostty-fedora-4344-segmentation-fault">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</h1>
+<p><strong>日期</strong>: 2026-05-20 初查 / 2026-05-21 修复完善<br />
+<strong>环境</strong>: Fedora 44, Wayland (niri), ghostty 1.3.1-2.fc44, clash-verge 2.5.1</p>
+<h2 id="_1">现象</h2>
+<p>运行 ghostty 后立即崩溃，输出末尾显示：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>zsh: segmentation fault (core dumped)  ghostty
+</code></pre></div>
+<p>完整日志中包含大量 Adwaita 弃用警告后崩溃：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>warning(glib): WARNING: Adwaita: The resource style-dark.css is deprecated ...
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>warning(glib): WARNING: Adwaita: The resource style-hc.css is deprecated ...
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>warning(glib): WARNING: Adwaita: The resource style-hc-dark.css is deprecated ...
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>zsh: segmentation fault (core dumped)  ghostty
+</code></pre></div>
+<p>经 <code>coredumpctl</code> 确认，每次启动均产生 SIGSEGV core dump。</p>
+<h2 id="_2">根因分析</h2>
+<h3 id="_3">崩溃调用链</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ghostty: App.newWindow
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  → gtk_window_present
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    → gtk_window_realize
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      → gtk_window_realize_icon           (加载窗口图标)
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        → gtk_icon_paintable_snapshot_with_weight
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>          → gdk_texture_new_from_stream_at_scale
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            → gdk_pixbuf_new_from_stream
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>              → load_pixbuf_with_glycin   (glycin 图像加载器)
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>                → gly_loader_load
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                  → glycin::api_common::spin_up_loader
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                    → glycin::sandbox::Sandbox::bwrap_command  (bwrap 沙箱初始化)
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>                      → FcConfigGetCacheDirs
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>                        → FcConfigDestroy
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>                          → FcStrSetDestroy  →  SIGSEGV
+</code></pre></div>
+<h3 id="_4">关键包版本</h3>
+<table>
+<thead>
+<tr>
+<th>包名</th>
+<th>Fedora 43</th>
+<th>Fedora 44</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ghostty</td>
+<td>1.3.1</td>
+<td>1.3.1-2.fc44</td>
+</tr>
+<tr>
+<td>glycin-libs</td>
+<td>2.0.8</td>
+<td>2.1.1</td>
+</tr>
+<tr>
+<td>fontconfig</td>
+<td>2.17.0-3</td>
+<td>2.17.0-4</td>
+</tr>
+<tr>
+<td>bubblewrap</td>
+<td>0.11.0-2</td>
+<td>0.11.0-4</td>
+</tr>
+<tr>
+<td>gtk4</td>
+<td>-</td>
+<td>4.22.4</td>
+</tr>
+<tr>
+<td>libadwaita</td>
+<td>-</td>
+<td>1.9.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">根因</h3>
+<p><strong>fontconfig 2.17.0 的 <code>FcConfigGetCacheDirs()</code> 函数存在 bug</strong>，在被调用时会触发 SIGSEGV。</p>
+<p>Fedora 43→44 升级将 <code>glycin-libs</code> 从 2.0.x 升级到 2.1.1，新版本中 glycin 的图像加载沙箱初始化过程会调用 <code>FcConfigGetCacheDirs()</code> 获取缓存目录以挂载到 bwrap 沙箱，从而触发了 fontconfig 的这个崩溃。</p>
+<p>经验证，在 Python 中直接调用 <code>libfontconfig.so</code> 的 <code>FcConfigGetCacheDirs()</code> 同样会导致段错误，确认是 fontconfig 库本身的问题。</p>
+<h2 id="_6">临时解决方案</h2>
+<p>设置 <code>GLYCIN_DATA_DIR</code> 环境变量使 glycin 绕过导致崩溃的代码路径。</p>
+<h3 id="_7">方法</h3>
+<p>环境变量需要在 <strong>三个层级</strong> 分别配置才能覆盖所有启动场景，详见下文。</p>
+<h3 id="_8">方法</h3>
+<h4 id="zsh-zshrc">层级一：zsh 终端会话 (<code>~/.zshrc</code>)</h4>
+<p>确保在终端中手动执行 <code>ghostty</code> 时有效：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># ~/.zshrc 中添加</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GLYCIN_DATA_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.cache/glycin-data"</span>
+</code></pre></div>
+<h4 id="niri-configniriconfigkdl">层级二：niri 环境块 (<code>~/.config/niri/config.kdl</code>)</h4>
+<p>niri 的 <code>environment</code> 块决定通过 niri spawn 机制启动的所有应用的初始环境：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>environment {
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  // ... 其他变量 ...
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  // Ghostty Fedora 44 临时绕过
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  GLYCIN_DATA_DIR "/home/errorichard/.cache/glycin-data"
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>}
+</code></pre></div>
+<p><strong>注意</strong>：niri 的 <code>load-config-file</code> 只重载快捷键和窗口规则，<code>environment</code> 块仅在 niri 启动时读取。修改后需重启 niri 会话才能使 niri 自身继承该变量。</p>
+<h4 id="systemd-configenvironmentd90-dmsconf">层级三：systemd 用户环境 (<code>~/.config/environment.d/90-dms.conf</code>)</h4>
+<p>systemd 用户服务（如 vicinae）从此处继承环境变量：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>GLYCIN_DATA_DIR=/home/errorichard/.cache/glycin-data
+</code></pre></div>
+<p>当前会话中已运行的 systemd 服务不会自动获取新变量，需手动注入并重启服务：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>set-environment<span class="w"> </span><span class="nv">GLYCIN_DATA_DIR</span><span class="o">=</span>/home/errorichard/.cache/glycin-data
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>restart<span class="w"> </span>vicinae.service
+</code></pre></div>
+<h3 id="_9">验证</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">GLYCIN_DATA_DIR</span><span class="o">=</span>/tmp/glycin-data<span class="w"> </span>ghostty
+</code></pre></div>
+<p>预期：ghostty 正常启动并显示终端窗口，无 segfault。</p>
+<h2 id="vicinae-ghostty">补充排查：vicinae 启动 ghostty 仍崩溃</h2>
+<h3 id="_10">现象</h3>
+<p>设置 <code>~/.zshrc</code> 后，从 alacritty 终端执行 <code>ghostty</code> 可正常启动，但通过 vicinae 启动仍 segfault。</p>
+<h3 id="_11">原因</h3>
+<p>vicinae 是 systemd 用户服务，其环境变量继承自 <strong>systemd 用户管理器</strong>，而非 zsh。变量传递链如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>zsh (~/.zshrc)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  └── ghostty           ✓ 有 GLYCIN_DATA_DIR（适用终端启动）
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>niri (environment 块)
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  └── spawn-at-startup "vicinae" "server"
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>       └── ghostty      ✗ 无 GLYCIN_DATA_DIR（niri 启动时未设置）
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>systemd 用户会话 (~/.config/environment.d/)
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>  └── vicinae.service
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>       └── ghostty      ✗ 无 GLYCIN_DATA_DIR（会话启动时未设置）
+</code></pre></div>
+<p>只有 <code>~/.zshrc</code> 被配置时，仅终端路径生效，vicinae 路径因缺少变量仍然崩溃。</p>
+<h3 id="_12">解决</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 注入 systemd 用户会话</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>set-environment<span class="w"> </span><span class="nv">GLYCIN_DATA_DIR</span><span class="o">=</span>/home/errorichard/.cache/glycin-data
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 重启 vicinae 使其继承新环境</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>restart<span class="w"> </span>vicinae.service
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 确认</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>cat<span class="w"> </span>/proc/<span class="k">$(</span>cat<span class="w"> </span>/run/user/1000/vicinae/vicinae-data-control-server.pid<span class="k">)</span>/environ<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">'\0'</span><span class="w"> </span><span class="s1">'\n'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>GLYCIN
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># 输出: GLYCIN_DATA_DIR=/home/errorichard/.cache/glycin-data</span>
+</code></pre></div>
+<h3 id="_13">最终配置清单</h3>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>用途</th>
+<th>生效范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.zshrc</code></td>
+<td>终端手动启动</td>
+<td>zsh 会话</td>
+</tr>
+<tr>
+<td><code>~/.config/niri/config.kdl</code></td>
+<td>niri spawn（重启 niri 后生效）</td>
+<td>niri 直接启动的应用</td>
+</tr>
+<tr>
+<td><code>~/.config/environment.d/90-dms.conf</code></td>
+<td>systemd 用户服务（重启会话后生效）</td>
+<td>vicinae 等 systemd 服务</td>
+</tr>
+</tbody>
+</table>
+<h2 id="glycin_data_dir-clash-verge">后续问题：GLYCIN_DATA_DIR 导致 clash-verge 崩溃</h2>
+<p><strong>日期</strong>: 2026-05-21</p>
+<h3 id="_14">现象</h3>
+<p>设置 <code>GLYCIN_DATA_DIR</code> 后，clash-verge 启动崩溃：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Gtk:ERROR:../gtk/gtkiconhelper.c:495:ensure_surface_for_gicon: assertion failed (error == NULL):
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Failed to load .../image-missing.svg: No image loaders are configured.
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Used config: Config {
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    image_loader: {},
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    image_editor: {},
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>}
+</code></pre></div>
+<h3 id="_15">根因分析</h3>
+<ol>
+<li>
+<p><strong>glycin 的图像加载器配置发现机制</strong>：glycin 通过扫描 <code>XDG_DATA_DIRS</code> 下的 <code>&lt;dir&gt;/glycin-loaders/&lt;compat-version&gt;+/conf.d/*.conf</code> 来发现可用的图像加载器</p>
+</li>
+<li>
+<p><strong><code>GLYCIN_DATA_DIR</code> 的副作用</strong>：当 <code>GLYCIN_DATA_DIR</code> 被设置为自定义路径时，glycin <strong>仅在</strong>该路径下查找加载器配置，不再搜索系统路径 <code>/usr/share/glycin-loaders/2+/conf.d/</code></p>
+</li>
+<li>
+<p><strong>原先工作目录为空</strong>：<code>~/.cache/glycin-data/</code> 下没有任何 loader 配置，导致 glycin 的 <code>Config { image_loader: {}, image_editor: {} }</code> 为空</p>
+</li>
+<li>
+<p><strong>所有图像格式均受影响</strong>：由于 Fedora 44 的 <code>libgdk_pixbuf-2.0.so.0</code> <strong>直接链接</strong> <code>libglycin-2.so.0</code>，glycin 成为所有图像加载的唯一后端。glycin 配置为空意味着 PNG、SVG、JPEG 等所有格式均无法加载</p>
+</li>
+<li>
+<p><strong>clash-verge 触发路径</strong>：</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>clash-verge: 创建系统托盘图标
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  → gtk_icon_theme_lookup_icon
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    → gdk_pixbuf_new_from_file (SVG)
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>      → gly_loader_new → Config 为空 → 报错退出
+</code></pre></div>
+<h3 id="_16">验证方法</h3>
+<p>通过 Python GDK-pixbuf 绑定测试图像加载：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">gi</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">'GdkPixbuf'</span><span class="p">,</span> <span class="s1">'2.0'</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">gi.repository</span><span class="w"> </span><span class="kn">import</span> <span class="n">GdkPixbuf</span><span class="p">,</span> <span class="n">GLib</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># GLYCIN_DATA_DIR 未设置时：正常加载</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">pb</span> <span class="o">=</span> <span class="n">GdkPixbuf</span><span class="o">.</span><span class="n">Pixbuf</span><span class="o">.</span><span class="n">new_from_file</span><span class="p">(</span><span class="s1">'/path/to/icon.svg'</span><span class="p">)</span>  <span class="c1"># OK</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># GLYCIN_DATA_DIR 指向空目录时：所有格式均失败</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1"># Error: No image loaders are configured</span>
+</code></pre></div>
+<h3 id="_17">解决方案演进</h3>
+<h4 id="glycin_data_dir-glycin">尝试一：在 GLYCIN_DATA_DIR 下补齐 glycin 配置</h4>
+<p>在 <code>~/.cache/glycin-data/</code> 下创建 glycin 加载器配置目录结构，从系统复制配置文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cache/glycin-data/glycin-loaders/2+/conf.d/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>cp<span class="w"> </span>/usr/share/glycin-loaders/2+/conf.d/*.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">   </span>~/.cache/glycin-data/glycin-loaders/2+/conf.d/
+</code></pre></div>
+<details class="terminal-alert terminal-alert-error">
+<summary>关键发现：路径不带 <code>share/</code> 前缀</summary>
+<p>在 <code>GLYCIN_DATA_DIR</code> 下，glycin 查找的是 <code>&lt;GLYCIN_DATA_DIR&gt;/glycin-loaders/2+/conf.d/</code>，而非 <code>&lt;GLYCIN_DATA_DIR&gt;/share/glycin-loaders/2+/conf.d/</code>。这与 <code>XDG_DATA_DIRS</code> 下的标准路径 <code>&lt;datadir&gt;/share/glycin-loaders/...</code> 不同。</p>
+</details>
+<p><strong>结果</strong>：clash-verge 恢复工作，glycin 正确发现加载器。但 ghostty 重新崩溃！</p>
+<h4 id="fontconfigtrue">尝试二：去掉 Fontconfig=true 彻底绕过崩溃</h4>
+<p>ghostty 重新崩溃的原因：glycin 能正常初始化后，在创建 bwrap 沙箱加载 SVG 时调用 <code>FcConfigGetCacheDirs()</code>，再次触发 fontconfig 2.17.0 的 double-free 崩溃。</p>
+<p>glycin SVG loader 配置中的 <code>Fontconfig=true</code> 指示 glycin 在沙箱中挂载字体缓存目录，这正是触发 <code>FcConfigGetCacheDirs()</code> 的代码路径。</p>
+<p><strong>最终方案</strong>：拷贝系统配置到 <code>GLYCIN_DATA_DIR</code> 后，<strong>移除 <code>Fontconfig=true</code></strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># ~/.cache/glycin-data/glycin-loaders/2+/conf.d/glycin-svg.conf</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">[loader:image/svg+xml]</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="na">Exec</span><span class="o">=</span><span class="s">/usr/libexec/glycin-loaders/2+/glycin-svg</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="na">ExposeBaseDir</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># Fontconfig=true  ← 移除此行，绕过 fontconfig 2.17.0 SIGSEGV</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="k">[loader:image/svg+xml-compressed]</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="na">Exec</span><span class="o">=</span><span class="s">/usr/libexec/glycin-loaders/2+/glycin-svg</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="na">ExposeBaseDir</span><span class="o">=</span><span class="s">true</span>
+</code></pre></div>
+<p><strong>结果</strong>：ghostty 和 clash-verge 均正常启动，SVG 图标可正常渲染。</p>
+<details class="terminal-alert">
+<summary>Fontconfig 移除的影响</summary>
+<p>移除 <code>Fontconfig=true</code> 后，glycin 不会在 bwrap 沙箱中挂载字体缓存目录。对于纯图形 SVG 图标（如系统图标主题中的图标），不影响渲染。但如果 SVG 中包含 <code>&lt;text&gt;</code> 元素需要字体渲染，则可能使用默认字体或渲染异常。日常使用中影响极小。</p>
+</details>
+<h2 id="_18">最终配置</h2>
+<h3 id="_19">环境变量</h3>
+<p>保持 <code>GLYCIN_DATA_DIR</code> 在三个层级中均设置，不做修改：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.zshrc</code></td>
+<td><code>export GLYCIN_DATA_DIR="$HOME/.cache/glycin-data"</code></td>
+</tr>
+<tr>
+<td><code>~/.config/niri/config.kdl</code></td>
+<td><code>GLYCIN_DATA_DIR "/home/errorichard/.cache/glycin-data"</code></td>
+</tr>
+<tr>
+<td><code>~/.config/environment.d/90-dms.conf</code></td>
+<td><code>GLYCIN_DATA_DIR=/home/errorichard/.cache/glycin-data</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="glycin">自定义 glycin 加载器配置目录</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>~/.cache/glycin-data/
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>└── glycin-loaders/
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    └── 2+/
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>        └── conf.d/
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>            ├── glycin-heif.conf
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>            ├── glycin-image-rs.conf
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>            ├── glycin-jxl.conf
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>            └── glycin-svg.conf        ← Fontconfig=true 已移除
+</code></pre></div>
+<h3 id="_20">系统配置同步</h3>
+<p>还需将修改后的 SVG loader 配置同步到系统路径（需 sudo）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>~/.cache/glycin-data/glycin-loaders/2+/conf.d/glycin-svg.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">        </span>/usr/share/glycin-loaders/2+/conf.d/glycin-svg.conf
+</code></pre></div>
+<h2 id="_21">永久修复方向</h2>
+<ol>
+<li><strong>fontconfig 上游修复</strong>: 向 <a href="https://gitlab.freedesktop.org/fontconfig/fontconfig/-/issues">fontconfig issue tracker</a> 报告 <code>FcConfigGetCacheDirs</code> 的段错误问题</li>
+<li><strong>glycin 上游</strong>: 向 <a href="https://gitlab.gnome.org/GNOME/glycin/-/issues">glycin issue tracker</a> 反馈字体配置获取的崩溃问题</li>
+<li><strong>Fedora 打包</strong>: 等待 fontconfig 或 glycin 的修复版本进入 Fedora 仓库后升级</li>
+<li><strong>降级方案</strong>: 如长期未修复，可考虑降级 glycin-libs 到 2.0.8</li>
+</ol>
+<h2 id="_22">排查过程中用到的命令</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># 查看 core dump 信息</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>coredumpctl<span class="w"> </span>list<span class="w"> </span>ghostty
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># 查看崩溃栈回溯（完整 gdb 调试）</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>coredumpctl<span class="w"> </span>debug<span class="w"> </span>ghostty
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># 检查关键包版本</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>rpm<span class="w"> </span>-q<span class="w"> </span>ghostty<span class="w"> </span>gtk4<span class="w"> </span>libadwaita<span class="w"> </span>glycin-libs<span class="w"> </span>fontconfig<span class="w"> </span>bubblewrap
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="c1"># 确认 fontconfig bug</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="s2">import ctypes</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="s2">lib = ctypes.CDLL('libfontconfig.so.1')</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="s2">lib.FcInit()</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="s2">lib.FcConfigGetCacheDirs(lib.FcConfigGetCurrent())</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="s2">"</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="c1"># 测试 GLYCIN_DATA_DIR 绕过效果</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="nv">GLYCIN_DATA_DIR</span><span class="o">=</span>/tmp/glycin-data<span class="w"> </span>ghostty
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="c1"># 验证 gdk-pixbuf 能否加载图像（glycin 配置诊断）</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="s2">import gi</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="s2">gi.require_version('GdkPixbuf', '2.0')</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="s2">from gi.repository import GdkPixbuf, GLib</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="s2">try:</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="s2">    pb = GdkPixbuf.Pixbuf.new_from_file('/path/to/icon.svg')</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="s2">    print('OK:', pb.get_width(), 'x', pb.get_height())</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="s2">except GLib.Error as e:</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="s2">    print('FAIL:', e.message)</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="s2">"</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="c1"># 查看 gdk-pixbuf 已注册的图像格式（含 glycin 提供者）</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="s2">import gi</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="s2">gi.require_version('GdkPixbuf', '2.0')</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a><span class="s2">from gi.repository import GdkPixbuf</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a><span class="s2">for f in GdkPixbuf.Pixbuf.get_formats():</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a><span class="s2">    print(f.get_name(), f.get_mime_types())</span>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a><span class="s2">"</span>
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a><span class="c1"># 检查 gdk-pixbuf 是否直接链接 libglycin</span>
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>ldd<span class="w"> </span>/lib64/libgdk_pixbuf-2.0.so.0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>glycin
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a><span class="c1"># 列出 glycin 导出的符号</span>
+<a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>nm<span class="w"> </span>-D<span class="w"> </span>/lib64/libglycin-2.so.0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'gly_loader'</span>
+<a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>
+<a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a><span class="c1"># 查找 GLYCIN_DATA_DIR 的设置来源</span>
+<a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>grep<span class="w"> </span>-r<span class="w"> </span><span class="s1">'GLYCIN_DATA_DIR'</span><span class="w"> </span>~/.config<span class="w"> </span>~/.zshrc<span class="w"> </span>/etc/environment.d/<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>
+<a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a><span class="c1"># 查看 glycin 加载器配置</span>
+<a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>cat<span class="w"> </span>/usr/share/glycin-loaders/2+/conf.d/glycin-svg.conf
+<a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>
+<a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a><span class="c1"># 查看完整的模块依赖链</span>
+<a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>objdump<span class="w"> </span>-T<span class="w"> </span>/lib64/libgdk_pixbuf-2.0.so.0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'gly_'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $NF}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u
+</code></pre></div>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>

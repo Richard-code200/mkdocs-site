@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+     
+     
+    
+    <link rel="canonical" href="https://richard-code200.github.io/mkdocs-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/fd/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>fd - My Mkdocs Site</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- gruvbox_dark color palette -->
+<link href="../../css/palettes/gruvbox_dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
+    
+    <script src="https://unpkg.com/highlightjs-cobol/dist/cobol.min.js"></script>
+    
+    <script src="../../add_hljs_highlight.js"></script>
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://richard-code200.github.io/mkdocs-site/" class="no-style">My Mkdocs Site</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">这是王佳贤的个人博客</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="1">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">这是王佳贤的个人博客</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Linux</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Linux/%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7/">安全特性</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">MarkDown</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../MarkDown/MarkDown/">Markdown 核心语法速查表</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Rust</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Cargo%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%8E%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">Cargo工作区与依赖管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Enum%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/">Enum和模式匹配</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%B5%81/">函数与控制流</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%88%87%E7%89%87/">切片(Slice)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本语法与数据类型</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">Rust 学习项目计划</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/">引用与借用</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%89%80%E6%9C%89%E6%9D%83/">所有权</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">格式化输出</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/">模块系统</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E7%89%B9%E5%BE%81/">泛型与特征</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B5%8B%E8%AF%95/">测试</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体(Struct)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%9B%86%E5%90%88/">集合</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/">Rust 项目代码组织</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Zed</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/">Zed</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/%E5%BF%AB%E6%8D%B7%E9%94%AE/">Zed 快捷键</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Git使用指南</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Git%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">Git基础概念</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E8%AE%BE%E7%BD%AE/">初始设置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">基本操作命令</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%9A%82%E5%AD%98/">工作区暂存</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">忽略文件配置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E9%80%80/">撤销与回退</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/">标签管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">远程仓库操作</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">常用工具</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../bat/">bat</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../eza/">eza</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="terminal-mkdocs-side-nav-item--active">fd</span>
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../late_sh_zh/">late.sh</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../ripgrep/">ripgrep (rg)</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源协议</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/">开源协议概念总结</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源项目学习</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97/">流程指南</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">操作系统原理</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E7%AC%AC%E4%B8%80%E7%AB%A0/">📟 A PROGRAM is not a PROCESS</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E8%AF%BE%E7%A8%8B%E4%BF%A1%E6%81%AF/">📚 课程信息</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">算法笔记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">分发饼干</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">费曼学习法</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">Way To Learn</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">随记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-4-27/">2026-4-27</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-5-19/">2026-5-19</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-6-1/">随记</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/2026-6-9/">课堂作业</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/Keygen%28%E6%B3%A8%E5%86%8C%E6%9C%BA%29/">注册机</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E9%9A%8F%E8%AE%B0/ghostty-segfault-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#fd">fd</a></li>
+        <li><a href="#_1">特点</a></li><li><a href="#demo">Demo</a></li><li><a href="#_2">如何使用</a></li><li><a href="#_18">基准测试</a></li><li><a href="#_19">排除故障</a></li><li><a href="#_21">与其他项目的整合</a></li><li><a href="#_24">安装</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="fd">fd</h1>
+<p><code>fd</code> 是一个在你文件系统中查找条目的程序。它是一个简单、快速、友好的 <a href="https://www.gnu.org/software/findutils/"><code>find</code></a> 替代品。虽然它的目标不是支持 <code>find</code> 的所有强大功能，但它为大多数的使用情况提供了合理的（有意见的）默认值。</p>
+<p>快速浏览：</p>
+<ul>
+<li>
+<p><a href="#how-to-use">如何使用</a></p>
+</li>
+<li>
+<p><a href="#安装">安装方法</a></p>
+</li>
+<li>
+<p><a href="#troubleshooting">排除故障</a></p>
+</li>
+</ul>
+<h2 id="_1">特点</h2>
+<ul>
+<li>
+<p>直观的语法：用 <code>fd PATTERN</code> 代替 <code>find -iname '*PATTERN*'</code></p>
+</li>
+<li>
+<p>使用正则表达式（默认）和 GLOB 模式</p>
+</li>
+<li>
+<p>由于并行遍历目录，<a href="#benchmark">速度非常快</a></p>
+</li>
+<li>
+<p>使用颜色来突出不同的文件类型（像 <code>ls</code> 一样）</p>
+</li>
+<li>
+<p>支持<a href="#command-execution">并发执行命令</a></p>
+</li>
+<li>
+<p>智能大小写：默认情况下，搜索是不区分大小写的。如果模式包含一个大写字母，它将切换到大小写敏感 <a href="http://vimdoc.sourceforge.net/htmldoc/options.html#" title="smartcase">*</a></p>
+</li>
+<li>
+<p>默认忽略隐藏目录和文件</p>
+</li>
+<li>
+<p>默认忽略你 <code>.gitignore</code> 文件中的模式</p>
+</li>
+<li>
+<p>该命令比 <code>find</code> 短了 50% <a href="https://github.com/ggreer/the_silver_searcher">*</a> :-)</p>
+</li>
+</ul>
+<h2 id="demo">Demo</h2>
+<p><img alt="" src="https://github.com/sharkdp/fd/raw/master/doc/screencast.svg" /></p>
+<h2 id="_2">如何使用 <a name="how-to-use"></a></h2>
+<p>首先，为了了解所有可用的命令行选项概况，你可以运行 <a href="#command-line-options"><code>fd -h</code></a> 获得简明的帮助信息，或者运行 <code>fd --help</code> 获得更详细的版本。</p>
+<h3 id="_3">简单搜索</h3>
+<p><em>fd</em> 被设计用来在你的文件系统中寻找条目。你可以进行的最基本的搜索，<em>fd</em> 只带一个参数：搜索模式。例如，假设你想找到你的一个旧脚本（它名字包含 <code>netflix</code>）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>netfl
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Software/python/imdb-ratings/netflix-details.py
+</code></pre></div>
+<p>如果像这样只调用一个参数，<em>fd</em> 会递归搜索当前目录中任何包含 <code>netfl</code> 模式的条目。</p>
+<h3 id="_4">正则表达式搜索</h3>
+<p>搜索模式被当作一个正则表达式来处理。这里，我们搜索以 <code>x</code> 开头、以 <code>rc</code> 结尾的条目：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/etc
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&gt;<span class="w"> </span>fd<span class="w"> </span><span class="s1">'^x.*rc$'</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>X11/xinit/xinitrc
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>X11/xinit/xserverrc
+</code></pre></div>
+<p><code>fd</code> 使用的正则表达式语法在<a href="https://docs.rs/regex/1.0.0/regex/#syntax">这里</a>。</p>
+<h3 id="_5">指定根目录</h3>
+<p>如果我们想搜索一个特定的目录，可以把它作为 <em>fd</em> 的第二个参数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>passwd<span class="w"> </span>/etc
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>/etc/default/passwd
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>/etc/pam.d/passwd
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>/etc/passwd
+</code></pre></div>
+<h3 id="_6">列出所有文件，递归</h3>
+<p><em>fd</em> 可以在没有参数的情况下被调用。这对于快速了解当前目录中的所有条目非常有用，它是递归的（类似于 <code>ls -R</code>）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>fd/tests
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&gt;<span class="w"> </span>fd
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>testenv
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>testenv/mod.rs
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>tests.rs
+</code></pre></div>
+<p>如果你想使用这个功能来列出一个给定目录中的所有文件，你必须使用一个全包模式，如 <code>.</code>或 <code>^</code>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>.<span class="w"> </span>fd/tests/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>testenv
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>testenv/mod.rs
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>tests.rs
+</code></pre></div>
+<h3 id="_7">搜索一个特定的文件扩展名</h3>
+<p>通常，我们对某一特定类型的所有文件感兴趣。这可以用 <code>-e</code>（或 <code>--extension</code>）选项来完成。在这里，我们搜索 <em>fd</em> 资源库中的所有 Markdown 文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>fd
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-e<span class="w"> </span>md
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>CONTRIBUTING.md
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>README.md
+</code></pre></div>
+<p><code>-e</code> 选项可以与搜索模式结合使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-e<span class="w"> </span>rs<span class="w"> </span>mod
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>src/fshelper/mod.rs
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>src/lscolors/mod.rs
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>tests/testenv/mod.rs
+</code></pre></div>
+<h3 id="_8">搜索一个特定的文件名</h3>
+<p>要找到与所提供的搜索模式完全一致的文件，请使用 <code>-g</code>（或 <code>--glob</code>）选项：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-g<span class="w"> </span>libc.so<span class="w"> </span>/usr
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>/usr/lib32/libc.so
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>/usr/lib/libc.so
+</code></pre></div>
+<h3 id="_9">隐藏和忽略的文件</h3>
+<p>默认情况下，<em>fd</em> 不搜索隐藏目录，也不在搜索结果中显示隐藏文件。要禁用这种行为，我们可以使用 <code>-H</code>（或 <code>--hidden</code>）选项：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>pre-commit
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-H<span class="w"> </span>pre-commit
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>.git/hooks/pre-commit.sample
+</code></pre></div>
+<p>如果我们在一个属于 Git 仓库（或包括 Git 仓库）的目录中工作，fd 不会搜索符合 .gitignore 模式之一的文件夹（也不会显示文件）。要禁用这种行为，我们可以使用 <code>-I</code>（或 <code>--no-ignore</code>）选项：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>num_cpu
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-I<span class="w"> </span>num_cpu
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>target/debug/deps/libnum_cpus-f5ce7ef99006aa05.rlib
+</code></pre></div>
+<p>要真正搜索_所有_文件和目录，只需将隐藏和忽略功能结合起来就可以显示所有的东西（<code>-HI</code>）。</p>
+<h3 id="_10">匹配完整路径</h3>
+<p>默认情况下，<em>fd</em> 只匹配每个文件的文件名。然而，使用 <code>--full-path</code> 或 <code>-p</code> 选项，你可以对全路径进行匹配：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-p<span class="w"> </span>-g<span class="w"> </span><span class="s1">'**/.git/config'</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-p<span class="w"> </span><span class="s1">'.*/lesson-\d+/[a-z]+.(jpg|png)'</span>
+</code></pre></div>
+<h3 id="_11">命令执行 <a name="command-execution"></a></h3>
+<p>比起只是显示搜索结果，你往往还想对它们做另一些事情。<code>fd</code> 提供了两种方法来为你的每一个搜索结果执行外部命令</p>
+<ul>
+<li>
+<p><code>-x</code>/<code>--exec</code> 选项为每个搜索结果运行一个外部命令（并行）。</p>
+</li>
+<li>
+<p><code>-X</code>/<code>--exec-batch</code> 选项启动一次外部命令，将所有搜索结果作为参数。</p>
+</li>
+</ul>
+<h4 id="_12">例子</h4>
+<p>递归找到所有的压缩文件并解压：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fd<span class="w"> </span>-e<span class="w"> </span>zip<span class="w"> </span>-x<span class="w"> </span>unzip
+</code></pre></div>
+<p>如果有两个这样的文件，<code>file1.zip</code> 和 <code>backup/file2.zip</code>，这将执行 <code>unzip file1.zip</code> 和 <code>unzip backup/file2.zip</code>。这两个解压过程并行运行（如果文件找到的速度足够快）。</p>
+<p>找到所有的<em>.h和</em>.cpp文件，用clang-format -i将它们自动格式化：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>fd<span class="w"> </span>-e<span class="w"> </span>h<span class="w"> </span>-e<span class="w"> </span>cpp<span class="w"> </span>-x<span class="w"> </span>clang-format<span class="w"> </span>-i
+</code></pre></div>
+<p>注意 <code>clang-format</code> 的 <code>-i</code> 选项可以作为一个单独的参数传递。这就是为什么我们把 <code>-x</code> 选项放在最后。</p>
+<p>找到所有<code>test_*.py</code>文件，用你喜欢的编辑器打开它们：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>fd<span class="w"> </span>-g<span class="w"> </span><span class="s1">'test_*.py'</span><span class="w"> </span>-X<span class="w"> </span>vim
+</code></pre></div>
+<p>注意，在这里我们使用大写的 <code>-X</code> 来打开一个vim实例。如果有两个这样的文件，<code>test_basic.py</code> 和 <code>lib/test_advanced.py</code>，这将运行 <code>vim test_basic.py lib/test_advanced.py</code>。</p>
+<p>要查看文件权限、所有者、文件大小等细节，你可以告诉<code>fd</code>通过对每个结果运行<code>ls</code>来显示它们：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>fd<span class="w"> </span>…<span class="w"> </span>-X<span class="w"> </span>ls<span class="w"> </span>-lhd<span class="w"> </span>--color<span class="o">=</span>always
+</code></pre></div>
+<p>这个模式非常有用，<code>fd</code> 提供了一个快捷方式。你可以使用 <code>-l</code>/<code>--list-details</code> 选项，以这种方式执行ls：<code>fd … -l</code>。</p>
+<p>当把 <code>fd</code> 和 <a href="https://github.com/BurntSushi/ripgrep/">ripgrep</a>（<code>rg</code>）结合起来时，<code>-X</code> 选项也很有用，可以在某一类文件中搜索，比如所有的 C++ 源代码文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>fd<span class="w"> </span>-e<span class="w"> </span>cpp<span class="w"> </span>-e<span class="w"> </span>cxx<span class="w"> </span>-e<span class="w"> </span>h<span class="w"> </span>-e<span class="w"> </span>hpp<span class="w"> </span>-X<span class="w"> </span>rg<span class="w"> </span><span class="s1">'std::cout'</span>
+</code></pre></div>
+<p>将所有 *.jpg 文件转换为 *.png 文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>fd<span class="w"> </span>-e<span class="w"> </span>jpg<span class="w"> </span>-x<span class="w"> </span>convert<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="o">{</span>.<span class="o">}</span>.png
+</code></pre></div>
+<p>在这里，<code>{}</code> 是搜索结果的一个占位符。<code>{.}</code> 也是如此，但它没有文件扩展名。关于占位符语法的更多细节，见下文。</p>
+<p>使用 <code>-x</code> 从并行线程运行的命令，终端输出不会交错或乱码，所以 <code>fd -x</code> 可以用来粗略地将一个在许多文件上运行的任务并行化。这方面的一个例子是计算一个目录中每个单独文件的校验和。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>fd<span class="w"> </span>-tf<span class="w"> </span>-x<span class="w"> </span>md5sum<span class="w"> </span>&gt;<span class="w"> </span>file_checksums.txt
+</code></pre></div>
+<h4 id="_13">占位符语法</h4>
+<p><code>-x</code> 和 <code>-X</code> 选项将一个命令模板作为一系列参数（而不是一个单一的字符串）。如果你想在命令模板之后给fd添加额外的选项，你可以用 <code>\;</code> 来终止它。</p>
+<p>生成命令的语法与 <a href="https://www.gnu.org/software/parallel/">GNU Parallel</a> 类似：</p>
+<ul>
+<li>
+<p><code>{}</code>： 一个占位符，将被替换为搜索结果的路径（documents/images/party.jpg）。</p>
+</li>
+<li>
+<p><code>{.}</code>：和 <code>{}</code> 一样，但没有文件扩展名（documents/images/party）。</p>
+</li>
+<li>
+<p><code>{/}</code>：一个占位符，将被搜索结果的基本名称（party.jpg）取代。</p>
+</li>
+<li>
+<p><code>{//}</code>：已发现路径的父级（documents/images）。</p>
+</li>
+<li>
+<p><code>{/.}</code>：去掉扩展名的基本名（party）。</p>
+</li>
+</ul>
+<p>如果你不包括占位符，<em>fd</em> 会自动在末尾添加一个 <code>{}</code>。</p>
+<h4 id="_14">并行执行与串行执行</h4>
+<p>对于 <code>-x</code>/<code>--exec</code>，你可以通过使用 <code>-j</code>/<code>--threads</code> 选项控制并行作业的数量。使用 <code>--threads=1</code> 进行串行执行。</p>
+<h3 id="_15">排除特定的文件或目录</h3>
+<p>有时我们想忽略来自特定子目录的搜索结果。例如，我们可能想搜索所有隐藏的文件和目录（<code>-H</code>），但排除所有来自 <code>.git</code> 目录的匹配。我们可以使用 <code>-E</code>（或 <code>--exclude</code>）选项来实现这一点。它需要一个任意的 glob 模式作为参数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-H<span class="w"> </span>-E<span class="w"> </span>.git<span class="w"> </span>…
+</code></pre></div>
+<p>我们也可以用它来跳过挂载的目录：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-E<span class="w"> </span>/mnt/external-drive<span class="w"> </span>…
+</code></pre></div>
+<p>.. 或者跳过某些文件类型：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-E<span class="w"> </span><span class="s1">'*.bak'</span><span class="w"> </span>…
+</code></pre></div>
+<p>为了使排除模式永久化，你可以创建一个 <code>.fdignore</code> 文件。它们的工作方式与 <code>.gitignore</code> 文件类似，但都是针对 <code>fd</code> 的。比如说：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>&gt;<span class="w"> </span>cat<span class="w"> </span>~/.fdignore
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>/mnt/external-drive
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>*.bak
+</code></pre></div>
+<p>注意：<code>fd</code> 也支持其他程序使用的 <code>.ignore</code> 文件，如 <code>rg</code> 或 <code>ag</code> 。</p>
+<p>如果你想让 <code>fd</code> 在全局范围内忽略这些模式，你可以把它们放在 <code>fd</code> 的全局忽略文件中。在 macOS 或 Linux 中，这个文件通常位于 <code>~/.config/fd/ignore</code>，在Windows中则位于 <code>%APPDATA%\fd/ignore</code>。</p>
+<h3 id="_16">删除文件</h3>
+<p>你可以使用 <code>fd</code> 来删除所有与你的搜索模式相匹配的文件和目录。如果你只想删除文件，你可以使用 <code>--exec-batch</code>/<code>-X</code> 选项来调用 <code>rm</code>。例如，要递归地删除所有 <code>.DS_Store</code> 文件，请运行：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-H<span class="w"> </span><span class="s1">'^\.DS_Store$'</span><span class="w"> </span>-tf<span class="w"> </span>-X<span class="w"> </span>rm
+</code></pre></div>
+<p>如果你不确定是否需要删除，请先调用不带 <code>-X rm</code> 的 <code>fd</code>。或者，使用 <code>rm</code> 的 “interactive” 选项：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-H<span class="w"> </span><span class="s1">'^\.DS_Store$'</span><span class="w"> </span>-tf<span class="w"> </span>-X<span class="w"> </span>rm<span class="w"> </span>-i
+</code></pre></div>
+<p>如果你还想删除某类目录，可以使用相同的技巧。你必须使用 <code>rm</code> 的 <code>--recursive</code>/<code>-r</code> 标志来删除目录。</p>
+<p>注意：在某些情况下，使用 <code>fd … -X rm -r</code> 会导致竞争条件：如果你有一个像 <code>.../foo/bar/foo/...</code> 的路径，并且想删除所有名为 <code>foo</code> 的目录，那么你可能会首先删除外部的 <code>foo</code> 目录，从而在 <code>rm</code> 调用中导致（无害的）<em>"'foo/bar/foo': No such file or directory"</em> 错误产生。</p>
+<h3 id="_17">命令行选项 <a name="command-line-options"></a></h3>
+<p>这是 <code>fd -h</code> 的输出。要查看全部的命令行选项，请使用 <code>fd --help</code>，它包括一个更详细的帮助文本。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Usage: fd [OPTIONS] [pattern] [path]...
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>Arguments:
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>  [pattern]  搜索模式 (正则表达式，除非使用了 '--glob'; 可选的)
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>  [path]...  文件系统搜索的根目录 (可选的)
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>Options:
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>  -H, --hidden                     搜索隐藏的文件和目录
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>  -I, --no-ignore                  不遵从 .(git|fd)ignore 文件
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>  -s, --case-sensitive             区分大小写的搜索 (默认: 智能大小写)
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>  -i, --ignore-case                不区分大小写的搜索 (默认: 智能大小写)
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>  -g, --glob                       基于Glob的搜索 (默认: 正则表达式)
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>  -a, --absolute-path              显示绝对路径而不是相对路径
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>  -l, --list-details               使用带有文件元数据的长列表格式
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>  -L, --follow                     遵循符号链接
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>  -p, --full-path                  搜索完整路径 (默认: 仅文件名)
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>  -d, --max-depth &lt;depth&gt;          设置最大搜索深度 (默认: 无)
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>  -E, --exclude &lt;pattern&gt;          排除符合给定 glob 模式的条目
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>  -t, --type &lt;filetype&gt;            按类型过滤: file (f), directory (d), symlink (l),
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>                                   executable (x), empty (e), socket (s), pipe (p)
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>  -e, --extension &lt;ext&gt;            按文件扩展名过滤
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>  -S, --size &lt;size&gt;                根据文件的大小限制结果
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>      --changed-within &lt;date|dur&gt;  按文件修改时间过滤 (较新)
+<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>      --changed-before &lt;date|dur&gt;  按文件修改时间过滤 (较旧)
+<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a>  -o, --owner &lt;user:group&gt;         按拥有文件的用户 (和/或者) 组
+<a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a>  -x, --exec &lt;cmd&gt;...              对每个搜索结果执行命令
+<a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a>  -X, --exec-batch &lt;cmd&gt;...        一次执行包含所有搜索结果的命令
+<a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a>  -c, --color &lt;when&gt;               什么时候使用颜色 [默认: auto] [可以使用的值: auto,
+<a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a>                                   always, never]
+<a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a>  -h, --help                       打印帮助信息 (使用 `--help` 获取更多细节)
+<a id="__codelineno-24-31" name="__codelineno-24-31" href="#__codelineno-24-31"></a>  -V, --version                    打印版本信息
+</code></pre></div>
+<h2 id="_18">基准测试 <a name="benchmark"></a></h2>
+<p>让我们在我的主文件夹中搜索以 <code>[0-9].jpg</code> 结尾的文件。它包含大约190,000个子目录和一百万个文件。对于平均数和统计分析，我使用了<a href="https://github.com/sharkdp/hyperfine">hyperfine</a>。以下基准测试是使用 "warm"/pre-filled 磁盘缓存执行的（"cold" 磁盘缓存的结果显示相同的趋势）。</p>
+<p>让我们从 <code>find</code> 开始：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Benchmark<span class="w"> </span><span class="c1">#1: find ~ -iregex '.*[0-9]\.jpg$'</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span>Time<span class="w"> </span><span class="o">(</span>mean<span class="w"> </span>±<span class="w"> </span>σ<span class="o">)</span>:<span class="w">      </span><span class="m">7</span>.236<span class="w"> </span>s<span class="w"> </span>±<span class="w">  </span><span class="m">0</span>.090<span class="w"> </span>s
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span>Range<span class="w"> </span><span class="o">(</span>min<span class="w"> </span>…<span class="w"> </span>max<span class="o">)</span>:<span class="w">    </span><span class="m">7</span>.133<span class="w"> </span>s<span class="w"> </span>…<span class="w">  </span><span class="m">7</span>.385<span class="w"> </span>s
+</code></pre></div>
+<p>如果不使用正则表达式搜索，<code>find</code> 的速度会快很多：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Benchmark<span class="w"> </span><span class="c1">#2: find ~ -iname '*[0-9].jpg'</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span>Time<span class="w"> </span><span class="o">(</span>mean<span class="w"> </span>±<span class="w"> </span>σ<span class="o">)</span>:<span class="w">      </span><span class="m">3</span>.914<span class="w"> </span>s<span class="w"> </span>±<span class="w">  </span><span class="m">0</span>.027<span class="w"> </span>s
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span>Range<span class="w"> </span><span class="o">(</span>min<span class="w"> </span>…<span class="w"> </span>max<span class="o">)</span>:<span class="w">    </span><span class="m">3</span>.876<span class="w"> </span>s<span class="w"> </span>…<span class="w">  </span><span class="m">3</span>.964<span class="w"> </span>s
+</code></pre></div>
+<p>现在让我们对 <code>fd</code> 做同样的尝试。注意，<code>fd</code> <em>总是</em> 执行一个正则表达式搜索。为了进行公平的比较，需要有选项 <code>--hidden</code> 和 <code>--no-ignore</code>，否则 <code>fd</code> 就不遍历隐藏的文件夹和忽略的路径（见下文）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>Benchmark<span class="w"> </span><span class="c1">#3: fd -HI '.*[0-9]\.jpg$' ~</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span>Time<span class="w"> </span><span class="o">(</span>mean<span class="w"> </span>±<span class="w"> </span>σ<span class="o">)</span>:<span class="w">     </span><span class="m">811</span>.6<span class="w"> </span>ms<span class="w"> </span>±<span class="w">  </span><span class="m">26</span>.9<span class="w"> </span>ms
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span>Range<span class="w"> </span><span class="o">(</span>min<span class="w"> </span>…<span class="w"> </span>max<span class="o">)</span>:<span class="w">   </span><span class="m">786</span>.0<span class="w"> </span>ms<span class="w"> </span>…<span class="w"> </span><span class="m">870</span>.7<span class="w"> </span>ms
+</code></pre></div>
+<p>对于这个特定的例子，<code>fd</code> 比 <code>find -iregex</code> 快了大约9倍，比 <code>find -iname</code> 快了大约5倍。顺便说一下，两个工具都找到了完全相同的20880个文件 😄。</p>
+<p>最后，让我们在没有 <code>--hidden</code> 和 <code>--no-ignore</code> 的情况下运行 <code>fd</code>（当然，这会导致不同的搜索结果）。如果 <code>fd</code> 不必遍历隐藏的和 git 忽略的文件夹，它几乎快了一个数量级：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Benchmark<span class="w"> </span><span class="c1">#4: fd '[0-9]\.jpg$' ~</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span>Time<span class="w"> </span><span class="o">(</span>mean<span class="w"> </span>±<span class="w"> </span>σ<span class="o">)</span>:<span class="w">     </span><span class="m">123</span>.7<span class="w"> </span>ms<span class="w"> </span>±<span class="w">   </span><span class="m">6</span>.0<span class="w"> </span>ms
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">  </span>Range<span class="w"> </span><span class="o">(</span>min<span class="w"> </span>…<span class="w"> </span>max<span class="o">)</span>:<span class="w">   </span><span class="m">118</span>.8<span class="w"> </span>ms<span class="w"> </span>…<span class="w"> </span><span class="m">140</span>.0<span class="w"> </span>ms
+</code></pre></div>
+<p><strong>注意</strong>：这是一个特定机器上的一个特定基准。虽然我已经进行了相当多的不同测试（并发现了一致的结果），但对你来说，情况可能会有所不同！我鼓励大家自己尝试。我鼓励大家自己去尝试。所有必要的脚本请见<a href="https://github.com/sharkdp/fd-benchmarks">这个仓库</a>。</p>
+<p>关于 <em>fd</em> 的速度，主要归功于 <code>regex</code> 和 <code>ignore</code> 模块，它们也被用在 <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> 中（快来看看吧！）。</p>
+<h2 id="_19">排除故障 <a name="troubleshooting"></a></h2>
+<h3 id="_20">彩色化输出</h3>
+<p><code>fd</code> 可以按扩展名给文件着色，就像 <code>ls</code> 一样。为了使其发挥作用，环境变量 <a href="https://linux.die.net/man/5/dir_colors"><code>LS_COLORS</code></a> 必须被设置。通常，这个变量的值是由 <code>dircolors</code> 命令设置的，它提供了一个方便的配置格式来定义不同文件格式的颜色。在大多数发行版上，<code>LS_COLORS</code> 应该已经被设置了。如果你是在 Windows 系统上，或者你在寻找其他更完整（或更多彩）的变体，请看<a href="https://github.com/sharkdp/vivid">这里</a>、<a href="https://github.com/seebi/dircolors-solarized">这里</a>或<a href="https://github.com/trapd00r/LS_COLORS">这里</a>。</p>
+<p><code>fd</code> 也遵守 <code>NO_COLOR</code> 环境变量的规定。</p>
+<h3 id="fd_1">fd没有找到我的文件</h3>
+<p>记住，<code>fd</code> 默认会忽略隐藏的目录和文件。它还会忽略 <code>.gitignore</code> 文件的模式。如果你想确保绝对找到所有可能的文件，一定要使用选项 <code>-H</code> 和 <code>-I</code> 来禁用这两个功能：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-HI<span class="w"> </span>…
+</code></pre></div>
+<h3 id="fd_2"><code>fd</code> 似乎不能正确地解释我的正则表达式模式</h3>
+<p>许多特殊正则表达式字符（如<code>[]</code>、<code>^</code>、<code>$</code>、..）也是shell中的特殊字符。如果有疑问，请务必在正则表达式模式周围加上单引号：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span><span class="s1">'^[A-Z][0-9]+$'</span>
+</code></pre></div>
+<p>如果模式以破折号开始，则必须添加 <code>--</code> 以表示命令行选项的结束。否则，该模式将被解释为命令行选项。或者，使用带有单个连字符的字符类：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>--<span class="w"> </span><span class="s1">'-pattern'</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>&gt;<span class="w"> </span>fd<span class="w"> </span><span class="s1">'[-]pattern'</span>
+</code></pre></div>
+<h3 id="aliasshell-command-not-found">执行<code>alias</code>或shell函数提示 “Command not found”</h3>
+<p>Shell <code>alias</code> 和 shell 函数不能通过 <code>fd -x</code> 或 <code>fd -X</code> 命令执行。在 <code>zsh</code> 中，你可以通过 <code>alias -g myalias="... "</code> 使别名成为全局的。在 <code>bash</code> 中，你可以使用 <code>export -f my_function</code> 使子进程可用。你仍然需要调用 <code>fd -x bash -c 'my_function "$1"' bash</code>。对于其他用例或shell，可以使用一个（临时）shell脚本。</p>
+<h2 id="_21">与其他项目的整合</h2>
+<h3 id="fzf">与 <code>fzf</code> 一起使用</h3>
+<p>您可以使用 <em>fd</em> 为命令行模糊查找器 <a href="https://github.com/junegunn/fzf">fzf</a> 生成输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FZF_DEFAULT_COMMAND</span><span class="o">=</span><span class="s1">'fd --type file'</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FZF_CTRL_T_COMMAND</span><span class="o">=</span><span class="s2">"</span><span class="nv">$FZF_DEFAULT_COMMAND</span><span class="s2">"</span>
+</code></pre></div>
+<p>然后，你可以在终端上键入 <code>vim &lt;Ctrl-T&gt;</code> 以打开 fzf 并搜索 fd 结果。</p>
+<p>或者，你可能希望遵循符号链接并包含隐藏文件（但不包括.git文件夹）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FZF_DEFAULT_COMMAND</span><span class="o">=</span><span class="s1">'fd --type file --follow --hidden --exclude .git'</span>
+</code></pre></div>
+<p>你甚至可以通过以下设置在 fzf 中使用 fd 的彩色输出：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FZF_DEFAULT_COMMAND</span><span class="o">=</span><span class="s2">"fd --type file --color=always"</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FZF_DEFAULT_OPTS</span><span class="o">=</span><span class="s2">"--ansi"</span>
+</code></pre></div>
+<p>更多细节，见 fzf README 中的<a href="https://github.com/junegunn/fzf#tips">提示部分</a>。</p>
+<h3 id="rofi">与 <code>rofi</code> 一起使用</h3>
+<p><a href="https://github.com/davatorium/rofi"><em>rofi</em></a> 是一个图形化的启动菜单应用程序，它能够通过从 <em>stdin</em> 读取信息来创建菜单。用管道将<code>fd</code> 输出导入 <code>rofi</code> 的 <code>-dmenu</code> 模式，可以创建模糊搜索的文件和目录列表。</p>
+<h4 id="_22">例子</h4>
+<p>在 <code>$HOME</code> 目录下创建一个不区分大小写的可搜索PDF 文件的多选列表，并用你配置的PDF查看器打开选择。要想列出所有文件类型，请删除-e pdf参数。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>fd<span class="w"> </span>--type<span class="w"> </span>f<span class="w"> </span>-e<span class="w"> </span>pdf<span class="w"> </span>.<span class="w"> </span><span class="nv">$HOME</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>rofi<span class="w"> </span>-keep-right<span class="w"> </span>-dmenu<span class="w"> </span>-i<span class="w"> </span>-p<span class="w"> </span>FILES<span class="w"> </span>-multi-select<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>xdg-open<span class="w"> </span><span class="o">{}</span>
+</code></pre></div>
+<h3 id="emac">与 <code>emac</code> 一起使用</h3>
+<p>emacs 包 <a href="https://github.com/technomancy/find-file-in-project">find-file-in-project</a> 可以使用 <em>fd</em> 来查找文件。</p>
+<p>安装 find-file-in-project 后，在你的 <code>~/.emacs</code> 或 <code>~/.emacs.d/init.el</code> 文件中添加一行<code>(setq ffip-use-rust-fd t)</code>。</p>
+<p>在 emacs 中，运行 <code>M-x find-file-in-project-by-selected</code> 来寻找匹配的文件。或者，运行 <code>M-x find-file-in-project</code> 来列出项目中所有可用的文件。</p>
+<h3 id="_23">将输出结果打印成树状</h3>
+<p>为了使 <code>fd</code> 的输出格式类似于 <code>tree</code> 命令，请安装 <a href="https://github.com/jez/as-tree"><code>as-tree</code></a>，并将 <code>fd</code> 的输出通过管道输送到 <code>as-tree</code>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>fd<span class="w"> </span><span class="p">|</span><span class="w"> </span>as-tree
+</code></pre></div>
+<p>这可能比运行 <code>tree</code> 本身更有用，因为 <code>tree</code> 默认不会忽略任何文件，也不像 <code>fd</code> 那样支持丰富的选项来控制打印的内容。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>❯<span class="w"> </span>fd<span class="w"> </span>--extension<span class="w"> </span>rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>as-tree
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>.
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>├──<span class="w"> </span>build.rs
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>└──<span class="w"> </span>src
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">    </span>├──<span class="w"> </span>app.rs
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="w">    </span>└──<span class="w"> </span>error.rs
+</code></pre></div>
+<p>关于 <code>as-tree</code> 的更多信息，请参见 <code>as-tree</code> 的 <a href="https://github.com/jez/as-tree">README</a>。</p>
+<h3 id="xargs-parallel">与 <code>xargs</code> 或 <code>parallel</code> 一起使用</h3>
+<p>请注意，<code>fd</code> 有一个内置的<a href="#command-execution">命令执行</a>功能，即它的<code>-x</code>/<code>--exec</code> 和 <code>-X</code>/<code>--exec-batch</code> 选项。如果你愿意，你仍然可以将它与 <code>xargs</code> 结合使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>&gt;<span class="w"> </span>fd<span class="w"> </span>-0<span class="w"> </span>-e<span class="w"> </span>rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>wc<span class="w"> </span>-l
+</code></pre></div>
+<p>这里，<code>-0</code> 选项告诉 <em>fd</em> 用 NULL 字符（而不是换行）来分隔搜索结果。同样地，<code>xargs</code> 的 <code>-0</code> 选项告诉它以这种方式读取输入。</p>
+<h2 id="_24">安装</h2>
+<p>各平台安装方式请参阅 <a href="https://github.com/sharkdp/fd/releases">Release 发布页</a>，或各发行版包管理器。Rust 用户可通过 <code>cargo install fd-find</code> 安装。</p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>
