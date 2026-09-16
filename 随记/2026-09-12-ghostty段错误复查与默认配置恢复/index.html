@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.8.0">
+     
+     
+    
+    <link rel="canonical" href="https://richard-code200.github.io/mkdocs-site/%E9%9A%8F%E8%AE%B0/2026-09-12-ghostty%E6%AE%B5%E9%94%99%E8%AF%AF%E5%A4%8D%E6%9F%A5%E4%B8%8E%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%81%A2%E5%A4%8D/"><link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Ghostty 段错误复查与默认配置恢复 - My Mkdocs Site</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- gruvbox_dark color palette -->
+<link href="../../css/palettes/gruvbox_dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
+    
+    <script src="https://unpkg.com/highlightjs-cobol/dist/cobol.min.js"></script>
+    
+    <script src="../../add_hljs_highlight.js"></script>
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://richard-code200.github.io/mkdocs-site/" class="no-style">My Mkdocs Site</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">这是王佳贤的个人博客</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="1">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../..">这是王佳贤的个人博客</a>
+        
+    
+    
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Linux</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Linux/%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7/">安全特性</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">MarkDown</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../MarkDown/MarkDown/">Markdown 核心语法速查表</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Rust</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Cargo%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%8E%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">Cargo工作区与依赖管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/Enum%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/">Enum和模式匹配</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%B5%81/">函数与控制流</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%88%87%E7%89%87/">切片(Slice)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基本语法与数据类型</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92/">Rust 学习项目计划</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/">引用与借用</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%89%80%E6%9C%89%E6%9D%83/">所有权</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">格式化输出</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F/">模块系统</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E7%89%B9%E5%BE%81/">泛型与特征</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E6%B5%8B%E8%AF%95/">测试</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体(Struct)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%9B%86%E5%90%88/">集合</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Rust/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87/">Rust 项目代码组织</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Zed</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/">Zed</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../Zed/%E5%BF%AB%E6%8D%B7%E9%94%AE/">Zed 快捷键</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Git使用指南</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Git%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">Git基础概念</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%88%9D%E5%A7%8B%E8%AE%BE%E7%BD%AE/">初始设置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">基本操作命令</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%9A%82%E5%AD%98/">工作区暂存</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE/">忽略文件配置</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E9%80%80/">撤销与回退</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86/">标签管理</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C/">远程仓库操作</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">常用工具</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/bat/">bat</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/eza/">eza</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/fd/">fd</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/late_sh_zh/">late.sh</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/ripgrep/">ripgrep (rg)</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/%E7%BB%88%E7%AB%AF%E5%BF%AB%E6%8D%B7%E9%94%AE/">终端快捷键</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源协议</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/">开源协议概念总结</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">开源项目学习</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97/">流程指南</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">操作系统原理</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E7%AC%AC%E4%B8%80%E7%AB%A0/">📟 A PROGRAM is not a PROCESS</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/%E8%AF%BE%E7%A8%8B%E4%BF%A1%E6%81%AF/">📚 课程信息</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">算法笔记</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">分发饼干</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">费曼学习法</span>
+        
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../../%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">Way To Learn</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+          <li class="terminal-mkdocs-side-nav-li">
+    
+        
+        
+        
+            
+    
+        
+        <span class="
+        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">随记</span>
+    
+    
+        
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="terminal-mkdocs-side-nav-item--active">Ghostty 段错误复查与默认配置恢复</span>
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-4-27/">2026-4-27</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-5-19/">2026-5-19</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-6-1/">随记</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../2026-6-9/">课堂作业</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../Keygen%28%E6%B3%A8%E5%86%8C%E6%9C%BA%29/">注册机</a>
+        
+    
+    </li>
+            
+        
+            
+            
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="terminal-mkdocs-side-nav-item" href="../ghostty-segfault-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+       </li>
+        
+    </ul>
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#ghostty">Ghostty 段错误复查与默认配置恢复</a></li>
+        <li><a href="#_1">结论</a></li><li><a href="#_2">软件版本变化</a></li><li><a href="#_3">复查方法与结果</a></li><li><a href="#_4">已执行的配置清理</a></li><li><a href="#_6">当前会话与最后一步清理</a></li><li><a href="#_7">配置验证与备份</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="ghostty">Ghostty 段错误复查与默认配置恢复</h1>
+<p><strong>日期</strong>：2026-09-12</p>
+<p><strong>环境</strong>：Fedora 44、Wayland、niri、Ghostty 1.3.1-4.fc44</p>
+<p><strong>前次记录</strong>：<a href="../ghostty-segfault-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题</a></p>
+<h2 id="_1">结论</h2>
+<p>在本机当前的软件版本和配置下，取消 <code>GLYCIN_DATA_DIR</code> 绕过、恢复系统默认 SVG 加载器的 <code>Fontconfig=true</code> 路径后，Ghostty 可以正常创建窗口、运行子进程并退出，未复现原来的启动段错误。</p>
+<p>据此撤除了有效配置中的环境变量覆盖，并停用自定义 glycin loader 副本。系统加载器配置由 RPM 提供，不再手工修改。</p>
+<p>这说明当前启动场景已不需要旧绕过方案，但不能仅凭本次测试确定历史故障究竟由哪个版本或补丁修复。原文保留为历史记录，当前处理方式以本文为准。</p>
+<h2 id="_2">软件版本变化</h2>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>2026 年 5 月记录</th>
+<th>本次检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ghostty</td>
+<td>1.3.1-2.fc44</td>
+<td>1.3.1-4.fc44</td>
+</tr>
+<tr>
+<td>glycin-libs</td>
+<td>2.1.1</td>
+<td>2.1.5-1.fc44</td>
+</tr>
+<tr>
+<td>fontconfig</td>
+<td>2.17.0-4.fc44</td>
+<td>2.17.0-4.fc44，未变化</td>
+</tr>
+<tr>
+<td>bubblewrap</td>
+<td>0.11.0-4.fc44</td>
+<td>0.12.0-1.fc44</td>
+</tr>
+<tr>
+<td>GTK 4</td>
+<td>4.22.4</td>
+<td>4.22.4-2.fc44</td>
+</tr>
+<tr>
+<td>libadwaita</td>
+<td>1.9.0</td>
+<td>1.9.3-1.fc44</td>
+</tr>
+</tbody>
+</table>
+<p>当前 Ghostty RPM 的 changelog 标注为本地构建，因此不能将结果直接归因于官方某个发行补丁。</p>
+<h2 id="_3">复查方法与结果</h2>
+<h3 id="1">1. 核查系统加载器</h3>
+<p>检查文件：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/usr/share/glycin-loaders/2+/conf.d/glycin-svg.conf
+</code></pre></div>
+<p>系统配置的两个 SVG 段落都已经包含 <code>Fontconfig=true</code>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">[loader:image/svg+xml]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">Exec</span><span class="o">=</span><span class="s">/usr/libexec/glycin-loaders/2+/glycin-svg</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="na">ExposeBaseDir</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="na">Fontconfig</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">[loader:image/svg+xml-compressed]</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="na">Exec</span><span class="o">=</span><span class="s">/usr/libexec/glycin-loaders/2+/glycin-svg</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="na">ExposeBaseDir</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="na">Fontconfig</span><span class="o">=</span><span class="s">true</span>
+</code></pre></div>
+<p>执行以下校验时无差异输出：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rpm<span class="w"> </span>-V<span class="w"> </span>glycin-loaders.x86_64<span class="w"> </span>fontconfig.x86_64
+</code></pre></div>
+<p>这表明当前相关系统包文件与安装时的 RPM 记录一致，无需再覆盖 <code>/usr/share</code> 下的配置。</p>
+<h3 id="2-fontconfig">2. 修正 Fontconfig 的独立复现方法</h3>
+<p>前次记录中的 Python 代码没有声明 <code>ctypes</code> 函数签名：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCacheDirs</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCurrent</span><span class="p">())</span>
+</code></pre></div>
+<p><code>ctypes</code> 默认把函数返回值解释为 C <code>int</code>。但 <code>FcConfigGetCurrent()</code> 返回的是指针，在 64 位环境中可能被截断，导致后续调用使用无效地址。</p>
+<p>因此，这段 Python 代码产生的段错误不能可靠地证明 Fontconfig 本身存在缺陷。它不否定历史上 Ghostty 的真实崩溃，只说明原文使用的这项独立证据不充分。</p>
+<p>本次使用正确签名，并释放缓存目录迭代器：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes.util</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_library</span><span class="p">(</span><span class="s2">"fontconfig"</span><span class="p">))</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcInit</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcInit</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCurrent</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCurrent</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCacheDirs</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCacheDirs</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcStrListNext</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcStrListNext</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcStrListDone</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">lib</span><span class="o">.</span><span class="n">FcStrListDone</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="k">assert</span> <span class="n">lib</span><span class="o">.</span><span class="n">FcInit</span><span class="p">()</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="n">config</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCurrent</span><span class="p">()</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">assert</span> <span class="n">config</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="n">iterator</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FcConfigGetCacheDirs</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="k">assert</span> <span class="n">iterator</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>        <span class="n">directories</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        <span class="k">while</span> <span class="n">value</span> <span class="o">:=</span> <span class="n">lib</span><span class="o">.</span><span class="n">FcStrListNext</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="n">directories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>    <span class="k">finally</span><span class="p">:</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>        <span class="n">lib</span><span class="o">.</span><span class="n">FcStrListDone</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"连续调用 100 次成功："</span><span class="p">,</span> <span class="n">directories</span><span class="p">)</span>
+</code></pre></div>
+<p>结果：连续 100 次成功。缓存目录包括 <code>/usr/lib/fontconfig/cache</code>、<code>~/.cache/fontconfig</code> 和 <code>~/.fontconfig</code>。</p>
+<h3 id="3-svg">3. 对照验证 SVG 加载</h3>
+<p>通过 GdkPixbuf 加载一个包含矩形、圆形及 <code>&lt;text&gt;</code> 元素的 SVG：</p>
+<table>
+<thead>
+<tr>
+<th>环境</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保留旧 <code>GLYCIN_DATA_DIR</code> 和去掉 <code>Fontconfig=true</code> 的 loader</td>
+<td>连续 5 次加载成功</td>
+</tr>
+<tr>
+<td>取消 <code>GLYCIN_DATA_DIR</code>，使用系统 loader</td>
+<td>连续 5 次加载成功</td>
+</tr>
+</tbody>
+</table>
+<p>验证了图像解码可以完成、尺寸正确；本次没有进行文字字形的像素级比较。</p>
+<h3 id="4-ghostty">4. 对照验证 Ghostty 窗口启动</h3>
+<p>每次测试均使用独立 Ghostty 进程，并显式设置：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>--gtk-single-instance=false
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>--quit-after-last-window-closed=true
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--shell-integration=none
+</code></pre></div>
+<p>测试窗口直接启动 Python 子进程，记录其环境并在等待数秒后退出。通过 <code>niri msg --json windows</code> 检查窗口对应的 PID，确认新窗口真正出现。</p>
+<p>不启动 Zsh，是为了避免 <code>.zshrc</code> 在测试过程中重新注入变量；关闭单实例复用，是为了避免请求被已有、仍带绕过环境的 Ghostty 进程接收。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>次数</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>旧绕过配置</td>
+<td>1</td>
+<td>窗口出现，子进程执行，退出码 0</td>
+</tr>
+<tr>
+<td>取消绕过，使用系统默认加载器</td>
+<td>3</td>
+<td>全部正常，退出码均为 0，子进程中无 <code>GLYCIN_DATA_DIR</code></td>
+</tr>
+<tr>
+<td>完成配置清理后，使用系统默认加载器</td>
+<td>1</td>
+<td>正常，退出码 0，子进程中无 <code>GLYCIN_DATA_DIR</code></td>
+</tr>
+<tr>
+<td>完成配置清理后，模拟旧进程仍持有变量</td>
+<td>1</td>
+<td>通过兼容链接读取系统加载器，正常，退出码 0</td>
+</tr>
+</tbody>
+</table>
+<p>初次复查未找到最近 30 天的 Ghostty core dump，测试后也未找到新增记录。日志中仍有 Adwaita 样式弃用及 <code>unimplemented action=.cell_size</code> 警告，但本次未伴随崩溃。</p>
+<h2 id="_4">已执行的配置清理</h2>
+<h3 id="_5">删除环境覆盖</h3>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>删除内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.zshrc</code></td>
+<td><code>export GLYCIN_DATA_DIR="$HOME/.cache/glycin-data"</code></td>
+</tr>
+<tr>
+<td><code>~/.config/niri/config.kdl</code></td>
+<td><code>GLYCIN_DATA_DIR "/home/errorichard/.cache/glycin-data"</code></td>
+</tr>
+<tr>
+<td><code>~/.config/environment.d/90-dms.conf</code></td>
+<td><code>GLYCIN_DATA_DIR=/home/errorichard/.cache/glycin-data</code></td>
+</tr>
+<tr>
+<td><code>~/.config/sway/scripts/environment.sh</code></td>
+<td>同一变量的 <code>export</code></td>
+</tr>
+<tr>
+<td><code>~/.config/sway/scripts/session.sh</code></td>
+<td>向用户服务导入该变量的 <code>-E GLYCIN_DATA_DIR</code> 参数</td>
+</tr>
+</tbody>
+</table>
+<p>历史 niri 备份目录中的旧配置作为备份保留；有效启动配置已经没有上述覆盖。</p>
+<h3 id="systemd">刷新 systemd 用户环境</h3>
+<p>仅执行 <code>unset-environment</code> 时，变量仍出现在用户管理器环境中。进一步检查发现，新的 environment.d 生成结果已不包含该变量，需要重新加载管理器来刷新生成环境：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reload
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>unset-environment<span class="w"> </span>GLYCIN_DATA_DIR
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>show-environment
+</code></pre></div>
+<p>刷新后确认输出中不再包含 <code>GLYCIN_DATA_DIR</code>。此操作不会让已经运行的应用自动清除其继承的环境变量。</p>
+<h3 id="loader">停用自定义 loader，保留本次会话的过渡兼容</h3>
+<p>原来的 <code>~/.cache/glycin-data</code> 目录已移入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>~/.local/state/ghostty-default-20260912/glycin-data/
+</code></pre></div>
+<p>原路径暂时替换为符号链接：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>~/.cache/glycin-data -&gt; /usr/share
+</code></pre></div>
+<p>这样做的原因是：旧的桌面进程可能仍持有 <code>GLYCIN_DATA_DIR=~/.cache/glycin-data</code>。直接删除路径会导致它们找不到任何加载器，重新引入原文记录过的图像加载失败。</p>
+<p>兼容链接使这些进程也读取 RPM 提供的默认 loader，包含 <code>Fontconfig=true</code>；不再使用任何修改过的 loader 副本。没有该变量的新进程则直接走系统默认发现路径。</p>
+<h2 id="_6">当前会话与最后一步清理</h2>
+<p>在现有终端中清除继承值并重启 Shell：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">unset</span><span class="w"> </span>GLYCIN_DATA_DIR
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">exec</span><span class="w"> </span>zsh
+</code></pre></div>
+<p>单纯 <code>exec zsh</code> 会继承旧变量，不能代替 <code>unset</code>。</p>
+<p>完整注销并重新登录桌面会话后，检查：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>printenv<span class="w"> </span>GLYCIN_DATA_DIR
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>show-environment
+</code></pre></div>
+<p>前者应无输出，后者不应包含该变量。确认后可删除本次会话的过渡链接：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-L<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.cache/glycin-data"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">   </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>readlink<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.cache/glycin-data"</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/usr/share<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span>unlink<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.cache/glycin-data"</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">fi</span>
+</code></pre></div>
+<p>这里使用 <code>unlink</code> 删除链接本身，不操作 <code>/usr/share</code> 的内容。</p>
+<h2 id="_7">配置验证与备份</h2>
+<p>清理后的 Zsh、Sway 脚本语法检查、<code>niri validate</code> 和 Ghostty 配置校验均通过。使用干净环境启动交互 Zsh、登录 Zsh 和三层嵌套 Zsh，确认均不再注入 <code>GLYCIN_DATA_DIR</code>。</p>
+<p>新增本文后执行 <code>mkdocs build</code>，站点构建通过。日志仍提示原有 Markdown 教程中的两处链接及 bat、fd 页面中的锚点问题，未出现本文相关的链接警告。</p>
+<p>备份位置：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>~/.local/state/ghostty-default-20260912/
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>├── before.tar.gz
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>├── glycin-data/
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>├── ghostty-regression-results.json
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>├── ghostty-cleanup-results.json
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>├── ghostty-check-*.log
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>├── ghostty-fontconfig-probe.py
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>├── ghostty-glycin-probe.py
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>└── ghostty-svg-probe.svg
+</code></pre></div>
+<p><code>before.tar.gz</code> 保存清理前的五个有效配置文件和自定义加载器目录；JSON 和日志保存独立窗口的对照结果。恢复配置前应先查看归档，避免覆盖之后新增的配置改动。</p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>
