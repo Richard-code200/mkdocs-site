@@ -25,3 +25,25 @@
 .terminal-mkdocs-side-nav-li-ul.collapse-nav-collapsed {
   display: none !important;
 }
+
+/* 仅在脚本创建按钮后收起窄屏目录，禁用脚本时仍可访问侧栏。 */
+.mobile-nav-toggle {
+  display: none;
+}
+
+@media only screen and (max-width: 69.999em) {
+  .mobile-nav-toggle {
+    display: block;
+    margin-bottom: 1em;
+    padding: 0.4em 0.8em;
+    font: inherit;
+    color: var(--gb-dm-fg1);
+    background: var(--gb-dm-bg1);
+    border: 1px solid var(--gb-dm-bg3);
+    cursor: pointer;
+  }
+
+  body.mobile-nav-ready:not(.mobile-nav-open) #terminal-mkdocs-side-panel {
+    display: none;
+  }
+}

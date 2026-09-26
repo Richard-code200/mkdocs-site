@@ -40,9 +40,47 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupCollapsibleNav);
-  } else {
+  function setupMobileNav() {
+    var panel = document.getElementById('terminal-mkdocs-side-panel');
+    if (!panel) return;
+
+    var button = document.createElement('button');
+    var expanded = false;
+    button.type = 'button';
+    button.className = 'mobile-nav-toggle';
+    button.setAttribute('aria-controls', panel.id);
+
+    function render() {
+      document.body.classList.toggle('mobile-nav-open', expanded);
+      button.setAttribute('aria-expanded', String(expanded));
+      button.textContent = expanded ? '收起目录' : '打开目录';
+    }
+
+    button.addEventListener('click', function () {
+      expanded = !expanded;
+      render();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && expanded && window.matchMedia('(max-width: 69.999em)').matches) {
+        expanded = false;
+        render();
+        button.focus();
+      }
+    });
+
+    panel.parentNode.insertBefore(button, panel);
+    render();
+    document.body.classList.add('mobile-nav-ready');
+  }
+
+  function setupNav() {
     setupCollapsibleNav();
+    setupMobileNav();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupNav);
+  } else {
+    setupNav();
   }
 })();
