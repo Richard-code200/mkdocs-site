@@ -1,5 +1,71 @@
 site_name: My Mkdocs Site
 site_url: https://richard-code200.github.io/mkdocs-site/
+
+nav:
+  - index.md
+  - Linux:
+      - Linux/安全特性.md
+  - MarkDown:
+      - MarkDown/MarkDown.md
+  - Rust:
+      - Rust/Cargo工作区与依赖管理.md
+      - Rust/Enum和模式匹配.md
+      - Rust/函数与控制流.md
+      - Rust/切片.md
+      - Rust/基本语法与数据类型.md
+      - Rust/学习项目计划.md
+      - Rust/引用与借用.md
+      - Rust/所有权.md
+      - Rust/格式化输出.md
+      - Rust/模块系统.md
+      - Rust/泛型与特征.md
+      - Rust/测试.md
+      - Rust/生命周期.md
+      - Rust/结构体.md
+      - Rust/错误处理.md
+      - Rust/集合.md
+      - Rust/项目代码组织.md
+  - Zed:
+      - Zed/index.md
+      - Zed/快捷键.md
+  - Git使用指南:
+      - git使用指南/Git基础概念.md
+      - git使用指南/分支管理.md
+      - git使用指南/初始设置.md
+      - git使用指南/基本操作命令.md
+      - git使用指南/工作区暂存.md
+      - git使用指南/忽略文件配置.md
+      - git使用指南/撤销与回退.md
+      - git使用指南/标签管理.md
+      - git使用指南/远程仓库操作.md
+  - 常用工具:
+      - 常用工具/bat.md
+      - 常用工具/eza.md
+      - 常用工具/fd.md
+      - 常用工具/late_sh_zh.md
+      - 常用工具/ripgrep.md
+      - 常用工具/uv.md
+      - 常用工具/终端快捷键.md
+  - 开源协议:
+      - 开源协议/开源协议概念总结.md
+  - 开源项目学习:
+      - 开源项目学习/流程指南.md
+  - 操作系统原理:
+      - 操作系统原理/第一章.md
+      - 操作系统原理/课程信息.md
+  - 算法笔记:
+      - 算法笔记/分发饼干.md
+  - 费曼学习法:
+      - 费曼学习法/学习方法.md
+  - 随记:
+      - 随记/2026-09-12-ghostty段错误复查与默认配置恢复.md
+      - 随记/2026-4-27.md
+      - 随记/2026-5-19.md
+      - 随记/2026-6-1.md
+      - 随记/2026-6-9.md
+      - "随记/Keygen(注册机).md"
+      - 随记/ghostty-segfault-问题排查.md
+
 theme:
   name: terminal
   palette: gruvbox_dark
@@ -11,6 +77,7 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
@@ -30,9 +97,10 @@ markdown_extensions:
           title: Important
 
 extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js
-  - https://unpkg.com/highlightjs-cobol/dist/cobol.min.js
-  - add_hljs_highlight.js
+  - collapse_nav.js
 
 extra_css:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/a11y-dark.min.css
+  - collapse_nav.css
+  - code_fonts.css
+  - code_gruvbox.css
+  - dark_scheme.css

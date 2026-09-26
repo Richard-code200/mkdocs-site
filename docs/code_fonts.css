@@ -1,0 +1,40 @@
+/* 代码字体:MonaspiceRn Nerd Font(子集版 woff2,保留编程符号与连字) */
+
+@font-face {
+  font-family: "MonaspiceRn Nerd Font";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/MonaspiceRnNerdFont-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "MonaspiceRn Nerd Font";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/MonaspiceRnNerdFont-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "MonaspiceRn Nerd Font";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/MonaspiceRnNerdFont-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "MonaspiceRn Nerd Font";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/MonaspiceRnNerdFont-BoldItalic.woff2") format("woff2");
+}
+
+/* 代码区域(代码块 + 行内代码)统一使用该字体;保留系统等宽字体与中文回退 */
+:root {
+  --mono-font-stack: "MonaspiceRn Nerd Font", Menlo, Monaco, "Lucida Console",
+    "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Courier New", monospace, serif;
+}

@@ -1,0 +1,27 @@
+/* 折叠侧边栏分类导航的样式:分类标题可点击,箭头指示展开状态 */
+.terminal-mkdocs-side-nav-section-no-index {
+  cursor: pointer;
+  user-select: none;
+}
+
+.terminal-mkdocs-side-nav-section-no-index::after {
+  content: "▸";
+  display: inline-block;
+  width: 1em;
+  margin-left: 0.4em;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.terminal-mkdocs-side-nav-section-no-index[aria-expanded="true"]::after {
+  content: "▾";
+}
+
+.terminal-mkdocs-side-nav-section-no-index:hover {
+  text-decoration: underline;
+}
+
+/* 收起状态:隐藏分类下的笔记链接 */
+.terminal-mkdocs-side-nav-li-ul.collapse-nav-collapsed {
+  display: none !important;
+}
