@@ -10,6 +10,8 @@
     var pagesPromise = null;
     var generation = 0;
     var wasHan = false;
+    var pendingEnglish = null;
+    var initialQuery = new URL(window.location.href).searchParams.get('q');
 
     function hasHan(text) {
       return /[\u3400-\u9fff]/.test(text);
@@ -89,6 +91,34 @@
       return originalDisplay(items);
     };
 
+    if (window.searchWorker) {
+      var worker = window.searchWorker;
+      // 主题 Worker 同步逐条处理请求，结果按提交顺序返回。
+      var queuedQueries = [];
+      // 初始英文 ?q= 有可能在本脚本初始化前已经交给 Worker。
+      var legacyQuery = initialQuery && !hasHan(initialQuery) && input.value === initialQuery &&
+        !results.hasChildNodes() && typeof window.min_search_length === 'number' &&
+        initialQuery.length > window.min_search_length ? initialQuery : null;
+      var originalPostMessage = worker.postMessage;
+      var originalOnMessage = worker.onmessage;
+
+      worker.postMessage = function (message) {
+        var value = originalPostMessage.apply(this, arguments);
+        if (message && typeof message.query === 'string') queuedQueries.push(message.query);
+        return value;
+      };
+
+      worker.onmessage = function (event) {
+        if (event.data && Array.isArray(event.data.results)) {
+          var request = legacyQuery !== null ? legacyQuery : queuedQueries.shift();
+          legacyQuery = null;
+          if (request !== input.value || !request || hasHan(request) ||
+              request.length <= window.min_search_length) return;
+        }
+        return originalOnMessage.call(this, event);
+      };
+    }
+
     function update(event) {
       var query = input.value.trim();
       var current = ++generation;
@@ -96,18 +126,24 @@
       if (!query) {
         results.replaceChildren();
         wasHan = false;
+        pendingEnglish = null;
         return;
       }
       if (!hasHan(query)) {
-        if ((wasHan || event.inputType === 'insertFromPaste' || event.type === 'compositionend') &&
-            typeof window.doSearch === 'function' && typeof window.min_search_length === 'number') {
-          window.doSearch();
+        if (wasHan || event.inputType === 'insertFromPaste' || event.type === 'compositionend') {
+          if (typeof window.min_search_length === 'number') {
+            pendingEnglish = null;
+            window.doSearch();
+          } else {
+            pendingEnglish = query;
+          }
         }
         wasHan = false;
         return;
       }
 
       wasHan = true;
+      pendingEnglish = null;
       if (hanCount(query) < 2) {
         message('请至少输入两个汉字');
         return;
@@ -131,6 +167,26 @@
       if (!event.isComposing) update(event);
     });
     input.addEventListener('compositionend', update);
+
+    // Worker 尚在初始化时粘贴的英文词，待主题注册搜索监听器后补搜。
+    var originalInitSearch = window.initSearch;
+    window.initSearch = function () {
+      var value = originalInitSearch.apply(this, arguments);
+      if (pendingEnglish && input.value.trim() === pendingEnglish &&
+          typeof window.min_search_length === 'number') {
+        pendingEnglish = null;
+        window.doSearch();
+      } else {
+        pendingEnglish = null;
+      }
+      return value;
+    };
+
+    // 主题从 ?q= 填入搜索框时不会触发 input 事件。
+    if (initialQuery && hasHan(initialQuery) && (!input.value || input.value === initialQuery)) {
+      input.value = initialQuery;
+      update({ type: 'initial' });
+    }
   }
 
   if (document.readyState === 'loading') {
