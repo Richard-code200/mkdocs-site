@@ -4,7 +4,7 @@
 
 ### 标题
 
-```Markdown
+```markdown
 # 一级标题 (对应 HTML h1)
 
 ## 二级标题 (对应 HTML h2)
@@ -16,7 +16,7 @@
 
 ### 强调
 
-```Markdown
+```markdown
 这是 **粗体** 文字，通常用来强调重点
 这是 _斜体_ 文字，通常用来标记术语或书名
 这是 **_粗斜体_** 文字。
@@ -77,7 +77,7 @@ sudo dnf install gcc g++ make
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 ```
 
-```C
+```c
 // C 语言示例
 #include <stdio.h>
 
