@@ -36,5 +36,5 @@
 :root {
   --mono-font-stack: "MonaspiceRn Nerd Font", Menlo, Monaco, "Lucida Console",
     "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-    "Courier New", monospace, serif;
+    "Courier New", "Noto Sans Mono CJK SC", monospace, serif;
 }

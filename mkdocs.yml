@@ -72,9 +72,12 @@ theme:
   language: zh # 设置中文界面
   features:
     - navigation.tabs # 启用顶部标签页
-    - content.code.copy # 启用代码块复制按钮
 
 markdown_extensions:
+  - toc:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - pymdownx.highlight:
       anchor_linenums: true
       pygments_lang_class: true
@@ -98,9 +101,13 @@ markdown_extensions:
 
 extra_javascript:
   - collapse_nav.js
+  - copy_code.js
 
 extra_css:
   - collapse_nav.css
   - code_fonts.css
   - code_gruvbox.css
   - dark_scheme.css
+  - body_fonts.css
+  - heading_colors.css
+  - copy_code.css

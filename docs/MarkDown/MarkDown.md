@@ -91,9 +91,9 @@ int main() {
 
 超链接
 
-[Fedora 官方文档](docs.fedoraprojects.org)
+[Fedora 官方文档](https://docs.fedoraproject.org)
 
-[GitHub](github.com)
+[GitHub](https://github.com)
 
 引用块
 
