@@ -1,0 +1,9 @@
+{% set search_modal_ns = namespace() %}
+{% set search_modal_ns.header = "搜索" %}
+{% set search_modal_ns.instructions = "输入关键词开始搜索" %}
+{% set search_modal_ns.no_results = "未找到匹配的笔记" %}
+{% set search_modal_ns.prompt = "搜索笔记" %}
+{% set search_modal_ns.tooltip = "输入关键词搜索笔记" %}
+{% set search_modal_ns.screen_reader_close_text = "关闭" %}
+{% set search_modal_ns.close_text = "×" %}
+{% include "partials/search/mkdocs/search-modal.html" %}
