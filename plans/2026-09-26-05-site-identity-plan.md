@@ -27,7 +27,7 @@
 
 ---
 
-### 任务 1：页面标题、语言与单一图标
+### Task 1：页面标题、语言与单一图标
 
 **文件：**修改 `mkdocs.yml:1,69-74`；新建 `overrides/main.html`、`docs/img/favicon.svg`。
 
@@ -79,7 +79,7 @@ git add mkdocs.yml overrides/main.html docs/img/favicon.svg
 git commit -m '统一博客名称、页面语言和图标'
 ```
 
-### 任务 2：搜索入口与弹窗中文化
+### Task 2：搜索入口与弹窗中文化
 
 **文件：**新建 `overrides/partials/search/modal.html`、`overrides/macros/top-nav/search-button.j2`。
 

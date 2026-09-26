@@ -27,7 +27,7 @@
 
 ---
 
-### 任务 1：统一语言标签
+### Task 1：统一语言标签
 
 **文件：**修改 `docs/MarkDown/MarkDown.md:7,19,80`。
 
@@ -64,7 +64,7 @@ git add docs/MarkDown/MarkDown.md
 git commit -m '统一代码块语言标签'
 ```
 
-### 任务 2：固定依赖并精简 CI
+### Task 2：固定依赖并精简 CI
 
 **文件：**新建 `requirements.txt`；修改 `mkdocs.yml:69-75`、`.github/workflows/publish.yml:12-18`。
 

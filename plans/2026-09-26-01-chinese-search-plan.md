@@ -27,7 +27,7 @@
 
 ---
 
-### 任务 1：为现有弹窗补中文查询分支
+### Task 1：为现有弹窗补中文查询分支
 
 **文件：**新建 `docs/chinese_search.js`；修改 `mkdocs.yml:102-105` 的 `extra_javascript`。
 

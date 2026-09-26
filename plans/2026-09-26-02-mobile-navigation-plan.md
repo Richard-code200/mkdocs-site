@@ -27,7 +27,7 @@
 
 ---
 
-### 任务 1：窄屏目录按钮
+### Task 1：窄屏目录按钮
 
 **文件：**修改 `docs/collapse_nav.js:5-47`、`docs/collapse_nav.css:1-27`。
 
