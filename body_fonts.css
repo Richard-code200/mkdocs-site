@@ -1,0 +1,6 @@
+/* 网页中文字体:正文使用 Noto Sans CJK SC(西文保持主题原字体栈不变) */
+:root {
+  --font-stack: Menlo, Monaco, "Lucida Console", "Liberation Mono",
+    "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New",
+    "Noto Sans CJK SC", monospace, serif;
+}
