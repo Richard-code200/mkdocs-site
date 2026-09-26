@@ -1,4 +1,4 @@
-site_name: My Mkdocs Site
+site_name: 王佳贤的个人博客
 site_url: https://richard-code200.github.io/mkdocs-site/
 
 nav:
@@ -69,7 +69,7 @@ nav:
 theme:
   name: terminal
   palette: gruvbox_dark
-  language: zh # 设置中文界面
+  custom_dir: overrides
   features:
     - navigation.tabs # 启用顶部标签页
 
