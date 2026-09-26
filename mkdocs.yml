@@ -70,8 +70,6 @@ theme:
   name: terminal
   palette: gruvbox_dark
   custom_dir: overrides
-  features:
-    - navigation.tabs # 启用顶部标签页
 
 markdown_extensions:
   - toc:
