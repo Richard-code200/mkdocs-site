@@ -98,6 +98,7 @@ markdown_extensions:
 extra_javascript:
   - collapse_nav.js
   - copy_code.js
+  - chinese_search.js
 
 extra_css:
   - collapse_nav.css
