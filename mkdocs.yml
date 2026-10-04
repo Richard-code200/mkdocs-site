@@ -40,6 +40,7 @@ nav:
       - 常用工具/bat.md
       - 常用工具/eza.md
       - 常用工具/fd.md
+      - 常用工具/grep.md
       - 常用工具/late_sh_zh.md
       - 常用工具/ripgrep.md
       - 常用工具/uv.md

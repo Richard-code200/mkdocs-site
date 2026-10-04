@@ -1,0 +1,165 @@
+# grep：日志与代码搜索
+
+`grep` 用于在文件内容或命令输出中搜索匹配的行，适合日常开发中的日志定位与代码查找。
+
+## 基本语法
+
+```bash
+grep [选项] '搜索模式' 文件或目录
+```
+
+```bash
+# 在日志中查找包含 error 的行
+grep 'error' app.log
+
+# 递归搜索源码，显示文件路径和行号，按普通文本匹配
+grep -rnF 'TODO' ./src
+```
+
+短选项通常可以组合：`-rnF` 等价于 `-r -n -F`。搜索模式建议用单引号包起来，避免被 shell 提前解释。
+
+## 选项的语义化记忆
+
+| 短选项 | 对应长选项 | 含义与记忆方法 |
+| --- | --- | --- |
+| `-n` | `--line-number` | **number**：显示匹配行的行号 |
+| `-r` | `--recursive` | **recursive**：递归搜索目录及子目录 |
+| `-F` | `--fixed-strings` | **Fixed**：固定字符串，不解释正则符号 |
+| `-i` | `--ignore-case` | **ignore**：忽略大小写 |
+| `-w` | `--word-regexp` | **word**：匹配完整单词 |
+| `-c` | `--count` | **count**：统计每个文件中匹配的行数，不是出现次数 |
+| `-v` | `--invert-match` | in**vert**：反选，输出不匹配的行 |
+| `-l` | `--files-with-matches` | 联想 **list files**：只列出含匹配内容的文件名 |
+| `-L` | `--files-without-match` | 与 `-l` 相反：列出没有匹配内容的文件名 |
+| `-E` | `--extended-regexp` | **Extended**：使用扩展正则表达式，例如用 `|` 表示“或” |
+| `-A 3` | `--after-context=3` | **After**：显示匹配行及其后 3 行 |
+| `-B 3` | `--before-context=3` | **Before**：显示匹配行及其前 3 行 |
+| `-C 3` | `--context=3` | **Context**：显示匹配行及其前后各 3 行 |
+
+/// info | 记忆联想不等于官方名称
+`-l` 是小写字母 L，可以联想为 “list files”，但官方长选项是 `--files-with-matches`，不是 `--list`。选项区分大小写，例如 `-l` 和 `-L` 的含义不同。
+///
+
+组合选项时，可以读成一句话：
+
+```bash
+grep -rnF 'TODO' ./src
+# recursive + number + fixed
+# 递归搜索、显示行号、按普通文本匹配
+```
+
+## 代码搜索
+
+```bash
+# 显示包含 TODO 的行以及文件路径、行号
+grep -rnF 'TODO' ./src
+
+# 只显示哪些文件的内容包含 TODO
+grep -rlF 'TODO' ./src
+
+# 匹配完整单词 getUser，避免匹配 getUserName
+grep -rnwF 'getUser' ./src
+
+# 只搜索 TypeScript 文件
+grep -rnF --include='*.ts' 'TODO' ./src
+
+# 搜索项目时排除依赖目录和 Git 目录
+grep -rnF --exclude-dir=node_modules --exclude-dir=.git 'getUser' .
+
+# 排除 vendor 子目录
+grep -rnF --exclude-dir=vendor 'TODO' ./src
+```
+
+`grep` 是文本搜索，不理解代码语法。匹配结果可能来自定义、调用、注释或字符串。它也不会自动遵守 `.gitignore`；需要时显式排除目录，或考虑使用 [ripgrep](ripgrep.md)。
+
+## 日志搜索
+
+```bash
+# 忽略大小写，搜索错误并显示行号
+grep -ni 'error' app.log
+
+# 查看错误前后各 5 行
+grep -niC 5 'error' app.log
+
+# 搜索多个关键词
+grep -niE 'error|exception|failed' app.log
+
+# 按请求 ID 追踪一次请求
+grep -nF 'request-id=req-102' app.log
+
+# 排除 DEBUG 日志
+grep -v 'DEBUG' app.log
+
+# 实时筛选新增日志，按行刷新输出
+tail -f app.log | grep --line-buffered -i 'error'
+```
+
+默认匹配区分大小写；希望同时匹配 `ERROR`、`error` 等形式时加上 `-i`。
+
+## 容易混淆的地方
+
+### 文件名搜索与文件内容搜索
+
+```bash
+# 筛选 ls 输出的名称，不读取文件内容
+ls | grep 'TODO'
+
+# 查找内容包含 TODO 的文件，只输出文件名
+grep -rlF 'TODO' ./src
+```
+
+记住：**管道中的 grep 搜索上一个命令的输出；带文件参数的 grep 搜索文件内容。**
+
+### 不显示行号，不等于只显示文件名
+
+```bash
+# 文件路径、行号、匹配内容
+grep -rnF 'TODO' ./src
+
+# 去掉 -n 后仍会输出匹配内容，只是不显示行号
+grep -rF 'TODO' ./src
+
+# 加上 -l 才会只显示文件名
+grep -rlF 'TODO' ./src
+```
+
+### 搜索范围：`.` 与 `./src`
+
+- `.`：当前目录及其子目录，可能连 README、笔记等也搜到。
+- `./src`：仅搜索源码目录及其子目录，结果更聚焦。
+
+### 普通文本与正则表达式
+
+```bash
+# 精确搜索字面上的 api.example.com
+grep -nF 'api.example.com' app.log
+
+# 用扩展正则匹配 ERROR 或 WARN
+grep -nE 'ERROR|WARN' app.log
+```
+
+没有 `-F` 时，`.` 在正则表达式中可以匹配任意单个字符，因此搜索 `api.example.com` 也可能匹配 `apiXexampleYcom`。**搜索普通文本优先用 `-F`，需要正则时再用 `-E`。**
+
+## 复习与练习
+
+本地模拟文件位于 `/home/errorichard/workspace/grep-practice`。先进入目录：
+
+```bash
+cd /home/errorichard/workspace/grep-practice
+```
+
+尝试不看速查表完成下面几题，再把命令和输出发给助手检查：
+
+1. 搜索 `src` 及其子目录中的 `TODO`，显示文件路径和行号。
+2. 只列出 `src` 中内容包含 `TODO` 的文件名。
+3. 只搜索 `.ts` 文件中的 `TODO`，并显示行号。
+4. 在 `logs/app.log` 中搜索 `error`，忽略大小写。
+5. 找到 `Database timeout`，同时显示前后各两行。
+
+完整的 11 道练习题见练习目录下的 `README.md`。
+
+## 查阅资料
+
+- `grep --help`：本机选项说明。
+- [GNU grep 官方手册](https://www.gnu.org/software/grep/manual/grep.html)：模式语法、上下文和输出控制等完整说明。
+- 常见退出状态：`0` 表示找到匹配，`1` 表示没有匹配，通常 `2` 表示发生错误；没有匹配不代表命令写错。
