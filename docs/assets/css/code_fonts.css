@@ -5,7 +5,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/MonaspiceRnNerdFont-Regular.woff2") format("woff2");
+  src: url("../fonts/MonaspiceRnNerdFont-Regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -13,7 +13,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("fonts/MonaspiceRnNerdFont-Bold.woff2") format("woff2");
+  src: url("../fonts/MonaspiceRnNerdFont-Bold.woff2") format("woff2");
 }
 
 @font-face {
@@ -21,7 +21,7 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/MonaspiceRnNerdFont-Italic.woff2") format("woff2");
+  src: url("../fonts/MonaspiceRnNerdFont-Italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -29,7 +29,7 @@
   font-style: italic;
   font-weight: 700;
   font-display: swap;
-  src: url("fonts/MonaspiceRnNerdFont-BoldItalic.woff2") format("woff2");
+  src: url("../fonts/MonaspiceRnNerdFont-BoldItalic.woff2") format("woff2");
 }
 
 /* 代码区域(代码块 + 行内代码)统一使用该字体;保留系统等宽字体与中文回退 */

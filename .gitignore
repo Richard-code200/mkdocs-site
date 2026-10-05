@@ -3,6 +3,7 @@ site/
 
 # Agent
 AGENTS.md
+plans/
 
 # Python 缓存
 __pycache__/

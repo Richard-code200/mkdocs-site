@@ -96,15 +96,15 @@ markdown_extensions:
           title: Important
 
 extra_javascript:
-  - collapse_nav.js
-  - copy_code.js
-  - chinese_search.js
+  - assets/js/collapse_nav.js
+  - assets/js/copy_code.js
+  - assets/js/chinese_search.js
 
 extra_css:
-  - collapse_nav.css
-  - code_fonts.css
-  - code_gruvbox.css
-  - dark_scheme.css
-  - body_fonts.css
-  - heading_colors.css
-  - copy_code.css
+  - assets/css/collapse_nav.css
+  - assets/css/code_fonts.css
+  - assets/css/code_gruvbox.css
+  - assets/css/dark_scheme.css
+  - assets/css/body_fonts.css
+  - assets/css/heading_colors.css
+  - assets/css/copy_code.css
