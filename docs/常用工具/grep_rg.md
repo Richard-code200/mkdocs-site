@@ -1,6 +1,8 @@
-# grep 与 rg：日志与代码搜索
+# grep：日志与代码搜索及 rg 替代工具
 
 `grep` 用于在文件内容或命令输出中搜索匹配的行，适合日常开发中的日志定位与代码查找。
+
+按名称、类型或路径找文件见 [find 与 fd 笔记](find_fd.md)。本笔记的 rg 作为 grep 的替代工具子章节，速查与示例分别组织。
 
 ## grep 速查
 
@@ -45,6 +47,12 @@ grep [选项] '搜索模式' 文件或目录
 
 ## grep 示例
 
+下面的代码与日志示例从基础素材目录运行：
+
+```bash
+cd /home/errorichard/workspace/linux-tools-practice/datasets/basic
+```
+
 ### 组合选项
 
 组合选项时，可以读成一句话：
@@ -83,28 +91,28 @@ grep -rnF --exclude-dir=vendor 'TODO' ./src
 
 ```bash
 # 忽略大小写，搜索错误并显示行号
-grep -ni 'error' app.log
+grep -ni 'error' logs/app.log
 
 # 查看错误前后各 5 行
-grep -niC 5 'error' app.log
+grep -niC 5 'error' logs/app.log
 
 # 搜索多个关键词
-grep -niE 'error|exception|failed' app.log
+grep -niE 'error|exception|failed' logs/app.log
 
 # 按请求 ID 追踪一次请求
-grep -nF 'request-id=req-102' app.log
+grep -nF 'request-id=req-102' logs/app.log
 
 # 排除 DEBUG 日志
-grep -v 'DEBUG' app.log
+grep -v 'DEBUG' logs/app.log
 
 # 统计错误行数，忽略大小写
-grep -ciF 'error' app.log
+grep -ciF 'error' logs/app.log
 
 # 筛选异常后排除某个请求，保留原始行号
-grep -niE 'error|warn' app.log | grep -vF 'request-id=req-102'
+grep -niE 'error|warn' logs/app.log | grep -vF 'request-id=req-102'
 
 # 实时筛选新增日志，按行刷新输出
-tail -f app.log | grep --line-buffered -i 'error'
+tail -f logs/app.log | grep --line-buffered -i 'error'
 ```
 
 默认匹配区分大小写；希望同时匹配 `ERROR`、`error` 等形式时加上 `-i`。
@@ -145,10 +153,10 @@ grep -rlF 'TODO' ./src
 
 ```bash
 # 精确搜索字面上的 api.example.com
-grep -nF 'api.example.com' app.log
+grep -nF 'api.example.com' logs/app.log
 
 # 用扩展正则匹配 ERROR 或 WARN
-grep -nE 'ERROR|WARN' app.log
+grep -nE 'ERROR|WARN' logs/app.log
 ```
 
 没有 `-F` 时，`.` 在正则表达式中可以匹配任意单个字符，因此搜索 `api.example.com` 也可能匹配 `apiXexampleYcom`。**搜索普通文本优先用 `-F`，需要正则时再用 `-E`。**
@@ -199,7 +207,7 @@ glob 要用引号，避免 shell 提前展开。`!` 表示排除；`*` 不跨路
 
 ### 示例
 
-以下示例使用 `/home/errorichard/workspace/grep-practice` 中的模拟文件，先进入该目录运行。输出顺序可能不同。
+以下示例使用 `/home/errorichard/workspace/linux-tools-practice/datasets/basic` 中的模拟文件，先进入该目录运行。输出顺序可能不同。
 
 #### 代码搜索与文件过滤
 
@@ -263,12 +271,37 @@ rg -lF -0 --glob='*.ts' --glob='!**/vendor/**' 'TODO' src |
 - `TODO|getUser` 表示“或”，不能保证同一个文件两个条件都满足；`TODO.*getUser` 默认只匹配同一行，也不符合这个需求。
 - **管道传递文本，xargs 把输入转换成命令参数。**直接写 `rg -l 'TODO' src | rg 'getUser'`，筛选的是文件名文本，而不是重新读取文件内容。
 
-## 复习与练习
+#### 配合 fd：先选择文件，再搜索内容
 
-本地模拟文件位于 `/home/errorichard/workspace/grep-practice`。先进入目录：
+fd 按名称、类型、扩展名及路径选择文件，`-X` 将路径直接作为参数批量交给 rg。以下命令从基础素材目录运行：
 
 ```bash
-cd /home/errorichard/workspace/grep-practice
+# 筛选 .ts 文件并排除 vendor，然后搜索完整单词 getUser
+fd -t f -e ts -E vendor '' src -X rg -nwF 'getUser'
+
+# 只列出内容包含 TODO 的候选文件名
+fd -t f -e ts -E vendor '' src -X rg -lF 'TODO'
+
+# 按路径选择 services，确保每行都显示路径、行号与内容
+fd -t f -e ts -E vendor -p 'services' src -X rg -HnF --no-heading 'TODO'
+
+# 按文件名选择 user，搜索完整单词，不匹配 getUserName
+fd -t f -e ts 'user' src -X rg -HnwF --no-heading 'getUser'
+
+# 即使只有一个日志文件也显示路径与计数
+fd -t f -e log '' logs -X rg -HciF 'error'
+```
+
+`-F` 按普通文本匹配，`-w` 限定完整单词；`-l` 才是只输出文件名，去掉 `-n` 只是不显示行号。`-H` 强制显示路径，但终端默认仍按文件分组；加 `--no-heading` 才会在每条结果中显示路径。
+
+完整的 fd 速查、文件大小边界和混合素材示例见 [find 与 fd 笔记](find_fd.md)。
+
+## 复习与练习
+
+练习场地位于 `/home/errorichard/workspace/linux-tools-practice`，题目放在 `exercises`，素材放在 `datasets`。基础练习先进入素材目录：
+
+```bash
+cd /home/errorichard/workspace/linux-tools-practice/datasets/basic
 ```
 
 尝试不看速查表完成下面几题，再把命令和输出发给助手检查：
@@ -279,7 +312,7 @@ cd /home/errorichard/workspace/grep-practice
 4. 在 `logs/app.log` 中搜索 `error`，忽略大小写。
 5. 找到 `Database timeout`，同时显示前后各两行。
 
-完整的 11 道练习题见练习目录下的 `README.md`。
+完整的 11 道 grep 练习见场地中的 `exercises/grep.md`，rg 综合题见 `exercises/rg.md`，其他工具入口见场地根目录 `README.md`。混合素材进阶题需切换到 `datasets/mixed`。
 
 本次练习已完成文件过滤、反选、上下文、计数与完整单词匹配，并用 `rg` 完成了“同一文件同时满足两个条件”的筛选。复习时重点回忆：`-l` 只列文件名、`-i` 才忽略大小写、文件过滤不能替代 `-v`，以及 `rg -r` 不是递归。
 
