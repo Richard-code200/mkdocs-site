@@ -1,0 +1,24 @@
+/* 大小标题配色:按层级使用 gruvbox 明亮色系,醒目且便于区分级别 */
+h1 {
+  color: var(--gb-dm-light-orange);
+}
+
+h2 {
+  color: var(--gb-dm-light-yellow);
+}
+
+h3 {
+  color: var(--gb-dm-light-green);
+}
+
+h4 {
+  color: var(--gb-dm-light-aqua);
+}
+
+h5 {
+  color: var(--gb-dm-light-purple);
+}
+
+h6 {
+  color: var(--gb-dm-light-blue);
+}
