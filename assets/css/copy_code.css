@@ -1,0 +1,33 @@
+/* 代码块复制按钮:右上角悬浮,gruvbox 风格 */
+pre {
+  position: relative;
+}
+
+.copy-code-button {
+  position: absolute;
+  top: 0.4em;
+  right: 0.5em;
+  padding: 0.1em 0.5em;
+  font-size: 0.75em;
+  font-family: var(--mono-font-stack);
+  line-height: 1.6;
+  color: var(--gb-dm-fg3);
+  background-color: var(--gb-dm-bg1);
+  border: 1px solid var(--gb-dm-bg3);
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.copy-code-button:hover,
+.copy-code-button:focus-visible {
+  opacity: 1;
+  color: var(--gb-dm-fg1);
+}
+
+.copy-code-button.copied {
+  opacity: 1;
+  color: var(--gb-dm-light-green);
+  border-color: var(--gb-dm-light-green);
+}
