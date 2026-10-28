@@ -101,6 +101,7 @@ extra_javascript:
   - assets/js/chinese_search.js
 
 extra_css:
+  - assets/css/font_faces.css
   - assets/css/collapse_nav.css
   - assets/css/code_fonts.css
   - assets/css/code_gruvbox.css

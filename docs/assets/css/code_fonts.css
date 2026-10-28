@@ -1,40 +1,34 @@
-/* 代码字体:MonaspiceRn Nerd Font(子集版 woff2,保留编程符号与连字) */
-
-@font-face {
-  font-family: "MonaspiceRn Nerd Font";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/MonaspiceRnNerdFont-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "MonaspiceRn Nerd Font";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../fonts/MonaspiceRnNerdFont-Bold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "MonaspiceRn Nerd Font";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/MonaspiceRnNerdFont-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "MonaspiceRn Nerd Font";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../fonts/MonaspiceRnNerdFont-BoldItalic.woff2") format("woff2");
-}
-
-/* 代码区域(代码块 + 行内代码)统一使用该字体;保留系统等宽字体与中文回退 */
+/* Neon 用于代码主体，Radon 用于注释；中文统一回退到更纱黑体。 */
 :root {
-  --mono-font-stack: "MonaspiceRn Nerd Font", Menlo, Monaco, "Lucida Console",
-    "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-    "Courier New", "Noto Sans Mono CJK SC", monospace, serif;
+  --mono-font-stack: "MonaspiceNe Nerd Font", "Sarasa Term SC", monospace;
+  --comment-font-stack: "MonaspiceRn Nerd Font", "Sarasa Term SC", monospace;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--mono-font-stack);
+  /* calt 启用 Texture Healing；ss01–ss10 与 liga 启用编程连字。 */
+  font-feature-settings: "calt" 1, "liga" 1,
+    "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1,
+    "ss06" 1, "ss07" 1, "ss08" 1, "ss09" 1, "ss10" 1;
+}
+
+pre,
+pre code {
+  line-height: 1.65;
+}
+
+/* 与 Pygments 的注释、文档字符串分类一致。 */
+.highlight .c,
+.highlight .ch,
+.highlight .cm,
+.highlight .cp,
+.highlight .cpf,
+.highlight .c1,
+.highlight .cs,
+.highlight .sd {
+  font-family: var(--comment-font-stack);
+  font-style: italic;
 }
