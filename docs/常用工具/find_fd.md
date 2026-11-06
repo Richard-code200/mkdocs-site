@@ -92,7 +92,7 @@ fd [选项] '名称模式' 搜索目录
 #### 基础素材：文件与路径筛选
 
 ```bash
-cd /home/errorichard/workspace/linux-tools-practice/datasets/basic
+cd /home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/basic
 
 # 多种扩展名：3 个文件
 fd -t f -e ts -e md -E vendor '' src
@@ -147,7 +147,7 @@ rg 的 `-H` 强制显示路径；终端默认仍可能把路径单独显示为�
 #### 混合素材：隐藏、空文件、大小与配置
 
 ```bash
-cd /home/errorichard/workspace/linux-tools-practice/datasets/mixed
+cd /home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/mixed
 
 # Python 或 Shell 文件，排除 tests，输出绝对路径：2 个文件
 fd -a -t f -e py -e sh -E tests '' .

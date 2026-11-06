@@ -50,7 +50,7 @@ grep [选项] '搜索模式' 文件或目录
 下面的代码与日志示例从基础素材目录运行：
 
 ```bash
-cd /home/errorichard/workspace/linux-tools-practice/datasets/basic
+cd /home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/basic
 ```
 
 ### 组合选项
@@ -207,7 +207,7 @@ glob 要用引号，避免 shell 提前展开。`!` 表示排除；`*` 不跨路
 
 ### 示例
 
-以下示例使用 `/home/errorichard/workspace/linux-tools-practice/datasets/basic` 中的模拟文件，先进入该目录运行。输出顺序可能不同。
+以下示例使用 `/home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/basic` 中的模拟文件，先进入该目录运行。输出顺序可能不同。
 
 #### 代码搜索与文件过滤
 
@@ -298,10 +298,10 @@ fd -t f -e log '' logs -X rg -HciF 'error'
 
 ## 复习与练习
 
-练习场地位于 `/home/errorichard/workspace/linux-tools-practice`，题目放在 `exercises`，素材放在 `datasets`。基础练习先进入素材目录：
+练习场地位于 `/home/errorichard/workspace/projects/learning/linux/tools-practice`，题目放在 `exercises`，素材放在 `datasets`。基础练习先进入素材目录：
 
 ```bash
-cd /home/errorichard/workspace/linux-tools-practice/datasets/basic
+cd /home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/basic
 ```
 
 尝试不看速查表完成下面几题，再把命令和输出发给助手检查：

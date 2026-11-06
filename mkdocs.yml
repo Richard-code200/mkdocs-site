@@ -15,6 +15,7 @@ nav:
       - Rust/结构体.md
       - Rust/Enum和模式匹配.md
       - Rust/集合.md
+      - Rust/迭代器与闭包.md
       - Rust/泛型与特征.md
       - Rust/生命周期.md
       - Rust/错误处理.md
@@ -22,6 +23,7 @@ nav:
       - Rust/测试.md
       - Rust/Cargo工作区与依赖管理.md
       - Rust/项目代码组织.md
+      - Rust/命令行文件搜索实践.md
       - Rust/学习项目计划.md
   - Zed:
       - Zed/index.md
