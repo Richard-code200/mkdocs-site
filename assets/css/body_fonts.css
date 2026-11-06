@@ -1,0 +1,32 @@
+/* Argon 用于正文与导航中的西文，中文使用 Sarasa Term SC。 */
+:root {
+  --font-stack: "MonaspiceAr Nerd Font", "Sarasa Term SC", monospace;
+  --heading-font-stack: "MonaspiceXe Nerd Font", "Sarasa Term SC", monospace;
+  --global-line-height: 1.75em;
+}
+
+body {
+  font-feature-settings: "calt" 1;
+}
+
+.terminal h1,
+.terminal h2,
+.terminal h3,
+.terminal h4,
+.terminal h5,
+.terminal h6,
+.terminal .logo {
+  font-family: var(--heading-font-stack);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* 长中文段落保持舒适行距，侧栏和按钮仍然紧凑。 */
+.terminal-mkdocs-side-nav-items,
+.menu-item,
+button,
+input,
+select,
+textarea {
+  line-height: 1.5;
+}
