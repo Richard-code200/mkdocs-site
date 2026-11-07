@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>所有权 · 王佳贤的个人博客</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="王佳贤的个人博客"/><meta property="og:title" content="所有权 · 王佳贤的个人博客"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="所有权 · 王佳贤的个人博客"/><meta name="twitter:description" content="什么是所有权 所有权是确保 Rust 程序安全的一种机制.所谓”安全”,是指程序中没有未定义行为(Undefined Behavior)."/><meta property="og:description" content="什么是所有权 所有权是确保 Rust 程序安全的一种机制.所谓”安全”,是指程序中没有未定义行为(Undefined Behavior)."/><meta property="og:image:alt" content="什么是所有权 所有权是确保 Rust 程序安全的一种机制.所谓”安全”,是指程序中没有未定义行为(Undefined Behavior)."/><meta property="og:image" content="https://richard-code200.github.io/mkdocs-site/static/og-image.png"/><meta property="og:image:url" content="https://richard-code200.github.io/mkdocs-site/static/og-image.png"/><meta name="twitter:image" content="https://richard-code200.github.io/mkdocs-site/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="richard-code200.github.io/mkdocs-site"/><meta property="og:url" content="https://richard-code200.github.io/mkdocs-site/Rust/所有权"/><meta property="twitter:url" content="https://richard-code200.github.io/mkdocs-site/Rust/所有权"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="什么是所有权 所有权是确保 Rust 程序安全的一种机制.所谓”安全”,是指程序中没有未定义行为(Undefined Behavior)."/><meta name="generator" content="Quartz"/><script>document.documentElement.setAttribute("saved-theme", "dark")</script><link rel="icon" type="image/svg+xml" href="../static/preview-favicon.svg"/><link rel="stylesheet" data-persist="true" href="../static/styles/gruvbox_dark.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/font_faces.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/code_fonts.css"/><link href="../index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvbWtkb2NzLXNpdGUvbWtkb2NzLXNpdGUvcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="../prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://richard-code200.github.io/mkdocs-site/index.xml"/></head><body data-slug="Rust/所有权"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">王佳贤的个人博客</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>搜索</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索些什么" placeholder="搜索些什么"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>{let order={MarkDown:1e3,\&quot;MarkDown/MarkDown\&quot;:1001,Rust:2e3,\&quot;Rust/\\u57FA\\u672C\\u8BED\\u6CD5\\u4E0E\\u6570\\u636E\\u7C7B\\u578B\&quot;:2001,\&quot;Rust/\\u51FD\\u6570\\u4E0E\\u63A7\\u5236\\u6D41\&quot;:2002,\&quot;Rust/\\u683C\\u5F0F\\u5316\\u8F93\\u51FA\&quot;:2003,\&quot;Rust/\\u6240\\u6709\\u6743\&quot;:2004,\&quot;Rust/\\u5F15\\u7528\\u4E0E\\u501F\\u7528\&quot;:2005,\&quot;Rust/\\u5207\\u7247\&quot;:2006,\&quot;Rust/\\u7ED3\\u6784\\u4F53\&quot;:2007,\&quot;Rust/Enum\\u548C\\u6A21\\u5F0F\\u5339\\u914D\&quot;:2008,\&quot;Rust/\\u96C6\\u5408\&quot;:2009,\&quot;Rust/\\u8FED\\u4EE3\\u5668\\u4E0E\\u95ED\\u5305\&quot;:2010,\&quot;Rust/\\u6CDB\\u578B\\u4E0E\\u7279\\u5F81\&quot;:2011,\&quot;Rust/\\u751F\\u547D\\u5468\\u671F\&quot;:2012,\&quot;Rust/\\u9519\\u8BEF\\u5904\\u7406\&quot;:2013,\&quot;Rust/\\u6A21\\u5757\\u7CFB\\u7EDF\&quot;:2014,\&quot;Rust/\\u6D4B\\u8BD5\&quot;:2015,\&quot;Rust/Cargo\\u5DE5\\u4F5C\\u533A\\u4E0E\\u4F9D\\u8D56\\u7BA1\\u7406\&quot;:2016,\&quot;Rust/\\u9879\\u76EE\\u4EE3\\u7801\\u7EC4\\u7EC7\&quot;:2017,\&quot;Rust/\\u547D\\u4EE4\\u884C\\u6587\\u4EF6\\u641C\\u7D22\\u5B9E\\u8DF5\&quot;:2018,\&quot;Rust/\\u5B66\\u4E60\\u9879\\u76EE\\u8BA1\\u5212\&quot;:2019,Zed:3001,\&quot;Zed/\\u5FEB\\u6377\\u952E\&quot;:3002,git\\u4F7F\\u7528\\u6307\\u5357:4e3,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/Git\\u57FA\\u7840\\u6982\\u5FF5\&quot;:4001,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u521D\\u59CB\\u8BBE\\u7F6E\&quot;:4002,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u57FA\\u672C\\u64CD\\u4F5C\\u547D\\u4EE4\&quot;:4003,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5DE5\\u4F5C\\u533A\\u6682\\u5B58\&quot;:4004,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5FFD\\u7565\\u6587\\u4EF6\\u914D\\u7F6E\&quot;:4005,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5206\\u652F\\u7BA1\\u7406\&quot;:4006,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u8FDC\\u7A0B\\u4ED3\\u5E93\\u64CD\\u4F5C\&quot;:4007,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u6807\\u7B7E\\u7BA1\\u7406\&quot;:4008,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u64A4\\u9500\\u4E0E\\u56DE\\u9000\&quot;:4009,\\u5E38\\u7528\\u5DE5\\u5177:5e3,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/bat\&quot;:5001,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/eza\&quot;:5002,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/find_fd\&quot;:5003,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/grep_rg\&quot;:5004,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/late_sh_zh\&quot;:5005,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/uv\&quot;:5006,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/\\u7EC8\\u7AEF\\u5FEB\\u6377\\u952E\&quot;:5007,\\u5F00\\u6E90\\u534F\\u8BAE:6e3,\&quot;\\u5F00\\u6E90\\u534F\\u8BAE/\\u5F00\\u6E90\\u534F\\u8BAE\\u6982\\u5FF5\\u603B\\u7ED3\&quot;:6001,\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60:7e3,\&quot;\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60/\\u6D41\\u7A0B\\u6307\\u5357\&quot;:7001,\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406:8e3,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u7B2C\\u4E00\\u7AE0\&quot;:8001,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u8BFE\\u7A0B\\u4FE1\\u606F\&quot;:8002,\\u7B97\\u6CD5\\u7B14\\u8BB0:9e3,\&quot;\\u7B97\\u6CD5\\u7B14\\u8BB0/\\u5206\\u53D1\\u997C\\u5E72\&quot;:9001,\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5:1e4,\&quot;\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5/\\u5B66\\u4E60\\u65B9\\u6CD5\&quot;:10001,\\u968F\\u8BB0:11e3,\&quot;\\u968F\\u8BB0/2026-09-12-ghostty\\u6BB5\\u9519\\u8BEF\\u590D\\u67E5\\u4E0E\\u9ED8\\u8BA4\\u914D\\u7F6E\\u6062\\u590D\&quot;:11001,\&quot;\\u968F\\u8BB0/2026-6-9\&quot;:11002,\&quot;\\u968F\\u8BB0/2026-6-1\&quot;:11003,\&quot;\\u968F\\u8BB0/2026-5-19\&quot;:11004,\&quot;\\u968F\\u8BB0/2026-4-27\&quot;:11005,\&quot;\\u968F\\u8BB0/ghostty-segfault-\\u95EE\\u9898\\u6392\\u67E5\&quot;:11006,\&quot;\\u968F\\u8BB0/Keygen(\\u6CE8\\u518C\\u673A)\&quot;:11007,Linux:12e3,\&quot;Linux/\\u5B89\\u5168\\u7279\\u6027\&quot;:12001,\\u7B14\\u8BB0\\u5BFC\\u822A:1,\\u5173\\u4E8E\\u672C\\u7AD9:99e3,\\u6392\\u7248\\u9884\\u89C8:99001},aSlug=a.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),bSlug=b.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),aRank=order[aSlug]??(order[aSlug.split(\&quot;/\&quot;)[0]]??9e4)+900,bRank=order[bSlug]??(order[bSlug.split(\&quot;/\&quot;)[0]]??9e4)+900;return aRank-bRank||a.displayName.localeCompare(b.displayName,\&quot;zh-CN\&quot;,{numeric:!0})}&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" aria-label="笔记导航" data-mobile="true" aria-controls="explorer-33"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>笔记导航</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-33" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><header></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">首页</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../Rust/">Rust</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>所有权</a></div></nav><h1 id="所有权" class="article-title">所有权</h1><p show-comma="true" class="content-meta"><time datetime="2026-05-23T15:43:12.000Z">2026年5月23日</time><span>18分钟阅读</span></p><ul class="tags"><li><a href="../tags/Rust" class="internal tag-link">Rust</a></li></ul></div></div><article class="popover-hint"><h2 id="什么是所有权">什么是所有权<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是所有权" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>所有权</strong>是确保 Rust 程序安全的一种机制.所谓”安全”,是指程序中没有未定义行为(Undefined Behavior).</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>未定义行为 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>当执行一段代码时,结果不可预测且未被编程语言指定的情况.Rust 的基础目标是<strong>确保你的程序永远不会有未定义行为</strong>,次要目标是在<strong>编译时</strong>而非运行时防止未定义行为.</p>
+</div>
+</blockquote>
+<p>大多数语言在运行时才会抛出异常,而 Rust 的目标是尽可能减少运行时的检查——Rust 在编译时就会进行错误分析和抛出.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    read</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 编译错误:cannot find value `x` in this scope</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> read</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">bool</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {</span></span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">    if</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">        println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;y is true!&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">    }</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>故意失败的反例 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>上面的片段故意在声明 <code>x</code> 之前使用它,因此会触发 E0425:<code>x</code> 在声明前不可见.当前项目的活动代码已经调整声明顺序,可以正常编译.</p>
+</div>
+</blockquote>
+<h2 id="所有权规则">所有权规则<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#所有权规则" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>所有权有三条基本原则:</p>
+<ol>
+<li>Rust 中的每一个值都有一个<strong>所有者</strong>(Owner)</li>
+<li>值在任意时刻<strong>有且只有一个</strong>所有者</li>
+<li>当所有者离开作用域,这个值将被<strong>丢弃</strong>(Drop)</li>
+</ol>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>所有权是 Rust 最独特的特性 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>所有权机制让 Rust 无需垃圾回收器(GC)就能保障内存安全.其他语言通过 GC 或手动内存管理来保证安全,Rust 则通过编译期检查所有权规则来实现,真正做到了<strong>零运行时开销</strong>.</p>
+</div>
+</blockquote>
+<h2 id="栈stack与堆heap">栈(Stack)与堆(Heap)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#栈stack与堆heap" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="栈">栈<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#栈" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>栈中的所有数据都必须占用已知且固定的大小,数据以”后进先出”(LIFO)的方式管理.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> n</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;                    </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// L1: main 栈帧压入 n=5</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">plus_one</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">n</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);          </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// L3: main 栈帧压入 y=6</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;The value of y is: {y}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> plus_one</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">i32</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) -> </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">i32</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">    x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> + </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1</span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">                         // L2: plus_one 栈帧压入 x=5</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>L1(Stack)</th><th>L2(Stack)</th><th>L3(Stack)</th></tr></thead><tbody><tr><td>main(n:5)</td><td>main(n:5)</td><td>main(n:5,y:6)</td></tr><tr><td></td><td>plus_one(x:5)</td><td></td></tr></tbody></table></div>
+<ul>
+<li>函数调用时,参数和局部变量被推入栈</li>
+<li>函数返回时,其栈帧被弹出,变量随之释放</li>
+</ul>
+<h3 id="堆">堆<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#堆" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>对于编译时大小未知或可能变化的数据,存储在堆上:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 字符串数据在堆上,栈上存放指针</span></span></code></pre></figure>
+<ul>
+<li>分配内存时,操作系统在堆中找到足够大的空间,标记为已用,返回<strong>指针</strong></li>
+<li>栈上存放的是指向堆的指针,长度,容量等信息</li>
+</ul>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>栈 vs 堆 </p></div>
+                  
+                </div>
+<div class="callout-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th></th><th>栈(Stack)</th><th>堆(Heap)</th></tr></thead><tbody><tr><td>速度</td><td>快(直接访问)</td><td>慢(通过指针间接访问)</td></tr><tr><td>大小</td><td>固定,编译时已知</td><td>动态,运行时分配</td></tr><tr><td>管理</td><td>自动(LIFO)</td><td>手动 / 所有权机制</td></tr><tr><td>用途</td><td>简单类型(i32,bool 等)</td><td>复杂类型(String,Vec 等)</td></tr></tbody></table></div>
+</div>
+</blockquote>
+<h2 id="变量作用域">变量作用域<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#变量作用域" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">{                          </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s 在这里无效,它尚未声明</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;       </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s 从此处开始有效</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">    // 使用 s</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}                          </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 此作用域已结束,s 不再有效</span></span></code></pre></figure>
+<p>当变量离开作用域时,Rust 会自动调用 <code>drop</code> 函数释放内存.这与 C++ 的 RAII(Resource Acquisition Is Initialization)模式类似.</p>
+<h2 id="移动move">移动(Move)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#移动move" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>考虑以下代码:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// x 的值被复制给 y(Copy trait)</span></span></code></pre></figure>
+<p>但如果数据在堆上呢?</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s1 被移动到 s2,s1 不再有效</span></span></code></pre></figure>
+<p><code>String</code> 在内存中的布局:</p>
+<ul>
+<li><strong>指针</strong>(栈):指向堆中存放字符串内容的内存</li>
+<li><strong>长度</strong>(栈):字符串当前使用的字节数</li>
+<li><strong>容量</strong>(栈):从分配器获取的总字节数</li>
+</ul>
+<p>当执行 <code>let s2 = s1;</code> 时,Rust 为了避免<strong>双重释放</strong>(double free),
+会将 <code>s1</code> <strong>移动</strong>给 <code>s2</code>,此后 <code>s1</code> 不再有效:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{s1}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 编译错误:use of moved value: `s1`</span></span></code></pre></figure>
+<p>移动不是让新值在原变量上执行“覆盖”.对 <code>String</code> 而言,栈上的指针、长度和容量被转交给新所有者,堆中的字符数据不需要搬动;编译器只把旧绑定标记为不可再使用.</p>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>E0382:以下示例故意无法编译 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>takes_ownership</code> 取得 <code>String</code> 的所有权,之后再次使用 <code>name</code> 会触发 E0382.这段代码用于展示错误,不是可运行示例.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> takes_ownership</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">value</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Ferris&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">takes_ownership</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{name}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// E0382:borrow of moved value</span></span></code></pre></figure>
+<p>如果函数只需读取字符串,应借用 <code>&amp;str</code>,调用后原值仍有效:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> read_name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">value</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: &amp;</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">str</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{value}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Ferris&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">read_name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(&amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{name}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span></code></pre></figure>
+</div>
+</blockquote>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>浅拷贝 vs 移动 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Rust 不会在赋值或传参时自动克隆堆数据.默认行为是<strong>移动</strong>(转移所有权),而非创建独立副本.</p>
+</div>
+</blockquote>
+<h2 id="克隆clone">克隆(Clone)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#克隆clone" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>需要显式复制 <code>String</code> 时,可以使用 <code>clone</code> 方法:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">.</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">clone</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 堆数据被完整复制,s1 仍然有效</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;s1 = {s1}, s2 = {s2}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 正常执行</span></span></code></pre></figure>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>clone 的代价 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>Clone</code> 的行为和代价由具体实现决定.<code>String::clone</code> 会复制字符串缓冲区,开销与内容长度有关;<code>Rc::clone</code> 只增加引用计数并共享同一份数据.调用 <code>.clone()</code> 表示一次显式克隆,但不等同于统一的深拷贝语义.</p>
+</div>
+</blockquote>
+<h2 id="copy-trait">Copy trait<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#copy-trait" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>是否发生隐式复制取决于<strong>类型是否实现 <code>Copy</code> trait</strong>,而不是值位于栈还是堆.例如整数实现了 <code>Copy</code>,所以赋值后两个绑定都能使用:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;x = {x}, y = {y}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 正常,因为 i32 实现了 Copy</span></span></code></pre></figure>
+<p>如果一种类型实现了 <code>Copy</code> trait,那么赋值后旧变量仍然可用.Rust 不允许自身或其任何部分实现了 <code>Drop</code> trait 的类型使用 <code>Copy</code>.</p>
+<p>实现了 <code>Copy</code> 的常见类型:</p>
+<ul>
+<li>所有整数类型(<code>u32</code>,<code>i64</code> 等)</li>
+<li>所有浮点类型(<code>f32</code>,<code>f64</code>)</li>
+<li>布尔类型(<code>bool</code>)</li>
+<li>字符类型(<code>char</code>)</li>
+<li>元组,当且仅当其包含的每个元素都实现了 <code>Copy</code></li>
+<li>不可变引用 <code>&amp;T</code></li>
+</ul>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Copy vs Clone </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>Copy</code> 是<strong>隐式的,按位复制</strong>,不会影响原值;<code>Clone</code> 通过 <code>.clone()</code> <strong>显式调用</strong>,具体克隆语义由类型实现决定.实现了 <code>Copy</code> 的类型通常也实现了 <code>Clone</code>.</p>
+</div>
+</blockquote>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>String::len 返回字节数 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>String::len()</code> 和 <code>str::len()</code> 返回 UTF-8 编码后的<strong>字节数</strong>,不是字符数.例如 <code>String::from(&quot;中&quot;).len()</code> 是 <code>3</code>.按 Unicode 标量值计数可使用 <code>.chars().count()</code>,但这也不等同于用户感知的字形数量.</p>
+</div>
+</blockquote>
+<h2 id="所有权与函数">所有权与函数<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#所有权与函数" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s 进入作用域</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    takes_ownership</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);            </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s 的值移动到函数,此后 s 无效</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;                     </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// x 进入作用域</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    makes_copy</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);                 </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// x 被复制(i32 是 Copy),此后 x 仍有效</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">} </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// x 离开作用域,s 已经移动所以无事发生</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> takes_ownership</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">some_string</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{some_string}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">} </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// some_string 离开作用域,drop 被调用</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> makes_copy</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">some_integer</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">i32</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{some_integer}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">} </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// some_integer 离开作用域</span></span></code></pre></figure>
+<p>返回值也可以转移所有权:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">gives_ownership</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">();         </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 返回值移动给 s1</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">takes_and_gives_back</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);  </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s2 移入函数,返回值移给 s3</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> gives_ownership</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() -> </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> some_string</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;yours&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">    some_string</span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"> // 返回并移出</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> takes_and_gives_back</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">a_string</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) -> </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">    a_string</span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"> // 返回并移出</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<h2 id="引用与借用">引用与借用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#引用与借用" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>每次都要把所有权传来传去太麻烦了.<strong>引用</strong>(Reference)允许在不获取所有权的情况下使用值:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> len</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">calculate_length</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(&amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 传递引用而非所有权</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;The length of '{s1}' is {len}.&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">} </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s1 仍然有效</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> calculate_length</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: &amp;</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) -> </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">usize</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">    s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">.</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">len</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">()</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">} </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s 离开作用域,但不拥有引用值的所有权,不会调用 drop</span></span></code></pre></figure>
+<p><code>&amp;</code> 符号表示<strong>引用</strong>,它允许使用值但不获取其所有权.把创建一个引用的行为称为<strong>借用</strong>(Borrowing).</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s2 借用了 s1</span></span></code></pre></figure>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>借用的比喻 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>借用的本质是”暂时使用,用完归还”.你不拥有它,只是临时访问.当你用完或引用离开作用域后,借用关系就结束了.</p>
+</div>
+</blockquote>
+<h2 id="可变引用">可变引用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#可变引用" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>默认情况下,引用是不可变的:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;"> mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 创建可变引用</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">r</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">.</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">push_str</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;, world!&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{s}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &quot;hello, world!&quot;</span></span></code></pre></figure>
+<p>可变引用有一个重要限制:<strong>在任意给定时间,要么只能有一个可变引用,要么只能有多个不可变引用</strong>.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;"> mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 编译错误:cannot borrow `s` as mutable more than once at a time</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r4</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 编译错误:不能同时存在可变引用和不可变引用</span></span></code></pre></figure>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>数据竞争 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>多个可变引用同时存在会导致<strong>数据竞争</strong>(Data Race),这在 C/C++ 中是 UB 的来源之一.Rust 在编译期就禁止这种情况,从根本上消除了数据竞争.</p>
+</div>
+</blockquote>
+<p>借用检查器会从引用创建处分析到它的<strong>最后一次使用</strong>.最后一次使用后借用可以结束,但引用变量所在的词法作用域并没有因此提前结束:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;"> mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{r1} {r2}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// r1 和 r2 在此之后不再使用</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> r3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">mut</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 没问题,因为 r1 和 r2 的借用已经结束</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{r3}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span></code></pre></figure>
+<p>这种按实际使用位置而非仅按代码块边界分析借用有效期的机制称为非词法生命周期(NLL, Non-Lexical Lifetimes).</p>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>借用规则总结 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ol>
+<li>在任意给定时间,<strong>要么</strong>有一个可变引用,<strong>要么</strong>有任意多个不可变引用</li>
+<li>引用<strong>必须</strong>总是有效的(不能有悬垂引用)</li>
+</ol>
+</div>
+</blockquote>
+<h2 id="悬垂引用dangling-references">悬垂引用(Dangling References)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#悬垂引用dangling-references" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>悬垂指针:指向已经被释放或分配给其他人的内存地址的指针.Rust 中,编译器保证引用永远不会变成悬垂引用:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> dangle</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() -> &amp;</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">    &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"> // 编译错误:`s` does not live long enough</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">} </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// s 在这里离开作用域并被释放</span></span></code></pre></figure>
+<p>编译器会精确分析引用的生命周期,确保任何引用都不会比其引用的数据活得更长.</p>
+<h2 id="切片slice">切片(Slice)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#切片slice" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>切片</strong>(Slice)是一种不获取所有权的引用,它引用集合中一段<strong>连续的元素序列</strong>:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello world&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> hello</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">0</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">..</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &quot;hello&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> world</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">6</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">..</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">11</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &quot;world&quot;</span></span></code></pre></figure>
+<p>切片的区间语法:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> slice</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">0</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">..</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &quot;he&quot; —— 索引 0 和 1</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> slice</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[..</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">];  </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 同上,从 0 开始可省略</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> slice</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">..];  </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &quot;lo&quot; —— 从索引 3 到末尾</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> slice</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[..];   </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &quot;hello&quot; —— 整个字符串</span></span></code></pre></figure>
+<p><code>first_word</code> 的最终签名是 <code>fn first_word(s: &amp;str) -> Option&lt;&amp;str></code>.<code>&amp;str</code> 同时接受字符串切片和 <code>&amp;String</code>;空输入返回 <code>None</code>,非空且没有 ASCII 空格时返回 <code>Some(s)</code>:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello world&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">if</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> let</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> Some</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">word</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">first_word</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(&amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">s</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{word}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">assert_eq!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">first_word</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">), </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">None</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">assert_eq!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">first_word</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">), </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Some</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;hello&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">));</span></span></code></pre></figure>
+<p>完整代码见<a href="../Rust/切片" class="internal alias" data-slug="Rust/切片">切片笔记中的权威实现</a>.</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>字符串切片 vs 字符串字面量 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>字符串字面量 <code>&quot;hello&quot;</code> 的类型就是 <code>&amp;str</code>,它是一个指向二进制程序特定位置的切片.正因如此,字符串字面量是不可变的.</p>
+</div>
+</blockquote>
+<p>其他集合类型同样支持切片:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> a</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = [</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">4</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">];</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> slice</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = &amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">a</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">..</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]; </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 类型为 &amp;[i32],指向 [2, 3]</span></span></code></pre></figure>
+<h2 id="boxt--堆上分配"><span id="box----堆上分配" class="legacy-anchor" aria-hidden="true"></span><code>Box&lt;T></code> — 堆上分配<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#boxt--堆上分配" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>Box&lt;T></code> 是 Rust 中最简单的<strong>智能指针</strong>(Smart Pointer),它允许将数据存储在<strong>堆</strong>上,而栈上只保留指向堆数据的指针.</p>
+<h3 id="基本用法">基本用法<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#基本用法" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> b</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;b = {b}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// b 离开作用域时,Box 和它指向的堆数据一起被释放</span></span></code></pre></figure>
+<p><code>Box&lt;T></code> 的核心特点:</p>
+<ul>
+<li>数据在<strong>堆</strong>上分配,栈上只存指针</li>
+<li>遵循所有权规则:当 <code>Box</code> 离开作用域时,它和它指向的堆数据都会被释放</li>
+<li>实现了 <code>Deref</code> trait,可以像普通引用一样解引用</li>
+</ul>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Box 的内存布局 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<pre><code>栈(Stack)          堆(Heap)
++------+          +-----+
+| 指针 | --------> |  5  |
++------+          +-----+
+(一个机器字)       (i32, 4字节)
+</code></pre>
+<p>当 <code>T</code> 是定长类型时,<code>Box&lt;T></code> 本身通常占一个机器字,实际数据在堆上;具体字节数随目标平台而变化.指向动态大小类型的 <code>Box</code> 可能是包含额外元数据的胖指针,通常占两个机器字.</p>
+</div>
+</blockquote>
+<h3 id="使用场景">使用场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用场景" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="场景一递归类型">场景一:递归类型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#场景一递归类型" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>Rust 在编译时需要知道每个类型的大小,而递归类型的大小在编译时无法确定:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 编译错误:recursive type has infinite size</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">enum</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> List</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    Cons</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">i32</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">List</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">),</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    Nil</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<p>使用 <code>Box&lt;T></code> 解决,因为这里的 <code>Box&lt;List></code> 是大小已知的指针:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">enum</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> List</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    Cons</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">i32</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">&lt;</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">List</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">>),</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    Nil</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">use</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> List</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::{</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Cons</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Nil</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">};</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> list</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Cons</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Cons</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Cons</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Nil</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">))))));</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<p><code>Cons</code> 的内存布局:</p>
+<ul>
+<li>栈上:<code>(i32, Box指针)</code> — 大小已知</li>
+<li>堆上:<code>(i32, Box指针)</code> <span>→</span> <code>(i32, Box指针)</code> <span>→</span> <code>Nil</code></li>
+</ul>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>为什么递归类型需要 Box </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>List</code> 枚举在编译时需要确定最大变体的大小.如果 <code>Cons(i32, List)</code> 直接包含自身,编译器会陷入无限循环计算大小.<code>Box&lt;List></code> 通常占一个机器字,具体字节数随目标平台而变化;这层固定大小的间接引用打破了递归.</p>
+</div>
+</blockquote>
+<h4 id="场景二转移大量数据">场景二:转移大量数据<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#场景二转移大量数据" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>当数据量很大时,直接移动会复制整个栈上数据.用 <code>Box</code> 可以只转移指针:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> large_data</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">([</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">0</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">u8</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1024</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> * </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1024</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 1MB 数据在堆上</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> moved_data</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">large_data</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;                    </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 只转移一个机器字的指针,数据不动</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// large_data 在此之后不可用</span></span></code></pre></figure>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Box 与所有权 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>Box&lt;T></code> 完全遵守所有权规则:赋值会<strong>移动</strong>所有权,离开作用域时自动释放.当你在函数间传递 <code>Box&lt;T></code> 时,只复制栈上的指针,堆数据不会发生拷贝.</p>
+</div>
+</blockquote>
+<h4 id="场景三通过-deref-自动解引用">场景三:通过 Deref 自动解引用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#场景三通过-deref-自动解引用" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">assert_eq!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">assert_eq!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, *</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 显式解引用</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">assert_eq!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, *(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">y</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">.</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">deref</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">())); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 等价写法</span></span></code></pre></figure>
+<p><code>Box&lt;T></code> 实现了 <code>Deref</code> trait,可以用 <code>*</code> 解引用操作符访问内部数据.</p>
+<h3 id="解引用强制转换deref-coercion">解引用强制转换(Deref Coercion)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#解引用强制转换deref-coercion" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Rust 会自动将 <code>&amp;Box&lt;T></code> 转换为 <code>&amp;T</code>,让代码更自然:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> hello</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">name</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: &amp;</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">str</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">) {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Hello, {name}!&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> m</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">Box</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">new</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Rust&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">));</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">hello</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(&amp;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">m</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">); </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// &amp;Box&lt;String> 自动转换为 &amp;String -> &amp;str</span></span></code></pre></figure>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Box 不是万能钥匙 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>优先使用<strong>栈</strong>分配的数据,只有在必要场景(递归类型,数据量过大,需要转移所有权而不拷贝)才使用 <code>Box</code>.过度使用堆分配会影响性能.</p>
+</div>
+</blockquote>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>所有权核心要义 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>所有权,借用,切片以及 <code>Box&lt;T></code> 这些概念,都在<strong>编译时</strong>保障了 Rust 程序的内存安全.Rust 通过所有权系统,让你不需要垃圾回收器,也无需手动管理内存,就能写出安全,高效的代码.</p>
+</div>
+</blockquote></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="全站关系图"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-9" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#什么是所有权" data-for="什么是所有权">什么是所有权</a></li><li class="depth-0"><a href="#所有权规则" data-for="所有权规则">所有权规则</a></li><li class="depth-0"><a href="#栈stack与堆heap" data-for="栈stack与堆heap">栈(Stack)与堆(Heap)</a></li><li class="depth-1"><a href="#栈" data-for="栈">栈</a></li><li class="depth-1"><a href="#堆" data-for="堆">堆</a></li><li class="depth-0"><a href="#变量作用域" data-for="变量作用域">变量作用域</a></li><li class="depth-0"><a href="#移动move" data-for="移动move">移动(Move)</a></li><li class="depth-0"><a href="#克隆clone" data-for="克隆clone">克隆(Clone)</a></li><li class="depth-0"><a href="#copy-trait" data-for="copy-trait">Copy trait</a></li><li class="depth-0"><a href="#所有权与函数" data-for="所有权与函数">所有权与函数</a></li><li class="depth-0"><a href="#引用与借用" data-for="引用与借用">引用与借用</a></li><li class="depth-0"><a href="#可变引用" data-for="可变引用">可变引用</a></li><li class="depth-0"><a href="#悬垂引用dangling-references" data-for="悬垂引用dangling-references">悬垂引用(Dangling References)</a></li><li class="depth-0"><a href="#切片slice" data-for="切片slice">切片(Slice)</a></li><li class="depth-0"><a href="#boxt--堆上分配" data-for="boxt--堆上分配">Box&lt;T> — 堆上分配</a></li><li class="depth-1"><a href="#基本用法" data-for="基本用法">基本用法</a></li><li class="depth-1"><a href="#使用场景" data-for="使用场景">使用场景</a></li><li class="depth-1"><a href="#解引用强制转换deref-coercion" data-for="解引用强制转换deref-coercion">解引用强制转换(Deref Coercion)</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-2" class="overflow"><li><a href="../Rust/" class="internal">Rust</a></li><li><a href="../排版预览" class="internal">字体与排版预览</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/Richard-code200/mkdocs-site">GitHub</a></li><li><a href="https://richard-code200.github.io/mkdocs-site/index.xml">RSS</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="../postscript.js" type="module" data-persist="true"></script></html>
