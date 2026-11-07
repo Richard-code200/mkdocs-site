@@ -1,0 +1,110 @@
+/* 其他页面不输出首页导航，去掉由 Quartz Header 留下的空容器间距。 */
+body:not([data-slug="index"]) .page-header > header:empty { display: none; }
+
+/* 只作用于根首页；文章、分类和标签页保留 Quartz 原生布局。 */
+body[data-slug="index"] {
+  & #quartz-root.page { max-width: none; }
+  & .page > #quartz-body { display: block; padding: 0; }
+  & .page > #quartz-body .sidebar { display: none; }
+  & .page > #quartz-body > .center { width: 100%; min-width: 0; max-width: none; margin: 0; }
+  & .page > #quartz-body .page-header { position: sticky; top: 0; z-index: 30; margin: 0; }
+  & .page-header > header { display: block; margin: 0; }
+  & .page > #quartz-body .center > :is(hr, .page-footer) { display: none; }
+  & .page > #quartz-body > footer {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 36px max(24px, calc((100% - 1232px) / 2));
+    border: 0;
+    background: #1d2021;
+  }
+}
+
+.home-nav { background: #1d2021; border-bottom: 1px solid #3c3836; }
+.home-nav-inner { box-sizing: border-box; max-width: 1280px; min-height: 56px; padding: 0 24px; margin: auto; display: flex; align-items: center; gap: 20px; position: relative; }
+.home-nav :is(a, button) { color: #ebdbb2; }
+.home-nav a:hover { color: #fabd2f; }
+.home-nav .home-brand { font-family: var(--heading-font-stack); font-size: 15px; font-weight: 700; margin-right: auto; line-height: 1.5; }
+.home-nav-links { display: flex; align-items: center; gap: 20px; }
+.home-nav-links a { font-size: 13px; font-weight: 400; white-space: nowrap; }
+.home-nav .search { min-width: 0; max-width: 200px; flex: 0 0 200px; }
+.home-nav .search-button { height: 34px; padding: 6px 10px; }
+.home-nav .search-button p { font-size: 13px; }
+.home-menu-toggle { display: none; background: none; border: none; padding: 4px; cursor: pointer; }
+.home-skip-link { position: fixed; left: 16px; top: -80px; padding: 8px 14px; background: #3c3836; z-index: 100; }
+.home-skip-link:focus { top: 8px; }
+.home-nav :is(a, button):focus-visible, .preview-home a:focus-visible { outline: 2px solid #fabd2f; outline-offset: 4px; }
+
+/* 从 Hugo 小样移植的首页布局，内容链接与统计改由 Quartz 提供。 */
+.preview-home {
+  box-sizing: border-box;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 0 36px 72px;
+  font-size: 15px;
+  line-height: normal;
+  & *, & *::before, & *::after { box-sizing: border-box; }
+  & :is(h1, h2, h3, p) { margin: 0; }
+  & a { font-weight: 400; text-decoration: none; }
+  & :is(p, a, h1, h2, h3) { overflow-wrap: break-word; }
+  & .preview-hero { padding: 72px 0 56px; }
+  & :is(.preview-eyebrow, .preview-meta, .preview-section-label, .preview-card-footer) { font-size: 12px; color: #bdae93; letter-spacing: .02em; }
+  & .preview-eyebrow { display: flex; gap: 10px; align-items: center; }
+  & .preview-dot { height: 7px; width: 7px; border-radius: 50%; background: #b8bb26; box-shadow: 0 0 12px #b8bb2633; }
+  & .preview-muted { color: #928374; }
+  & .preview-hero h1 { font-size: clamp(36px, 5vw, 56px); margin: 24px 0 20px; letter-spacing: -.03em; line-height: 1.45; color: #fbf1c7; }
+  & .preview-cursor { color: #fabd2f; }
+  & .preview-intro { color: #d5c4a1; line-height: 1.9; font-size: 15px; }
+  & .preview-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 28px; }
+  & .preview-button { display: inline-flex; gap: 32px; background: #fabd2f; color: #1d2021; font-size: 14px; font-weight: 700; padding: 12px 20px; border: 1px solid #fabd2f; border-radius: 4px; }
+  & .preview-button span { color: inherit; }
+  & .preview-button:hover { background: #fbf1c7; }
+  & .preview-text-link { color: #d5c4a1; font-size: 13px; }
+  & .preview-text-link:hover { color: #fabd2f; }
+  & .preview-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; color: #928374; font-size: 11px; }
+  & .preview-section-label { display: flex; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid #504945; }
+  & .preview-section-title { margin: 12px 0 24px; font-size: 22px; color: #fbf1c7; }
+  & .preview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  & .preview-card { display: flex; flex-direction: column; padding: 24px; min-height: 232px; background: #32302f; border: 1px solid #504945; border-radius: 6px; transition: border-color .15s, transform .15s; }
+  & .preview-card:hover { border-color: #fabd2f; transform: translateY(-3px); }
+  & .preview-card-index { display: flex; justify-content: space-between; color: #928374; font-size: 12px; }
+  & .preview-card h3 { margin: 24px 0 10px; font-size: 21px; color: #fabd2f; }
+  & .preview-card:nth-child(2) h3 { color: #8ec07c; }
+  & .preview-card:nth-child(3) h3 { color: #d3869b; }
+  & .preview-card p { color: #bdae93; font-size: 13px; line-height: 1.9; margin-bottom: 24px; }
+  & .preview-card-footer { margin-top: auto; font-size: 11px; }
+  & .preview-bottom { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; margin-top: 48px; }
+  & .preview-entry { display: flex; gap: 20px; padding: 18px 0; font-size: 13px; align-items: baseline; border-bottom: 1px solid #3c3836; }
+  & .preview-entry time { color: #928374; font-size: 11px; flex-shrink: 0; }
+  & .preview-entry span { color: #ebdbb2; }
+  & .preview-entry span:last-child { margin-left: auto; color: #fabd2f; }
+  & .preview-entry:hover span { color: #fabd2f; }
+  & .preview-status { border: 1px dashed #504945; border-radius: 6px; padding: 24px; }
+  & .preview-status p { color: #d5c4a1; margin: 16px 0; line-height: 1.9; }
+  & .preview-status small, & .preview-empty { font-size: 11px; line-height: 1.8; color: #928374; display: block; }
+}
+
+@media (max-width: 767px) {
+  .home-nav-inner { padding: 0 22px; gap: 12px; }
+  .home-nav .search { flex: 0 0 32px; }
+  .home-nav .search .search-button { width: 32px; height: 32px; background: transparent; border: none; padding: 4px; justify-content: center; }
+  .home-nav .search .search-button svg { margin: 0; }
+  .home-nav .search .search-button p { display: none; }
+  .home-menu-toggle { display: inline-flex; }
+  .home-nav-links { display: none; position: absolute; top: 55px; right: 22px; min-width: 170px; padding: 12px; background: #32302f; border: 1px solid #504945; border-radius: 4px; box-shadow: 0 12px 24px #0004; }
+  .home-nav[data-open="true"] .home-nav-links { display: flex; align-items: stretch; flex-direction: column; gap: 0; }
+  .home-nav-links a { padding: 10px 12px; }
+  .preview-home {
+    padding: 0 22px 40px;
+    & .preview-hero { padding: 48px 0 40px; }
+    & :is(.preview-grid, .preview-bottom) { grid-template-columns: 1fr; }
+    & .preview-grid { gap: 12px; }
+    & .preview-card { min-height: 192px; padding: 20px; }
+    & .preview-bottom { gap: 28px; margin-top: 32px; }
+    & .preview-section-label > .preview-muted { display: none; }
+    & .preview-entry { flex-wrap: wrap; gap: 8px 16px; }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .preview-home .preview-card { transition: none; } }

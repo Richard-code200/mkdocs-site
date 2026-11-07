@@ -1,30 +1,26 @@
-# MkDocs 构建输出
-site/
-
-# Agent
-AGENTS.md
-plans/
-
-# Python 缓存
+node_modules/
+public/
+.preview/
+.quartz-cache/
+tsconfig.tsbuildinfo
+artifacts/
 __pycache__/
 *.pyc
-*.pyo
-
-# 虚拟环境
-.venv/
-venv/
-env/
-
-# 隔离工作树
+.hugo_build.lock
+site/
 .worktrees/
-
-# 系统文件
 .DS_Store
 Thumbs.db
 
-# IDE 配置
+# 保留迁移前的本地资料、环境与编辑器忽略规则。
+AGENTS.md
+plans/
+*.pyo
+.venv/
+venv/
+env/
 .vscode/
 .idea/
 *.swp
 *.swo
-docs/superpowers/
+content/superpowers/

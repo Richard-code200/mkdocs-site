@@ -8,8 +8,8 @@ from fontTools.ttLib import TTFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "docs/assets/fonts"
-CSS = ROOT / "docs/assets/css/font_faces.css"
+OUTPUT = ROOT / "quartz/static/fonts"
+CSS = ROOT / "quartz/static/styles/font_faces.css"
 
 
 def unicode_ranges(points):
@@ -75,7 +75,7 @@ def main():
 
     # 将已有笔记用字集中为小包，其余字形也保留，新增笔记无需重新生成字体。
     used = set()
-    for note in (ROOT / "docs").rglob("*.md"):
+    for note in (ROOT / "content").rglob("*.md"):
         used.update(map(ord, note.read_text(encoding="utf-8")))
     regular = args.sarasa / "SarasaTermSC-Regular.ttf"
     with TTFont(regular) as font:

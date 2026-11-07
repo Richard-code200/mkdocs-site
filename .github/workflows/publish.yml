@@ -1,18 +1,42 @@
-name: publish site
+name: 构建并发布笔记网站
+
 on:
   push:
-    branches:
-      - main # 确保你的主分支名称正确
+    branches: [main]
+  workflow_dispatch:
+
 permissions:
   contents: write
+
+concurrency:
+  group: 笔记网站发布
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - name: 获取源码
+        uses: actions/checkout@v4
+      - name: 配置 Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
-      - run: pip install -r requirements.txt
-      - run: mkdocs build
-      - run: mkdocs gh-deploy --force
+          node-version: '22'
+          cache: npm
+      - name: 安装锁定依赖
+        run: npm ci --no-audit --no-fund
+        env:
+          SHARP_IGNORE_GLOBAL_LIBVIPS: '1'
+      - name: 类型检查
+        run: npm run check
+      - name: 构建 Quartz
+        run: npm run build
+      - name: 验证文章、旧链接与字体
+        run: npm run validate
+      - name: 发布至现有 gh-pages 分支
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          enable_jekyll: false

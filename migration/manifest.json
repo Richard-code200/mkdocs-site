@@ -1,0 +1,4396 @@
+{
+  "source_archive": "/home/errorichard/workspace/backups/mkdocs-site/20261107-132953-Quartz全量迁移前/mkdocs-site-complete.tar.gz",
+  "source_archive_sha256": "8f36d51683f4d26041e553b31ceb461cd7084ebb883a84ba553f7d65f93cca0f",
+  "source_count": 53,
+  "callout_count": 181,
+  "pages": [
+    {
+      "source": "Linux/安全特性.md",
+      "target": "Linux/安全特性.md",
+      "source_sha256": "f354b49e4684451c026f762d3b1a80ccb812d599868cbf6ba90f9cb08d77440f",
+      "initial_sha256": "cb3a3d95a91abf8281cb0775ce69f73087aab7d8f9c97cb67cfc9c534e1963c0",
+      "old_url": "Linux/安全特性/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "安全特性",
+          "text": "安全特性"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "MarkDown/MarkDown.md",
+      "target": "MarkDown/MarkDown.md",
+      "source_sha256": "96c3297ede1438afcb664ef4aa64562c79bf37a7dce248361d3bc07d147f0bcc",
+      "initial_sha256": "fa7cf5e1f9d657158c60f14528aa314d5dc3607f8af08f6f1d5cf430998c3c7f",
+      "old_url": "MarkDown/MarkDown/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "markdown-核心语法速查表",
+          "text": "Markdown 核心语法速查表"
+        },
+        {
+          "level": 2,
+          "id": "-1-基础排版",
+          "text": "📝 1. 基础排版"
+        },
+        {
+          "level": 3,
+          "id": "标题",
+          "text": "标题"
+        },
+        {
+          "level": 3,
+          "id": "强调",
+          "text": "强调"
+        },
+        {
+          "level": 3,
+          "id": "分割线",
+          "text": "分割线"
+        },
+        {
+          "level": 2,
+          "id": "下面这条横线可以用来分隔章节",
+          "text": "下面这条横线可以用来分隔章节"
+        },
+        {
+          "level": 2,
+          "id": "-2-列表",
+          "text": "📋 2. 列表"
+        },
+        {
+          "level": 3,
+          "id": "无序列表-用---或-",
+          "text": "无序列表 (用 - 或 *)"
+        },
+        {
+          "level": 3,
+          "id": "有序列表-记录操作步骤",
+          "text": "有序列表 (记录操作步骤)"
+        },
+        {
+          "level": 3,
+          "id": "待办清单-部分编辑器支持交互",
+          "text": "待办清单 (部分编辑器支持交互)"
+        },
+        {
+          "level": 2,
+          "id": "-3-代码块",
+          "text": "💻 3. 代码块"
+        },
+        {
+          "level": 3,
+          "id": "行内代码",
+          "text": "行内代码"
+        },
+        {
+          "level": 3,
+          "id": "多行代码块-带语法高亮",
+          "text": "多行代码块 (带语法高亮)"
+        },
+        {
+          "level": 2,
+          "id": "-4-链接与引用",
+          "text": "🔗 4. 链接与引用"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "Rust/Cargo工作区与依赖管理.md",
+      "target": "Rust/Cargo工作区与依赖管理.md",
+      "source_sha256": "dcf75d26160d08a5b2a4c61c2a9e78e7b7c144848243a2ffb76de7a781e06831",
+      "initial_sha256": "336242d4bbddf58ffc75c41629491121d70ee1a7da817013aa8bba26ae62c17a",
+      "old_url": "Rust/Cargo工作区与依赖管理/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "cargo工作区与依赖管理",
+          "text": "Cargo工作区与依赖管理"
+        },
+        {
+          "level": 2,
+          "id": "packagecrate-与-workspace",
+          "text": "Package、Crate 与 Workspace"
+        },
+        {
+          "level": 3,
+          "id": "package",
+          "text": "Package"
+        },
+        {
+          "level": 3,
+          "id": "crate",
+          "text": "Crate"
+        },
+        {
+          "level": 3,
+          "id": "workspace",
+          "text": "Workspace"
+        },
+        {
+          "level": 2,
+          "id": "virtual-workspace",
+          "text": "Virtual Workspace"
+        },
+        {
+          "level": 3,
+          "id": "members",
+          "text": "members"
+        },
+        {
+          "level": 3,
+          "id": "resolver",
+          "text": "resolver"
+        },
+        {
+          "level": 2,
+          "id": "edition-2024",
+          "text": "Edition 2024"
+        },
+        {
+          "level": 2,
+          "id": "添加与管理依赖",
+          "text": "添加与管理依赖"
+        },
+        {
+          "level": 3,
+          "id": "使用-rand-09",
+          "text": "使用 rand 0.9"
+        },
+        {
+          "level": 3,
+          "id": "路径依赖",
+          "text": "路径依赖"
+        },
+        {
+          "level": 2,
+          "id": "cargolock",
+          "text": "Cargo.lock"
+        },
+        {
+          "level": 2,
+          "id": "常用验证命令",
+          "text": "常用验证命令"
+        },
+        {
+          "level": 2,
+          "id": "常见配置错误",
+          "text": "常见配置错误"
+        },
+        {
+          "level": 3,
+          "id": "重复成员",
+          "text": "重复成员"
+        },
+        {
+          "level": 3,
+          "id": "members-写成-package-名而不是目录",
+          "text": "members 写成 Package 名而不是目录"
+        },
+        {
+          "level": 3,
+          "id": "目录不存在或缺少-cargotoml",
+          "text": "目录不存在或缺少 Cargo.toml"
+        },
+        {
+          "level": 3,
+          "id": "package-名重复",
+          "text": "Package 名重复"
+        },
+        {
+          "level": 3,
+          "id": "virtual-workspace-遗漏-resolver",
+          "text": "virtual workspace 遗漏 resolver"
+        }
+      ],
+      "callouts": 6
+    },
+    {
+      "source": "Rust/Enum和模式匹配.md",
+      "target": "Rust/Enum和模式匹配.md",
+      "source_sha256": "c4043df75da7a81103fdac83cdd68fc0602c771b683f8fe5f974b482a53d0f23",
+      "initial_sha256": "513cdb4bab3e27d539c5f720673a89cc698fd6f5607cefebc1661c05af575643",
+      "old_url": "Rust/Enum和模式匹配/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "enum和模式匹配",
+          "text": "Enum和模式匹配"
+        },
+        {
+          "level": 2,
+          "id": "枚举enum",
+          "text": "枚举(Enum)"
+        },
+        {
+          "level": 3,
+          "id": "定义枚举",
+          "text": "定义枚举"
+        },
+        {
+          "level": 3,
+          "id": "创建枚举实例",
+          "text": "创建枚举实例"
+        },
+        {
+          "level": 3,
+          "id": "枚举-vs-结构体",
+          "text": "枚举 vs 结构体"
+        },
+        {
+          "level": 2,
+          "id": "枚举变体的数据形式",
+          "text": "枚举变体的数据形式"
+        },
+        {
+          "level": 3,
+          "id": "单元变体unit-variant",
+          "text": "单元变体(Unit Variant)"
+        },
+        {
+          "level": 3,
+          "id": "元组变体tuple-variant",
+          "text": "元组变体(Tuple Variant)"
+        },
+        {
+          "level": 3,
+          "id": "结构体变体struct-variant",
+          "text": "结构体变体(Struct Variant)"
+        },
+        {
+          "level": 3,
+          "id": "枚举的内存布局",
+          "text": "枚举的内存布局"
+        },
+        {
+          "level": 2,
+          "id": "枚举的方法",
+          "text": "枚举的方法"
+        },
+        {
+          "level": 2,
+          "id": "option-枚举",
+          "text": "Option 枚举"
+        },
+        {
+          "level": 3,
+          "id": "基本用法",
+          "text": "基本用法"
+        },
+        {
+          "level": 3,
+          "id": "常用方法",
+          "text": "常用方法"
+        },
+        {
+          "level": 2,
+          "id": "模式匹配match",
+          "text": "模式匹配(match)"
+        },
+        {
+          "level": 3,
+          "id": "基本语法",
+          "text": "基本语法"
+        },
+        {
+          "level": 3,
+          "id": "匹配携带数据的变体",
+          "text": "匹配携带数据的变体"
+        },
+        {
+          "level": 3,
+          "id": "匹配-option",
+          "text": "匹配 Option"
+        },
+        {
+          "level": 3,
+          "id": "通配符-_-与占位符",
+          "text": "通配符 _ 与占位符"
+        },
+        {
+          "level": 2,
+          "id": "if-let-简洁控制流",
+          "text": "if let 简洁控制流"
+        },
+        {
+          "level": 3,
+          "id": "基本用法_1",
+          "text": "基本用法"
+        },
+        {
+          "level": 3,
+          "id": "if-let--else",
+          "text": "if let ... else"
+        },
+        {
+          "level": 3,
+          "id": "if-let--else-if-let--else",
+          "text": "if let ... else if let ... else"
+        },
+        {
+          "level": 3,
+          "id": "搭配-option-使用",
+          "text": "搭配 Option 使用"
+        },
+        {
+          "level": 2,
+          "id": "while-let",
+          "text": "while let"
+        },
+        {
+          "level": 2,
+          "id": "let-else-语法rust-165",
+          "text": "let else 语法(Rust 1.65+)"
+        },
+        {
+          "level": 2,
+          "id": "模式匹配进阶",
+          "text": "模式匹配进阶"
+        },
+        {
+          "level": 3,
+          "id": "匹配字面量",
+          "text": "匹配字面量"
+        },
+        {
+          "level": 3,
+          "id": "匹配多个模式",
+          "text": "匹配多个模式"
+        },
+        {
+          "level": 3,
+          "id": "匹配范围",
+          "text": "匹配范围"
+        },
+        {
+          "level": 3,
+          "id": "解构destructuring",
+          "text": "解构(Destructuring)"
+        },
+        {
+          "level": 4,
+          "id": "解构结构体",
+          "text": "解构结构体"
+        },
+        {
+          "level": 4,
+          "id": "解构枚举",
+          "text": "解构枚举"
+        },
+        {
+          "level": 4,
+          "id": "解构元组",
+          "text": "解构元组"
+        },
+        {
+          "level": 3,
+          "id": "匹配守卫match-guard",
+          "text": "匹配守卫(Match Guard)"
+        },
+        {
+          "level": 3,
+          "id": "-绑定",
+          "text": "@ 绑定"
+        },
+        {
+          "level": 2,
+          "id": "综合示例",
+          "text": "综合示例"
+        }
+      ],
+      "callouts": 23
+    },
+    {
+      "source": "Rust/函数与控制流.md",
+      "target": "Rust/函数与控制流.md",
+      "source_sha256": "c3dd0a0b2553c31c40bc4fb36731ffb891600243a6d314f06a83e3d3d336eb3e",
+      "initial_sha256": "515f31c592de9e2a6b1dc236f21897e0208c59b76212c976d349f51bab9a4cda",
+      "old_url": "Rust/函数与控制流/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "函数与控制流",
+          "text": "函数与控制流"
+        },
+        {
+          "level": 2,
+          "id": "函数function",
+          "text": "函数(Function)"
+        },
+        {
+          "level": 3,
+          "id": "命名规范",
+          "text": "命名规范"
+        },
+        {
+          "level": 3,
+          "id": "参数",
+          "text": "参数"
+        },
+        {
+          "level": 3,
+          "id": "语句statement-vs-表达式expression",
+          "text": "语句(Statement) vs 表达式(Expression)"
+        },
+        {
+          "level": 3,
+          "id": "函数的返回值",
+          "text": "函数的返回值"
+        },
+        {
+          "level": 2,
+          "id": "控制流control-flow",
+          "text": "控制流(Control Flow)"
+        },
+        {
+          "level": 3,
+          "id": "if表达式",
+          "text": "If表达式"
+        },
+        {
+          "level": 3,
+          "id": "循环loopwhilefor",
+          "text": "循环(loop,while,for)"
+        },
+        {
+          "level": 4,
+          "id": "loop",
+          "text": "loop"
+        },
+        {
+          "level": 4,
+          "id": "while",
+          "text": "while"
+        },
+        {
+          "level": 4,
+          "id": "for",
+          "text": "for"
+        }
+      ],
+      "callouts": 9
+    },
+    {
+      "source": "Rust/切片.md",
+      "target": "Rust/切片.md",
+      "source_sha256": "a9661c792efe48f877f990ac56d00f344e29370e5d7ae3f66a75d54bf793d916",
+      "initial_sha256": "8f203001c431ad0cd00d0ab0854328f38315d041609ba81c2564fd90dbc1b599",
+      "old_url": "Rust/切片/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "切片slice",
+          "text": "切片(Slice)"
+        },
+        {
+          "level": 2,
+          "id": "为什么需要切片",
+          "text": "为什么需要切片"
+        },
+        {
+          "level": 2,
+          "id": "切片是胖指针",
+          "text": "切片是\"胖指针\""
+        },
+        {
+          "level": 2,
+          "id": "字符串切片string-slices",
+          "text": "字符串切片(String Slices)"
+        },
+        {
+          "level": 3,
+          "id": "基本语法",
+          "text": "基本语法"
+        },
+        {
+          "level": 3,
+          "id": "改造后的-first_word",
+          "text": "改造后的 first_word"
+        },
+        {
+          "level": 2,
+          "id": "范围语法range",
+          "text": "范围语法(Range)"
+        },
+        {
+          "level": 2,
+          "id": "字符串字面量就是切片",
+          "text": "字符串字面量就是切片"
+        },
+        {
+          "level": 2,
+          "id": "ascii-空格状态机与边界",
+          "text": "ASCII 空格状态机与边界"
+        },
+        {
+          "level": 2,
+          "id": "数组切片-t",
+          "text": "数组切片 &[T]"
+        }
+      ],
+      "callouts": 6
+    },
+    {
+      "source": "Rust/命令行文件搜索实践.md",
+      "target": "Rust/命令行文件搜索实践.md",
+      "source_sha256": "9b11f1fed87c90e3c9dccc119a70465026399a761e386ee13588ef75f65b05dc",
+      "initial_sha256": "b67d54d971934a648a1dacabf5fecd40d6d6e54de7184083257dcb0b741570e0",
+      "old_url": "Rust/命令行文件搜索实践/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "命令行文件搜索实践minigrep",
+          "text": "命令行文件搜索实践:minigrep"
+        },
+        {
+          "level": 2,
+          "id": "职责分工",
+          "text": "职责分工"
+        },
+        {
+          "level": 2,
+          "id": "先明确命令的行为契约",
+          "text": "先明确命令的行为契约"
+        },
+        {
+          "level": 3,
+          "id": "直接消费参数迭代器",
+          "text": "直接消费参数迭代器"
+        },
+        {
+          "level": 2,
+          "id": "环境变量开关检查存在性不解析布尔值",
+          "text": "环境变量开关:检查存在性,不解析布尔值"
+        },
+        {
+          "level": 2,
+          "id": "读取与搜索返回原文切片",
+          "text": "读取与搜索:返回原文切片"
+        },
+        {
+          "level": 2,
+          "id": "入口决定如何报告错误",
+          "text": "入口决定如何报告错误"
+        }
+      ],
+      "callouts": 1
+    },
+    {
+      "source": "Rust/基本语法与数据类型.md",
+      "target": "Rust/基本语法与数据类型.md",
+      "source_sha256": "d44de3508ed097b4059febd2a91f0e67e3ba6d31c3d3d0e5dc9ffccb8391e1f9",
+      "initial_sha256": "3b63a301f38d6d00a5d6aa301faaedcdf8a73b15cb23bd4b4bb95c2484039908",
+      "old_url": "Rust/基本语法与数据类型/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "基本语法与数据类型",
+          "text": "基本语法与数据类型"
+        },
+        {
+          "level": 2,
+          "id": "基本语法",
+          "text": "基本语法"
+        },
+        {
+          "level": 3,
+          "id": "变量--可变性variables--mutability",
+          "text": "变量 & 可变性(Variables & Mutability)"
+        },
+        {
+          "level": 3,
+          "id": "常量constants",
+          "text": "常量(Constants)"
+        },
+        {
+          "level": 3,
+          "id": "变量遮蔽shadowing",
+          "text": "变量遮蔽(Shadowing)"
+        },
+        {
+          "level": 2,
+          "id": "数据类型",
+          "text": "数据类型"
+        },
+        {
+          "level": 3,
+          "id": "标量类型",
+          "text": "标量类型"
+        },
+        {
+          "level": 4,
+          "id": "整数integer",
+          "text": "整数(Integer)"
+        },
+        {
+          "level": 4,
+          "id": "浮点floating-point",
+          "text": "浮点(Floating Point)"
+        },
+        {
+          "level": 4,
+          "id": "布尔boolean",
+          "text": "布尔(Boolean)"
+        },
+        {
+          "level": 4,
+          "id": "字符character",
+          "text": "字符(Character)"
+        },
+        {
+          "level": 3,
+          "id": "字符串string",
+          "text": "字符串(String)"
+        },
+        {
+          "level": 3,
+          "id": "复合类型compound-type",
+          "text": "复合类型(Compound Type)"
+        },
+        {
+          "level": 4,
+          "id": "元组tuple",
+          "text": "元组(Tuple)"
+        },
+        {
+          "level": 4,
+          "id": "数组array",
+          "text": "数组(Array)"
+        }
+      ],
+      "callouts": 9
+    },
+    {
+      "source": "Rust/学习项目计划.md",
+      "target": "Rust/学习项目计划.md",
+      "source_sha256": "20faebbf98f223f5ccf2ea16a0131c89c7087e4cb34e89e48cd939fc62d3b968",
+      "initial_sha256": "d0ee82afcfb5eea805e836a691fffbbaa6a4d9948e5687d0b9b7d89b46b1b817",
+      "old_url": "Rust/学习项目计划/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "rust-学习项目计划",
+          "text": "Rust 学习项目计划"
+        },
+        {
+          "level": 2,
+          "id": "第一阶段熟悉基础语法",
+          "text": "第一阶段：熟悉基础语法"
+        },
+        {
+          "level": 3,
+          "id": "1-猜数字游戏",
+          "text": "1. 猜数字游戏"
+        },
+        {
+          "level": 3,
+          "id": "2-命令行计算器",
+          "text": "2. 命令行计算器"
+        },
+        {
+          "level": 3,
+          "id": "3-todo-命令行工具",
+          "text": "3. Todo 命令行工具"
+        },
+        {
+          "level": 2,
+          "id": "第二阶段深入核心概念",
+          "text": "第二阶段：深入核心概念"
+        },
+        {
+          "level": 3,
+          "id": "4-文件搜索工具-mini-grep",
+          "text": "4. 文件搜索工具 (mini grep)"
+        },
+        {
+          "level": 3,
+          "id": "5-http-请求工具-mini-curl",
+          "text": "5. HTTP 请求工具 (mini curl)"
+        },
+        {
+          "level": 3,
+          "id": "6-markdown-转-html-转换器",
+          "text": "6. Markdown 转 HTML 转换器"
+        },
+        {
+          "level": 2,
+          "id": "第三阶段综合运用",
+          "text": "第三阶段：综合运用"
+        },
+        {
+          "level": 3,
+          "id": "7-简单的-http-服务器",
+          "text": "7. 简单的 HTTP 服务器"
+        },
+        {
+          "level": 3,
+          "id": "8-redis-简易克隆-命令存储",
+          "text": "8. Redis 简易克隆 (命令存储)"
+        },
+        {
+          "level": 3,
+          "id": "9-终端-ui-应用-ratatui-crate",
+          "text": "9. 终端 UI 应用 (ratatui crate)"
+        },
+        {
+          "level": 2,
+          "id": "第四阶段有挑战性但很有趣",
+          "text": "第四阶段：有挑战性但很有趣"
+        },
+        {
+          "level": 3,
+          "id": "10-小型数据库引擎",
+          "text": "10. 小型数据库引擎"
+        },
+        {
+          "level": 3,
+          "id": "11-webassembly-游戏",
+          "text": "11. WebAssembly 游戏"
+        },
+        {
+          "level": 2,
+          "id": "推荐学习路径",
+          "text": "推荐学习路径"
+        }
+      ],
+      "callouts": 1
+    },
+    {
+      "source": "Rust/引用与借用.md",
+      "target": "Rust/引用与借用.md",
+      "source_sha256": "b84a055166900e916d197aa61bd2e02b11ac50d5cd92b2ef72ec9adbe01a948f",
+      "initial_sha256": "9ae0b77d002fb3017cb8276c21379d5f9494e507ffb1d48fde260271ce9636fd",
+      "old_url": "Rust/引用与借用/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "引用与借用",
+          "text": "引用与借用"
+        },
+        {
+          "level": 2,
+          "id": "什么是引用",
+          "text": "什么是引用"
+        },
+        {
+          "level": 2,
+          "id": "引用的基本语法",
+          "text": "引用的基本语法"
+        },
+        {
+          "level": 3,
+          "id": "不可变引用-t",
+          "text": "不可变引用 &T"
+        },
+        {
+          "level": 3,
+          "id": "可变引用-mut-t",
+          "text": "可变引用 &mut T"
+        },
+        {
+          "level": 2,
+          "id": "借用规则",
+          "text": "借用规则"
+        },
+        {
+          "level": 3,
+          "id": "规则一多个不可变引用可以共存",
+          "text": "规则一:多个不可变引用可以共存"
+        },
+        {
+          "level": 3,
+          "id": "规则二不可变引用与可变引用不能同时存在",
+          "text": "规则二:不可变引用与可变引用不能同时存在"
+        },
+        {
+          "level": 3,
+          "id": "借用规则的形式化表述",
+          "text": "借用规则的形式化表述"
+        },
+        {
+          "level": 2,
+          "id": "引用的作用域",
+          "text": "引用的作用域"
+        },
+        {
+          "level": 3,
+          "id": "非词法生命周期nll",
+          "text": "非词法生命周期(NLL)"
+        },
+        {
+          "level": 2,
+          "id": "引用与函数",
+          "text": "引用与函数"
+        },
+        {
+          "level": 3,
+          "id": "引用作为函数参数",
+          "text": "引用作为函数参数"
+        },
+        {
+          "level": 3,
+          "id": "引用作为返回值",
+          "text": "引用作为返回值"
+        },
+        {
+          "level": 2,
+          "id": "悬垂引用dangling-reference",
+          "text": "悬垂引用(Dangling Reference)"
+        },
+        {
+          "level": 2,
+          "id": "切片一种特殊的引用",
+          "text": "切片:一种特殊的引用"
+        },
+        {
+          "level": 3,
+          "id": "字符串切片-str",
+          "text": "字符串切片 &str"
+        },
+        {
+          "level": 3,
+          "id": "数组切片-t",
+          "text": "数组切片 &[T]"
+        },
+        {
+          "level": 3,
+          "id": "切片作为函数参数",
+          "text": "切片作为函数参数"
+        },
+        {
+          "level": 2,
+          "id": "常见借用错误",
+          "text": "常见借用错误"
+        },
+        {
+          "level": 3,
+          "id": "错误一同时持有不可变和可变引用",
+          "text": "错误一:同时持有不可变和可变引用"
+        },
+        {
+          "level": 3,
+          "id": "错误二在循环中修改集合",
+          "text": "错误二:在循环中修改集合"
+        },
+        {
+          "level": 3,
+          "id": "错误三返回局部变量的引用",
+          "text": "错误三:返回局部变量的引用"
+        }
+      ],
+      "callouts": 11
+    },
+    {
+      "source": "Rust/所有权.md",
+      "target": "Rust/所有权.md",
+      "source_sha256": "cf6eec2462e489ed64223ebd1ca42ace8a25216f2db9684073e5edd66765f7fd",
+      "initial_sha256": "76c2e06c04a9658a4aef962cc0f995af982b1ce9ef663d8606d34791b5f7547b",
+      "old_url": "Rust/所有权/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "所有权",
+          "text": "所有权"
+        },
+        {
+          "level": 2,
+          "id": "什么是所有权",
+          "text": "什么是所有权"
+        },
+        {
+          "level": 2,
+          "id": "所有权规则",
+          "text": "所有权规则"
+        },
+        {
+          "level": 2,
+          "id": "栈stack与堆heap",
+          "text": "栈(Stack)与堆(Heap)"
+        },
+        {
+          "level": 3,
+          "id": "栈",
+          "text": "栈"
+        },
+        {
+          "level": 3,
+          "id": "堆",
+          "text": "堆"
+        },
+        {
+          "level": 2,
+          "id": "变量作用域",
+          "text": "变量作用域"
+        },
+        {
+          "level": 2,
+          "id": "移动move",
+          "text": "移动(Move)"
+        },
+        {
+          "level": 2,
+          "id": "克隆clone",
+          "text": "克隆(Clone)"
+        },
+        {
+          "level": 2,
+          "id": "copy-trait",
+          "text": "Copy trait"
+        },
+        {
+          "level": 2,
+          "id": "所有权与函数",
+          "text": "所有权与函数"
+        },
+        {
+          "level": 2,
+          "id": "引用与借用",
+          "text": "引用与借用"
+        },
+        {
+          "level": 2,
+          "id": "可变引用",
+          "text": "可变引用"
+        },
+        {
+          "level": 2,
+          "id": "悬垂引用dangling-references",
+          "text": "悬垂引用(Dangling References)"
+        },
+        {
+          "level": 2,
+          "id": "切片slice",
+          "text": "切片(Slice)"
+        },
+        {
+          "level": 2,
+          "id": "box----堆上分配",
+          "text": "Box -- 堆上分配"
+        },
+        {
+          "level": 3,
+          "id": "基本用法",
+          "text": "基本用法"
+        },
+        {
+          "level": 3,
+          "id": "使用场景",
+          "text": "使用场景"
+        },
+        {
+          "level": 4,
+          "id": "场景一递归类型",
+          "text": "场景一:递归类型"
+        },
+        {
+          "level": 4,
+          "id": "场景二转移大量数据",
+          "text": "场景二:转移大量数据"
+        },
+        {
+          "level": 4,
+          "id": "场景三通过-deref-自动解引用",
+          "text": "场景三:通过 Deref 自动解引用"
+        },
+        {
+          "level": 3,
+          "id": "解引用强制转换deref-coercion",
+          "text": "解引用强制转换(Deref Coercion)"
+        }
+      ],
+      "callouts": 18
+    },
+    {
+      "source": "Rust/格式化输出.md",
+      "target": "Rust/格式化输出.md",
+      "source_sha256": "30951d2164d5f4a133515537a95d18d64418040c69d8e2469bc4bb39989877a1",
+      "initial_sha256": "e89e2e5b99f9ecb3dc465d7787866973c7703d84ecf58d4739faf19b236c705b",
+      "old_url": "Rust/格式化输出/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "格式化输出",
+          "text": "格式化输出"
+        },
+        {
+          "level": 2,
+          "id": "格式化宏家族",
+          "text": "格式化宏家族"
+        },
+        {
+          "level": 3,
+          "id": "format-与-stdfmtformat",
+          "text": "format! 与 std::fmt::format"
+        },
+        {
+          "level": 2,
+          "id": "占位符语法",
+          "text": "占位符语法"
+        },
+        {
+          "level": 3,
+          "id": "基本占位符-",
+          "text": "基本占位符 {}"
+        },
+        {
+          "level": 3,
+          "id": "位置参数",
+          "text": "位置参数"
+        },
+        {
+          "level": 3,
+          "id": "命名参数",
+          "text": "命名参数"
+        },
+        {
+          "level": 3,
+          "id": "变量捕获",
+          "text": "变量捕获"
+        },
+        {
+          "level": 2,
+          "id": "格式化说明符",
+          "text": "格式化说明符"
+        },
+        {
+          "level": 3,
+          "id": "对齐与填充",
+          "text": "对齐与填充"
+        },
+        {
+          "level": 3,
+          "id": "精度控制",
+          "text": "精度控制"
+        },
+        {
+          "level": 3,
+          "id": "使用变量作为格式参数",
+          "text": "使用变量作为格式参数"
+        },
+        {
+          "level": 2,
+          "id": "debug-trait",
+          "text": "Debug trait"
+        },
+        {
+          "level": 3,
+          "id": "自动派生-debug",
+          "text": "自动派生 Debug"
+        },
+        {
+          "level": 3,
+          "id": "美化打印",
+          "text": "美化打印"
+        },
+        {
+          "level": 3,
+          "id": "dbg-宏",
+          "text": "dbg! 宏"
+        },
+        {
+          "level": 2,
+          "id": "display-trait",
+          "text": "Display trait"
+        },
+        {
+          "level": 3,
+          "id": "多字段结构体的-display",
+          "text": "多字段结构体的 Display"
+        },
+        {
+          "level": 2,
+          "id": "注释",
+          "text": "注释"
+        },
+        {
+          "level": 3,
+          "id": "行注释",
+          "text": "行注释"
+        },
+        {
+          "level": 3,
+          "id": "块注释",
+          "text": "块注释"
+        }
+      ],
+      "callouts": 3
+    },
+    {
+      "source": "Rust/模块系统.md",
+      "target": "Rust/模块系统.md",
+      "source_sha256": "9a20d5119fc59622570cc2b565ba923e2fb544ae71d74d97d234fafc66b428d9",
+      "initial_sha256": "a50086c547b7ec01332c0b00560719c4db4b94f46d1cf11cda30f0893607b3c4",
+      "old_url": "Rust/模块系统/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "模块系统",
+          "text": "模块系统"
+        },
+        {
+          "level": 2,
+          "id": "包与-crate",
+          "text": "包与 Crate"
+        },
+        {
+          "level": 2,
+          "id": "mod----定义模块",
+          "text": "mod -- 定义模块"
+        },
+        {
+          "level": 2,
+          "id": "路径----如何引用模块中的项",
+          "text": "路径 -- 如何引用模块中的项"
+        },
+        {
+          "level": 2,
+          "id": "pub----可见性控制",
+          "text": "pub -- 可见性控制"
+        },
+        {
+          "level": 3,
+          "id": "pub-的多种形式",
+          "text": "pub 的多种形式"
+        },
+        {
+          "level": 2,
+          "id": "use----导入到作用域",
+          "text": "use -- 导入到作用域"
+        },
+        {
+          "level": 3,
+          "id": "导入惯例",
+          "text": "导入惯例"
+        },
+        {
+          "level": 3,
+          "id": "使用-as-重命名",
+          "text": "使用 as 重命名"
+        },
+        {
+          "level": 3,
+          "id": "使用-pub-use-重新导出",
+          "text": "使用 pub use 重新导出"
+        },
+        {
+          "level": 2,
+          "id": "文件组织",
+          "text": "文件组织"
+        },
+        {
+          "level": 3,
+          "id": "单文件模块",
+          "text": "单文件模块"
+        },
+        {
+          "level": 3,
+          "id": "目录模块",
+          "text": "目录模块"
+        },
+        {
+          "level": 2,
+          "id": "super----访问父模块",
+          "text": "super -- 访问父模块"
+        },
+        {
+          "level": 2,
+          "id": "crate----crate-根",
+          "text": "crate -- crate 根"
+        },
+        {
+          "level": 2,
+          "id": "cargo-workspace----管理多个-crate",
+          "text": "Cargo Workspace -- 管理多个 crate"
+        },
+        {
+          "level": 3,
+          "id": "workspace-中的-path-依赖",
+          "text": "workspace 中的 path 依赖"
+        },
+        {
+          "level": 2,
+          "id": "实战示例学习项目的模块组织",
+          "text": "实战示例:学习项目的模块组织"
+        }
+      ],
+      "callouts": 7
+    },
+    {
+      "source": "Rust/泛型与特征.md",
+      "target": "Rust/泛型与特征.md",
+      "source_sha256": "551934714af2f300e2cf6dc3f6c9362ba518e9f7e9dec28a1e517af834c7741c",
+      "initial_sha256": "7d17bda7952ba8aaa45905641fc44cd7734ac5454049730ffcac8a583a116a46",
+      "old_url": "Rust/泛型与特征/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "泛型与特征",
+          "text": "泛型与特征"
+        },
+        {
+          "level": 2,
+          "id": "泛型generics",
+          "text": "泛型(Generics)"
+        },
+        {
+          "level": 3,
+          "id": "为什么需要泛型",
+          "text": "为什么需要泛型"
+        },
+        {
+          "level": 3,
+          "id": "泛型结构体",
+          "text": "泛型结构体"
+        },
+        {
+          "level": 3,
+          "id": "泛型结构体的实际应用",
+          "text": "泛型结构体的实际应用"
+        },
+        {
+          "level": 3,
+          "id": "多个泛型参数",
+          "text": "多个泛型参数"
+        },
+        {
+          "level": 3,
+          "id": "泛型函数",
+          "text": "泛型函数"
+        },
+        {
+          "level": 3,
+          "id": "调用泛型函数",
+          "text": "调用泛型函数"
+        },
+        {
+          "level": 3,
+          "id": "泛型枚举",
+          "text": "泛型枚举"
+        },
+        {
+          "level": 3,
+          "id": "泛型方法",
+          "text": "泛型方法"
+        },
+        {
+          "level": 3,
+          "id": "方法自带泛型参数",
+          "text": "方法自带泛型参数"
+        },
+        {
+          "level": 3,
+          "id": "单态化monomorphization",
+          "text": "单态化(Monomorphization)"
+        },
+        {
+          "level": 3,
+          "id": "运算符特征约束",
+          "text": "运算符特征约束"
+        },
+        {
+          "level": 3,
+          "id": "用冒泡排序理解-trait-bound",
+          "text": "用冒泡排序理解 trait bound"
+        },
+        {
+          "level": 2,
+          "id": "特征trait",
+          "text": "特征(Trait)"
+        },
+        {
+          "level": 3,
+          "id": "定义特征",
+          "text": "定义特征"
+        },
+        {
+          "level": 3,
+          "id": "实现特征",
+          "text": "实现特征"
+        },
+        {
+          "level": 3,
+          "id": "默认实现",
+          "text": "默认实现"
+        },
+        {
+          "level": 3,
+          "id": "特征作为参数",
+          "text": "特征作为参数"
+        },
+        {
+          "level": 3,
+          "id": "多个特征约束",
+          "text": "多个特征约束"
+        },
+        {
+          "level": 3,
+          "id": "where-子句",
+          "text": "where 子句"
+        },
+        {
+          "level": 3,
+          "id": "特征作为返回值",
+          "text": "特征作为返回值"
+        },
+        {
+          "level": 3,
+          "id": "dyn-trait通过共同接口使用具体值",
+          "text": "dyn Trait:通过共同接口使用具体值"
+        },
+        {
+          "level": 3,
+          "id": "常用标准库特征",
+          "text": "常用标准库特征"
+        }
+      ],
+      "callouts": 15
+    },
+    {
+      "source": "Rust/测试.md",
+      "target": "Rust/测试.md",
+      "source_sha256": "a0a2d3d746f16548f7a2ce8aff4068871f117dd9355d463372878672d5b8ca8d",
+      "initial_sha256": "738407fc0a9627f645bc53287b3f7087c5c57701fe65ed87d685251d4e93c2f0",
+      "old_url": "Rust/测试/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "测试",
+          "text": "测试"
+        },
+        {
+          "level": 2,
+          "id": "断言宏assertion-macros",
+          "text": "断言宏(Assertion Macros)"
+        },
+        {
+          "level": 3,
+          "id": "assert",
+          "text": "assert"
+        },
+        {
+          "level": 3,
+          "id": "assert_eq",
+          "text": "assert_eq"
+        },
+        {
+          "level": 3,
+          "id": "assert_ne",
+          "text": "assert_ne"
+        },
+        {
+          "level": 2,
+          "id": "单元测试unit-tests",
+          "text": "单元测试(Unit Tests)"
+        },
+        {
+          "level": 3,
+          "id": "测试-panic",
+          "text": "测试 panic"
+        },
+        {
+          "level": 2,
+          "id": "从学习项目选择测试边界",
+          "text": "从学习项目选择测试边界"
+        },
+        {
+          "level": 2,
+          "id": "minigrep精确验证错误变体",
+          "text": "minigrep:精确验证错误变体"
+        },
+        {
+          "level": 2,
+          "id": "编译期约束测试与运行时断言",
+          "text": "编译期约束测试与运行时断言"
+        },
+        {
+          "level": 2,
+          "id": "集成测试启动真实命令行程序",
+          "text": "集成测试:启动真实命令行程序"
+        },
+        {
+          "level": 2,
+          "id": "文档注释与文档测试",
+          "text": "文档注释与文档测试"
+        }
+      ],
+      "callouts": 7
+    },
+    {
+      "source": "Rust/生命周期.md",
+      "target": "Rust/生命周期.md",
+      "source_sha256": "23b1e0c5ae3d64759399d05be397c09a74033863aed17f40639f92efc4103214",
+      "initial_sha256": "e2a273b352e45b4eb8a6679b902988ac943f70db49cf604887e712f7121e698d",
+      "old_url": "Rust/生命周期/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "生命周期",
+          "text": "生命周期"
+        },
+        {
+          "level": 2,
+          "id": "为什么需要生命周期",
+          "text": "为什么需要生命周期"
+        },
+        {
+          "level": 2,
+          "id": "生命周期注解语法",
+          "text": "生命周期注解语法"
+        },
+        {
+          "level": 2,
+          "id": "函数中的生命周期",
+          "text": "函数中的生命周期"
+        },
+        {
+          "level": 2,
+          "id": "minigrep返回值只借用原文不借用查询词",
+          "text": "minigrep:返回值只借用原文,不借用查询词"
+        },
+        {
+          "level": 2,
+          "id": "结构体中的生命周期",
+          "text": "结构体中的生命周期"
+        },
+        {
+          "level": 2,
+          "id": "生命周期省略规则",
+          "text": "生命周期省略规则"
+        },
+        {
+          "level": 3,
+          "id": "规则一每个引用参数获得独立的生命周期",
+          "text": "规则一:每个引用参数获得独立的生命周期"
+        },
+        {
+          "level": 3,
+          "id": "规则二只有一个输入生命周期时它被赋给所有输出引用",
+          "text": "规则二:只有一个输入生命周期时,它被赋给所有输出引用"
+        },
+        {
+          "level": 3,
+          "id": "规则三有-self-或-mut-self-时self-的生命周期被赋给所有输出引用",
+          "text": "规则三:有 &self 或 &mut self 时,self 的生命周期被赋给所有输出引用"
+        },
+        {
+          "level": 2,
+          "id": "static-生命周期",
+          "text": "'static 生命周期"
+        },
+        {
+          "level": 2,
+          "id": "生命周期约束",
+          "text": "生命周期约束"
+        },
+        {
+          "level": 2,
+          "id": "生命周期与泛型结合",
+          "text": "生命周期与泛型结合"
+        }
+      ],
+      "callouts": 5
+    },
+    {
+      "source": "Rust/结构体.md",
+      "target": "Rust/结构体.md",
+      "source_sha256": "a3ba69bbbe9d3ef41e488c5ee3bcf5415a8ae87138cd64bb102f77a891a5ff1b",
+      "initial_sha256": "e5df072811b8622a6f871d65c3efe9d68a447c9fa8412f89d2d97cc473dac52e",
+      "old_url": "Rust/结构体/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "结构体struct",
+          "text": "结构体(Struct)"
+        },
+        {
+          "level": 2,
+          "id": "定义与使用",
+          "text": "定义与使用"
+        },
+        {
+          "level": 3,
+          "id": "定义结构体",
+          "text": "定义结构体"
+        },
+        {
+          "level": 3,
+          "id": "创建实例",
+          "text": "创建实例"
+        },
+        {
+          "level": 3,
+          "id": "字段初始化简写",
+          "text": "字段初始化简写"
+        },
+        {
+          "level": 3,
+          "id": "结构体更新语法",
+          "text": "结构体更新语法"
+        },
+        {
+          "level": 2,
+          "id": "元组结构体tuple-struct",
+          "text": "元组结构体(Tuple Struct)"
+        },
+        {
+          "level": 2,
+          "id": "单元结构体unit-like-struct",
+          "text": "单元结构体(Unit-like Struct)"
+        },
+        {
+          "level": 2,
+          "id": "方法method",
+          "text": "方法(Method)"
+        },
+        {
+          "level": 3,
+          "id": "定义方法",
+          "text": "定义方法"
+        },
+        {
+          "level": 3,
+          "id": "调用方法",
+          "text": "调用方法"
+        },
+        {
+          "level": 3,
+          "id": "调试工具",
+          "text": "调试工具"
+        },
+        {
+          "level": 3,
+          "id": "self-的不同形式",
+          "text": "self 的不同形式"
+        },
+        {
+          "level": 2,
+          "id": "关联函数associated-functions",
+          "text": "关联函数(Associated Functions)"
+        },
+        {
+          "level": 3,
+          "id": "self-类型别名",
+          "text": "Self 类型别名"
+        },
+        {
+          "level": 2,
+          "id": "多个-impl-块",
+          "text": "多个 impl 块"
+        },
+        {
+          "level": 2,
+          "id": "常用-derive-宏",
+          "text": "常用 derive 宏"
+        },
+        {
+          "level": 2,
+          "id": "实现-display-trait",
+          "text": "实现 Display trait"
+        },
+        {
+          "level": 2,
+          "id": "结构体与所有权",
+          "text": "结构体与所有权"
+        },
+        {
+          "level": 3,
+          "id": "结构体的-drop",
+          "text": "结构体的 Drop"
+        },
+        {
+          "level": 3,
+          "id": "自定义-drop",
+          "text": "自定义 Drop"
+        },
+        {
+          "level": 3,
+          "id": "手动提前释放",
+          "text": "手动提前释放"
+        }
+      ],
+      "callouts": 15
+    },
+    {
+      "source": "Rust/迭代器与闭包.md",
+      "target": "Rust/迭代器与闭包.md",
+      "source_sha256": "7524a74a7802b1174cd2c9df5e177e5064e6c016f262856848c2d85cc27f5576",
+      "initial_sha256": "d86fa6b6d0e6958bb578d7924ab97e734031fe4f846317940ed0ab1d9e0bd730",
+      "old_url": "Rust/迭代器与闭包/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "迭代器与闭包",
+          "text": "迭代器与闭包"
+        },
+        {
+          "level": 2,
+          "id": "next取得并消费下一个元素",
+          "text": "next:取得并消费下一个元素"
+        },
+        {
+          "level": 2,
+          "id": "iter-与-into_iter关注所有权",
+          "text": "iter 与 into_iter:关注所有权"
+        },
+        {
+          "level": 2,
+          "id": "mapfilter-与-collect",
+          "text": "map、filter 与 collect"
+        },
+        {
+          "level": 3,
+          "id": "惰性求值",
+          "text": "惰性求值"
+        },
+        {
+          "level": 2,
+          "id": "lines-与原文保持",
+          "text": "lines 与原文保持"
+        },
+        {
+          "level": 3,
+          "id": "忽略大小写但返回原始行",
+          "text": "忽略大小写,但返回原始行"
+        },
+        {
+          "level": 2,
+          "id": "enumerate先编号再过滤",
+          "text": "enumerate:先编号,再过滤"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "Rust/错误处理.md",
+      "target": "Rust/错误处理.md",
+      "source_sha256": "05300da0dad007ed967264ebb0722ceb003a8b163ab274c57f97c01b4b32b3ce",
+      "initial_sha256": "f1fd15c1a7e062087169fdbaeca15337eed27c40fc87f51559cb66303aebbacc",
+      "old_url": "Rust/错误处理/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "错误处理",
+          "text": "错误处理"
+        },
+        {
+          "level": 2,
+          "id": "panic----不可恢复错误",
+          "text": "panic! -- 不可恢复错误"
+        },
+        {
+          "level": 2,
+          "id": "result----可恢复错误",
+          "text": "Result -- 可恢复错误"
+        },
+        {
+          "level": 3,
+          "id": "基本用法",
+          "text": "基本用法"
+        },
+        {
+          "level": 3,
+          "id": "匹配不同的错误类型",
+          "text": "匹配不同的错误类型"
+        },
+        {
+          "level": 2,
+          "id": "快捷方式",
+          "text": "快捷方式"
+        },
+        {
+          "level": 3,
+          "id": "unwrap----成功就返回值失败就-panic",
+          "text": "unwrap -- 成功就返回值,失败就 panic"
+        },
+        {
+          "level": 3,
+          "id": "expect----带自定义信息的-panic",
+          "text": "expect -- 带自定义信息的 panic"
+        },
+        {
+          "level": 3,
+          "id": "unwrap-家族",
+          "text": "unwrap 家族"
+        },
+        {
+          "level": 2,
+          "id": "-运算符----错误传播",
+          "text": "? 运算符 -- 错误传播"
+        },
+        {
+          "level": 3,
+          "id": "链式调用",
+          "text": "链式调用"
+        },
+        {
+          "level": 3,
+          "id": "使用--要匹配函数的返回类型",
+          "text": "使用 ? 要匹配函数的返回类型"
+        },
+        {
+          "level": 2,
+          "id": "实战示例猜数游戏中的错误处理",
+          "text": "实战示例:猜数游戏中的错误处理"
+        },
+        {
+          "level": 2,
+          "id": "自定义错误类型",
+          "text": "自定义错误类型"
+        },
+        {
+          "level": 3,
+          "id": "minigrep用枚举区分参数错误",
+          "text": "minigrep:用枚举区分参数错误"
+        },
+        {
+          "level": 3,
+          "id": "从-option-得到具体的参数错误",
+          "text": "从 Option 得到具体的参数错误"
+        },
+        {
+          "level": 3,
+          "id": "error-接口与-from-转换不是一回事",
+          "text": "Error 接口与 From 转换不是一回事"
+        }
+      ],
+      "callouts": 9
+    },
+    {
+      "source": "Rust/集合.md",
+      "target": "Rust/集合.md",
+      "source_sha256": "e2f0dc18bbbdb8cc15ac17b39ad786889dd92da2a61c1cfb8ea3baab8273f7dc",
+      "initial_sha256": "6385f06d9ce190dd568967c95015a438e750cb1a13080d21edbeb0a79258a5d7",
+      "old_url": "Rust/集合/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "集合",
+          "text": "集合"
+        },
+        {
+          "level": 2,
+          "id": "vec",
+          "text": "Vec"
+        },
+        {
+          "level": 3,
+          "id": "创建与更新",
+          "text": "创建与更新"
+        },
+        {
+          "level": 3,
+          "id": "使用索引与-get-读取元素",
+          "text": "使用索引与 get 读取元素"
+        },
+        {
+          "level": 3,
+          "id": "共享迭代与可变迭代",
+          "text": "共享迭代与可变迭代"
+        },
+        {
+          "level": 3,
+          "id": "使用-enum-保存异构数据",
+          "text": "使用 enum 保存异构数据"
+        },
+        {
+          "level": 2,
+          "id": "string",
+          "text": "String"
+        },
+        {
+          "level": 3,
+          "id": "创建-string",
+          "text": "创建 String"
+        },
+        {
+          "level": 3,
+          "id": "追加字符串与字符",
+          "text": "追加字符串与字符"
+        },
+        {
+          "level": 3,
+          "id": "使用--与-format-拼接",
+          "text": "使用 + 与 format! 拼接"
+        },
+        {
+          "level": 3,
+          "id": "utf-8-字节长度",
+          "text": "UTF-8 字节长度"
+        },
+        {
+          "level": 3,
+          "id": "字符边界与字符串切片",
+          "text": "字符边界与字符串切片"
+        },
+        {
+          "level": 3,
+          "id": "遍历字符与字节",
+          "text": "遍历字符与字节"
+        },
+        {
+          "level": 2,
+          "id": "常见错误",
+          "text": "常见错误"
+        },
+        {
+          "level": 3,
+          "id": "vec-索引越界",
+          "text": "Vec 索引越界"
+        },
+        {
+          "level": 3,
+          "id": "迭代时同时修改-vec-结构",
+          "text": "迭代时同时修改 Vec 结构"
+        },
+        {
+          "level": 3,
+          "id": "忘记解引用可变元素",
+          "text": "忘记解引用可变元素"
+        },
+        {
+          "level": 3,
+          "id": "使用--后继续访问左操作数",
+          "text": "使用 + 后继续访问左操作数"
+        },
+        {
+          "level": 3,
+          "id": "在非字符边界切片",
+          "text": "在非字符边界切片"
+        }
+      ],
+      "callouts": 5
+    },
+    {
+      "source": "Rust/项目代码组织.md",
+      "target": "Rust/项目代码组织.md",
+      "source_sha256": "3c299623df42bedcab1d65125d02a5d9b4794e69fbf0ca68fed7413ee563621a",
+      "initial_sha256": "5aac75053ea11234ab5c680ab100bafb80b2b6eb1ff7abb43d2c161b6b10c488",
+      "old_url": "Rust/项目代码组织/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "rust-项目代码组织",
+          "text": "Rust 项目代码组织"
+        },
+        {
+          "level": 2,
+          "id": "cargo-项目结构",
+          "text": "Cargo 项目结构"
+        },
+        {
+          "level": 3,
+          "id": "二进制项目",
+          "text": "二进制项目"
+        },
+        {
+          "level": 3,
+          "id": "库项目",
+          "text": "库项目"
+        },
+        {
+          "level": 3,
+          "id": "同时包含库和程序",
+          "text": "同时包含库和程序"
+        },
+        {
+          "level": 3,
+          "id": "多个二进制程序",
+          "text": "多个二进制程序"
+        },
+        {
+          "level": 2,
+          "id": "模块的三种组织方式",
+          "text": "模块的三种组织方式"
+        },
+        {
+          "level": 3,
+          "id": "内联模块",
+          "text": "内联模块"
+        },
+        {
+          "level": 3,
+          "id": "单文件模块",
+          "text": "单文件模块"
+        },
+        {
+          "level": 3,
+          "id": "目录模块",
+          "text": "目录模块"
+        },
+        {
+          "level": 2,
+          "id": "模块声明与文件路径",
+          "text": "模块声明与文件路径"
+        },
+        {
+          "level": 2,
+          "id": "模块可见性",
+          "text": "模块可见性"
+        },
+        {
+          "level": 2,
+          "id": "模块路径",
+          "text": "模块路径"
+        },
+        {
+          "level": 3,
+          "id": "crate",
+          "text": "crate"
+        },
+        {
+          "level": 3,
+          "id": "self",
+          "text": "self"
+        },
+        {
+          "level": 3,
+          "id": "super",
+          "text": "super"
+        },
+        {
+          "level": 3,
+          "id": "外部-crate-名称",
+          "text": "外部 crate 名称"
+        },
+        {
+          "level": 2,
+          "id": "简化模块调用",
+          "text": "简化模块调用"
+        },
+        {
+          "level": 3,
+          "id": "使用-use",
+          "text": "使用 use"
+        },
+        {
+          "level": 3,
+          "id": "使用-as-设置别名",
+          "text": "使用 as 设置别名"
+        },
+        {
+          "level": 3,
+          "id": "使用-pub-use-重新导出",
+          "text": "使用 pub use 重新导出"
+        },
+        {
+          "level": 2,
+          "id": "csv_to_json-项目示例",
+          "text": "csv_to_json 项目示例"
+        },
+        {
+          "level": 2,
+          "id": "按职责组织项目",
+          "text": "按职责组织项目"
+        },
+        {
+          "level": 2,
+          "id": "workspace-组织多个项目",
+          "text": "Workspace 组织多个项目"
+        },
+        {
+          "level": 3,
+          "id": "当前学习仓库的层级",
+          "text": "当前学习仓库的层级"
+        },
+        {
+          "level": 2,
+          "id": "常见问题检查",
+          "text": "常见问题检查"
+        },
+        {
+          "level": 3,
+          "id": "文件存在但模块找不到",
+          "text": "文件存在但模块找不到"
+        },
+        {
+          "level": 3,
+          "id": "模块路径正确但无法访问",
+          "text": "模块路径正确但无法访问"
+        },
+        {
+          "level": 3,
+          "id": "mainrs-无法访问-librs",
+          "text": "main.rs 无法访问 lib.rs"
+        },
+        {
+          "level": 3,
+          "id": "检查项目结构",
+          "text": "检查项目结构"
+        }
+      ],
+      "callouts": 3
+    },
+    {
+      "source": "Zed/index.md",
+      "target": "Zed/index.md",
+      "source_sha256": "c5688b55b4983c61156f06e32f82a30071454319dba599126ff3491a9489546e",
+      "initial_sha256": "f7da70611ef7ad86a3a2dd45524f89afc91c1474316e19aaaf96099763d8ed23",
+      "old_url": "Zed/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "zed",
+          "text": "Zed"
+        },
+        {
+          "level": 2,
+          "id": "当前键位方案",
+          "text": "当前键位方案"
+        },
+        {
+          "level": 2,
+          "id": "笔记",
+          "text": "笔记"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "Zed/快捷键.md",
+      "target": "Zed/快捷键.md",
+      "source_sha256": "340da24ae852edfd4d8ef2504b5c936e35582e1285c7271e70954480d5650857",
+      "initial_sha256": "eb052abe2251c615eb0df8083edb9387923db761e3b5fbf2703c0214958359f8",
+      "old_url": "Zed/快捷键/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "zed-快捷键",
+          "text": "Zed 快捷键"
+        },
+        {
+          "level": 2,
+          "id": "按键约定",
+          "text": "按键约定"
+        },
+        {
+          "level": 3,
+          "id": "如何判断当前上下文",
+          "text": "如何判断当前上下文"
+        },
+        {
+          "level": 2,
+          "id": "高频速查",
+          "text": "高频速查"
+        },
+        {
+          "level": 2,
+          "id": "全局窗格与标签",
+          "text": "全局、窗格与标签"
+        },
+        {
+          "level": 2,
+          "id": "保存定位与搜索",
+          "text": "保存、定位与搜索"
+        },
+        {
+          "level": 3,
+          "id": "文件与项目",
+          "text": "文件与项目"
+        },
+        {
+          "level": 3,
+          "id": "标签与搜索",
+          "text": "标签与搜索"
+        },
+        {
+          "level": 2,
+          "id": "lsp-与诊断",
+          "text": "LSP 与诊断"
+        },
+        {
+          "level": 2,
+          "id": "git-与外部任务",
+          "text": "Git 与外部任务"
+        },
+        {
+          "level": 3,
+          "id": "git-操作",
+          "text": "Git 操作"
+        },
+        {
+          "level": 3,
+          "id": "外部任务",
+          "text": "外部任务"
+        },
+        {
+          "level": 2,
+          "id": "ai-与-edit-prediction",
+          "text": "AI 与 Edit Prediction"
+        },
+        {
+          "level": 2,
+          "id": "面板与特殊视图",
+          "text": "面板与特殊视图"
+        },
+        {
+          "level": 3,
+          "id": "projectpanel",
+          "text": "ProjectPanel"
+        },
+        {
+          "level": 3,
+          "id": "gitpanel-与-projectsearchbar",
+          "text": "GitPanel 与 ProjectSearchBar"
+        },
+        {
+          "level": 3,
+          "id": "emptypanesharedscreen-与-keycontextview",
+          "text": "EmptyPane、SharedScreen 与 KeyContextView"
+        },
+        {
+          "level": 3,
+          "id": "markdownpreview",
+          "text": "MarkdownPreview"
+        },
+        {
+          "level": 3,
+          "id": "terminal",
+          "text": "Terminal"
+        },
+        {
+          "level": 2,
+          "id": "vim-普通与可视模式",
+          "text": "Vim 普通与可视模式"
+        },
+        {
+          "level": 3,
+          "id": "显示行滚动与搜索居中",
+          "text": "显示行、滚动与搜索居中"
+        },
+        {
+          "level": 3,
+          "id": "sneaksurround-与文本对象",
+          "text": "Sneak、Surround 与文本对象"
+        },
+        {
+          "level": 3,
+          "id": "系统剪贴板",
+          "text": "系统剪贴板"
+        },
+        {
+          "level": 3,
+          "id": "可视模式编辑",
+          "text": "可视模式编辑"
+        },
+        {
+          "level": 2,
+          "id": "vim-插入模式",
+          "text": "Vim 插入模式"
+        },
+        {
+          "level": 3,
+          "id": "退出与编辑",
+          "text": "退出与编辑"
+        },
+        {
+          "level": 3,
+          "id": "ctrl-x-序列",
+          "text": "Ctrl-x 序列"
+        },
+        {
+          "level": 2,
+          "id": "菜单与预测覆盖",
+          "text": "菜单与预测覆盖"
+        },
+        {
+          "level": 2,
+          "id": "上下文差异与注意事项",
+          "text": "上下文差异与注意事项"
+        },
+        {
+          "level": 2,
+          "id": "常用操作流程",
+          "text": "常用操作流程"
+        },
+        {
+          "level": 2,
+          "id": "配置维护",
+          "text": "配置维护"
+        }
+      ],
+      "callouts": 1
+    },
+    {
+      "source": "git使用指南/Git基础概念.md",
+      "target": "git使用指南/Git基础概念.md",
+      "source_sha256": "e4910c65da649563155549e18509f7a7b2dc90888da311a495153bda9fb8b68d",
+      "initial_sha256": "9a6a39da9fe55922aa363f5eb18d3c21b796571c60cc0531b53ac7368c9743ac",
+      "old_url": "git使用指南/Git基础概念/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "git基础概念",
+          "text": "Git基础概念"
+        },
+        {
+          "level": 2,
+          "id": "工作区暂存区和版本库",
+          "text": "工作区,暂存区和版本库"
+        },
+        {
+          "level": 2,
+          "id": "文件状态流转",
+          "text": "文件状态流转"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/分支管理.md",
+      "target": "git使用指南/分支管理.md",
+      "source_sha256": "edb1a96c7f8c4b320c6052bb613e021c425d2051bdacaa4894b76c97265351d2",
+      "initial_sha256": "2b7628481701562cc78dff7d795aea30d4cea898e50f4f0f667bffaa5cc1f228",
+      "old_url": "git使用指南/分支管理/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "分支管理",
+          "text": "分支管理"
+        },
+        {
+          "level": 2,
+          "id": "分支基本操作",
+          "text": "分支基本操作"
+        },
+        {
+          "level": 2,
+          "id": "合并分支",
+          "text": "合并分支"
+        },
+        {
+          "level": 2,
+          "id": "处理合并冲突",
+          "text": "处理合并冲突"
+        },
+        {
+          "level": 2,
+          "id": "rebase变基",
+          "text": "Rebase(变基)"
+        },
+        {
+          "level": 2,
+          "id": "分支策略示例",
+          "text": "分支策略示例"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/初始设置.md",
+      "target": "git使用指南/初始设置.md",
+      "source_sha256": "484c430183e175c852fac366f047fe1688a5150fcd4391b9894f3ed4ac6df36e",
+      "initial_sha256": "697cfaef878637f72b663fd60addedb298c76732c7c322b14f16bc6d6bbfcd68",
+      "old_url": "git使用指南/初始设置/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "初始设置",
+          "text": "初始设置"
+        },
+        {
+          "level": 2,
+          "id": "设置用户名和邮箱必须有",
+          "text": "设置用户名和邮箱(必须有)"
+        },
+        {
+          "level": 2,
+          "id": "设置默认编辑器",
+          "text": "设置默认编辑器"
+        },
+        {
+          "level": 2,
+          "id": "查看配置信息",
+          "text": "查看配置信息"
+        },
+        {
+          "level": 2,
+          "id": "配置别名可选但没必要",
+          "text": "配置别名(可选但没必要)"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/基本操作命令.md",
+      "target": "git使用指南/基本操作命令.md",
+      "source_sha256": "d4942de9f313e24f990d9a174ca7a617778cf3a062002cde65ea2f2614f0c576",
+      "initial_sha256": "79a56d3fa6e4756339e91826f46c2b4b35f8556f4006ef28457a37dabc5518e9",
+      "old_url": "git使用指南/基本操作命令/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "基本操作命令",
+          "text": "基本操作命令"
+        },
+        {
+          "level": 2,
+          "id": "创建仓库",
+          "text": "创建仓库"
+        },
+        {
+          "level": 2,
+          "id": "查看状态",
+          "text": "查看状态"
+        },
+        {
+          "level": 2,
+          "id": "添加文件到暂存区",
+          "text": "添加文件到暂存区"
+        },
+        {
+          "level": 2,
+          "id": "提交更改",
+          "text": "提交更改"
+        },
+        {
+          "level": 2,
+          "id": "查看历史",
+          "text": "查看历史"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/工作区暂存.md",
+      "target": "git使用指南/工作区暂存.md",
+      "source_sha256": "833a8f8c9a9c08f18904b0cc37e9e0f4be0f41cffb782262af0216aa4eefbbbb",
+      "initial_sha256": "7475aa2942244dae12a4e11b403a5ff4aec8779e166f43b11c70091626c5b28a",
+      "old_url": "git使用指南/工作区暂存/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "工作区暂存",
+          "text": "工作区暂存"
+        },
+        {
+          "level": 2,
+          "id": "保存临时工作",
+          "text": "保存临时工作"
+        },
+        {
+          "level": 2,
+          "id": "查看暂存列表",
+          "text": "查看暂存列表"
+        },
+        {
+          "level": 2,
+          "id": "恢复暂存",
+          "text": "恢复暂存"
+        },
+        {
+          "level": 2,
+          "id": "查看暂存内容",
+          "text": "查看暂存内容"
+        },
+        {
+          "level": 2,
+          "id": "删除暂存",
+          "text": "删除暂存"
+        },
+        {
+          "level": 2,
+          "id": "从暂存创建分支",
+          "text": "从暂存创建分支"
+        },
+        {
+          "level": 2,
+          "id": "常用工作流示例",
+          "text": "常用工作流示例"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/忽略文件配置.md",
+      "target": "git使用指南/忽略文件配置.md",
+      "source_sha256": "8c1192853d305e0a7d4d05021df7fdb0578cd75397f7b3294a149813f8bd8a21",
+      "initial_sha256": "711764e6ec5f3ba7d428299e244391b1ea1aedcce2356691b0f266a3d7fd561d",
+      "old_url": "git使用指南/忽略文件配置/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "忽略文件配置",
+          "text": "忽略文件配置"
+        },
+        {
+          "level": 2,
+          "id": "gitignore-基本规则",
+          "text": ".gitignore 基本规则"
+        },
+        {
+          "level": 2,
+          "id": "匹配模式",
+          "text": "匹配模式"
+        },
+        {
+          "level": 2,
+          "id": "常用-gitignore-模板",
+          "text": "常用 .gitignore 模板"
+        },
+        {
+          "level": 2,
+          "id": "全局忽略配置",
+          "text": "全局忽略配置"
+        },
+        {
+          "level": 2,
+          "id": "忽略已被跟踪的文件",
+          "text": "忽略已被跟踪的文件"
+        },
+        {
+          "level": 2,
+          "id": "查看忽略规则",
+          "text": "查看忽略规则"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/撤销与回退.md",
+      "target": "git使用指南/撤销与回退.md",
+      "source_sha256": "c7665d83a1e9e24dbbad3939ce0cb666f2c3bc2ffc667ba4fa889acb6629cb1c",
+      "initial_sha256": "612904f3515f6e85338c5685b0ed5b53f61db070299b9370bb46869b4263587c",
+      "old_url": "git使用指南/撤销与回退/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "撤销与回退",
+          "text": "撤销与回退"
+        },
+        {
+          "level": 2,
+          "id": "撤销工作区修改",
+          "text": "撤销工作区修改"
+        },
+        {
+          "level": 2,
+          "id": "撤销暂存区修改",
+          "text": "撤销暂存区修改"
+        },
+        {
+          "level": 2,
+          "id": "修改提交",
+          "text": "修改提交"
+        },
+        {
+          "level": 2,
+          "id": "回退提交",
+          "text": "回退提交"
+        },
+        {
+          "level": 2,
+          "id": "撤销提交保留历史",
+          "text": "撤销提交（保留历史）"
+        },
+        {
+          "level": 2,
+          "id": "清理未跟踪文件",
+          "text": "清理未跟踪文件"
+        },
+        {
+          "level": 2,
+          "id": "后悔药找回丢失的提交",
+          "text": "后悔药：找回丢失的提交"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/标签管理.md",
+      "target": "git使用指南/标签管理.md",
+      "source_sha256": "bad553b5003b0d0f89f479867b8cae9516f5e860a5e38672ca28a92a4c2b6990",
+      "initial_sha256": "c16271e8e2a61a9d14c8c9a9a162455ddda07f99ba87f09b9245b8cc19fa727e",
+      "old_url": "git使用指南/标签管理/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "标签管理",
+          "text": "标签管理"
+        },
+        {
+          "level": 2,
+          "id": "查看标签",
+          "text": "查看标签"
+        },
+        {
+          "level": 2,
+          "id": "创建标签",
+          "text": "创建标签"
+        },
+        {
+          "level": 2,
+          "id": "操作标签",
+          "text": "操作标签"
+        },
+        {
+          "level": 2,
+          "id": "推送标签到远程",
+          "text": "推送标签到远程"
+        },
+        {
+          "level": 2,
+          "id": "版本号命名规范语义化版本",
+          "text": "版本号命名规范（语义化版本）"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "git使用指南/远程仓库操作.md",
+      "target": "git使用指南/远程仓库操作.md",
+      "source_sha256": "a31fb026f6fe7da47bd932fbc1568a3b294ad79b6d5de3f855dff96c4e347c8c",
+      "initial_sha256": "bd864850841bf85035753c5fa5ffbe8ed8ec402808a01c2d5f6917c4a49bb09a",
+      "old_url": "git使用指南/远程仓库操作/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "远程仓库操作",
+          "text": "远程仓库操作"
+        },
+        {
+          "level": 2,
+          "id": "管理远程仓库",
+          "text": "管理远程仓库"
+        },
+        {
+          "level": 2,
+          "id": "推送和拉取",
+          "text": "推送和拉取"
+        },
+        {
+          "level": 2,
+          "id": "克隆与同步",
+          "text": "克隆与同步"
+        },
+        {
+          "level": 2,
+          "id": "常见问题",
+          "text": "常见问题"
+        },
+        {
+          "level": 3,
+          "id": "ssh-推送时-22-端口连接被关闭",
+          "text": "SSH 推送时 22 端口连接被关闭"
+        },
+        {
+          "level": 4,
+          "id": "问题现象",
+          "text": "问题现象"
+        },
+        {
+          "level": 4,
+          "id": "解决方法",
+          "text": "解决方法"
+        },
+        {
+          "level": 3,
+          "id": "mkdocs-build-出现链接警告",
+          "text": "mkdocs build 出现链接警告"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "index.md",
+      "target": "关于本站.md",
+      "source_sha256": "38f69c74ed082a3afaf2e0a856d6275ee34ec4dcab9497119c2e807106c2890e",
+      "initial_sha256": "6683f88a3df67e218ca45da801d1fd9b54384f83e6c1e0d5e24b2f6028962dee",
+      "old_url": "",
+      "headings": [
+        {
+          "level": 1,
+          "id": "这是王佳贤的个人博客",
+          "text": "这是王佳贤的个人博客"
+        },
+        {
+          "level": 2,
+          "id": "一点想法",
+          "text": "一点想法"
+        },
+        {
+          "level": 2,
+          "id": "笔记导航",
+          "text": "笔记导航"
+        },
+        {
+          "level": 2,
+          "id": "计划添加到这个博客的内容",
+          "text": "计划添加到这个博客的内容"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "常用工具/bat.md",
+      "target": "常用工具/bat.md",
+      "source_sha256": "55dff5af4858762a1e4190f1ab04f0a8bb29ffd58c8a9afa65ace4c63b1375e5",
+      "initial_sha256": "e7eb7282784381f6ffb10452e791afc7dc52a988616d5c481d359072cc251f9a",
+      "old_url": "常用工具/bat/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "bat",
+          "text": "bat"
+        },
+        {
+          "level": 2,
+          "id": "优点",
+          "text": "优点"
+        },
+        {
+          "level": 3,
+          "id": "语法高亮",
+          "text": "语法高亮"
+        },
+        {
+          "level": 3,
+          "id": "git-集成",
+          "text": "Git 集成"
+        },
+        {
+          "level": 3,
+          "id": "不可打印non-printable字符可视化",
+          "text": "不可打印(non-printable)字符可视化"
+        },
+        {
+          "level": 3,
+          "id": "自动分页",
+          "text": "自动分页"
+        },
+        {
+          "level": 4,
+          "id": "智能输出",
+          "text": "智能输出"
+        },
+        {
+          "level": 2,
+          "id": "如何使用",
+          "text": "如何使用"
+        },
+        {
+          "level": 3,
+          "id": "第三方工具交互",
+          "text": "第三方工具交互"
+        },
+        {
+          "level": 4,
+          "id": "fzf",
+          "text": "fzf"
+        },
+        {
+          "level": 4,
+          "id": "find-或-fd",
+          "text": "find 或 fd"
+        },
+        {
+          "level": 4,
+          "id": "ripgrep",
+          "text": "ripgrep"
+        },
+        {
+          "level": 4,
+          "id": "tail--f",
+          "text": "tail -f"
+        },
+        {
+          "level": 4,
+          "id": "git",
+          "text": "git"
+        },
+        {
+          "level": 4,
+          "id": "git-diff",
+          "text": "git diff"
+        },
+        {
+          "level": 4,
+          "id": "xclip",
+          "text": "xclip"
+        },
+        {
+          "level": 4,
+          "id": "man",
+          "text": "man"
+        },
+        {
+          "level": 4,
+          "id": "prettier--shfmt--rustfmt",
+          "text": "prettier / shfmt / rustfmt"
+        },
+        {
+          "level": 2,
+          "id": "安装",
+          "text": "安装"
+        },
+        {
+          "level": 2,
+          "id": "自定义",
+          "text": "自定义"
+        },
+        {
+          "level": 3,
+          "id": "语法高亮主题",
+          "text": "语法高亮主题"
+        },
+        {
+          "level": 3,
+          "id": "8-bit-主题",
+          "text": "8-bit 主题"
+        },
+        {
+          "level": 3,
+          "id": "输出样式",
+          "text": "输出样式"
+        },
+        {
+          "level": 3,
+          "id": "添加新的语言和语法",
+          "text": "添加新的语言和语法"
+        },
+        {
+          "level": 3,
+          "id": "添加主题",
+          "text": "添加主题"
+        },
+        {
+          "level": 3,
+          "id": "添加或修改文件关联",
+          "text": "添加或修改文件关联"
+        },
+        {
+          "level": 3,
+          "id": "使用自定义分页器",
+          "text": "使用自定义分页器"
+        },
+        {
+          "level": 3,
+          "id": "缩进",
+          "text": "缩进"
+        },
+        {
+          "level": 3,
+          "id": "暗色模式",
+          "text": "暗色模式"
+        },
+        {
+          "level": 2,
+          "id": "配置文件",
+          "text": "配置文件"
+        },
+        {
+          "level": 3,
+          "id": "格式",
+          "text": "格式"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "常用工具/eza.md",
+      "target": "常用工具/eza.md",
+      "source_sha256": "f424c595fa3d5153aab37615b701f832ff248089d7bce17c67e16b48d51ab9d4",
+      "initial_sha256": "99d4aefbb35c0bbefe5c48075d6cdbfc08aa36569a27fa7a5051a1df810bc757",
+      "old_url": "常用工具/eza/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "eza",
+          "text": "eza"
+        },
+        {
+          "level": 2,
+          "id": "相比-exa-新增的功能",
+          "text": "相比 exa 新增的功能"
+        },
+        {
+          "level": 2,
+          "id": "试一试",
+          "text": "试一试"
+        },
+        {
+          "level": 2,
+          "id": "安装",
+          "text": "安装"
+        },
+        {
+          "level": 2,
+          "id": "命令行选项",
+          "text": "命令行选项"
+        },
+        {
+          "level": 3,
+          "id": "显示选项",
+          "text": "显示选项"
+        },
+        {
+          "level": 3,
+          "id": "过滤选项",
+          "text": "过滤选项"
+        },
+        {
+          "level": 3,
+          "id": "-l-长列表选项",
+          "text": "-l 长列表选项"
+        },
+        {
+          "level": 2,
+          "id": "自定义主题",
+          "text": "自定义主题"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "常用工具/find_fd.md",
+      "target": "常用工具/find_fd.md",
+      "source_sha256": "c403691df78bad18285c4e090b7844be8667c41967f166ac975050c3d3753c0e",
+      "initial_sha256": "557487b884294183366d5835aa64fcf92f22698b89d9e17a4b3fdabc105b9922",
+      "old_url": "常用工具/find_fd/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "find文件查找与-fd-替代工具",
+          "text": "find：文件查找与 fd 替代工具"
+        },
+        {
+          "level": 2,
+          "id": "find-速查",
+          "text": "find 速查"
+        },
+        {
+          "level": 2,
+          "id": "find-示例",
+          "text": "find 示例"
+        },
+        {
+          "level": 2,
+          "id": "fd",
+          "text": "fd"
+        },
+        {
+          "level": 3,
+          "id": "速查",
+          "text": "速查"
+        },
+        {
+          "level": 4,
+          "id": "基本语法与记忆方法",
+          "text": "基本语法与记忆方法"
+        },
+        {
+          "level": 4,
+          "id": "与-findrg-容易混淆的区别",
+          "text": "与 find、rg 容易混淆的区别"
+        },
+        {
+          "level": 3,
+          "id": "练习示例",
+          "text": "练习示例"
+        },
+        {
+          "level": 4,
+          "id": "基础素材文件与路径筛选",
+          "text": "基础素材：文件与路径筛选"
+        },
+        {
+          "level": 4,
+          "id": "基础素材与-rgwc-组合",
+          "text": "基础素材：与 rg、wc 组合"
+        },
+        {
+          "level": 4,
+          "id": "混合素材隐藏空文件大小与配置",
+          "text": "混合素材：隐藏、空文件、大小与配置"
+        },
+        {
+          "level": 4,
+          "id": "练习入口与复习重点",
+          "text": "练习入口与复习重点"
+        },
+        {
+          "level": 3,
+          "id": "详细参考",
+          "text": "详细参考"
+        },
+        {
+          "level": 4,
+          "id": "特点",
+          "text": "特点"
+        },
+        {
+          "level": 4,
+          "id": "demo",
+          "text": "Demo"
+        },
+        {
+          "level": 4,
+          "id": "如何使用",
+          "text": "如何使用"
+        },
+        {
+          "level": 5,
+          "id": "简单搜索",
+          "text": "简单搜索"
+        },
+        {
+          "level": 5,
+          "id": "正则表达式搜索",
+          "text": "正则表达式搜索"
+        },
+        {
+          "level": 5,
+          "id": "指定根目录",
+          "text": "指定根目录"
+        },
+        {
+          "level": 5,
+          "id": "列出所有文件递归",
+          "text": "列出所有文件，递归"
+        },
+        {
+          "level": 5,
+          "id": "搜索一个特定的文件扩展名",
+          "text": "搜索一个特定的文件扩展名"
+        },
+        {
+          "level": 5,
+          "id": "搜索一个特定的文件名",
+          "text": "搜索一个特定的文件名"
+        },
+        {
+          "level": 5,
+          "id": "隐藏和忽略的文件",
+          "text": "隐藏和忽略的文件"
+        },
+        {
+          "level": 5,
+          "id": "匹配完整路径",
+          "text": "匹配完整路径"
+        },
+        {
+          "level": 5,
+          "id": "命令执行",
+          "text": "命令执行"
+        },
+        {
+          "level": 6,
+          "id": "例子",
+          "text": "例子"
+        },
+        {
+          "level": 6,
+          "id": "占位符语法",
+          "text": "占位符语法"
+        },
+        {
+          "level": 6,
+          "id": "并行执行与串行执行",
+          "text": "并行执行与串行执行"
+        },
+        {
+          "level": 5,
+          "id": "排除特定的文件或目录",
+          "text": "排除特定的文件或目录"
+        },
+        {
+          "level": 5,
+          "id": "删除文件",
+          "text": "删除文件"
+        },
+        {
+          "level": 5,
+          "id": "命令行选项",
+          "text": "命令行选项"
+        },
+        {
+          "level": 4,
+          "id": "基准测试",
+          "text": "基准测试"
+        },
+        {
+          "level": 4,
+          "id": "排除故障",
+          "text": "排除故障"
+        },
+        {
+          "level": 5,
+          "id": "彩色化输出",
+          "text": "彩色化输出"
+        },
+        {
+          "level": 5,
+          "id": "fd没有找到我的文件",
+          "text": "fd没有找到我的文件"
+        },
+        {
+          "level": 5,
+          "id": "fd-似乎不能正确地解释我的正则表达式模式",
+          "text": "fd 似乎不能正确地解释我的正则表达式模式"
+        },
+        {
+          "level": 5,
+          "id": "执行alias或shell函数提示-command-not-found",
+          "text": "执行alias或shell函数提示 “Command not found”"
+        },
+        {
+          "level": 4,
+          "id": "与其他项目的整合",
+          "text": "与其他项目的整合"
+        },
+        {
+          "level": 5,
+          "id": "与-fzf-一起使用",
+          "text": "与 fzf 一起使用"
+        },
+        {
+          "level": 5,
+          "id": "与-rofi-一起使用",
+          "text": "与 rofi 一起使用"
+        },
+        {
+          "level": 6,
+          "id": "例子_1",
+          "text": "例子"
+        },
+        {
+          "level": 5,
+          "id": "与-emac-一起使用",
+          "text": "与 emac 一起使用"
+        },
+        {
+          "level": 5,
+          "id": "将输出结果打印成树状",
+          "text": "将输出结果打印成树状"
+        },
+        {
+          "level": 5,
+          "id": "与-xargs-或-parallel-一起使用",
+          "text": "与 xargs 或 parallel 一起使用"
+        },
+        {
+          "level": 4,
+          "id": "安装",
+          "text": "安装"
+        },
+        {
+          "level": 2,
+          "id": "查阅资料",
+          "text": "查阅资料"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "常用工具/grep_rg.md",
+      "target": "常用工具/grep_rg.md",
+      "source_sha256": "6c77b42f7f9285addb6b3a1fdd250a60cfed762d5813745053db19f305f845b9",
+      "initial_sha256": "887e854aa45db7aae031536537e0d2b1b3eb3e9e2496df72c1c2c52316e7e886",
+      "old_url": "常用工具/grep_rg/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "grep日志与代码搜索及-rg-替代工具",
+          "text": "grep：日志与代码搜索及 rg 替代工具"
+        },
+        {
+          "level": 2,
+          "id": "grep-速查",
+          "text": "grep 速查"
+        },
+        {
+          "level": 3,
+          "id": "基本语法",
+          "text": "基本语法"
+        },
+        {
+          "level": 3,
+          "id": "选项的语义化记忆",
+          "text": "选项的语义化记忆"
+        },
+        {
+          "level": 3,
+          "id": "文件过滤与输出判断",
+          "text": "文件过滤与输出判断"
+        },
+        {
+          "level": 2,
+          "id": "grep-示例",
+          "text": "grep 示例"
+        },
+        {
+          "level": 3,
+          "id": "组合选项",
+          "text": "组合选项"
+        },
+        {
+          "level": 3,
+          "id": "代码搜索",
+          "text": "代码搜索"
+        },
+        {
+          "level": 3,
+          "id": "日志搜索",
+          "text": "日志搜索"
+        },
+        {
+          "level": 3,
+          "id": "容易混淆的地方",
+          "text": "容易混淆的地方"
+        },
+        {
+          "level": 4,
+          "id": "文件名搜索与文件内容搜索",
+          "text": "文件名搜索与文件内容搜索"
+        },
+        {
+          "level": 4,
+          "id": "不显示行号不等于只显示文件名",
+          "text": "不显示行号，不等于只显示文件名"
+        },
+        {
+          "level": 4,
+          "id": "搜索范围-与-src",
+          "text": "搜索范围：. 与 ./src"
+        },
+        {
+          "level": 4,
+          "id": "普通文本与正则表达式",
+          "text": "普通文本与正则表达式"
+        },
+        {
+          "level": 2,
+          "id": "rgripgrep",
+          "text": "rg（ripgrep）"
+        },
+        {
+          "level": 3,
+          "id": "速查",
+          "text": "速查"
+        },
+        {
+          "level": 4,
+          "id": "与-grep-常见的不同点",
+          "text": "与 grep 常见的不同点"
+        },
+        {
+          "level": 4,
+          "id": "常用选项与-glob",
+          "text": "常用选项与 glob"
+        },
+        {
+          "level": 3,
+          "id": "示例",
+          "text": "示例"
+        },
+        {
+          "level": 4,
+          "id": "代码搜索与文件过滤",
+          "text": "代码搜索与文件过滤"
+        },
+        {
+          "level": 4,
+          "id": "日志搜索与多阶段筛选",
+          "text": "日志搜索与多阶段筛选"
+        },
+        {
+          "level": 4,
+          "id": "同一个文件同时满足两个条件",
+          "text": "同一个文件同时满足两个条件"
+        },
+        {
+          "level": 4,
+          "id": "配合-fd先选择文件再搜索内容",
+          "text": "配合 fd：先选择文件，再搜索内容"
+        },
+        {
+          "level": 2,
+          "id": "复习与练习",
+          "text": "复习与练习"
+        },
+        {
+          "level": 2,
+          "id": "查阅资料",
+          "text": "查阅资料"
+        }
+      ],
+      "callouts": 2
+    },
+    {
+      "source": "常用工具/late_sh_zh.md",
+      "target": "常用工具/late_sh_zh.md",
+      "source_sha256": "86c806080dc63034d233c038233195a214e93bbd0f7020def5457398dfd0dbb0",
+      "initial_sha256": "aed17a17e08827b62b8903ce0f6eefd47e4e8dd2e50b67ac88e4a93fe3b9094e",
+      "old_url": "常用工具/late_sh_zh/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "latesh",
+          "text": "late.sh"
+        },
+        {
+          "level": 2,
+          "id": "功能包含",
+          "text": "功能包含"
+        },
+        {
+          "level": 2,
+          "id": "技术栈",
+          "text": "技术栈"
+        },
+        {
+          "level": 2,
+          "id": "快速开始",
+          "text": "快速开始"
+        },
+        {
+          "level": 2,
+          "id": "伴随-cli",
+          "text": "伴随 CLI"
+        },
+        {
+          "level": 2,
+          "id": "本地开发",
+          "text": "本地开发"
+        },
+        {
+          "level": 2,
+          "id": "验证",
+          "text": "验证"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "常用工具/uv.md",
+      "target": "常用工具/uv.md",
+      "source_sha256": "8aca236d34bd91fef9c4bdbdb0bfb0921eabe5726afaa2b1e66fd15740c98ac9",
+      "initial_sha256": "e65b35a96113c95f4f36b7e7aaa65a47c8af5656ddfe81f52ef92787318c24e8",
+      "old_url": "常用工具/uv/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "uv",
+          "text": "uv"
+        },
+        {
+          "level": 2,
+          "id": "安装",
+          "text": "安装"
+        },
+        {
+          "level": 2,
+          "id": "管理-python-版本",
+          "text": "管理 Python 版本"
+        },
+        {
+          "level": 2,
+          "id": "项目管理",
+          "text": "项目管理"
+        },
+        {
+          "level": 2,
+          "id": "单文件脚本",
+          "text": "单文件脚本"
+        },
+        {
+          "level": 2,
+          "id": "命令行工具pipx-替代",
+          "text": "命令行工具（pipx 替代）"
+        },
+        {
+          "level": 2,
+          "id": "与-pip-兼容",
+          "text": "与 pip 兼容"
+        },
+        {
+          "level": 2,
+          "id": "实用配置",
+          "text": "实用配置"
+        },
+        {
+          "level": 3,
+          "id": "国内镜像",
+          "text": "国内镜像"
+        },
+        {
+          "level": 3,
+          "id": "缓存与其他",
+          "text": "缓存与其他"
+        },
+        {
+          "level": 2,
+          "id": "起手式",
+          "text": "起手式"
+        },
+        {
+          "level": 2,
+          "id": "参考资料",
+          "text": "参考资料"
+        }
+      ],
+      "callouts": 3
+    },
+    {
+      "source": "常用工具/终端快捷键.md",
+      "target": "常用工具/终端快捷键.md",
+      "source_sha256": "cf6600702fcc3e4c5307e8bd3703234bae6683b92bad07a80956373a74db816b",
+      "initial_sha256": "6f0d326ca3f135ce021f38777dd05d82d2f96cfa7644edaa3e09cc50b2365371",
+      "old_url": "常用工具/终端快捷键/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "终端快捷键",
+          "text": "终端快捷键"
+        },
+        {
+          "level": 2,
+          "id": "按键约定",
+          "text": "按键约定"
+        },
+        {
+          "level": 2,
+          "id": "高频速查",
+          "text": "高频速查"
+        },
+        {
+          "level": 2,
+          "id": "ghostty窗口显示与剪贴板",
+          "text": "Ghostty：窗口、显示与剪贴板"
+        },
+        {
+          "level": 3,
+          "id": "复制搜索与显示",
+          "text": "复制、搜索与显示"
+        },
+        {
+          "level": 3,
+          "id": "窗口标签与原生分屏",
+          "text": "窗口、标签与原生分屏"
+        },
+        {
+          "level": 2,
+          "id": "tmux会话窗口与窗格",
+          "text": "tmux：会话、窗口与窗格"
+        },
+        {
+          "level": 3,
+          "id": "会话与窗口",
+          "text": "会话与窗口"
+        },
+        {
+          "level": 3,
+          "id": "分屏与布局",
+          "text": "分屏与布局"
+        },
+        {
+          "level": 3,
+          "id": "历史输出与复制模式",
+          "text": "历史输出与复制模式"
+        },
+        {
+          "level": 3,
+          "id": "插件与配置维护",
+          "text": "插件与配置维护"
+        },
+        {
+          "level": 2,
+          "id": "zsh命令行编辑与历史搜索",
+          "text": "zsh：命令行编辑与历史搜索"
+        },
+        {
+          "level": 3,
+          "id": "插入模式",
+          "text": "插入模式"
+        },
+        {
+          "level": 3,
+          "id": "fzf-快捷入口",
+          "text": "fzf 快捷入口"
+        },
+        {
+          "level": 3,
+          "id": "vi-普通模式",
+          "text": "Vi 普通模式"
+        },
+        {
+          "level": 2,
+          "id": "前台程序与任务控制",
+          "text": "前台程序与任务控制"
+        },
+        {
+          "level": 2,
+          "id": "上下文差异与配置维护",
+          "text": "上下文差异与配置维护"
+        }
+      ],
+      "callouts": 1
+    },
+    {
+      "source": "开源协议/开源协议概念总结.md",
+      "target": "开源协议/开源协议概念总结.md",
+      "source_sha256": "fdd134adcc6ce82fd69918171a46c1ceda1e134a47f8c027195741fa9af7e24e",
+      "initial_sha256": "bb8e65e51f5a6082a86e25487eb89e9240391d08076fa3ad39aea88ae18eba9c",
+      "old_url": "开源协议/开源协议概念总结/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "开源协议概念总结",
+          "text": "开源协议概念总结"
+        },
+        {
+          "level": 2,
+          "id": "什么是开源协议",
+          "text": "什么是开源协议"
+        },
+        {
+          "level": 2,
+          "id": "核心维度说明",
+          "text": "核心维度说明"
+        },
+        {
+          "level": 2,
+          "id": "mit-协议",
+          "text": "MIT 协议"
+        },
+        {
+          "level": 3,
+          "id": "关键条款",
+          "text": "关键条款"
+        },
+        {
+          "level": 3,
+          "id": "典型使用场景",
+          "text": "典型使用场景"
+        },
+        {
+          "level": 2,
+          "id": "apache-20-协议",
+          "text": "Apache 2.0 协议"
+        },
+        {
+          "level": 3,
+          "id": "关键条款_1",
+          "text": "关键条款"
+        },
+        {
+          "level": 3,
+          "id": "与-mit-的核心区别",
+          "text": "与 MIT 的核心区别"
+        },
+        {
+          "level": 2,
+          "id": "gpl-协议",
+          "text": "GPL 协议"
+        },
+        {
+          "level": 3,
+          "id": "gplv2-vs-gplv3",
+          "text": "GPLv2 vs GPLv3"
+        },
+        {
+          "level": 3,
+          "id": "关键条款_2",
+          "text": "关键条款"
+        },
+        {
+          "level": 3,
+          "id": "典型使用场景_1",
+          "text": "典型使用场景"
+        },
+        {
+          "level": 2,
+          "id": "agpl-协议",
+          "text": "AGPL 协议"
+        },
+        {
+          "level": 3,
+          "id": "核心补充",
+          "text": "核心补充"
+        },
+        {
+          "level": 3,
+          "id": "典型使用场景_2",
+          "text": "典型使用场景"
+        },
+        {
+          "level": 2,
+          "id": "lgpl-协议",
+          "text": "LGPL 协议"
+        },
+        {
+          "level": 3,
+          "id": "核心思想",
+          "text": "核心思想"
+        },
+        {
+          "level": 3,
+          "id": "典型使用场景_3",
+          "text": "典型使用场景"
+        },
+        {
+          "level": 2,
+          "id": "bsd-协议",
+          "text": "BSD 协议"
+        },
+        {
+          "level": 3,
+          "id": "bsd-2-clause-vs-bsd-3-clause",
+          "text": "BSD 2-Clause vs BSD 3-Clause"
+        },
+        {
+          "level": 3,
+          "id": "典型使用场景_4",
+          "text": "典型使用场景"
+        },
+        {
+          "level": 2,
+          "id": "mpl-20-协议",
+          "text": "MPL 2.0 协议"
+        },
+        {
+          "level": 3,
+          "id": "核心特点",
+          "text": "核心特点"
+        },
+        {
+          "level": 3,
+          "id": "典型使用场景_5",
+          "text": "典型使用场景"
+        },
+        {
+          "level": 2,
+          "id": "unlicense--cc0",
+          "text": "Unlicense / CC0"
+        },
+        {
+          "level": 2,
+          "id": "对比总结表",
+          "text": "对比总结表"
+        },
+        {
+          "level": 2,
+          "id": "协议兼容性",
+          "text": "协议兼容性"
+        },
+        {
+          "level": 2,
+          "id": "选型建议",
+          "text": "选型建议"
+        },
+        {
+          "level": 2,
+          "id": "gpl-系列与-mpl-深度对比",
+          "text": "GPL 系列与 MPL 深度对比"
+        },
+        {
+          "level": 3,
+          "id": "核心差异一览",
+          "text": "核心差异一览"
+        },
+        {
+          "level": 3,
+          "id": "三组关键区别",
+          "text": "三组关键区别"
+        },
+        {
+          "level": 3,
+          "id": "代表性软件",
+          "text": "代表性软件"
+        },
+        {
+          "level": 4,
+          "id": "gplv2",
+          "text": "GPLv2"
+        },
+        {
+          "level": 4,
+          "id": "gplv3",
+          "text": "GPLv3"
+        },
+        {
+          "level": 4,
+          "id": "lgpl",
+          "text": "LGPL"
+        },
+        {
+          "level": 4,
+          "id": "mpl-20",
+          "text": "MPL 2.0"
+        },
+        {
+          "level": 3,
+          "id": "选型速查",
+          "text": "选型速查"
+        }
+      ],
+      "callouts": 9
+    },
+    {
+      "source": "开源项目学习/流程指南.md",
+      "target": "开源项目学习/流程指南.md",
+      "source_sha256": "b97a57b58ea16aba1e5ab56cb9dbe2eba49616117b05a5cc2225d0d6e24bf33c",
+      "initial_sha256": "c1e2b7c4a7ca335591ff87a7b99d9cb687fa93f3534d87cdd77bfccc82177211",
+      "old_url": "开源项目学习/流程指南/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "流程指南",
+          "text": "流程指南"
+        },
+        {
+          "level": 2,
+          "id": "阶段一选对项目",
+          "text": "阶段一：选对项目"
+        },
+        {
+          "level": 3,
+          "id": "筛选条件",
+          "text": "筛选条件"
+        },
+        {
+          "level": 3,
+          "id": "快速检查三个指标",
+          "text": "快速检查三个指标"
+        },
+        {
+          "level": 3,
+          "id": "本地跑通",
+          "text": "本地跑通"
+        },
+        {
+          "level": 2,
+          "id": "阶段二先成为用户",
+          "text": "阶段二：先成为用户"
+        },
+        {
+          "level": 3,
+          "id": "熟悉全部功能",
+          "text": "熟悉全部功能"
+        },
+        {
+          "level": 3,
+          "id": "猜实现并验证",
+          "text": "猜实现并验证"
+        },
+        {
+          "level": 3,
+          "id": "用调试器跟踪调用栈",
+          "text": "用调试器跟踪调用栈"
+        },
+        {
+          "level": 2,
+          "id": "阶段三带着问题读源码",
+          "text": "阶段三：带着问题读源码"
+        },
+        {
+          "level": 3,
+          "id": "第-1-圈读懂接口层",
+          "text": "第 1 圈：读懂接口层"
+        },
+        {
+          "level": 3,
+          "id": "第-2-圈追踪功能的完整链路",
+          "text": "第 2 圈：追踪功能的完整链路"
+        },
+        {
+          "level": 3,
+          "id": "第-3-圈读最早期的-commit",
+          "text": "第 3 圈：读最早期的 commit"
+        },
+        {
+          "level": 3,
+          "id": "实操技巧",
+          "text": "实操技巧"
+        },
+        {
+          "level": 2,
+          "id": "阶段四写最小原型",
+          "text": "阶段四：写最小原型"
+        },
+        {
+          "level": 3,
+          "id": "剥离核心模块",
+          "text": "剥离核心模块"
+        },
+        {
+          "level": 3,
+          "id": "用自己的方式重写",
+          "text": "用自己的方式重写"
+        },
+        {
+          "level": 3,
+          "id": "与原版对比",
+          "text": "与原版对比"
+        },
+        {
+          "level": 2,
+          "id": "阶段五参与贡献",
+          "text": "阶段五：参与贡献"
+        },
+        {
+          "level": 3,
+          "id": "level-0修改文档或注释第-1-次-pr",
+          "text": "Level 0：修改文档或注释（第 1 次 PR）"
+        },
+        {
+          "level": 3,
+          "id": "level-1补测试第-23-次-pr",
+          "text": "Level 1：补测试（第 2~3 次 PR）"
+        },
+        {
+          "level": 3,
+          "id": "level-2修-bug第-45-次-pr",
+          "text": "Level 2：修 bug（第 4~5 次 PR）"
+        },
+        {
+          "level": 3,
+          "id": "level-3实现小型-feature",
+          "text": "Level 3：实现小型 feature"
+        },
+        {
+          "level": 2,
+          "id": "每日节奏建议",
+          "text": "每日节奏建议"
+        },
+        {
+          "level": 2,
+          "id": "常见坑及对策",
+          "text": "常见坑及对策"
+        },
+        {
+          "level": 2,
+          "id": "常用命令速查",
+          "text": "常用命令速查"
+        }
+      ],
+      "callouts": 2
+    },
+    {
+      "source": "操作系统原理/第一章.md",
+      "target": "操作系统原理/第一章.md",
+      "source_sha256": "f7602e1c5787cf341dea8379d32af1e7fddbe02be715b8d27e8210a2964f7c6c",
+      "initial_sha256": "f8c17ce1c16c9b2a6111a27a74654aa39f6b9d9bb01fbadd22b0878ac1653cac",
+      "old_url": "操作系统原理/第一章/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "-a-program-is-not-a-process",
+          "text": "📟 A PROGRAM is not a PROCESS"
+        },
+        {
+          "level": 2,
+          "id": "-历史背景",
+          "text": "🕰️ 历史背景"
+        },
+        {
+          "level": 2,
+          "id": "-什么是进程什么是程序",
+          "text": "🔬 什么是进程？什么是程序？"
+        },
+        {
+          "level": 3,
+          "id": "-程序-program--静态实体",
+          "text": "📦 程序 (Program) — 静态实体"
+        },
+        {
+          "level": 3,
+          "id": "-进程-process--动态实体",
+          "text": "⚡ 进程 (Process) — 动态实体"
+        },
+        {
+          "level": 3,
+          "id": "-进程的内存布局",
+          "text": "🧠 进程的内存布局"
+        },
+        {
+          "level": 2,
+          "id": "-实例分析文本编辑器",
+          "text": "💡 实例分析：文本编辑器"
+        },
+        {
+          "level": 2,
+          "id": "-程序-vs-进程对比总结",
+          "text": "📊 程序 vs 进程：对比总结"
+        },
+        {
+          "level": 2,
+          "id": "-进程的五状态模型",
+          "text": "🗺️ 进程的五状态模型"
+        },
+        {
+          "level": 3,
+          "id": "状态转换图",
+          "text": "状态转换图"
+        },
+        {
+          "level": 3,
+          "id": "状态说明",
+          "text": "状态说明"
+        },
+        {
+          "level": 2,
+          "id": "-进程控制块-pcb",
+          "text": "📋 进程控制块 (PCB)"
+        },
+        {
+          "level": 3,
+          "id": "-核心要点",
+          "text": "⚡ 核心要点"
+        },
+        {
+          "level": 3,
+          "id": "pcb-包含的关键信息",
+          "text": "PCB 包含的关键信息"
+        },
+        {
+          "level": 2,
+          "id": "-上下文切换-context-switch",
+          "text": "🔄 上下文切换 (Context Switch)"
+        },
+        {
+          "level": 3,
+          "id": "切换流程图",
+          "text": "切换流程图"
+        },
+        {
+          "level": 3,
+          "id": "上下文切换的开销",
+          "text": "上下文切换的开销"
+        },
+        {
+          "level": 2,
+          "id": "-进程的创建",
+          "text": "🧬 进程的创建"
+        },
+        {
+          "level": 3,
+          "id": "unixlinuxfork--exec-模式",
+          "text": "Unix/Linux：fork() + exec() 模式"
+        },
+        {
+          "level": 3,
+          "id": "windowscreateprocess",
+          "text": "Windows：CreateProcess()"
+        },
+        {
+          "level": 2,
+          "id": "-编译型-vs-解释型语言",
+          "text": "🌐 编译型 vs 解释型语言"
+        },
+        {
+          "level": 2,
+          "id": "-本章总结",
+          "text": "🏁 本章总结"
+        }
+      ],
+      "callouts": 8
+    },
+    {
+      "source": "操作系统原理/课程信息.md",
+      "target": "操作系统原理/课程信息.md",
+      "source_sha256": "4f489069a4dc1a396d9dc707180f253030aad351b02fa359e2901f1ea4c62a59",
+      "initial_sha256": "2735ee1cf9f5f1f08f77ad1f5a4d1076a68f21738f890ab93f1c956585d82485",
+      "old_url": "操作系统原理/课程信息/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "-课程信息",
+          "text": "📚 课程信息"
+        },
+        {
+          "level": 2,
+          "id": "-视频资源",
+          "text": "📺 视频资源"
+        },
+        {
+          "level": 2,
+          "id": "-章节列表",
+          "text": "🗂️ 章节列表"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "算法笔记/分发饼干.md",
+      "target": "算法笔记/分发饼干.md",
+      "source_sha256": "4f16c22ada0626c91a19147457d9694fdb394dbc1f988a5a7d5df10f5e7e5486",
+      "initial_sha256": "d5549a93d9bc6c3b3ebeafb75a1896852ec9d70ea3b6b251e474ebb747175432",
+      "old_url": "算法笔记/分发饼干/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "分发饼干",
+          "text": "分发饼干"
+        },
+        {
+          "level": 2,
+          "id": "问题描述",
+          "text": "问题描述"
+        },
+        {
+          "level": 2,
+          "id": "输入格式",
+          "text": "输入格式"
+        },
+        {
+          "level": 2,
+          "id": "输出格式",
+          "text": "输出格式"
+        },
+        {
+          "level": 2,
+          "id": "示例",
+          "text": "示例"
+        },
+        {
+          "level": 2,
+          "id": "算法思路",
+          "text": "算法思路"
+        },
+        {
+          "level": 2,
+          "id": "代码实现",
+          "text": "代码实现"
+        },
+        {
+          "level": 2,
+          "id": "复杂度分析",
+          "text": "复杂度分析"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "费曼学习法/学习方法.md",
+      "target": "费曼学习法/学习方法.md",
+      "source_sha256": "3ef5b71792558b806e55b54d1cd0ce0844e23ee946b713bada51c688976955e9",
+      "initial_sha256": "f4b62dbfd54e7337ce15ca04b5cd2057bb98f8fb3d4f2c10f5b5939bb4aac0c0",
+      "old_url": "费曼学习法/学习方法/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "way-to-learn",
+          "text": "Way To Learn"
+        },
+        {
+          "level": 2,
+          "id": "选择一个概念",
+          "text": "选择一个概念"
+        },
+        {
+          "level": 2,
+          "id": "模拟教授",
+          "text": "模拟教授"
+        },
+        {
+          "level": 2,
+          "id": "发现漏洞并回顾教材",
+          "text": "发现漏洞并回顾教材"
+        },
+        {
+          "level": 2,
+          "id": "简化与类比",
+          "text": "简化与类比"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/2026-09-12-ghostty段错误复查与默认配置恢复.md",
+      "target": "随记/2026-09-12-ghostty段错误复查与默认配置恢复.md",
+      "source_sha256": "0634feaddfd8bedcaf23fd2eae9e7c62029295436a213440092123a030880de7",
+      "initial_sha256": "df718e48679d68102024a97bb6a48194899b8cc11e91ad7a47c233c491ef686e",
+      "old_url": "随记/2026-09-12-ghostty段错误复查与默认配置恢复/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "ghostty-段错误复查与默认配置恢复",
+          "text": "Ghostty 段错误复查与默认配置恢复"
+        },
+        {
+          "level": 2,
+          "id": "结论",
+          "text": "结论"
+        },
+        {
+          "level": 2,
+          "id": "软件版本变化",
+          "text": "软件版本变化"
+        },
+        {
+          "level": 2,
+          "id": "复查方法与结果",
+          "text": "复查方法与结果"
+        },
+        {
+          "level": 3,
+          "id": "1-核查系统加载器",
+          "text": "1. 核查系统加载器"
+        },
+        {
+          "level": 3,
+          "id": "2-修正-fontconfig-的独立复现方法",
+          "text": "2. 修正 Fontconfig 的独立复现方法"
+        },
+        {
+          "level": 3,
+          "id": "3-对照验证-svg-加载",
+          "text": "3. 对照验证 SVG 加载"
+        },
+        {
+          "level": 3,
+          "id": "4-对照验证-ghostty-窗口启动",
+          "text": "4. 对照验证 Ghostty 窗口启动"
+        },
+        {
+          "level": 2,
+          "id": "已执行的配置清理",
+          "text": "已执行的配置清理"
+        },
+        {
+          "level": 3,
+          "id": "删除环境覆盖",
+          "text": "删除环境覆盖"
+        },
+        {
+          "level": 3,
+          "id": "刷新-systemd-用户环境",
+          "text": "刷新 systemd 用户环境"
+        },
+        {
+          "level": 3,
+          "id": "停用自定义-loader保留本次会话的过渡兼容",
+          "text": "停用自定义 loader，保留本次会话的过渡兼容"
+        },
+        {
+          "level": 2,
+          "id": "当前会话与最后一步清理",
+          "text": "当前会话与最后一步清理"
+        },
+        {
+          "level": 2,
+          "id": "配置验证与备份",
+          "text": "配置验证与备份"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/2026-4-27.md",
+      "target": "随记/2026-4-27.md",
+      "source_sha256": "b7506221897efbcd3682b6d8502538e41b3940b09af541036fbac2c38c7f2b4f",
+      "initial_sha256": "b14e9b9fc2559ce55b5e66a1aeab8edc24f6d65583e81fc3ef5cd1e8e7f8499d",
+      "old_url": "随记/2026-4-27/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "2026-4-27",
+          "text": "2026-4-27"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/2026-5-19.md",
+      "target": "随记/2026-5-19.md",
+      "source_sha256": "d1b314c24e462f094e131ccfa20fe88c64d1c2aad96ba77fa30b049f2c750462",
+      "initial_sha256": "06c3b977a807d17d99f50dc3385f829b2c4834fe01efe3486147f40cf3b0da87",
+      "old_url": "随记/2026-5-19/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "2026-5-19",
+          "text": "2026-5-19"
+        },
+        {
+          "level": 2,
+          "id": "概念简述",
+          "text": "概念简述"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/2026-6-1.md",
+      "target": "随记/2026-6-1.md",
+      "source_sha256": "9312590d96ef95d9d351b07832bb0ba673cc2a558a3f9c41d7d56f78a65c3c70",
+      "initial_sha256": "a6d2c7310e5257ef4523b44498e40afea6c5b2c604e620b07e51e7826b07cd65",
+      "old_url": "随记/2026-6-1/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "随记",
+          "text": "随记"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/2026-6-9.md",
+      "target": "随记/2026-6-9.md",
+      "source_sha256": "9690030780107f137751f8bca151f49d6b38d17152ac2e88157a9c8dbfbda10a",
+      "initial_sha256": "795a2cda99d7d2a48e8fa9b2bd7e171241e1fd625075a4cd84d045b4858f4fe7",
+      "old_url": "随记/2026-6-9/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "课堂作业",
+          "text": "课堂作业"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/Keygen(注册机).md",
+      "target": "随记/Keygen(注册机).md",
+      "source_sha256": "a2026ac94454b6b9b2b1437c4c859825112693eff74ebef14f317e7604e9fe57",
+      "initial_sha256": "dab64c4754b376a4a2ebba5a901cdf49d2cef3d994c6139c5b248b28eca40ec8",
+      "old_url": "随记/Keygen(注册机)/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "注册机",
+          "text": "注册机"
+        }
+      ],
+      "callouts": 0
+    },
+    {
+      "source": "随记/ghostty-segfault-问题排查.md",
+      "target": "随记/ghostty-segfault-问题排查.md",
+      "source_sha256": "2bb263f4e8f7c2c3064d67c8d8d1fd47704f9b2846926bf76710da99a4e58deb",
+      "initial_sha256": "867c9fcaf9ba9a9623714f5126802d6d19c13f4f44aecb03ced0832bc2da18c5",
+      "old_url": "随记/ghostty-segfault-问题排查/",
+      "headings": [
+        {
+          "level": 1,
+          "id": "ghostty-在-fedora-4344-升级后-segmentation-fault-问题",
+          "text": "Ghostty 在 Fedora 43→44 升级后 Segmentation Fault 问题"
+        },
+        {
+          "level": 2,
+          "id": "现象",
+          "text": "现象"
+        },
+        {
+          "level": 2,
+          "id": "根因分析",
+          "text": "根因分析"
+        },
+        {
+          "level": 3,
+          "id": "崩溃调用链",
+          "text": "崩溃调用链"
+        },
+        {
+          "level": 3,
+          "id": "关键包版本",
+          "text": "关键包版本"
+        },
+        {
+          "level": 3,
+          "id": "根因",
+          "text": "根因"
+        },
+        {
+          "level": 2,
+          "id": "临时解决方案",
+          "text": "临时解决方案"
+        },
+        {
+          "level": 3,
+          "id": "方法",
+          "text": "方法"
+        },
+        {
+          "level": 3,
+          "id": "方法_1",
+          "text": "方法"
+        },
+        {
+          "level": 4,
+          "id": "层级一zsh-终端会话-zshrc",
+          "text": "层级一：zsh 终端会话 (~/.zshrc)"
+        },
+        {
+          "level": 4,
+          "id": "层级二niri-环境块-configniriconfigkdl",
+          "text": "层级二：niri 环境块 (~/.config/niri/config.kdl)"
+        },
+        {
+          "level": 4,
+          "id": "层级三systemd-用户环境-configenvironmentd90-dmsconf",
+          "text": "层级三：systemd 用户环境 (~/.config/environment.d/90-dms.conf)"
+        },
+        {
+          "level": 3,
+          "id": "验证",
+          "text": "验证"
+        },
+        {
+          "level": 2,
+          "id": "补充排查vicinae-启动-ghostty-仍崩溃",
+          "text": "补充排查：vicinae 启动 ghostty 仍崩溃"
+        },
+        {
+          "level": 3,
+          "id": "现象_1",
+          "text": "现象"
+        },
+        {
+          "level": 3,
+          "id": "原因",
+          "text": "原因"
+        },
+        {
+          "level": 3,
+          "id": "解决",
+          "text": "解决"
+        },
+        {
+          "level": 3,
+          "id": "最终配置清单",
+          "text": "最终配置清单"
+        },
+        {
+          "level": 2,
+          "id": "后续问题glycin_data_dir-导致-clash-verge-崩溃",
+          "text": "后续问题：GLYCIN_DATA_DIR 导致 clash-verge 崩溃"
+        },
+        {
+          "level": 3,
+          "id": "现象_2",
+          "text": "现象"
+        },
+        {
+          "level": 3,
+          "id": "根因分析_1",
+          "text": "根因分析"
+        },
+        {
+          "level": 3,
+          "id": "验证方法",
+          "text": "验证方法"
+        },
+        {
+          "level": 3,
+          "id": "解决方案演进",
+          "text": "解决方案演进"
+        },
+        {
+          "level": 4,
+          "id": "尝试一在-glycin_data_dir-下补齐-glycin-配置",
+          "text": "尝试一：在 GLYCIN_DATA_DIR 下补齐 glycin 配置"
+        },
+        {
+          "level": 4,
+          "id": "尝试二去掉-fontconfigtrue-彻底绕过崩溃",
+          "text": "尝试二：去掉 Fontconfig=true 彻底绕过崩溃"
+        },
+        {
+          "level": 2,
+          "id": "最终配置",
+          "text": "最终配置"
+        },
+        {
+          "level": 3,
+          "id": "环境变量",
+          "text": "环境变量"
+        },
+        {
+          "level": 3,
+          "id": "自定义-glycin-加载器配置目录",
+          "text": "自定义 glycin 加载器配置目录"
+        },
+        {
+          "level": 3,
+          "id": "系统配置同步",
+          "text": "系统配置同步"
+        },
+        {
+          "level": 2,
+          "id": "永久修复方向",
+          "text": "永久修复方向"
+        },
+        {
+          "level": 2,
+          "id": "排查过程中用到的命令",
+          "text": "排查过程中用到的命令"
+        }
+      ],
+      "callouts": 2
+    }
+  ],
+  "font_sha256": {
+    "MonaspiceRnNerdFont-Italic.woff2": "801bafe143d5a555d0f41bb096d90a40baa566d6eff24aed5d81f279db4c9b03",
+    "MonaspiceArNerdFont-Regular.woff2": "9395543dafb83c6e69bc07b5593de0e2d062a55655ada74e7009000f8b22dfba",
+    "MonaspiceArNerdFont-Bold.woff2": "13840405e00e3158c858b8141e9691743382d9c19447fda668667abb8175a073",
+    "MonaspiceArNerdFont-Italic.woff2": "208f7bc06746b8fc65cfeb3b84efbf1840167b34f2f77866d4c15cb3441ff9d6",
+    "MonaspiceArNerdFont-BoldItalic.woff2": "838b1c92754d54ac4f19a0ef2a18884633635c5979ccd18d0e967793386ee425",
+    "MonaspiceXeNerdFont-Bold.woff2": "6fa791328c2c4e7352572e3c5ddb9dc1d9a7cb3424362b8f2341f4a584c7c641",
+    "MonaspiceNeNerdFont-Regular.woff2": "070674dabe7f1c2d70977041a2d4223b4a2261708f3ae830a767a07088f71a1b",
+    "MonaspiceNeNerdFont-Bold.woff2": "6ba4b1d892b34ddb051477c745aa386c863df6221818209e8c99dea4edb0e852",
+    "MonaspiceNeNerdFont-Italic.woff2": "68d35f3add3fbf45bc9ddd2797ecd7aeefaa4cd4bf5d3390b6e757397bc7bd5d",
+    "MonaspiceNeNerdFont-BoldItalic.woff2": "c9db5343e0918f3812fca69041ea2b3000ecce4a478727d285a9abf3efe51f6d",
+    "SarasaTermSC-Regular-00.woff2": "7c79805c2a372eefcb8aef8415fe8793a97d9e01db0a7f3fc16b2697ccc8bb74",
+    "SarasaTermSC-Regular-01.woff2": "3babfc587f74051c8afeaacce1bdfe5946f4483f828a94604794b5b2b684ed26",
+    "SarasaTermSC-Regular-02.woff2": "450f63612a945e0c0962a2dcfc0761c208e74b45d02cc22c2baa49d75fcedee8",
+    "SarasaTermSC-Regular-03.woff2": "7b550856bc08eca57b1a833196cd292a619fcfd3c9aba295c92d20f2e9fd99c2",
+    "SarasaTermSC-Regular-04.woff2": "1a67e1930a7cb696908aea0d14db57aeab42ebdc9fc72c9713dbe9e5898f518e",
+    "SarasaTermSC-Regular-05.woff2": "ac5279a2f8d987fcc5f7200ff7525ed2413766fe717c63e8c0ae5c5cd049b8ae",
+    "SarasaTermSC-Regular-06.woff2": "7ae4ee98ec1df0bc0b5dbd46722e3b4473e56dcf36fc4ac6964fafe89dcc4e30",
+    "SarasaTermSC-Regular-07.woff2": "60c14e63ab3dfc862861247e75a0595a3301b381b3e431059f2da762633184c7",
+    "SarasaTermSC-Regular-08.woff2": "c81e36d3a432fe7dcea48275bb8a3f1dd357e3ba2144d31a4e3fba4db59d549f",
+    "SarasaTermSC-Regular-09.woff2": "c29c57c28ff16b9ae9dcf2ba8735320679b33a6bda1528b129f1cd44e8749e5c",
+    "SarasaTermSC-Regular-10.woff2": "d2a7f92c4d58fda8afe9efa43c78b91505f16bbebf0ab9a044fc387d8bbe9ddc",
+    "Monaspice-LICENSE.txt": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+    "SarasaTermSC-Regular-11.woff2": "7274cedc73ff59efe5382776b1dc6d035a23aa2cff330d59a34bd505c4c739b3",
+    "Sarasa-LICENSE.txt": "32c932e0dbae4f6e6386964bbc2d04178707665a05ca65cf636241af13d50a53",
+    "SarasaTermSC-Regular-12.woff2": "64cee0ee276bf5c415b960c3f6a836bca26b69bb14d817d1da95ce2ec52e54a8",
+    "SarasaTermSC-Regular-13.woff2": "51a133005b539c640c556897e8ec0fe0a8ced10ad4927b9fb433e3245447c102",
+    "SarasaTermSC-Regular-14.woff2": "dd3c17969579923bbfe4dae5651e5fe27f96108f35f819d244068bcd1b6b2b4c",
+    "SarasaTermSC-Regular-15.woff2": "304efe0351a0e441832e1ed00705271ae509846c0be6fc04aa8cd686dec30374",
+    "SarasaTermSC-Regular-16.woff2": "b5baee54369c078ec941debd52e6dbc972ae9bf113e8ff3dacb1bc2bf9e47792",
+    "SarasaTermSC-Regular-17.woff2": "7c2cb7fe9c9bbe6fddbbf532adc2f29b817b742970ec666540c0b58dec6dd2a2",
+    "SarasaTermSC-Regular-18.woff2": "08f38d5b3de027d7d87fb85897a1a2c3adcd735fd89895465b7f965b752cb862",
+    "SarasaTermSC-Regular-19.woff2": "c09b00f0a663c2d20ca7323db12c7d36f464f15b739409a973a2167f2c51b5b0",
+    "SarasaTermSC-Regular-20.woff2": "f9b7da2c420d2c92207bac4a60d617632a0dcbb26ddbe28247c352f87fb2f331",
+    "SarasaTermSC-Regular-21.woff2": "c94a282f19d08f2d235c2ef46e49f6d63bd7253c3e89256e8112b051496130cc",
+    "SarasaTermSC-Regular-22.woff2": "84990acbb9348abe42d1768325b90824990c74470d6530c4d538c19c77c78d15",
+    "SarasaTermSC-Regular-23.woff2": "e862582ec9c74cd1d540a9b0df2d97a54af7f92ee58b2cfd55228752c19f19cc",
+    "SarasaTermSC-Regular-24.woff2": "0104ddcfcf40c0e255aa3da7d97094001c488c6b55e4873ec1501736b2d5577c",
+    "SarasaTermSC-Regular-25.woff2": "cd6db9ed4de294a61626404942a5cd28bb4daa1e9933459667c8108aaad5630a",
+    "SarasaTermSC-Regular-26.woff2": "eb4716ea69ecb195e852fade7c8bb6ee769e6751600b043996b42906e5e0bb32",
+    "SarasaTermSC-Bold-00.woff2": "ac9470411d4eb958d63f0373df72708ef89d5e0f21b4917ad7e8834d2ffdf786",
+    "SarasaTermSC-Bold-01.woff2": "7758653d63129d2ce17c4c331ab09daf80b1447ee7a4446d3d8acf4770e769f9",
+    "SarasaTermSC-Bold-02.woff2": "51a64ddca70661a380e43710f1a59021637529dac0727b20819d4fb251f03497",
+    "SarasaTermSC-Bold-03.woff2": "ff0c240f23ba192eabd2419142962ebb61241a20aef6da79c76d4963a01261db",
+    "SarasaTermSC-Bold-04.woff2": "6bc12080c255b2cfdf276883a97e666cbcead74fe5e7f317db67e7d5a2f72336",
+    "SarasaTermSC-Bold-05.woff2": "628ef4cdf94e69449fa5a857334922c27701b9400fdb40b309016a17326bd6d0",
+    "SarasaTermSC-Bold-06.woff2": "31e475d5eba15151135ac4e79c8fb0ef08668fceb77b5eac2d0f1f911ed2f7b9",
+    "SarasaTermSC-Bold-07.woff2": "d55a1fdf1b20c2edfd7f63258271dbc809367c10319abaa72105d8eaa74841c7",
+    "SarasaTermSC-Bold-08.woff2": "8ca9ca1f74f977d0beb97feac3dce4b07797f8c50e03d08230e4f21ac601ee2d",
+    "SarasaTermSC-Bold-09.woff2": "09ea91a91bbfd8d9ddc4ac8c2e9ac724922b64ac1a41fc97672aa275a65b389e",
+    "SarasaTermSC-Bold-10.woff2": "4a0153dffa638588cc69b9d85e43bec4dfa3882621e762630b6f35929092101a",
+    "SarasaTermSC-Bold-11.woff2": "2e89a3be85bdc405c597e7641bf9c6372aad2b45774492253d5a5f1a991ec515",
+    "SarasaTermSC-Bold-12.woff2": "cb9ad87593ecb32578845f34cbfcc06dcac123ba8a84b919683c06baf862ecf3",
+    "SarasaTermSC-Bold-13.woff2": "13993e62de577c34a1c1d8eda9aa0948ab274bbad787a3d06a9b871cf54942cf",
+    "SarasaTermSC-Bold-14.woff2": "5b76c3dc2c07ac47380403cd0bd632c7c068a14f7d561dab7f77190c3a5be3a8",
+    "SarasaTermSC-Bold-15.woff2": "f50fa7f46ed10bce7ad4a9dd9534fe32edd6c501527bebab50b7976f2a47f9e8",
+    "SarasaTermSC-Bold-16.woff2": "7e59bcc41c0dc1d90c74fef7bdbbbb328b40f826c580d62c6ba0b7841cba921e",
+    "SarasaTermSC-Bold-17.woff2": "3910fa299085e4c229179cd3030bea7ce725af8d62b202bb32b7e7ec5ee5c052",
+    "SarasaTermSC-Bold-18.woff2": "7ccde4a46807f69c241fb1d6c973964dc028b577ffd0e3e7042a529a0319cdf0",
+    "SarasaTermSC-Bold-19.woff2": "e9f1a7ff558f2e0f54d7d37e7ad4c5ef0b12466e5e9b8f24b9a1e831f7df1ce2",
+    "SarasaTermSC-Bold-20.woff2": "79c8671b3fe1d6587f0287d0da299f7496923bab62090546f0bfadf40070e3ee",
+    "SarasaTermSC-Bold-21.woff2": "5ac0a25d99999e0e89517cc475b6de99f32725c04db3574ac10f9e03c699ae6c",
+    "SarasaTermSC-Bold-22.woff2": "5afefbe7ce833b3de181da8fbedac6b896904a533e84da4140303c2711b86e6d",
+    "SarasaTermSC-Bold-23.woff2": "ad8488159a7b64ec63cf717bdd24c6a617f8cc8b08deaedd276f90d7d5257faf",
+    "SarasaTermSC-Bold-24.woff2": "8b98bc8f4c9256afbe6dd724aafb0a3bfeabe0694dad17012ed9d394fcea59e8",
+    "SarasaTermSC-Bold-25.woff2": "9191b364032b3ce980cc16d706ecf1f212cc2d34fc5aaf1cc20cf3a598daad4a",
+    "SarasaTermSC-Bold-26.woff2": "62ad83f4b8e28c7a48f5f2ba6c6b2cba7152c03ccedd7fac18fdcd65440d87c5"
+  }
+}

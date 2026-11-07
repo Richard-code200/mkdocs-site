@@ -1,0 +1,126 @@
+[
+  {
+    "title": "MarkDown",
+    "folder": "MarkDown",
+    "files": [
+      "MarkDown/MarkDown.md"
+    ]
+  },
+  {
+    "title": "Rust",
+    "folder": "Rust",
+    "files": [
+      "Rust/基本语法与数据类型.md",
+      "Rust/函数与控制流.md",
+      "Rust/格式化输出.md",
+      "Rust/所有权.md",
+      "Rust/引用与借用.md",
+      "Rust/切片.md",
+      "Rust/结构体.md",
+      "Rust/Enum和模式匹配.md",
+      "Rust/集合.md",
+      "Rust/迭代器与闭包.md",
+      "Rust/泛型与特征.md",
+      "Rust/生命周期.md",
+      "Rust/错误处理.md",
+      "Rust/模块系统.md",
+      "Rust/测试.md",
+      "Rust/Cargo工作区与依赖管理.md",
+      "Rust/项目代码组织.md",
+      "Rust/命令行文件搜索实践.md",
+      "Rust/学习项目计划.md"
+    ]
+  },
+  {
+    "title": "Zed",
+    "folder": "Zed",
+    "files": [
+      "Zed/index.md",
+      "Zed/快捷键.md"
+    ]
+  },
+  {
+    "title": "Git使用指南",
+    "folder": "git使用指南",
+    "files": [
+      "git使用指南/Git基础概念.md",
+      "git使用指南/初始设置.md",
+      "git使用指南/基本操作命令.md",
+      "git使用指南/工作区暂存.md",
+      "git使用指南/忽略文件配置.md",
+      "git使用指南/分支管理.md",
+      "git使用指南/远程仓库操作.md",
+      "git使用指南/标签管理.md",
+      "git使用指南/撤销与回退.md"
+    ]
+  },
+  {
+    "title": "常用工具",
+    "folder": "常用工具",
+    "files": [
+      "常用工具/bat.md",
+      "常用工具/eza.md",
+      "常用工具/find_fd.md",
+      "常用工具/grep_rg.md",
+      "常用工具/late_sh_zh.md",
+      "常用工具/uv.md",
+      "常用工具/终端快捷键.md"
+    ]
+  },
+  {
+    "title": "开源协议",
+    "folder": "开源协议",
+    "files": [
+      "开源协议/开源协议概念总结.md"
+    ]
+  },
+  {
+    "title": "开源项目学习",
+    "folder": "开源项目学习",
+    "files": [
+      "开源项目学习/流程指南.md"
+    ]
+  },
+  {
+    "title": "操作系统原理",
+    "folder": "操作系统原理",
+    "files": [
+      "操作系统原理/第一章.md",
+      "操作系统原理/课程信息.md"
+    ]
+  },
+  {
+    "title": "算法笔记",
+    "folder": "算法笔记",
+    "files": [
+      "算法笔记/分发饼干.md"
+    ]
+  },
+  {
+    "title": "费曼学习法",
+    "folder": "费曼学习法",
+    "files": [
+      "费曼学习法/学习方法.md"
+    ]
+  },
+  {
+    "title": "随记",
+    "folder": "随记",
+    "files": [
+      "随记/2026-09-12-ghostty段错误复查与默认配置恢复.md",
+      "随记/2026-6-9.md",
+      "随记/2026-6-1.md",
+      "随记/2026-5-19.md",
+      "随记/2026-4-27.md",
+      "随记/ghostty-segfault-问题排查.md",
+      "随记/Keygen(注册机).md"
+    ]
+  },
+  {
+    "title": "Linux",
+    "folder": "Linux",
+    "files": [
+      "Linux/安全特性.md"
+    ]
+  }
+]

@@ -1,0 +1,109 @@
+@use "./base.scss";
+
+/* 字体文件与精确色值由原站复制；这里适配 Quartz 原生组件。 */
+:root {
+  color-scheme: dark;
+  --font-stack: "MonaspiceAr Nerd Font", "Sarasa Term SC", monospace;
+  --heading-font-stack: "MonaspiceXe Nerd Font", "Sarasa Term SC", monospace;
+  --mono-font-stack: "MonaspiceNe Nerd Font", "Sarasa Term SC", monospace;
+  --comment-font-stack: "MonaspiceRn Nerd Font", "Sarasa Term SC", monospace;
+}
+
+html { scrollbar-color: #665c54 #282828; }
+.legacy-anchor, .legacy-home-anchor { display: block; height: 0; padding: 0; margin: 0; scroll-margin-top: 72px; }
+body {
+  /* 在正文层声明，隔离旧 Terminal 调色板自带的默认字体变量。 */
+  --font-stack: "MonaspiceAr Nerd Font", "Sarasa Term SC", monospace;
+  --mono-font-stack: "MonaspiceNe Nerd Font", "Sarasa Term SC", monospace;
+  font-family: var(--font-stack);
+  font-feature-settings: "calt" 1;
+  background: #282828;
+  color: #ebdbb2;
+}
+button, input, select, textarea { font-family: var(--font-stack); }
+h1, h2, h3, h4, h5, h6, .page-title a {
+  font-family: var(--heading-font-stack);
+  font-weight: 700;
+  line-height: 1.5;
+}
+h1, .article-title { color: #f38019; }
+h2 { color: #fabd2f; }
+h3 { color: #b8bb26; }
+h4 { color: #8ec07c; }
+h5 { color: #d3869b; }
+h6 { color: #83a598; }
+.page-title { font-size: 22px; }
+.page-title a { color: #fbf1c7; line-height: 1.6; }
+article { font-size: 15px; line-height: 1.85; }
+article p, article li { line-height: 1.85; }
+article :is(h2, hr, th, td, tr) { border-color: #504945; }
+article h2 { padding-bottom: 6px; border-bottom: 1px solid #504945; }
+article strong { color: #fbf1c7; font-weight: 700; }
+article blockquote { border-left-color: #8ec07c; color: #bdae93; }
+article a.internal { color: #fabd2f; background: #3c3836; }
+article a:hover { color: #8ec07c; }
+article .text-highlight, article mark { background: #fabd2f; color: #1d2021; border-radius: 2px; padding: .05em .2em; }
+article :not(pre) > code { background: #3c3836; color: #ebdbb2; border: 1px solid #504945; font-size: .88em; }
+pre {
+  background: #1d2021;
+  border: 1px solid #504945;
+  border-radius: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #665c54 transparent;
+}
+pre code, [saved-theme] pre code[data-theme] {
+  font-family: var(--mono-font-stack);
+  background: #1d2021;
+  color: #ebdbb2;
+  font-size: 13px;
+  line-height: 1.7;
+}
+/* Shiki 为注释使用原站独有的灰色；以此定位注释 token，保留 Radon 字体。 */
+code span[style*="#928374" i] {
+  font-family: var(--comment-font-stack);
+  font-style: italic;
+}
+article pre code > [data-line] { padding: 0 12px; }
+article table { font-size: 13px; line-height: 1.75; }
+article thead { background: #3c3836; }
+article :is(th, td) { padding: 9px 12px; }
+article .callout[data-callout] {
+  --color: #8ec07c;
+  --border: #504945;
+  --bg: #32302f;
+  border: 1px solid #504945;
+  border-left: 3px solid var(--color);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+article .callout[data-callout="warning"] { --color: #fb4934; }
+article .callout:is([data-callout="tip"], [data-callout="important"]) { --color: #fabd2f; }
+article .callout .callout-title { gap: 8px; }
+article .callout .callout-title p { color: var(--color); font-weight: 700; }
+article .callout-content > :first-child { margin-top: 0; }
+article .callout-content > :last-child { margin-bottom: 0; }
+article .callout-title-inner { font-family: var(--font-stack); }
+article > blockquote:not(.callout) { color: #bdae93; }
+.search > .search-button { background: #3c3836; border: 1px solid #504945; border-radius: 6px; }
+.search > .search-container > .search-space { background: #282828; border-color: #504945; }
+.graph > .graph-outer { border-color: #504945; border-radius: 6px; background: #1d2021; }
+.explorer .folder-container div > a { color: #fabd2f; }
+.explorer .explorer-content a.active { color: #fabd2f; background: #3c3836; }
+.sidebar :is(h2, h3) { font-size: 15px; }
+.sidebar .page-title { font-size: 22px; }
+.sidebar .explorer :is(a, button), .sidebar .toc :is(a, button) { line-height: 1.65; }
+footer { border-top: 1px solid #504945; padding-top: 20px; }
+footer p, footer li, footer a { font-size: 12px; }
+
+/* 保留原生导航与关系图，只控制手机长代码和表格的独立横向滚动。 */
+@media (max-width: 800px) {
+  article { font-size: 14px; }
+  article table { max-width: 100%; }
+  .page-title, .sidebar .page-title { font-size: 18px; }
+  article .callout { padding: 12px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
