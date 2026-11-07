@@ -5,7 +5,7 @@ import handler from "serve-handler"
 
 // 不把 .html 再重定向成无扩展名路径，避免与旧目录网址形成循环。
 const port = Number(process.env.PORT ?? 8082)
-const base = (process.env.SITE_BASE_PATH ?? "/mkdocs-site").replace(/\/$/, "")
+const base = (process.env.SITE_BASE_PATH ?? "/quartz-site").replace(/\/$/, "")
 const directory = path.resolve(".preview")
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PORT 必须是有效端口")
 const server = http.createServer((request, response) => {

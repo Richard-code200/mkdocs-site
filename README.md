@@ -2,9 +2,11 @@
 
 记录个人学习到的内容，和想记录的其他信息。
 
-网站：<https://richard-code200.github.io/mkdocs-site/>
+网站：<https://richard-code200.github.io/quartz-site/>
 
-现使用 **Quartz 4.5.2 + 定制首页**。首页沿用已经确认的 Hugo 设计，文章页保留 Quartz 的目录、搜索、关系图、反向链接与悬浮预览；全站由同一个 Quartz 构建流程生成，不需要 Hugo 或 MkDocs。
+仓库：<https://github.com/Richard-code200/quartz-site>
+
+现使用 **Quartz 4.5.2 + 定制首页**。首页采用已确认的“字形实验室”设计，文章页保留 Quartz 的目录、搜索、关系图、反向链接与悬浮预览；全站由同一个 Quartz 构建流程生成，不需要 Hugo 或 MkDocs。
 
 ## 本地运行
 
@@ -15,12 +17,12 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm ci --no-audit --no-fund
 npm run serve
 ```
 
-打开 <http://localhost:8082/mkdocs-site/>。预览只监听本机，并使用与 GitHub Pages 一致的子路径；按 `Ctrl+C` 停止。
+打开 <http://localhost:8082/quartz-site/>。预览只监听本机，并使用与 GitHub Pages 一致的子路径；按 `Ctrl+C` 停止。
 
 端口冲突时：`PORT=8083 npm run serve`。这是静态预览服务，修改后需重新构建 `.preview/` 并刷新，不会自动热更新：
 
 ```bash
-QUARTZ_BASE_URL=localhost:8082/mkdocs-site npm run build -- --output .preview
+QUARTZ_BASE_URL=localhost:8082/quartz-site npm run build -- --output .preview
 ```
 
 本地预览会禁止索引，正式生产构建不会继承该限制。
@@ -78,6 +80,8 @@ created: 2026-11-07
 
 普通文章同时有明确的 `.html` 文件，例如 `/Rust/所有权.html`。原 MkDocs 的 `/Rust/所有权/` 路径通过兼容页跳转，保留查询参数与标题锚点。
 
+以上兼容均位于当前 `/quartz-site/` 项目路径下。GitHub 仓库更名并不自动保留原 Pages 的 `/mkdocs-site/` 前缀；若需要旧域名路径继续访问，必须另行配置跳转站或自定义域名，不能只依靠本站兼容页。
+
 旧标题锚点通过 `LegacyAnchors` 注入，新的 Quartz 锚点也可以使用。原首页的旧标题链接会转至“关于本站”页的对应位置。
 
 `migration/manifest.json` 保存 53 份原文的校验记录、758 个旧标题锚点与字体校验和。运行 `npm run validate` 可持续检查旧路径、锚点、资源与关系图。它不会把个人机器上的备份路径当作 CI 依赖。
@@ -85,6 +89,8 @@ created: 2026-11-07
 ## 部署
 
 推送 `main` 后，`.github/workflows/publish.yml` 安装依赖、检查类型、构建并验收，再把 `public/` 发布到已有的 `gh-pages` 分支。保持 GitHub Pages 原有的分支发布设置即可。
+
+仓库更名后，现行 Git 远程应为 `https://github.com/Richard-code200/quartz-site.git`；站点地址、页脚、RSS 与本机预览统一使用 `quartz-site`。生产验证会检查分享网址、站点地图和 RSS，防止旧项目路径残留。
 
 本地修改不会自动推送。正式上线前先确认本地效果，再提交并推送到 `main`，由 GitHub Actions 完成构建与发布；远程发布结果以对应工作流运行记录为准。
 

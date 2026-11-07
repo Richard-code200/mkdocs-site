@@ -7,7 +7,7 @@ import { once } from "node:events"
 // 有头模式提供真实桌面指针能力；Linux 无显示器时由 agent-browser 管理虚拟显示。
 const execute = promisify(execFile)
 let session = `homepage-regression-${process.pid}`
-const base = new URL(process.argv[2] ?? "http://localhost:8082/mkdocs-site/").href
+const base = new URL(process.argv[2] ?? "http://localhost:8082/quartz-site/").href
 async function browser(...args) {
   const { stdout } = await execute(
     "agent-browser",

@@ -1,7 +1,7 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import { QuartzComponent } from "./quartz/components/types"
 import { HomeHeader } from "./quartz/components/HybridHome"
+import { QuartzComponent } from "./quartz/components/types"
 import { sortNavigation } from "./quartz/util/navigation"
 
 // 首页使用移植的 Hugo 设计，其他页面保留 Quartz 原生知识花园布局。
@@ -15,8 +15,8 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/Richard-code200/mkdocs-site",
-      RSS: "https://richard-code200.github.io/mkdocs-site/index.xml",
+      GitHub: "https://github.com/Richard-code200/quartz-site",
+      RSS: "https://richard-code200.github.io/quartz-site/index.xml",
     },
   }),
 }

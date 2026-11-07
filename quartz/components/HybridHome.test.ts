@@ -1,14 +1,14 @@
-import test from "node:test"
+import { build } from "esbuild"
 import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
+import test from "node:test"
 import { fileURLToPath } from "node:url"
-import { build } from "esbuild"
 import { h } from "preact"
 import render from "preact-render-to-string"
-import type { QuartzComponentProps } from "./types"
 import type { QuartzPluginData } from "../plugins/vfile"
 import type { FullSlug } from "../util/path"
+import type { QuartzComponentProps } from "./types"
 
 // 使用真实组件；这里只模拟 Quartz 构建时的文本资源加载方式。
 const source = fileURLToPath(new URL("./HybridHome.tsx", import.meta.url))
@@ -81,13 +81,13 @@ test("最近记录按钮指向本页实际存在的区域", () => {
 test("全部分类与重点分类入口可在部署子路径中解析", () => {
   const html = render(h(Home, props()))
   const urls = [...html.matchAll(/href="([^"]+)"/g)].map((match) =>
-    decodeURI(new URL(match[1], "https://example.com/mkdocs-site/").pathname),
+    decodeURI(new URL(match[1], "https://example.com/quartz-site/").pathname),
   )
   for (const expected of [
-    "/mkdocs-site/笔记导航",
-    "/mkdocs-site/Rust/",
-    "/mkdocs-site/常用工具/",
-    "/mkdocs-site/随记/",
+    "/quartz-site/笔记导航",
+    "/quartz-site/Rust/",
+    "/quartz-site/常用工具/",
+    "/quartz-site/随记/",
   ]) {
     assert.ok(urls.includes(expected), `缺少可用入口：${expected}`)
   }

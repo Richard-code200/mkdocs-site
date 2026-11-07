@@ -9,9 +9,12 @@ import tarfile
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = '/mkdocs-site'
+BASE = '/quartz-site'
+SITE_URL = 'https://richard-code200.github.io' + BASE
+REPOSITORY_URL = 'https://github.com/Richard-code200/quartz-site'
 
 
 class Page(HTMLParser):
@@ -21,6 +24,7 @@ class Page(HTMLParser):
         self.ids = set()
         self.canonical = None
         self.noindex = False
+        self.social_urls = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -30,6 +34,8 @@ class Page(HTMLParser):
         self.links.extend(attrs[key] for key in ('href', 'src') if attrs.get(key))
         if tag == 'link' and attrs.get('rel') == 'canonical':
             self.canonical = attrs.get('href')
+        if tag == 'meta' and attrs.get('property') in ('og:url', 'twitter:url'):
+            self.social_urls.append(attrs.get('content', ''))
         if tag == 'meta' and attrs.get('name') == 'robots' and 'noindex' in attrs.get('content', ''):
             self.noindex = True
 
@@ -174,6 +180,33 @@ def main():
                     errors.append(f'原首页锚点缺少转接：#{heading["id"]}')
     if output.name == 'public' and home_page.noindex:
         errors.append('正式首页仍禁止搜索引擎索引')
+
+    # 仓库更名后，正文相对链接可能正常，但分享元数据和订阅地址仍指向旧站。
+    if output.name == 'public':
+        def current_site(value):
+            return value == SITE_URL or value.startswith(SITE_URL + '/')
+
+        for file, page in pages.items():
+            for value in page.social_urls:
+                if not current_site(value):
+                    errors.append(f'{file.relative_to(output)}：分享网址不属于当前站点 {value}')
+        for name, selectors in (
+            ('sitemap.xml', ('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc',)),
+            ('index.xml', ('./channel/link', './channel/item/link')),
+        ):
+            try:
+                document = ElementTree.parse(output / name)
+                values = [node.text or '' for selector in selectors for node in document.findall(selector)]
+                if not values:
+                    errors.append(f'{name}：缺少站点网址')
+                for value in values:
+                    if not current_site(value):
+                        errors.append(f'{name}：网址不属于当前站点 {value}')
+            except (OSError, ElementTree.ParseError) as error:
+                errors.append(f'{name}：无法读取地址索引 {error}')
+        for value in (REPOSITORY_URL, SITE_URL + '/index.xml'):
+            if value not in home_page.links:
+                errors.append(f'首页缺少当前仓库或订阅入口：{value}')
 
     audited = 0
     if args.audit_archive:

@@ -1,9 +1,9 @@
 import { QuartzConfig } from "./quartz/cfg"
-import * as Plugin from "./quartz/plugins"
-import { previewTheme } from "./quartz/util/previewTheme"
 import HybridHome from "./quartz/components/HybridHome"
-import { LegacyAnchors } from "./quartz/plugins/transformers/legacyAnchors"
+import * as Plugin from "./quartz/plugins"
 import { LegacyRoutes } from "./quartz/plugins/emitters/legacyRoutes"
+import { LegacyAnchors } from "./quartz/plugins/transformers/legacyAnchors"
+import { previewTheme } from "./quartz/util/previewTheme"
 
 // 正式笔记站：保留原字体和配色；构建不依赖字体 CDN，不启用访问统计。
 const colors = {
@@ -26,7 +26,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "zh-CN",
-    baseUrl: process.env.QUARTZ_BASE_URL ?? "richard-code200.github.io/mkdocs-site",
+    baseUrl: process.env.QUARTZ_BASE_URL ?? "richard-code200.github.io/quartz-site",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
     theme: {
