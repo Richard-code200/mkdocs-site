@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>grex：从样本生成正则表达式 · Richard的个人博客</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Richard的个人博客"/><meta property="og:title" content="grex：从样本生成正则表达式 · Richard的个人博客"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="grex：从样本生成正则表达式 · Richard的个人博客"/><meta name="twitter:description" content="grex 根据你提供的字符串样本，自动生成一条正则表达式。它适合作为学习搭档：先自己猜规则，再看工具如何表达，最后用新样本和反例检查理解。 grex：根据样本生成正则。 grep / rg：使用正则搜索文本，见 grep 与 rg 笔记。 本文以命令行工具为主，示例输出在 grex 1.4.6 上核对；其他版本可能生成形式不同但含义等价的表达式。 样本不等于需求 默认设置下，grex 的目标是只匹配给出的样本，而不是猜出所有符合业务要求的字符串。开启 -d、-w 等选项后，匹配范围又可能大幅扩大。它不能代替你判断“应该接受什么、必须拒绝什么”，也没有供 CLI 输入负样本来约束生成的选项；反例..."/><meta property="og:description" content="grex 根据你提供的字符串样本，自动生成一条正则表达式。它适合作为学习搭档：先自己猜规则，再看工具如何表达，最后用新样本和反例检查理解。 grex：根据样本生成正则。 grep / rg：使用正则搜索文本，见 grep 与 rg 笔记。 本文以命令行工具为主，示例输出在 grex 1.4.6 上核对；其他版本可能生成形式不同但含义等价的表达式。 样本不等于需求 默认设置下，grex 的目标是只匹配给出的样本，而不是猜出所有符合业务要求的字符串。开启 -d、-w 等选项后，匹配范围又可能大幅扩大。它不能代替你判断“应该接受什么、必须拒绝什么”，也没有供 CLI 输入负样本来约束生成的选项；反例..."/><meta property="og:image:alt" content="grex 根据你提供的字符串样本，自动生成一条正则表达式。它适合作为学习搭档：先自己猜规则，再看工具如何表达，最后用新样本和反例检查理解。 grex：根据样本生成正则。 grep / rg：使用正则搜索文本，见 grep 与 rg 笔记。 本文以命令行工具为主，示例输出在 grex 1.4.6 上核对；其他版本可能生成形式不同但含义等价的表达式。 样本不等于需求 默认设置下，grex 的目标是只匹配给出的样本，而不是猜出所有符合业务要求的字符串。开启 -d、-w 等选项后，匹配范围又可能大幅扩大。它不能代替你判断“应该接受什么、必须拒绝什么”，也没有供 CLI 输入负样本来约束生成的选项；反例..."/><meta property="og:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:url" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta name="twitter:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="richard-code200.github.io/quartz-site"/><meta property="og:url" content="https://richard-code200.github.io/quartz-site/常用工具/grex"/><meta property="twitter:url" content="https://richard-code200.github.io/quartz-site/常用工具/grex"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="grex 根据你提供的字符串样本，自动生成一条正则表达式。它适合作为学习搭档：先自己猜规则，再看工具如何表达，最后用新样本和反例检查理解。 grex：根据样本生成正则。 grep / rg：使用正则搜索文本，见 grep 与 rg 笔记。 本文以命令行工具为主，示例输出在 grex 1.4.6 上核对；其他版本可能生成形式不同但含义等价的表达式。 样本不等于需求 默认设置下，grex 的目标是只匹配给出的样本，而不是猜出所有符合业务要求的字符串。开启 -d、-w 等选项后，匹配范围又可能大幅扩大。它不能代替你判断“应该接受什么、必须拒绝什么”，也没有供 CLI 输入负样本来约束生成的选项；反例..."/><meta name="generator" content="Quartz"/><script>document.documentElement.setAttribute("saved-theme", "dark")</script><link rel="icon" type="image/svg+xml" href="../static/preview-favicon.svg"/><link rel="stylesheet" data-persist="true" href="../static/styles/gruvbox_dark.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/font_faces.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/code_fonts.css"/><link href="../index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvcXVhcnR6LXNpdGUvcXVhcnR6LXNpdGUvcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="../prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://richard-code200.github.io/quartz-site/index.xml"/></head><body data-slug="常用工具/grex"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Richard的个人博客</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>搜索</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索些什么" placeholder="搜索些什么"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>{let order={MarkDown:1e3,\&quot;MarkDown/MarkDown\&quot;:1001,Rust:2e3,\&quot;Rust/\\u57FA\\u672C\\u8BED\\u6CD5\\u4E0E\\u6570\\u636E\\u7C7B\\u578B\&quot;:2001,\&quot;Rust/\\u51FD\\u6570\\u4E0E\\u63A7\\u5236\\u6D41\&quot;:2002,\&quot;Rust/\\u683C\\u5F0F\\u5316\\u8F93\\u51FA\&quot;:2003,\&quot;Rust/\\u6240\\u6709\\u6743\&quot;:2004,\&quot;Rust/\\u5F15\\u7528\\u4E0E\\u501F\\u7528\&quot;:2005,\&quot;Rust/\\u5207\\u7247\&quot;:2006,\&quot;Rust/\\u7ED3\\u6784\\u4F53\&quot;:2007,\&quot;Rust/Enum\\u548C\\u6A21\\u5F0F\\u5339\\u914D\&quot;:2008,\&quot;Rust/\\u96C6\\u5408\&quot;:2009,\&quot;Rust/\\u8FED\\u4EE3\\u5668\\u4E0E\\u95ED\\u5305\&quot;:2010,\&quot;Rust/\\u6CDB\\u578B\\u4E0E\\u7279\\u5F81\&quot;:2011,\&quot;Rust/\\u751F\\u547D\\u5468\\u671F\&quot;:2012,\&quot;Rust/\\u9519\\u8BEF\\u5904\\u7406\&quot;:2013,\&quot;Rust/\\u6A21\\u5757\\u7CFB\\u7EDF\&quot;:2014,\&quot;Rust/\\u6D4B\\u8BD5\&quot;:2015,\&quot;Rust/Cargo\\u5DE5\\u4F5C\\u533A\\u4E0E\\u4F9D\\u8D56\\u7BA1\\u7406\&quot;:2016,\&quot;Rust/\\u9879\\u76EE\\u4EE3\\u7801\\u7EC4\\u7EC7\&quot;:2017,\&quot;Rust/\\u547D\\u4EE4\\u884C\\u6587\\u4EF6\\u641C\\u7D22\\u5B9E\\u8DF5\&quot;:2018,\&quot;Rust/\\u5B66\\u4E60\\u9879\\u76EE\\u8BA1\\u5212\&quot;:2019,Zed:3001,\&quot;Zed/\\u5FEB\\u6377\\u952E\&quot;:3002,git\\u4F7F\\u7528\\u6307\\u5357:4e3,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/Git\\u57FA\\u7840\\u6982\\u5FF5\&quot;:4001,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u521D\\u59CB\\u8BBE\\u7F6E\&quot;:4002,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u57FA\\u672C\\u64CD\\u4F5C\\u547D\\u4EE4\&quot;:4003,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5DE5\\u4F5C\\u533A\\u6682\\u5B58\&quot;:4004,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5FFD\\u7565\\u6587\\u4EF6\\u914D\\u7F6E\&quot;:4005,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5206\\u652F\\u7BA1\\u7406\&quot;:4006,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u8FDC\\u7A0B\\u4ED3\\u5E93\\u64CD\\u4F5C\&quot;:4007,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u6807\\u7B7E\\u7BA1\\u7406\&quot;:4008,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u64A4\\u9500\\u4E0E\\u56DE\\u9000\&quot;:4009,\\u5E38\\u7528\\u5DE5\\u5177:5e3,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/bat\&quot;:5001,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/eza\&quot;:5002,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/find_fd\&quot;:5003,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/grep_rg\&quot;:5004,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/late_sh_zh\&quot;:5005,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/uv\&quot;:5006,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/\\u7EC8\\u7AEF\\u5FEB\\u6377\\u952E\&quot;:5007,\\u5F00\\u6E90\\u534F\\u8BAE:6e3,\&quot;\\u5F00\\u6E90\\u534F\\u8BAE/\\u5F00\\u6E90\\u534F\\u8BAE\\u6982\\u5FF5\\u603B\\u7ED3\&quot;:6001,\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60:7e3,\&quot;\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60/\\u6D41\\u7A0B\\u6307\\u5357\&quot;:7001,\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406:8e3,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u7B2C\\u4E00\\u7AE0\&quot;:8001,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u8BFE\\u7A0B\\u4FE1\\u606F\&quot;:8002,\\u7B97\\u6CD5\\u7B14\\u8BB0:9e3,\&quot;\\u7B97\\u6CD5\\u7B14\\u8BB0/\\u5206\\u53D1\\u997C\\u5E72\&quot;:9001,\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5:1e4,\&quot;\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5/\\u5B66\\u4E60\\u65B9\\u6CD5\&quot;:10001,\\u968F\\u8BB0:11e3,\&quot;\\u968F\\u8BB0/2026-09-12-ghostty\\u6BB5\\u9519\\u8BEF\\u590D\\u67E5\\u4E0E\\u9ED8\\u8BA4\\u914D\\u7F6E\\u6062\\u590D\&quot;:11001,\&quot;\\u968F\\u8BB0/2026-6-9\&quot;:11002,\&quot;\\u968F\\u8BB0/2026-6-1\&quot;:11003,\&quot;\\u968F\\u8BB0/2026-5-19\&quot;:11004,\&quot;\\u968F\\u8BB0/2026-4-27\&quot;:11005,\&quot;\\u968F\\u8BB0/ghostty-segfault-\\u95EE\\u9898\\u6392\\u67E5\&quot;:11006,\&quot;\\u968F\\u8BB0/Keygen(\\u6CE8\\u518C\\u673A)\&quot;:11007,Linux:12e3,\&quot;Linux/\\u5B89\\u5168\\u7279\\u6027\&quot;:12001,\\u7B14\\u8BB0\\u5BFC\\u822A:1,\\u5173\\u4E8E\\u672C\\u7AD9:99e3,\\u6392\\u7248\\u9884\\u89C8:99001},aSlug=a.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),bSlug=b.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),aRank=order[aSlug]??(order[aSlug.split(\&quot;/\&quot;)[0]]??9e4)+900,bRank=order[bSlug]??(order[bSlug.split(\&quot;/\&quot;)[0]]??9e4)+900;return aRank-bRank||a.displayName.localeCompare(b.displayName,\&quot;zh-CN\&quot;,{numeric:!0})}&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" aria-label="笔记导航" data-mobile="true" aria-controls="explorer-71"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>笔记导航</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-71" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><header></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">首页</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../常用工具/">常用工具</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>grex：从样本生成正则表达式</a></div></nav><h1 class="article-title">grex：从样本生成正则表达式</h1><p show-comma="true" class="content-meta"><time datetime="2026-11-09T00:00:00.000Z">2026年11月09日</time><span>19分钟阅读</span></p><ul class="tags"><li><a href="../tags/常用工具" class="internal tag-link">常用工具</a></li><li><a href="../tags/正则表达式" class="internal tag-link">正则表达式</a></li></ul></div></div><article class="popover-hint"><p><code>grex</code> 根据你提供的字符串样本，自动生成一条正则表达式。它适合作为学习搭档：<strong>先自己猜规则，再看工具如何表达，最后用新样本和反例检查理解。</strong></p>
+<ul>
+<li><code>grex</code>：根据样本<strong>生成正则</strong>。</li>
+<li><code>grep</code> / <code>rg</code>：使用正则<strong>搜索文本</strong>，见 <a href="../常用工具/grep_rg" class="internal alias" data-slug="常用工具/grep_rg">grep 与 rg 笔记</a>。</li>
+<li>本文以命令行工具为主，示例输出在 <code>grex 1.4.6</code> 上核对；其他版本可能生成形式不同但含义等价的表达式。</li>
+</ul>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>样本不等于需求 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>默认设置下，grex 的目标是只匹配给出的样本，而不是猜出所有符合业务要求的字符串。开启 <code>-d</code>、<code>-w</code> 等选项后，匹配范围又可能大幅扩大。它不能代替你判断“应该接受什么、必须拒绝什么”，也没有供 CLI 输入负样本来约束生成的选项；反例需要另外测试。</p>
+</div>
+</blockquote>
+<h2 id="安装与开始使用">安装与开始使用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装与开始使用" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>先检查是否已经安装：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --version</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --help</span></span></code></pre></figure>
+<p>已有 Rust 工具链时，可以通过 Cargo 安装；下面是安装方法，已安装就不必重复运行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">cargo</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> install</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --locked</span></span></code></pre></figure>
+<p>不想编译时，可以从 <a href="https://github.com/pemistahl/grex/releases" class="external">官方 Releases<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 下载对应系统与架构的可执行文件。官方也列出了 Homebrew、Scoop 等包管理器渠道。<code>pip install grex</code> 安装的是 Python 扩展库，不是本文采用的 Cargo CLI 安装路线。</p>
+<p>不安装也能在 <a href="https://pemistahl.github.io/grex-js/" class="external">官方在线演示<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 中试用。不要向在线工具提交密码、令牌或真实的敏感数据。</p>
+<h2 id="命令速查">命令速查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#命令速查" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="输入和输出">输入和输出<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#输入和输出" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 每个参数是一条完整样本</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'cat'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'car'</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 含空格的样本也要保持为一个参数</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'hello world'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'hello rust'</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 从标准输入读取，每行一条样本；末尾的 - 不能省略</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">printf</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> '%s\n'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'cat'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'car'</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;"> |</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 从 UTF-8 文本文件读取，每行一条样本</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -f</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> samples.txt</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 用 shell 重定向保存正则；不是 grex -o</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'cat'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'car'</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;"> ></span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> pattern.txt</span></span></code></pre></figure>
+<p>上面的直接输入与管道示例可以在任意目录运行。文件示例需要当前目录已经有 <code>samples.txt</code>；<code>> pattern.txt</code> 会覆盖同名文件。位置参数与 <code>-f</code> 是两种互斥的输入方式，不要混用。</p>
+<p>这里的单引号是 <strong>shell 语法</strong>：防止空格、<code>*</code>、<code>$</code> 等提前被 shell 解释，不属于传给 grex 的字符串。<code>grex '[a-z]'</code> 表示提供字面字符串 <code>[a-z]</code>，不是让工具展开一个正则。</p>
+<h3 id="常用选项">常用选项<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常用选项" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>选项</th><th>长选项</th><th>作用与注意点</th></tr></thead><tbody><tr><td><code>-f 文件</code></td><td><code>--file 文件</code></td><td>每行读取一个样本，不是每行一条现成正则</td></tr><tr><td><code>-d</code></td><td><code>--digits</code></td><td>将 Unicode 十进制数字转换为 <code>\d</code>，会扩大匹配范围</td></tr><tr><td><code>-w</code></td><td><code>--words</code></td><td>将 Unicode 单词字符转换为 <code>\w</code>，字母、数字、下划线等都可能匹配</td></tr><tr><td><code>-s</code></td><td><code>--spaces</code></td><td>将 Unicode 空白字符转换为 <code>\s</code>，不只是普通空格</td></tr><tr><td><code>-r</code></td><td><code>--repetitions</code></td><td>将重复子串压缩为 <code>{n}</code>、<code>{m,n}</code> 等量词表示</td></tr><tr><td><code>-i</code></td><td><code>--ignore-case</code></td><td>生成忽略大小写的表达式，通常带 <code>(?i)</code></td></tr><tr><td><code>-g</code></td><td><code>--capture-groups</code></td><td>将默认的非捕获分组改成捕获分组，不会自动识别业务字段</td></tr><tr><td><code>-x</code></td><td><code>--verbose</code></td><td>输出带 <code>(?x)</code> 的多行易读表达式</td></tr><tr><td><code>-c</code></td><td><code>--colorize</code></td><td>彩色显示，供终端阅读；保存或传给其他工具时不要加</td></tr><tr><td><code>-e</code></td><td><code>--escape</code></td><td>将非 ASCII 字符输出为 Unicode 转义，不是“启用正则”</td></tr><tr><td>无</td><td><code>--no-anchors</code></td><td>同时移除开头的 <code>^</code> 和结尾的 <code>$</code>，适合搜索较长文本中的片段</td></tr><tr><td>无</td><td><code>--no-start-anchor</code></td><td>只移除 <code>^</code>，保留结尾约束</td></tr><tr><td>无</td><td><code>--no-end-anchor</code></td><td>只移除 <code>$</code>，保留开头约束</td></tr></tbody></table></div>
+<p>其他字符类转换：<code>-D</code> → <code>\D</code>（非数字）、<code>-W</code> → <code>\W</code>（非单词字符）、<code>-S</code> → <code>\S</code>（非空白）。大小写不同，含义不同。</p>
+<p>初学时一次只加一个选项，观察变化。短选项可以组合，例如 <code>-dr</code> 等价于 <code>-d -r</code>；同时使用 <code>-d</code> 和 <code>-w</code> 时，数字优先转换成 <code>\d</code>，其他单词字符转换成 <code>\w</code>。</p>
+<h2 id="正则语法小抄">正则语法小抄<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#正则语法小抄" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>先读懂本页会用到的符号，不必一开始背完整套语法：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>写法</th><th>含义</th><th>例子</th></tr></thead><tbody><tr><td><code>^</code>、<code>$</code></td><td>匹配开头、结尾的位置，不消耗字符</td><td><code>^cat$</code> 用于限定整行内容</td></tr><tr><td><code>[abc]</code></td><td>匹配方括号中任意一个字符</td><td><code>[rt]</code> 匹配 <code>r</code> 或 <code>t</code></td></tr><tr><td><code>[0-9]</code></td><td>匹配一个 ASCII 数字</td><td><code>7</code> 可以，<code>x</code> 不可以</td></tr><tr><td><code>.</code></td><td>通常匹配除换行外的任意一个字符，具体取决于模式</td><td><code>a.b</code> 可以匹配 <code>a-b</code></td></tr><tr><td><code>\.</code></td><td>匹配字面上的句点</td><td><code>a\.b</code> 匹配 <code>a.b</code></td></tr><tr><td>分支（竖线）</td><td>在多个分支中选择一个</td><td><code>cat</code> 或 <code>dog</code> 的写法见下文</td></tr><tr><td><code>(?:...)</code></td><td>非捕获分组：把一段表达式当成整体</td><td><code>(?:ab){3}</code> 匹配 <code>ababab</code></td></tr><tr><td><code>(...)</code></td><td>捕获分组：分组并保存匹配内容</td><td><code>(ab)</code> 可以供程序提取内容</td></tr><tr><td><code>?</code></td><td>前一个字符或分组出现 0 次或 1 次</td><td><code>colou?r</code> 匹配 <code>color</code>、<code>colour</code></td></tr><tr><td><code>*</code>、<code>+</code></td><td>前一个单元出现 0 次以上、1 次以上</td><td><code>a*</code> 可匹配空串，<code>a+</code> 不可</td></tr><tr><td><code>{n}</code>、<code>{m,n}</code></td><td>前一个单元出现指定次数、指定范围次数</td><td><code>\d{2}</code> 匹配两个数字</td></tr><tr><td><code>\d</code>、<code>\w</code>、<code>\s</code></td><td>数字、单词字符、空白字符类</td><td>范围受正则引擎和 Unicode 设置影响</td></tr></tbody></table></div>
+<p>上表竖线的实际写法：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="regex" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="regex" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">^(?:cat|dog)$</span></span></code></pre></figure>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>“整串校验”和“逐行搜索”不是完全相同的场景 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>在 rg 的默认逐行搜索里，<code>^</code>、<code>$</code> 对应行的边界。编程语言中，换行、末尾换行和多行模式会影响锚点语义；严格校验整个字符串时，优先使用目标语言提供的完整匹配接口，例如 Python 的 <code>re.fullmatch()</code>。</p>
+</div>
+</blockquote>
+<h2 id="跟着示例学正则">跟着示例学正则<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#跟着示例学正则" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>以下命令均可在任意目录运行，不依赖练习素材。建议每次先预测输出，再执行命令。</p>
+<h3 id="第一步公共部分与字符集合">第一步：公共部分与字符集合<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步公共部分与字符集合" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'cat'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'car'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^ca[rt]$</span></span></code></pre></figure>
+<p>拆开读：</p>
+<ol>
+<li><code>^</code>：从开头开始。</li>
+<li><code>ca</code>：这两个字符必须原样出现。</li>
+<li><code>[rt]</code>：最后一个字符可以是 <code>r</code> 或 <code>t</code>。</li>
+<li><code>$</code>：到这里结束，后面不能再接其他字符。</li>
+</ol>
+<p>它匹配 <code>cat</code>、<code>car</code>，不匹配 <code>cap</code>、<code>cart</code>。<strong><code>[rt]</code> 是一个字符的位置，不是字符串 <code>rt</code>。</strong></p>
+<h3 id="第二步可选字符与分支">第二步：可选字符与分支<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步可选字符与分支" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'color'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'colour'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^colou?r$</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'cat'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'dog'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^(?:cat|dog)$</span></span></code></pre></figure>
+<ul>
+<li><code>u?</code>：<code>u</code> 可有可无，其他字符不变。</li>
+<li><code>(?:cat|dog)</code>：在两条完整分支之间选择。</li>
+<li>非捕获分组用于组织结构，不表示“提取一个字段”。需要提取时才考虑捕获分组。</li>
+</ul>
+<p>为什么不是 <code>^cat|dog$</code>？因为它相当于“开头是 cat，<strong>或者</strong>结尾是 dog”，不是“两者任选其一且占满整串”。分组决定了锚点约束的范围。</p>
+<h3 id="第三步字面字符与转义">第三步：字面字符与转义<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步字面字符与转义" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'log.1'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'log.2'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^log\.[12]$</span></span></code></pre></figure>
+<p>这里的 <code>\.</code> 必须匹配普通句点。如果你手改成 <code>^log.[12]$</code>，<code>logX1</code> 也可能匹配。</p>
+<p>grex 会按字面样本处理正则元字符，而不是把你的输入当作已有的正则。后面的示例出现 <code>\-</code> 也是工具输出的转义写法；在字符集合外，普通 <code>-</code> 通常可以直接书写。</p>
+<h3 id="第四步从指定数字泛化为数字类型">第四步：从指定数字泛化为数字类型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第四步从指定数字泛化为数字类型" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>保持样本不变，比较三个命令：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-34'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^item\-(?:12|34)$</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -d</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-34'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^item\-\d\d$</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -dr</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-34'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^item\-\d{2}$</span></span></code></pre></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>表达式</th><th>匹配 <code>item-12</code></th><th>匹配未提供的 <code>item-99</code></th><th>匹配 <code>item-123</code></th></tr></thead><tbody><tr><td>默认生成</td><td>是</td><td>否</td><td>否</td></tr><tr><td>加 <code>-d</code></td><td>是</td><td>是</td><td>否</td></tr><tr><td>加 <code>-dr</code></td><td>是</td><td>是</td><td>否</td></tr></tbody></table></div>
+<ul>
+<li><strong><code>-d</code> 改变匹配范围</strong>：不再只接受样本里的数字值。</li>
+<li><strong><code>-r</code> 在这里压缩重复写法</strong>：把 <code>\d\d</code> 变成 <code>\d{2}</code>，不是让位数无限增长。</li>
+<li>如果需求是“item- 后恰好两位 ASCII 数字”，可以手写成 <code>^item-[0-9]{2}$</code>。</li>
+<li>如果需求是“一位或多位数字”，<code>[0-9]+</code> 是你明确作出的规则选择，不能指望两个两位数样本让工具自动知道。</li>
+</ul>
+<p>注意：<code>-d</code> 会转换样本中<strong>所有</strong>十进制数字，无法指定只转换某个业务字段。固定版本号、固定前缀里的数字也可能被泛化。</p>
+<h3 id="第五步重复子串与次数边界">第五步：重复子串与次数边界<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第五步重复子串与次数边界" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -r</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'ababab'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^(?:ab){3}$</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -r</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'ha'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'hahaha'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^(?:ha|(?:ha){3})$</span></span></code></pre></figure>
+<p>第一条表示整个 <code>ab</code> 重复 3 次，不是只重复 <code>b</code>。第二条仍然只允许 1 组或 3 组 <code>ha</code>，<strong>没有凭空补出中间的 <code>haha</code></strong>，也不是无限重复。</p>
+<p>进阶时可以用 <code>--min-substring-length</code> 控制最短重复单元长度，用 <code>--min-repetitions</code> 控制转换门槛；两者需配合 <code>-r</code>。后者按首个子串之后的额外重复次数计算，例如 <code>ababab</code> 是一个 <code>ab</code> 加两次重复。初学阶段保留默认值即可。</p>
+<h3 id="第六步谨慎使用单词字符和空白字符">第六步：谨慎使用单词字符和空白字符<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第六步谨慎使用单词字符和空白字符" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -w</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-34'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^\w\w\w\w\-\w\w$</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -s</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'a b'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> $'a</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">\t</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">b'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 输出：^a\sb$</span></span></code></pre></figure>
+<ul>
+<li><code>-w</code> 连固定前缀 <code>item</code> 也转换了，<code>xxxx-AB</code> 都能匹配。它不是“只泛化变量部分”。</li>
+<li><code>\w</code> 不是“任意英文单词”，而是一个单词字符；在 grex / rg 的 Unicode 语义下，其范围也不限于英文字母。</li>
+<li><code>\s</code> 不只是空格，还能匹配制表符等空白。<code>$'a\tb'</code> 是 Bash 写法，传入的实际内容是 <code>a</code>、一个制表符、<code>b</code>。</li>
+<li><code>\d</code> 在 grex / rg 的默认 Unicode 语义下也不只限于 <code>[0-9]</code>。需要纯 ASCII 时明确写范围，并在实际使用的引擎中验证。</li>
+</ul>
+<h2 id="把生成结果交给-rg-验证">把生成结果交给 rg 验证<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#把生成结果交给-rg-验证" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="整行筛选保留锚点">整行筛选：保留锚点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#整行筛选保留锚点" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>下面的样本包含原始正例、未见过但应接受的正例，以及位数、前缀和嵌入位置方面的反例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">pattern</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">$(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -dr</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-34'</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">)</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">printf</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> '%s\n'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-99'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-1'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-123'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'other-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'prefix item-12 suffix'</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;"> |</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  rg</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -n</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -e</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$pattern</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span></span></code></pre></figure>
+<p>预期输出：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>1:item-12</span></span>
+<span data-line><span>2:item-99</span></span></code></pre></figure>
+<p>这里 <code>&quot;$pattern&quot;</code> 的双引号保留变量内容，<code>-e</code> 表示后面是搜索模式。<strong>不要加 <code>rg -F</code></strong>，否则会按普通文本寻找反斜杠、锚点等符号，而不是解释正则。</p>
+<h3 id="日志片段提取移除锚点">日志片段提取：移除锚点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#日志片段提取移除锚点" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">pattern</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">$(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -dr</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --no-anchors</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-12'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'item-34'</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">)</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">printf</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> '%s\n'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'INFO created item-12 successfully'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'WARN item-99 not found'</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;"> |</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  rg</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -o</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -e</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$pattern</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span></span></code></pre></figure>
+<p>预期输出：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>item-12</span></span>
+<span data-line><span>item-99</span></span></code></pre></figure>
+<p>此处 <code>-o</code> 是 <strong>rg 的选项</strong>，表示只输出匹配片段；grex 没有对应的保存文件选项。</p>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>去掉锚点，也就去掉了完整性约束 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>这个无锚点表达式还能从 <code>item-123</code> 中提取出 <code>item-12</code>。如果你要提取完整编号，需要另外定义编号的左右边界并测试，而不是只删除 <code>^</code>、<code>$</code>。</p>
+</div>
+</blockquote>
+<h2 id="在-python-中检查正例与反例">在 Python 中检查正例与反例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#在-python-中检查正例与反例" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>仅验证“原样本都能匹配”很容易漏掉过度泛化。下面直接调用已安装的 grex，再用 Python 标准库测试，<strong>不需要安装 Python 版 grex</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="python" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">import</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> re</span></span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">import</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> subprocess</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">pattern = subprocess.check_output(</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">    [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;grex&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;-dr&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;item-12&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;item-34&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">],</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">    text</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">=</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">True</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">).strip()</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 这些期望来自需求：item- 后恰好两位 ASCII 数字。</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">cases = {</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;item-12&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">True</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;item-99&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">True</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;item-1&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">False</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;item-123&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">False</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;other-12&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">False</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;prefix item-12 suffix&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">False</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;item-１２&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">False</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,  </span><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 全角数字：用来暴露 Unicode 范围问题。</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">print</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;生成结果：&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, pattern)</span></span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">for</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> text, expected </span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">in</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> cases.items():</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">    actual = re.fullmatch(pattern, text) is not </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">None</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">    status = </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;符合预期&quot;</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;"> if</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> actual == expected </span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">else</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;需要修改规则&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    print</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">f</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">{</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">status</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">}</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">：</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">{</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">text</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">!r</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">}</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">，期望=</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">{</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">expected</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">}</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">，实际=</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">{</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">actual</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">}</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">)</span></span></code></pre></figure>
+<p>预期最后一项显示“需要修改规则”：Python 默认的 <code>\d</code> 也能匹配全角数字。如果确实只接受 ASCII 数字，可以将 <code>pattern</code> 改为 <code>r&quot;^item-[0-9]{2}$&quot;</code>，再运行同一批测试。</p>
+<p>这里故意保留一次规则与需求不一致的结果，目的是练习：<strong>生成结果是起点，正反例才是判断依据。</strong></p>
+<h2 id="可读性与兼容性">可读性与兼容性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#可读性与兼容性" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="先看懂再复制">先看懂，再复制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#先看懂再复制" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -x</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'color'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'colour'</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">grex</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -i</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'error'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> 'ERROR'</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;"># 第二条输出：(?i)^error$</span></span></code></pre></figure>
+<p><code>-x</code> 输出的是带 <code>(?x)</code> 的多行正则，不只是把一行文本随意换行。该模式会让引擎忽略表达式中的部分空白，并支持注释语法。学习时方便阅读；传给 rg 的 <code>-e</code> 时，优先使用默认单行输出，因为 rg 需要额外配置才能接受模式里的实际换行。</p>
+<h3 id="不要假定所有工具都用同一种正则">不要假定所有工具都用同一种正则<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#不要假定所有工具都用同一种正则" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>官方说明生成结果兼容 Rust 的 <code>regex</code> crate；rg 默认使用同一类正则语法，因此适合做本教程的验证工具。换到其他环境仍需测试：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>使用环境</th><th>注意点</th></tr></thead><tbody><tr><td><code>rg</code></td><td>不要用 <code>-F</code>；<code>-i</code>、<code>-w</code>、<code>-r</code> 的含义也不要和 grex 混记</td></tr><tr><td><code>grep -E</code></td><td>不原生支持 grex 常见的 <code>(?:...)</code>、<code>\d</code>、<code>(?i)</code> 等写法，不能原样照搬</td></tr><tr><td>Python <code>re</code></td><td>本文基础模式可用，但 grex <code>-e</code> 可能输出的 <code>\u{...}</code> 不是 Python <code>re</code> 接受的同一种转义写法</td></tr><tr><td>JavaScript</td><td>不能照搬完整的 <code>(?i)</code>、<code>(?x)</code> 输出；大小写通常由外部 <code>i</code> 标志控制；字符类、Unicode 转义的语义也需单独核对</td></tr></tbody></table></div>
+<p>复制到代码字符串里时，还有“字符串转义”和“正则转义”两层问题。Python 用 <code>r&quot;\d{2}&quot;</code> 这样的原始字符串较直观；JSON 等格式通常还要把反斜杠再转义一层。</p>
+<h2 id="建议的学习顺序与练习">建议的学习顺序与练习<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#建议的学习顺序与练习" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>每次只练一类语法，按 <strong>预测 → 生成 → 拆解 → 测试 → 手改</strong> 的顺序来。前面的内联命令无需创建文件；要保存素材时，统一放在练习场地，而不是笔记站的源码目录：</p>
+<ul>
+<li>工作目录：<code>/home/errorichard/workspace/projects/learning/linux/tools-practice</code>。</li>
+<li>样本文件：放在 <code>datasets/grex/</code>，如 <code>positive.txt</code>、<code>negative.txt</code>。</li>
+<li>练习题与自己的解答：放在 <code>exercises/</code>，例如 <code>grex.md</code>。</li>
+<li>本文只约定这些位置，不代表已经创建了对应文件。</li>
+</ul>
+<h3 id="第一轮读懂输出">第一轮：读懂输出<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一轮读懂输出" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>执行 <code>grex 'a' 'b' 'c'</code>，解释输出中的范围。它会匹配 <code>d</code> 吗？</li>
+<li>执行 <code>grex 'abc' 'bc'</code>，找出哪个字符变成了可选项。</li>
+<li>用 <code>file.txt</code>、<code>file.csv</code> 生成表达式，解释句点为什么被转义。</li>
+<li>比较 <code>grex '22' '33'</code>、加 <code>-d</code>、再加 <code>-dr</code> 的输出；分别检查 <code>23</code> 是否匹配。</li>
+</ol>
+<h3 id="第二轮判断泛化边界">第二轮：判断泛化边界<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二轮判断泛化边界" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol start="5">
+<li>用 <code>user-01</code>、<code>user-02</code> 生成“固定 user- 前缀，后面恰好两位数字”的规则。加入 <code>admin-01</code>、<code>user-AA</code>、<code>user-001</code> 作为反例；比较 <code>-d</code> 与 <code>-w</code>。</li>
+<li>用 <code>a</code>、<code>aaa</code> 配合 <code>-r</code> 生成规则，测试 <code>aa</code>。不要只看 <code>{...}</code> 就猜它接受所有中间长度。</li>
+<li>用 <code>ERROR</code>、<code>error</code> 配合 <code>-i</code> 生成表达式，检查 <code>Error</code> 与 <code>ERRORS</code> 的区别。</li>
+<li>用日期样本生成正则，试试 <code>2026-99-99</code>。为什么“外形像日期”不能保证“日期真实存在”？</li>
+</ol>
+<h3 id="第三轮自己写规则再让工具做对照">第三轮：自己写规则，再让工具做对照<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三轮自己写规则再让工具做对照" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>先不用 grex，按需求写两条正则：</p>
+<ul>
+<li>文件名为 <code>note-</code> 加恰好三位 ASCII 数字，以 <code>.md</code> 结尾。</li>
+<li>文本只能是 <code>yes</code> 或 <code>no</code>，不接受额外的前缀或后缀。</li>
+</ul>
+<p>再各取几个正例交给 grex，对比结构差异。不要为了“和工具输出一模一样”修改自己的正确规则；同一个匹配集合可以有不同的表达式。</p>
+<p>每题至少准备：原始正例、未见过但应接受的新正例、长度反例、前后多字符反例。涉及数字或字母时，再考虑是否允许 Unicode 字符。</p>
+<h2 id="查阅资料">查阅资料<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#查阅资料" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://github.com/pemistahl/grex" class="external">grex 官方项目与 README<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>：设计目标、安装与完整示例。</li>
+<li><a href="https://github.com/pemistahl/grex/blob/main/src/main.rs" class="external">grex CLI 参数定义<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>：参数的准确含义与约束；实际使用以本机 <code>grex --help</code> 为准。</li>
+<li><a href="https://docs.rs/regex/latest/regex/#syntax" class="external">Rust regex 语法文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>：字符类、分组、量词与 Unicode 行为。</li>
+<li><a href="https://docs.python.org/zh-cn/3/library/re.html" class="external">Python re 文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>：<code>fullmatch()</code>、原始字符串与引擎语法。</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="全站关系图"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-36" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#安装与开始使用" data-for="安装与开始使用">安装与开始使用</a></li><li class="depth-0"><a href="#命令速查" data-for="命令速查">命令速查</a></li><li class="depth-1"><a href="#输入和输出" data-for="输入和输出">输入和输出</a></li><li class="depth-1"><a href="#常用选项" data-for="常用选项">常用选项</a></li><li class="depth-0"><a href="#正则语法小抄" data-for="正则语法小抄">正则语法小抄</a></li><li class="depth-0"><a href="#跟着示例学正则" data-for="跟着示例学正则">跟着示例学正则</a></li><li class="depth-1"><a href="#第一步公共部分与字符集合" data-for="第一步公共部分与字符集合">第一步：公共部分与字符集合</a></li><li class="depth-1"><a href="#第二步可选字符与分支" data-for="第二步可选字符与分支">第二步：可选字符与分支</a></li><li class="depth-1"><a href="#第三步字面字符与转义" data-for="第三步字面字符与转义">第三步：字面字符与转义</a></li><li class="depth-1"><a href="#第四步从指定数字泛化为数字类型" data-for="第四步从指定数字泛化为数字类型">第四步：从指定数字泛化为数字类型</a></li><li class="depth-1"><a href="#第五步重复子串与次数边界" data-for="第五步重复子串与次数边界">第五步：重复子串与次数边界</a></li><li class="depth-1"><a href="#第六步谨慎使用单词字符和空白字符" data-for="第六步谨慎使用单词字符和空白字符">第六步：谨慎使用单词字符和空白字符</a></li><li class="depth-0"><a href="#把生成结果交给-rg-验证" data-for="把生成结果交给-rg-验证">把生成结果交给 rg 验证</a></li><li class="depth-1"><a href="#整行筛选保留锚点" data-for="整行筛选保留锚点">整行筛选：保留锚点</a></li><li class="depth-1"><a href="#日志片段提取移除锚点" data-for="日志片段提取移除锚点">日志片段提取：移除锚点</a></li><li class="depth-0"><a href="#在-python-中检查正例与反例" data-for="在-python-中检查正例与反例">在 Python 中检查正例与反例</a></li><li class="depth-0"><a href="#可读性与兼容性" data-for="可读性与兼容性">可读性与兼容性</a></li><li class="depth-1"><a href="#先看懂再复制" data-for="先看懂再复制">先看懂，再复制</a></li><li class="depth-1"><a href="#不要假定所有工具都用同一种正则" data-for="不要假定所有工具都用同一种正则">不要假定所有工具都用同一种正则</a></li><li class="depth-0"><a href="#建议的学习顺序与练习" data-for="建议的学习顺序与练习">建议的学习顺序与练习</a></li><li class="depth-1"><a href="#第一轮读懂输出" data-for="第一轮读懂输出">第一轮：读懂输出</a></li><li class="depth-1"><a href="#第二轮判断泛化边界" data-for="第二轮判断泛化边界">第二轮：判断泛化边界</a></li><li class="depth-1"><a href="#第三轮自己写规则再让工具做对照" data-for="第三轮自己写规则再让工具做对照">第三轮：自己写规则，再让工具做对照</a></li><li class="depth-0"><a href="#查阅资料" data-for="查阅资料">查阅资料</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-2" class="overflow"><li><a href="../常用工具/" class="internal">常用工具</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/Richard-code200/quartz-site">GitHub</a></li><li><a href="https://richard-code200.github.io/quartz-site/index.xml">RSS</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="../postscript.js" type="module" data-persist="true"></script></html>
