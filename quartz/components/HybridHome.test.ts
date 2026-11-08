@@ -126,6 +126,37 @@ test("非首页仍然输出原生文章而不是定制首屏", () => {
   assert.doesNotMatch(html, /preview-home|RICHARD/)
   assert.equal(render(h(HomeHeader(), page)), "")
 })
+test("首页关联图位于学习分类与最近记录之间", () => {
+  const html = render(h(Home, props()))
+  const position = html.indexOf('id="home-graph"')
+  assert.ok(position > html.indexOf('id="topics-heading"'), "分类后应有图谱独立区域")
+  assert.ok(position < html.indexOf('id="recent-notes"'), "图谱应在最近记录之前")
+  assert.match(html, /id="home-graph"[^>]*aria-labelledby="home-graph-heading"/)
+  assert.match(html, /id="home-graph-heading"/)
+})
+test("首页图谱使用完整索引且不添加标签节点，保留图形交互", () => {
+  const html = render(h(Home, props([note("孤立笔记", "没有出链的笔记")])))
+  const configurations = [...html.matchAll(/data-cfg="([^"]+)"/g)].map((match) =>
+    JSON.parse(match[1].replaceAll("&quot;", '"')),
+  )
+  assert.equal(configurations.length, 2, "应同时提供内嵌图与放大图")
+  for (const configuration of configurations) {
+    assert.equal(configuration.depth, -1, "不能只绘制首页邻居，孤立笔记也应可见")
+    assert.equal(configuration.showTags, false)
+    assert.equal(configuration.drag, true)
+    assert.equal(configuration.zoom, true)
+  }
+  assert.match(html, /class="global-graph-icon"[^>]*aria-label="全站关系图"/)
+})
+test("首页注册原生图谱资源，而不是仅输出空容器", () => {
+  assert.ok([Home.css].flat().some((css: string) => css.includes(".graph-outer")))
+  assert.ok([Home.afterDOMLoaded].flat().some((script: string) => script?.includes("renderGraph")))
+})
+test("非首页不会加入全站内嵌图谱区域", () => {
+  const page = props()
+  page.fileData.slug = "Rust/所有权" as FullSlug
+  assert.doesNotMatch(render(h(Home, page)), /home-graph|preview-graph|graph-container/)
+})
 test("首页导航保留搜索、排版入口与手机菜单控制关系", () => {
   const html = render(h(HomeHeader(), props()))
   assert.match(html, /class="search-button"/)

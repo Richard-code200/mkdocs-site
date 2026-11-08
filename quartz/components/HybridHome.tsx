@@ -1,6 +1,7 @@
 import { QuartzComponent, QuartzComponentConstructor } from "./types"
 import ContentConstructor from "./pages/Content"
 import SearchConstructor from "./Search"
+import GraphConstructor from "./Graph"
 import { getDate } from "./Date"
 import { FullSlug, resolveRelative } from "../util/path"
 import style from "./styles/hybridHome.scss"
@@ -113,6 +114,10 @@ export const HomeHeader = (() => {
 // 只有根首页使用定制布局，其他文章仍交给 Quartz 原生 Content 组件。
 export default (() => {
   const Content = ContentConstructor()
+  const Graph = GraphConstructor({
+    localGraph: { depth: -1, showTags: false, focusOnHover: true, autoResize: true, autoFit: true },
+    globalGraph: { showTags: false, autoResize: true, autoFit: true },
+  })
   const HybridHome: QuartzComponent = (props) => {
     const { fileData, allFiles, cfg } = props
     if (fileData.slug !== "index") return <Content {...props} />
@@ -218,10 +223,29 @@ export default (() => {
             </div>
           </section>
 
+          <section id="home-graph" class="preview-graph" aria-labelledby="home-graph-heading">
+            <div class="preview-section-label">
+              <span>02 / 笔记关联</span>
+              <a href={href("笔记导航")}>
+                全部笔记 <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <h2 id="home-graph-heading" class="preview-section-title">
+              让零散的记录，连成知识。
+            </h2>
+            <p id="home-graph-help" class="preview-graph-help">
+              每个节点都是一个页面，连线来自笔记中的链接。拖动探索、缩放查看，点击节点开始阅读。
+            </p>
+            <Graph {...props} />
+            <p class="preview-graph-caption">
+              当前站点的全部笔记与分类 · 随内容构建自动更新 · 右上角可放大查看
+            </p>
+          </section>
+
           <section id="recent-notes" class="preview-bottom" aria-labelledby="recent-heading">
             <div>
               <div class="preview-section-label">
-                <span>02 / 随记</span>
+                <span>03 / 随记</span>
               </div>
               <h2 id="recent-heading" class="preview-section-title">
                 留一点生活的切片
@@ -263,6 +287,7 @@ export default (() => {
       </main>
     )
   }
-  HybridHome.css = style
+  HybridHome.css = [...(Graph.css ? [Graph.css].flat() : []), style]
+  HybridHome.afterDOMLoaded = Graph.afterDOMLoaded
   return HybridHome
 }) satisfies QuartzComponentConstructor

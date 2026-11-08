@@ -19,6 +19,10 @@ export interface D3Config {
   showTags: boolean
   focusOnHover?: boolean
   enableRadial?: boolean
+  // 首页内嵌全站图谱按容器尺寸调整；原生文章图谱保持默认行为。
+  autoResize?: boolean
+  // 初始视野容纳全部节点，手动拖动或缩放后保留用户视野。
+  autoFit?: boolean
 }
 
 interface GraphOptions {

@@ -76,6 +76,16 @@ created: 2026-11-07
 - Gruvbox 色板、Monaspice 和 Sarasa 字体均自托管，资源与许可证在 `quartz/static/`。
 - 字体维护见 [`scripts/字体资源维护.md`](scripts/字体资源维护.md)。
 
+### 首页全站笔记关联图
+
+首页学习分类与最近记录之间直接展示全站图谱，复用 Quartz 当前环境的内容索引：本地预览显示本地构建内容，线上显示已发布内容。图谱包含全部索引页面（包括分类页与孤立笔记），只按真实站内链接连线，不读取电脑其他目录；新增笔记随构建自动更新。
+
+支持拖动、缩放、点击节点阅读和右上角放大查看；键盘用户也可通过“全部笔记”文字链接浏览。首页开启 `autoResize` 跟随容器尺寸变化，`autoFit` 初始完整展示图谱，手动拖动或缩放后保留用户视野；文章页仍使用原生局部图谱配置。
+
+启动预览后运行 `node scripts/verify_home_graph.mjs http://localhost:8082/quartz-site/` 验证图形与交互；需要本机已安装 `agent-browser`。原有首页回归为 `node scripts/verify_homepage.mjs`。截图位于被忽略的 `artifacts/home-graph/`。
+
+如需撤销该区域，移除 `HybridHome.tsx` 中的图谱实例、资源注册与区域、对应首页 SCSS 及 `content/index.md` 摘要；只有首页使用的 `autoResize` 适配可随功能一并移除。恢复前核对后续修改，不应覆盖其他首页内容。
+
 ## 旧网址兼容
 
 普通文章同时有明确的 `.html` 文件，例如 `/Rust/所有权.html`。原 MkDocs 的 `/Rust/所有权/` 路径通过兼容页跳转，保留查询参数与标题锚点。

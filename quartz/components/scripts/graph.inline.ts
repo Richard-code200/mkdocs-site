@@ -87,6 +87,8 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     showTags,
     focusOnHover,
     enableRadial,
+    autoResize,
+    autoFit,
   } = JSON.parse(graph.dataset["cfg"]!) as D3Config
 
   const data: Map<SimpleSlug, ContentDetails> = new Map(
@@ -161,8 +163,8 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       })),
   }
 
-  const width = graph.offsetWidth
-  const height = Math.max(graph.offsetHeight, 250)
+  let width = graph.offsetWidth
+  let height = Math.max(graph.offsetHeight, 250)
 
   // we virtualize the simulation and use pixi to actually render it
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
@@ -361,6 +363,19 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     resolution: window.devicePixelRatio,
     eventMode: "static",
   })
+  if (autoResize) {
+    // 初始化期间已经离开的首页不应留下绘图与模拟任务。
+    if (!graph.isConnected) {
+      simulation.stop()
+      app.destroy()
+      return () => {}
+    }
+    app.canvas.setAttribute("role", "img")
+    app.canvas.setAttribute(
+      "aria-label",
+      `笔记关联图：${graphData.nodes.length} 个页面，${graphData.links.length} 条关联。可通过全部笔记文字入口浏览。`,
+    )
+  }
   graph.appendChild(app.canvas)
 
   const stage = app.stage
@@ -450,12 +465,15 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   }
 
   let currentTransform = zoomIdentity
+  let manuallyAdjusted = false
+  const nodeRadii = autoFit ? graphData.nodes.map(nodeRadius) : []
   if (enableDrag) {
     select<HTMLCanvasElement, NodeData | undefined>(app.canvas).call(
       drag<HTMLCanvasElement, NodeData | undefined>()
         .container(() => app.canvas)
         .subject(() => graphData.nodes.find((n) => n.id === hoveredNodeId))
         .on("start", function dragstarted(event) {
+          manuallyAdjusted = true
           if (!event.active) simulation.alphaTarget(1).restart()
           event.subject.fx = event.subject.x
           event.subject.fy = event.subject.y
@@ -496,32 +514,57 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     }
   }
 
+  const zoomBehavior = zoom<HTMLCanvasElement, NodeData>()
+    .extent((): [[number, number], [number, number]] => [
+      [0, 0],
+      [width, height],
+    ])
+    .scaleExtent([0.25, 4])
+    .on("zoom", ({ transform, sourceEvent }) => {
+      if (sourceEvent) manuallyAdjusted = true
+      currentTransform = transform
+      stage.scale.set(transform.k, transform.k)
+      stage.position.set(transform.x, transform.y)
+
+      // zoom adjusts opacity of labels too
+      const scale = transform.k * opacityScale
+      let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
+      const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
+
+      for (const label of labelsContainer.children) {
+        if (!activeNodes.includes(label)) {
+          label.alpha = scaleOpacity
+        }
+      }
+    })
   if (enableZoom) {
-    select<HTMLCanvasElement, NodeData>(app.canvas).call(
-      zoom<HTMLCanvasElement, NodeData>()
-        .extent([
-          [0, 0],
-          [width, height],
-        ])
-        .scaleExtent([0.25, 4])
-        .on("zoom", ({ transform }) => {
-          currentTransform = transform
-          stage.scale.set(transform.k, transform.k)
-          stage.position.set(transform.x, transform.y)
-
-          // zoom adjusts opacity of labels too
-          const scale = transform.k * opacityScale
-          let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
-          const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
-
-          for (const label of labelsContainer.children) {
-            if (!activeNodes.includes(label)) {
-              label.alpha = scaleOpacity
-            }
-          }
-        }),
-    )
+    select<HTMLCanvasElement, NodeData>(app.canvas).call(zoomBehavior)
   }
+
+  // 仅显式开启的首页图谱跟随版心变化，文章页维持原有尺寸策略。
+  const resizeObserver = autoResize
+    ? new ResizeObserver(() => {
+        const nextWidth = graph.offsetWidth
+        const nextHeight = Math.max(graph.offsetHeight, 250)
+        if (!nextWidth || (nextWidth === width && nextHeight === height)) return
+        const dx = (nextWidth - width) / 2
+        const dy = (nextHeight - height) / 2
+        width = nextWidth
+        height = nextHeight
+        app.renderer.resize(width, height)
+        if (enableRadial) {
+          simulation.force("radial", forceRadial((Math.min(width, height) / 2) * 0.8).strength(0.2))
+        }
+        if (enableZoom) {
+          const { x, y, k } = currentTransform
+          select<HTMLCanvasElement, NodeData>(app.canvas).call(
+            zoomBehavior.transform,
+            zoomIdentity.translate(x + (1 - k) * dx, y + (1 - k) * dy).scale(k),
+          )
+        }
+      })
+    : undefined
+  resizeObserver?.observe(graph)
 
   let stopAnimation = false
   function animate(time: number) {
@@ -544,6 +587,39 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
         .stroke({ alpha: l.alpha, width: 1, color: l.color })
     }
 
+    // 初始布局逐渐展开时仍保持完整全景；悬停或手动操作时不抢夺视野。
+    if (autoFit && !manuallyAdjusted && hoveredNodeId === null && graphData.nodes.length > 0) {
+      let minX = Infinity,
+        minY = Infinity,
+        maxX = -Infinity,
+        maxY = -Infinity
+      graphData.nodes.forEach((node, index) => {
+        const x = node.x ?? 0,
+          y = node.y ?? 0,
+          radius = nodeRadii[index]
+        minX = Math.min(minX, x - radius)
+        minY = Math.min(minY, y - radius)
+        maxX = Math.max(maxX, x + radius)
+        maxY = Math.max(maxY, y + radius)
+      })
+      const k = Math.min(
+        1,
+        (width - 48) / Math.max(1, maxX - minX),
+        (height - 48) / Math.max(1, maxY - minY),
+      )
+      const x = width / 2 - k * (width / 2 + (minX + maxX) / 2)
+      const y = height / 2 - k * (height / 2 + (minY + maxY) / 2)
+      if (
+        Math.abs(currentTransform.k - k) > 0.001 ||
+        Math.abs(currentTransform.x - x) > 0.1 ||
+        Math.abs(currentTransform.y - y) > 0.1
+      ) {
+        select<HTMLCanvasElement, NodeData>(app.canvas).call(
+          zoomBehavior.transform,
+          zoomIdentity.translate(x, y).scale(k),
+        )
+      }
+    }
     tweens.forEach((t) => t.update(time))
     app.renderer.render(stage)
     requestAnimationFrame(animate)
@@ -552,6 +628,11 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   requestAnimationFrame(animate)
   return () => {
     stopAnimation = true
+    resizeObserver?.disconnect()
+    if (autoResize) {
+      simulation.stop()
+      tweens.forEach((tween) => tween.stop())
+    }
     app.destroy()
   }
 }
