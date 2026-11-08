@@ -163,7 +163,7 @@ export default (() => {
           </div>
           <p class="preview-tagline">学到一点，就记录一点。</p>
           <p class="preview-intro">
-            这里是王佳贤的学习笔记与随记。
+            这里是Richard的学习笔记与随记。
             <br />
             记录代码、工具，和慢慢理解这个世界的过程。
           </p>

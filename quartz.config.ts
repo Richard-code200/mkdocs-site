@@ -20,8 +20,8 @@ const colors = {
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "王佳贤的个人博客",
-    pageTitleSuffix: " · 王佳贤的个人博客",
+    pageTitle: "Richard的个人博客",
+    pageTitleSuffix: " · Richard的个人博客",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,

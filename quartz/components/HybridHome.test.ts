@@ -52,7 +52,7 @@ function note(slug: string, title: string, generated = false): QuartzPluginData 
 }
 function props(allFiles: QuartzPluginData[] = []): QuartzComponentProps {
   return {
-    cfg: { pageTitle: "王佳贤的个人博客", locale: "zh-CN", defaultDateType: "created" },
+    cfg: { pageTitle: "Richard的个人博客", locale: "zh-CN", defaultDateType: "created" },
     fileData: {
       slug: "index",
       filePath: "content/index.md",
