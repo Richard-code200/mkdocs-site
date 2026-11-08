@@ -69,7 +69,7 @@ export const HomeHeader = (() => {
               </svg>
             </span>
             <span class="home-brand-label">
-              {props.cfg.pageTitle}
+              <span class="home-brand-title">{props.cfg.pageTitle}</span>
               <small>RICHARD / NOTES</small>
             </span>
           </a>
@@ -168,9 +168,7 @@ export default (() => {
           </div>
           <p class="preview-tagline">学到一点，就记录一点。</p>
           <p class="preview-intro">
-            这里是Richard的学习笔记与随记。
-            <br />
-            记录代码、工具，和慢慢理解这个世界的过程。
+            这里是 Richard 的学习笔记与随记，整理编程、工具实践和日常思考。
           </p>
           <div class="preview-actions">
             <a class="preview-button" href={href("笔记导航")}>
@@ -201,7 +199,7 @@ export default (() => {
               </a>
             </div>
             <h2 id="topics-heading" class="preview-section-title">
-              每一种学习，都有自己的字形。
+              按主题整理，方便查阅与回顾。
             </h2>
             <div class="preview-grid">
               {topics.map((topic, index) => (

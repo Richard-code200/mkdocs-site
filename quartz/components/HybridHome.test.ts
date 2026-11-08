@@ -73,6 +73,18 @@ test("首页只有一个可读主标题，重影和色带不重复进入读屏",
   assert.match(html, /class="preview-wordmark-echo"[^>]*aria-hidden="true"/)
   assert.match(html, /class="preview-ribbons"[^>]*aria-hidden="true"/)
 })
+test("首页简介使用确认后的具体学习内容描述", () => {
+  const html = render(h(Home, props()))
+  assert.match(html, /这里是 Richard 的学习笔记与随记，整理编程、工具实践和日常思考。/)
+})
+test("学习笔记提示说明主题整理与查阅用途", () => {
+  assert.match(render(h(Home, props())), /按主题整理，方便查阅与回顾。/)
+})
+test("站名有独立文本区域，英文副标题保持分离", () => {
+  const html = render(h(HomeHeader(), props()))
+  assert.match(html, /<span class="home-brand-title">Richard的个人博客<\/span>/)
+  assert.match(html, /<small>RICHARD \/ NOTES<\/small>/)
+})
 test("最近记录按钮指向本页实际存在的区域", () => {
   const html = render(h(Home, props()))
   assert.match(html, /href="#recent-notes"/)

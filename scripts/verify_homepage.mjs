@@ -34,6 +34,28 @@ async function home() {
   return page.targetId
 }
 
+async function verifyBrand(context) {
+  const layout = await evaluate(`(() => {
+    const brand=document.querySelector('.home-brand'), label=document.querySelector('.home-brand-label');
+    const title=document.querySelector('.home-brand-title') ?? label.firstChild;
+    const range=document.createRange();range.selectNodeContents(title);
+    const lines=[...range.getClientRects()].filter(box=>box.width>0 && box.height>0);
+    const textBox=range.getBoundingClientRect(), brandBox=brand.getBoundingClientRect();
+    const controls=[...document.querySelectorAll('.home-nav .search-button,.home-menu-toggle,#home-nav-links')]
+      .filter(element=>getComputedStyle(element).display!=='none').map(element=>element.getBoundingClientRect());
+    const overlap=controls.some(box=>box.width>0 && box.height>0 && box.left<brandBox.right-1 && box.right>brandBox.left+1 && box.top<brandBox.bottom-1 && box.bottom>brandBox.top+1);
+    return {text:title.textContent,rows:new Set(lines.map(box=>Math.round(box.top))).size,left:textBox.left,right:textBox.right,
+      width:document.documentElement.clientWidth,overlap,subtitleTop:label.querySelector('small').getBoundingClientRect().top,titleBottom:textBox.bottom,
+      clipped:[brand,label,document.querySelector('.home-brand-title')].filter(Boolean).some(element=>['hidden','clip'].includes(getComputedStyle(element).overflowX))};
+  })()`)
+  assert.equal(layout.text, "Richard的个人博客", `${context} 站名不能丢字`)
+  assert.equal(layout.rows, 1, `${context} 站名不能换行：${JSON.stringify(layout)}`)
+  assert.ok(layout.left >= 0 && layout.right <= layout.width, `${context} 站名不能超出视口`)
+  assert.ok(layout.subtitleTop >= layout.titleBottom - 2, `${context} 英文副标题应保留在下方`)
+  assert.equal(layout.clipped, false, `${context} 不能裁切站名`)
+  assert.equal(layout.overlap, false, `${context} 站名不能与搜索、菜单或导航重叠`)
+}
+
 let touchSocket
 async function enableTouch(targetId) {
   // 当前 CLI 的设备预设只设置尺寸和 UA；用其自身 CDP 连接补齐真实触摸能力。
@@ -70,6 +92,7 @@ async function enableTouch(targetId) {
 try {
   await browser("set", "viewport", "390", "844")
   await home()
+  await evaluate("document.fonts.ready.then(() => true)")
   const targets = await evaluate(
     `['.home-menu-toggle', '.home-nav .search-button', ...Array.from({length: 2}, (_,i) => '.preview-actions a:nth-child('+(i+1)+')')].map(selector => {const box=document.querySelector(selector).getBoundingClientRect();return {selector,width:box.width,height:box.height}})`,
   )
@@ -111,6 +134,7 @@ try {
     [844, 390],
   ]) {
     await browser("set", "viewport", String(width), String(height))
+    await verifyBrand(`${width} × ${height}`)
     const layout = await evaluate(
       `(()=>{const root=document.documentElement;const title=document.querySelector('.preview-wordmark').getBoundingClientRect();return {width:root.clientWidth,scrollWidth:root.scrollWidth,titleLeft:title.left,titleRight:title.right,overflow:getComputedStyle(document.body).overflowX,rootOverflow:getComputedStyle(root).overflowX}})()`,
     )
@@ -130,6 +154,7 @@ try {
   }
   await browser("set", "viewport", "320", "760")
   await evaluate(`document.documentElement.style.fontSize='200%'`)
+  await verifyBrand("320px / 200% 字体")
   assert.equal(
     await evaluate(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`),
     true,

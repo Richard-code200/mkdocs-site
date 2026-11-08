@@ -29,10 +29,11 @@ body[data-slug="index"] {
   & :is(a, button) { color: #ebdbb2; }
   & a:hover { color: #fabd2f; }
   & .home-brand {
-    display: flex; align-items: center; gap: 12px; min-width: 0; margin-right: auto;
+    display: flex; align-items: center; gap: 12px; min-width: 0; flex-shrink: 0; margin-right: auto;
     font-family: var(--heading-font-stack); font-size: .875rem; font-weight: 700; line-height: 1.5;
   }
-  & .home-brand-label { min-width: 0; overflow-wrap: anywhere; }
+  & .home-brand-label { min-width: 0; }
+  & .home-brand-title { display: block; white-space: nowrap; }
   & .home-brand small {
     display: block; margin-top: 2px; color: #bdae93; font-family: var(--mono-font-stack);
     font-size: .625rem; font-weight: 400; letter-spacing: .04em;
@@ -51,7 +52,7 @@ body[data-slug="index"] {
 }
 .home-nav-inner {
   box-sizing: border-box; max-width: 1280px; min-height: 82px; padding: 12px 24px; margin: auto;
-  display: flex; align-items: center; gap: 24px; position: relative;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 24px; position: relative;
 }
 .home-nav-links {
   display: flex; align-items: center; gap: 20px;
@@ -222,7 +223,7 @@ body[data-slug="index"] {
   .home-nav-inner { min-height: 72px; padding: 12px 20px; gap: 12px; }
   .home-nav .home-brand { gap: 9px; font-size: .8125rem; }
   .home-nav .home-brand-mark { flex-basis: 34px; height: 34px; & svg { width: 28px; height: 28px; } }
-  .home-nav .search { flex: 0 0 44px; }
+  .home-nav .search { flex: 0 0 44px; margin-left: auto; }
   .home-nav .search .search-button { width: 44px; height: 44px; background: transparent; border: none; padding: 10px; justify-content: center; }
   .home-nav .search .search-button svg { margin: 0; }
   .home-nav .search .search-button p { display: none; }
@@ -258,6 +259,10 @@ body[data-slug="index"] {
     & .preview-bottom { gap: 28px; margin-top: 36px; }
     & .preview-entry { flex-wrap: wrap; gap: 8px 16px; }
   }
+}
+/* 窄屏保留完整站名；字体放大时允许控件另起一行，不裁切文字。 */
+@media (max-width: 380px) {
+  .home-nav-inner { padding-inline: 16px; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html:has(body[data-slug="index"]) { scroll-behavior: auto; }
