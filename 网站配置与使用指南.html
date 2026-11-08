@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>网站配置与使用指南 · Richard的个人博客</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Richard的个人博客"/><meta property="og:title" content="网站配置与使用指南 · Richard的个人博客"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="网站配置与使用指南 · Richard的个人博客"/><meta name="twitter:description" content="从目录结构、写笔记和本地预览开始，逐步掌握本站的导航、首页、外观、发布、排错与撤销方法。"/><meta property="og:description" content="从目录结构、写笔记和本地预览开始，逐步掌握本站的导航、首页、外观、发布、排错与撤销方法。"/><meta property="og:image:alt" content="从目录结构、写笔记和本地预览开始，逐步掌握本站的导航、首页、外观、发布、排错与撤销方法。"/><meta property="og:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:url" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta name="twitter:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="richard-code200.github.io/quartz-site"/><meta property="og:url" content="https://richard-code200.github.io/quartz-site/网站配置与使用指南"/><meta property="twitter:url" content="https://richard-code200.github.io/quartz-site/网站配置与使用指南"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="从目录结构、写笔记和本地预览开始，逐步掌握本站的导航、首页、外观、发布、排错与撤销方法。"/><meta name="generator" content="Quartz"/><script>document.documentElement.setAttribute("saved-theme", "dark")</script><link rel="icon" type="image/svg+xml" href="./static/preview-favicon.svg"/><link rel="stylesheet" data-persist="true" href="./static/styles/gruvbox_dark.css"/><link rel="stylesheet" data-persist="true" href="./static/styles/font_faces.css"/><link rel="stylesheet" data-persist="true" href="./static/styles/code_fonts.css"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvcXVhcnR6LXNpdGUvcXVhcnR6LXNpdGUvcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://richard-code200.github.io/quartz-site/index.xml"/></head><body data-slug="网站配置与使用指南"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href=".">Richard的个人博客</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>搜索</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索些什么" placeholder="搜索些什么"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>{let order={MarkDown:1e3,\&quot;MarkDown/MarkDown\&quot;:1001,Rust:2e3,\&quot;Rust/\\u57FA\\u672C\\u8BED\\u6CD5\\u4E0E\\u6570\\u636E\\u7C7B\\u578B\&quot;:2001,\&quot;Rust/\\u51FD\\u6570\\u4E0E\\u63A7\\u5236\\u6D41\&quot;:2002,\&quot;Rust/\\u683C\\u5F0F\\u5316\\u8F93\\u51FA\&quot;:2003,\&quot;Rust/\\u6240\\u6709\\u6743\&quot;:2004,\&quot;Rust/\\u5F15\\u7528\\u4E0E\\u501F\\u7528\&quot;:2005,\&quot;Rust/\\u5207\\u7247\&quot;:2006,\&quot;Rust/\\u7ED3\\u6784\\u4F53\&quot;:2007,\&quot;Rust/Enum\\u548C\\u6A21\\u5F0F\\u5339\\u914D\&quot;:2008,\&quot;Rust/\\u96C6\\u5408\&quot;:2009,\&quot;Rust/\\u8FED\\u4EE3\\u5668\\u4E0E\\u95ED\\u5305\&quot;:2010,\&quot;Rust/\\u6CDB\\u578B\\u4E0E\\u7279\\u5F81\&quot;:2011,\&quot;Rust/\\u751F\\u547D\\u5468\\u671F\&quot;:2012,\&quot;Rust/\\u9519\\u8BEF\\u5904\\u7406\&quot;:2013,\&quot;Rust/\\u6A21\\u5757\\u7CFB\\u7EDF\&quot;:2014,\&quot;Rust/\\u6D4B\\u8BD5\&quot;:2015,\&quot;Rust/Cargo\\u5DE5\\u4F5C\\u533A\\u4E0E\\u4F9D\\u8D56\\u7BA1\\u7406\&quot;:2016,\&quot;Rust/\\u9879\\u76EE\\u4EE3\\u7801\\u7EC4\\u7EC7\&quot;:2017,\&quot;Rust/\\u547D\\u4EE4\\u884C\\u6587\\u4EF6\\u641C\\u7D22\\u5B9E\\u8DF5\&quot;:2018,\&quot;Rust/\\u5B66\\u4E60\\u9879\\u76EE\\u8BA1\\u5212\&quot;:2019,Zed:3001,\&quot;Zed/\\u5FEB\\u6377\\u952E\&quot;:3002,git\\u4F7F\\u7528\\u6307\\u5357:4e3,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/Git\\u57FA\\u7840\\u6982\\u5FF5\&quot;:4001,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u521D\\u59CB\\u8BBE\\u7F6E\&quot;:4002,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u57FA\\u672C\\u64CD\\u4F5C\\u547D\\u4EE4\&quot;:4003,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5DE5\\u4F5C\\u533A\\u6682\\u5B58\&quot;:4004,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5FFD\\u7565\\u6587\\u4EF6\\u914D\\u7F6E\&quot;:4005,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5206\\u652F\\u7BA1\\u7406\&quot;:4006,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u8FDC\\u7A0B\\u4ED3\\u5E93\\u64CD\\u4F5C\&quot;:4007,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u6807\\u7B7E\\u7BA1\\u7406\&quot;:4008,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u64A4\\u9500\\u4E0E\\u56DE\\u9000\&quot;:4009,\\u5E38\\u7528\\u5DE5\\u5177:5e3,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/bat\&quot;:5001,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/eza\&quot;:5002,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/find_fd\&quot;:5003,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/grep_rg\&quot;:5004,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/late_sh_zh\&quot;:5005,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/uv\&quot;:5006,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/\\u7EC8\\u7AEF\\u5FEB\\u6377\\u952E\&quot;:5007,\\u5F00\\u6E90\\u534F\\u8BAE:6e3,\&quot;\\u5F00\\u6E90\\u534F\\u8BAE/\\u5F00\\u6E90\\u534F\\u8BAE\\u6982\\u5FF5\\u603B\\u7ED3\&quot;:6001,\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60:7e3,\&quot;\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60/\\u6D41\\u7A0B\\u6307\\u5357\&quot;:7001,\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406:8e3,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u7B2C\\u4E00\\u7AE0\&quot;:8001,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u8BFE\\u7A0B\\u4FE1\\u606F\&quot;:8002,\\u7B97\\u6CD5\\u7B14\\u8BB0:9e3,\&quot;\\u7B97\\u6CD5\\u7B14\\u8BB0/\\u5206\\u53D1\\u997C\\u5E72\&quot;:9001,\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5:1e4,\&quot;\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5/\\u5B66\\u4E60\\u65B9\\u6CD5\&quot;:10001,\\u968F\\u8BB0:11e3,\&quot;\\u968F\\u8BB0/2026-09-12-ghostty\\u6BB5\\u9519\\u8BEF\\u590D\\u67E5\\u4E0E\\u9ED8\\u8BA4\\u914D\\u7F6E\\u6062\\u590D\&quot;:11001,\&quot;\\u968F\\u8BB0/2026-6-9\&quot;:11002,\&quot;\\u968F\\u8BB0/2026-6-1\&quot;:11003,\&quot;\\u968F\\u8BB0/2026-5-19\&quot;:11004,\&quot;\\u968F\\u8BB0/2026-4-27\&quot;:11005,\&quot;\\u968F\\u8BB0/ghostty-segfault-\\u95EE\\u9898\\u6392\\u67E5\&quot;:11006,\&quot;\\u968F\\u8BB0/Keygen(\\u6CE8\\u518C\\u673A)\&quot;:11007,Linux:12e3,\&quot;Linux/\\u5B89\\u5168\\u7279\\u6027\&quot;:12001,\\u7B14\\u8BB0\\u5BFC\\u822A:1,\\u5173\\u4E8E\\u672C\\u7AD9:99e3,\\u6392\\u7248\\u9884\\u89C8:99001},aSlug=a.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),bSlug=b.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),aRank=order[aSlug]??(order[aSlug.split(\&quot;/\&quot;)[0]]??9e4)+900,bRank=order[bSlug]??(order[bSlug.split(\&quot;/\&quot;)[0]]??9e4)+900;return aRank-bRank||a.displayName.localeCompare(b.displayName,\&quot;zh-CN\&quot;,{numeric:!0})}&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" aria-label="笔记导航" data-mobile="true" aria-controls="explorer-80"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>笔记导航</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-80" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><header></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">首页</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>网站配置与使用指南</a></div></nav><h1 class="article-title">网站配置与使用指南</h1><p show-comma="true" class="content-meta"><time datetime="2026-11-09T00:00:00.000Z">2026年11月09日</time><span>56分钟阅读</span></p><ul class="tags"><li><a href="./tags/建站" class="internal tag-link">建站</a></li><li><a href="./tags/Quartz" class="internal tag-link">Quartz</a></li><li><a href="./tags/使用指南" class="internal tag-link">使用指南</a></li></ul></div></div><article class="popover-hint"><p>这份指南针对<strong>当前这个仓库的实际配置</strong>编写，而不是通用的 Quartz 教程。目标是：即使不熟悉网站开发，也能知道“想改什么、应该打开哪个文件、改完怎样检查”。</p>
+<p>核对基准：2026 年 11 月 9 日，Quartz 4.5.2、Node.js 22、npm 10。以后升级框架或调整目录后，应重新核对本文中的配置和命令。</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>第一次读，先看这些 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>日常写笔记只需要了解第 1～5 节和第 13 节。需要调整导航、首页和外观时，再看对应章节，不必从头记住所有代码。
+本文所有终端命令，除非另有说明，都在仓库根目录执行。标明“片段”的代码不能直接覆盖整个文件。</p>
+</div>
+</blockquote>
+<p><strong>按当前任务跳转：</strong></p>
+<ul>
+<li>第一次使用：<a href="#2-%E7%9B%AE%E5%BD%95%E5%9C%B0%E5%9B%BE%E6%AF%8F%E4%B8%AA%E4%BD%8D%E7%BD%AE%E8%B4%9F%E8%B4%A3%E4%BB%80%E4%B9%88" class="internal alias">目录地图</a> → <a href="#3-%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%97%A5%E5%B8%B8%E9%A2%84%E8%A7%88" class="internal alias">启动预览</a>。</li>
+<li>只想写文章：<a href="#4-%E5%86%99%E4%B8%80%E7%AF%87%E6%96%B0%E7%AC%94%E8%AE%B0%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B" class="internal alias">完整模板</a> → <a href="#5-%E9%93%BE%E6%8E%A5%E5%9B%BE%E7%89%87%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%86%99%E6%B3%95" class="internal alias">链接和图片</a> → <a href="#13-%E6%94%B9%E5%AE%8C%E4%B9%8B%E5%90%8E%E6%80%8E%E6%A0%B7%E9%AA%8C%E8%AF%81" class="internal alias">检查结果</a>。</li>
+<li>想改配置：<a href="#6-%E5%88%86%E7%B1%BB%E5%AF%BC%E8%88%AA%E5%92%8C%E9%98%85%E8%AF%BB%E9%A1%BA%E5%BA%8F" class="internal alias">分类导航</a>、<a href="#7-%E4%BF%AE%E6%94%B9%E5%85%A8%E7%AB%99%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE" class="internal alias">基础设置</a>、<a href="#8-%E9%A6%96%E9%A1%B5%E8%A7%86%E8%A7%89%E9%A1%B5%E9%9D%A2%E4%B8%8E-markdown-%E6%91%98%E8%A6%81%E8%A6%81%E5%8C%BA%E5%88%86" class="internal alias">首页</a>、<a href="#9-%E6%96%87%E7%AB%A0%E5%B8%83%E5%B1%80%E6%90%9C%E7%B4%A2%E4%BE%A7%E6%A0%8F%E7%9B%AE%E5%BD%95%E9%A1%B5%E8%84%9A" class="internal alias">布局</a>、<a href="#10-%E5%A4%96%E8%A7%82%E4%B8%8E%E5%AD%97%E4%BD%93%E4%BB%8E%E6%9C%80%E5%B0%8F%E6%94%B9%E5%8A%A8%E5%BC%80%E5%A7%8B" class="internal alias">外观字体</a>。</li>
+<li>准备上线：<a href="#13-%E6%94%B9%E5%AE%8C%E4%B9%8B%E5%90%8E%E6%80%8E%E6%A0%B7%E9%AA%8C%E8%AF%81" class="internal alias">验证</a> → <a href="#14-%E4%BB%8E%E6%9C%AC%E6%9C%BA%E4%BF%AE%E6%94%B9%E5%88%B0%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83" class="internal alias">发布</a>。</li>
+<li>遇到问题：<a href="#16-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%85%88%E6%89%BE%E5%8E%9F%E5%9B%A0%E5%86%8D%E5%8A%A8%E6%89%8B" class="internal alias">排错表</a>、<a href="#15-%E6%94%B9%E9%94%99%E4%BA%86%E6%80%8E%E6%A0%B7%E6%92%A4%E9%94%80%E5%85%88%E4%BF%9D%E6%8A%A4%E5%BD%93%E5%89%8D%E5%86%85%E5%AE%B9" class="internal alias">撤销方法</a>、<a href="#18-%E6%9C%80%E5%90%8E%E4%BF%9D%E7%95%99%E4%B8%80%E5%BC%A0%E6%93%8D%E4%BD%9C%E9%80%9F%E6%9F%A5%E8%A1%A8" class="internal alias">操作速查</a>。</li>
+</ul>
+<h2 id="1-先理解这个网站是怎么运行的">1. 先理解：这个网站是怎么运行的<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-先理解这个网站是怎么运行的" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>本站是一个<strong>静态笔记网站</strong>：你写 Markdown 文件，Quartz 把它们转换成浏览器能打开的网页，再由 GitHub Pages 托管。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>你维护的源文件</span></span>
+<span data-line><span>├── content/                 笔记正文</span></span>
+<span data-line><span>├── quartz.config.ts         全站配置</span></span>
+<span data-line><span>├── quartz.layout.ts         页面组件布局</span></span>
+<span data-line><span>└── quartz/                  框架、首页组件、样式、字体</span></span>
+<span data-line><span>            │</span></span>
+<span data-line><span>            ├── npm run build ──→ public/ ──→ GitHub Pages</span></span>
+<span data-line><span>            │                         正式构建结果</span></span>
+<span data-line><span>            │</span></span>
+<span data-line><span>            └── npm run serve ──→ .preview/ ──→ 本机浏览器</span></span>
+<span data-line><span>                                      本地预览结果</span></span></code></pre></figure>
+<p>不需要数据库，也不需要运行后端服务。搜索、关系图、反向链接使用构建时生成的内容索引。</p>
+<h3 id="三个经常混淆的位置">三个经常混淆的位置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三个经常混淆的位置" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>位置</th><th>含义</th><th>你应该做什么</th></tr></thead><tbody><tr><td>本机源码仓库</td><td>你正在编辑的文件</td><td>写笔记、改配置、运行检查</td></tr><tr><td>本机预览</td><td>仅当前电脑可访问的测试站</td><td>确认页面效果，不会自动上线</td></tr><tr><td>线上网站</td><td>已发布的版本</td><td>内容以发布结果为准，不会读取本机未发布文件</td></tr></tbody></table></div>
+<ul>
+<li>正式网站：<a href="https://richard-code200.github.io/quartz-site/" class="external">https://richard-code200.github.io/quartz-site/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>源码仓库：<a href="https://github.com/Richard-code200/quartz-site" class="external">https://github.com/Richard-code200/quartz-site<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>默认本地预览：<a href="http://localhost:8082/quartz-site/" class="external">http://localhost:8082/quartz-site/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>两条最重要的原则 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>**修改源文件，不修改 <code>public/</code> 或 <code>.preview/</code>。**它们下次构建就会被重新生成。
+<strong>提交、推送和发布是三件事。</strong><code>git commit</code> 只保存在本机；推送到 <code>main</code> 才会触发当前发布工作流。</p>
+</div>
+</blockquote>
+<h2 id="2-目录地图每个位置负责什么">2. 目录地图：每个位置负责什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-目录地图每个位置负责什么" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>当前仓库路径：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">cd</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> /home/errorichard/workspace/projects/notes/quartz-site</span></span></code></pre></figure>
+<p>换电脑或搬迁目录后，把上面的路径换成实际仓库路径。项目内部相对路径的含义不变。</p>
+<h3 id="21-经常会用到的文件">2.1 经常会用到的文件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#21-经常会用到的文件" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>路径</th><th>用途</th><th>什么时候编辑</th></tr></thead><tbody><tr><td><code>content/</code></td><td>所有公开笔记及笔记附件</td><td>写文章、增加图片</td></tr><tr><td><code>content/index.md</code></td><td>首页的文字摘要、搜索元数据和链接关系</td><td>首页介绍或入口发生变化时同步修改</td></tr><tr><td><code>content/笔记导航.md</code></td><td>“学习笔记”入口页</td><td>增加分类或手写推荐入口</td></tr><tr><td><code>content/某分类/index.md</code></td><td>该分类的介绍和手写文章链接</td><td>更新分类说明、推荐阅读顺序</td></tr><tr><td><code>content/关于本站.md</code></td><td>建站想法、学习计划、原首页内容</td><td>更新关于信息，保留原有重要内容</td></tr><tr><td><code>content/排版预览.md</code></td><td>用来检查字体、代码块、提示块等</td><td>改外观后检查效果</td></tr><tr><td><code>quartz.config.ts</code></td><td>网站名称、网址、语言、插件、主题配置</td><td>修改全站设置</td></tr><tr><td><code>quartz.layout.ts</code></td><td>侧栏、目录、图谱、页脚等组件组合</td><td>调整页面功能和位置</td></tr><tr><td><code>site.navigation.json</code></td><td>分类与指定文章的侧栏排序表</td><td>希望改变侧栏顺序</td></tr><tr><td><code>README.md</code></td><td>仓库使用说明</td><td>查常用命令和维护入口</td></tr></tbody></table></div>
+<h3 id="22-需要调整外观时再看">2.2 需要调整外观时再看<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#22-需要调整外观时再看" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>路径</th><th>用途</th></tr></thead><tbody><tr><td><code>quartz/components/HybridHome.tsx</code></td><td>首页视觉内容、顶部菜单、学习卡片、最近随记、首页图谱</td></tr><tr><td><code>quartz/components/styles/hybridHome.scss</code></td><td>仅首页的外观、间距、卡片与手机布局</td></tr><tr><td><code>quartz/styles/custom.scss</code></td><td>阅读页的字体、字号、行距、标题、代码、表格等</td></tr><tr><td><code>quartz/util/previewTheme.ts</code></td><td>代码语法高亮配色</td></tr><tr><td><code>quartz/static/styles/gruvbox_dark.css</code></td><td>保留的原站色板与基础样式</td></tr><tr><td><code>quartz/static/styles/font_faces.css</code></td><td>自托管字体声明，主要由脚本生成</td></tr><tr><td><code>quartz/static/styles/code_fonts.css</code></td><td>代码字体声明</td></tr><tr><td><code>quartz/static/fonts/</code></td><td>WOFF2 字体文件与许可证</td></tr><tr><td><code>quartz/static/preview-favicon.svg</code></td><td>当前额外声明的 SVG 网站图标</td></tr><tr><td><code>quartz/static/icon.png</code></td><td>Quartz 默认图标来源，也用于生成 <code>favicon.ico</code></td></tr><tr><td><code>quartz/static/og-image.png</code></td><td>默认社交分享预览图</td></tr><tr><td><code>quartz/components/Head.tsx</code></td><td>页面头部、元数据、固定深色和额外字体样式加载</td></tr></tbody></table></div>
+<p>文件扩展名可以这样理解：<code>.md</code> 是笔记，<code>.json</code> 是数据表，<code>.ts</code> 是 TypeScript 配置或逻辑，<code>.tsx</code> 是页面组件，<code>.scss</code> / <code>.css</code> 是样式，<code>.yml</code> 是自动化流程配置。</p>
+<h3 id="23-维护回归与生成物">2.3 维护、回归与生成物<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#23-维护回归与生成物" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>路径</th><th>用途</th><th>注意</th></tr></thead><tbody><tr><td><code>scripts/serve.sh</code>、<code>scripts/serve.mjs</code></td><td>本地构建并提供子路径预览</td><td>默认仅监听本机</td></tr><tr><td><code>scripts/build_navigation.py</code></td><td>从排序表生成侧栏排序函数</td><td>改排序后运行</td></tr><tr><td><code>quartz/util/navigation.ts</code></td><td>生成后的侧栏排序函数</td><td>优先改 JSON，再生成，不要只改这里</td></tr><tr><td><code>scripts/validate_site.py</code></td><td>静态验收脚本</td><td>链接、旧路径、旧锚点、字体和发布网址检查</td></tr><tr><td><code>.github/workflows/publish.yml</code></td><td>GitHub Actions 自动发布</td><td>决定何时构建、发布到哪里</td></tr><tr><td><code>package.json</code></td><td>npm 命令、依赖范围、项目元信息</td><td>改构建命令或依赖时才需要碰</td></tr><tr><td><code>package-lock.json</code></td><td>精确依赖版本</td><td>不要手工编辑，不要随意删除</td></tr><tr><td><code>.node-version</code>、<code>.npmrc</code></td><td>开发环境约束</td><td>不要为了绕过报错随意改动</td></tr><tr><td><code>migration/manifest.json</code></td><td>旧站内容、锚点与字体回归记录</td><td>长期保留，新文章无需补登记</td></tr><tr><td><code>migration/迁移说明.md</code></td><td>历史迁移与恢复资料</td><td>处理迁移遗留问题时查看</td></tr><tr><td><code>AGENTS.md</code></td><td>本机项目维护约定</td><td>当前被 Git 忽略，不是发布内容</td></tr><tr><td><code>node_modules/</code></td><td>安装的依赖</td><td>可重新安装，不要在里面改源码</td></tr><tr><td><code>public/</code>、<code>.preview/</code></td><td>正式 / 本地构建结果</td><td>不要编辑、不要提交</td></tr><tr><td><code>.quartz-cache/</code>、<code>*.tsbuildinfo</code></td><td>构建和类型检查缓存</td><td>不是笔记，也不是备份</td></tr><tr><td><code>artifacts/</code></td><td>浏览器验收截图等</td><td>当前被 Git 忽略</td></tr></tbody></table></div>
+<p><code>quartz/</code> 同时包含框架代码和本项目的定制文件。不要把它当成纯粹的第三方依赖整个替换，否则可能覆盖首页、字体和旧网址兼容实现。</p>
+<h2 id="3-第一次启动与日常预览">3. 第一次启动与日常预览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-第一次启动与日常预览" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="31-核对运行环境">3.1 核对运行环境<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#31-核对运行环境" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">node</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --version</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --version</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">python3</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --version</span></span></code></pre></figure>
+<p>本项目按 Node.js 22、npm 10 维护，其中 <code>package.json</code> 要求 npm 至少为 10.9.2。静态验证脚本只需要 Python 3 标准库。</p>
+<p>没有这些命令，先准备相应运行环境；不要通过修改 <code>engines</code> 字段来掩盖版本不符合的问题，也不需要先全局安装 Quartz。</p>
+<h3 id="32-首次安装依赖">3.2 首次安装依赖<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#32-首次安装依赖" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">SHARP_IGNORE_GLOBAL_LIBVIPS</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">1</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> ci</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --no-audit</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --no-fund</span></span></code></pre></figure>
+<ul>
+<li><code>npm ci</code> 按锁文件安装，通常用于首次获取仓库、锁文件变动后或重建依赖。</li>
+<li>它会重建 <code>node_modules/</code>；不要把自己的文件放在依赖目录里。</li>
+<li>前面的环境变量用于避免系统 libvips 让 <code>sharp</code> 意外进入源码编译，不会修改系统配置。</li>
+<li>平时只是修改笔记，不需要每次都重新安装依赖。</li>
+</ul>
+<h3 id="33-启动预览">3.3 启动预览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#33-启动预览" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> serve</span></span></code></pre></figure>
+<p>看到“笔记网站已就绪”后，打开 <a href="http://localhost:8082/quartz-site/" class="external">http://localhost:8082/quartz-site/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<p>这个命令会先构建 <code>.preview/</code>，再启动预览服务。终端持续占用是正常的；在该终端按 <code>Ctrl+C</code> 停止。</p>
+<p>端口被占用时，换一个端口，不必结束不认识的进程：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">PORT</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">8083</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> serve</span></span></code></pre></figure>
+<p>这时访问 <code>http://localhost:8083/quartz-site/</code>。</p>
+<h3 id="34-改完文件怎样看到新效果">3.4 改完文件，怎样看到新效果<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#34-改完文件怎样看到新效果" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>**最容易理解的方式：**停止预览，然后重新运行 <code>npm run serve</code>，再刷新浏览器。</p>
+<p>**不用停止服务的方式：**保持预览终端运行，在第二个终端进入仓库根目录，执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">QUARTZ_BASE_URL</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">localhost:8082/quartz-site</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> build</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --output</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> .preview</span></span></code></pre></figure>
+<p>等构建结束再刷新。使用 8083 时，这条命令中的端口也必须改成 8083。构建过程中的页面可能暂时不完整，不要在构建尚未结束时判断链接是否损坏。</p>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>本站的预览不是自动热更新 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>当前 <code>npm run serve</code> 是“先构建一次，再提供静态文件”。保存文件不会自动重建。
+单独运行 <code>npm run build</code> 更新的是 <code>public/</code>，不是浏览器正在访问的 <code>.preview/</code>。</p>
+</div>
+</blockquote>
+<p>预览只绑定 <code>127.0.0.1</code>，不能直接从手机或另一台电脑访问。若要开放局域网，应另行评估监听地址和访问风险，而不是关闭防火墙。</p>
+<h2 id="4-写一篇新笔记完整示例">4. 写一篇新笔记：完整示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-写一篇新笔记完整示例" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="41-选择分类并新建文件">4.1 选择分类并新建文件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#41-选择分类并新建文件" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>例如准备记录 Rust 的学习方法，在编辑器中创建：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>content/Rust/复习方法.md</span></span></code></pre></figure>
+<p>保留现有中文分类和文件名。不必把所有文章改成英文，也不要顺便移动已有文章。</p>
+<h3 id="42-复制这个起步模板">4.2 复制这个起步模板<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#42-复制这个起步模板" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>下面是新文件的完整示例；日期请换成实际写作日期：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">---</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">title</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">Rust 复习方法</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">description</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">用练习和回顾巩固 Rust 所有权知识。</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">tags</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">Rust</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">学习方法</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">created</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: 2026-11-09</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">modified</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: 2026-11-09</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">---</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">这篇笔记记录我准备怎样复习 Rust。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">## 本次目标</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">- 理解所有权转移。</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">- 分清借用和复制。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">## 相关笔记</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">先复习[</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">所有权</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">](Rust/所有权.md)，再看[</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">引用与借用</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">](Rust/引用与借用.md)。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">## 一个小例子</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">```rust</span></span>
+<span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> message</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">String</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">::</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">from</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;继续学习&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{message}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">```</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">!info</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">] 复习提示</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> </span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> 先自己解释一遍，再运行代码验证。</span></span></code></pre></figure>
+<p>文件顶部两个 <code>---</code> 之间叫 <strong>frontmatter（元数据）</strong>，用于说明标题、日期等；下面才是正文。</p>
+<ul>
+<li><code>title</code> 会生成文章大标题，所以正文通常从 <code>##</code> 开始，避免再写一个 <code>#</code> 标题。</li>
+<li>YAML 字段使用英文冒号，冒号后加空格；缩进用空格，不用 Tab。</li>
+<li>标题含有英文冒号加空格等特殊内容时，用引号包住，例如 <code>title: &quot;Rust: 所有权复习&quot;</code>。</li>
+<li>代码块语言标签使用小写，例如 <code>rust</code>、<code>bash</code>、<code>typescript</code>、<code>json</code>。</li>
+</ul>
+<h3 id="43-元数据常用字段">4.3 元数据常用字段<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#43-元数据常用字段" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>字段</th><th>用途</th><th>示例与提醒</th></tr></thead><tbody><tr><td><code>title</code></td><td>页面标题、搜索标题</td><td><code>title: Rust 复习方法</code>；不写时会退回文件名</td></tr><tr><td><code>description</code></td><td>页面描述及搜索摘要来源</td><td>一两句话概括内容，不必复制全文</td></tr><tr><td><code>tags</code></td><td>标签页和关联信息</td><td><code>tags: [Rust, 学习方法]</code>；不等于文件夹分类</td></tr><tr><td><code>created</code></td><td>创建日期</td><td><code>created: 2026-11-09</code>；建议明确填写</td></tr><tr><td><code>modified</code></td><td>修改日期</td><td>实质更新后手动修改，不会自动写回 Markdown</td></tr><tr><td><code>draft</code></td><td>是否暂不生成文章</td><td><code>draft: true</code>；准备发布时删除或改为 <code>false</code></td></tr><tr><td><code>enableToc</code></td><td>是否为这篇文章生成目录</td><td><code>enableToc: false</code>；布尔值不要加引号</td></tr><tr><td><code>aliases</code></td><td>额外的站内跳转地址</td><td>见第 5 节，通常不需要设置</td></tr></tbody></table></div>
+<p>当前默认按 <code>created</code> 取日期，且日期插件优先使用元数据，其次才参考文件系统。<strong>不要依赖“文件名里写了日期”来决定排序</strong>，例如 <code>随记/2026-11-09.md</code> 仍建议填写 <code>created</code>。</p>
+<p>当前页面布局只有在元数据含 <code>created</code> 时才显示文章的日期 / 阅读信息区域。缺少日期还可能导致换电脑后排序变化。</p>
+<p><code>_original_note</code> 和 <code>_generated_navigation</code> 是历史迁移或导航标记，普通新笔记不要复制添加。当前并未启用“只有 <code>publish: true</code> 才发布”的过滤器，<strong>不要把 <code>publish: false</code> 当成保护隐私的方法</strong>。</p>
+<h3 id="44-写完后会自动发生什么">4.4 写完后会自动发生什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#44-写完后会自动发生什么" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>重新构建后，正常的新文章会进入：</p>
+<ul>
+<li>左侧“笔记导航”的目录树；</li>
+<li>搜索索引；</li>
+<li>关系图节点；</li>
+<li>所在文件夹页面的自动文章列表。</li>
+</ul>
+<p>有几点<strong>不会自动发生</strong>：</p>
+<ul>
+<li>分类 <code>index.md</code> 正文中的手写推荐链接不会自动追加。</li>
+<li><code>content/笔记导航.md</code> 正文中的分类入口和手写篇数不会自动更新。</li>
+<li>首页不会自动为每个新分类增加一张卡片。</li>
+<li>关系图有节点不代表一定有连线：连线来自真实站内链接。</li>
+</ul>
+<h3 id="45-草稿与隐私不是一回事">4.5 草稿与隐私不是一回事<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#45-草稿与隐私不是一回事" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>draft: true</code> 会让文章不被当前 <code>RemoveDrafts</code> 插件发布，但它不是加密、登录或仓库访问控制：</p>
+<ul>
+<li>草稿文件如果提交到公开 GitHub 仓库，别人仍能读取源码。</li>
+<li>草稿引用的图片等附件可能独立被复制到站点中，不能假定一并保密。</li>
+<li>已经发布过的内容，改成草稿也不能清除 Git 历史、外部缓存或他人的副本。</li>
+</ul>
+<p>真正敏感的内容不要放进公开仓库；当前 <code>content/private/</code> 同时受到构建忽略和 Git 忽略，但仍应先确认文件没有在过去被跟踪。不要用 <code>git add -f</code> 强行加入私人文件。</p>
+<h2 id="5-链接图片与常用写法">5. 链接、图片与常用写法<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-链接图片与常用写法" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="51-站内链接以-content-为根目录">5.1 站内链接以 <code>content/</code> 为根目录<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#51-站内链接以-content-为根目录" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不管正在编辑哪一篇笔记，推荐都写完整的内容库路径：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">所有权</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">](Rust/所有权.md)</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">常用工具</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">](常用工具/index.md)</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[[</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">Rust/所有权|所有权</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">]]</span></span></code></pre></figure>
+<p>这些链接中<strong>不写</strong> <code>content/</code>，不写本机绝对路径，也不必手工加上 <code>/quartz-site/</code>。</p>
+<p>例如从 <code>content/随记/某一天.md</code> 链接到 Rust 笔记，仍然写 <code>Rust/所有权.md</code>，而不是凭文件夹位置猜相对路径。</p>
+<p>链接到具体小节时，最稳妥的做法是在预览中点击标题旁的锚点图标，复制并核对实际地址。不要假设标点、空格、重复标题生成的锚点一定与自己的直觉相同。</p>
+<h3 id="52-图片与附件">5.2 图片与附件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#52-图片与附件" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>推荐把公开附件放进清楚的目录，例如：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>content/assets/网站维护/预览截图.png</span></span></code></pre></figure>
+<p>然后在笔记中使用下面的写法；这是示例路径，实际使用前需要放入对应文件：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">![</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">本地预览窗口</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">](assets/网站维护/预览截图.png)</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">[</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">下载示例文件</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">](assets/网站维护/示例.zip)</span></span></code></pre></figure>
+<p>笔记图片放 <code>content/</code> 下便于与文章一起管理；全站通用的图标、字体等放 <code>quartz/static/</code>。注意控制截图大小，并在提交前检查是否包含用户名、令牌或私人窗口。</p>
+<h3 id="53-提示块强调和任务列表">5.3 提示块、强调和任务列表<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#53-提示块强调和任务列表" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">!info</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">] 普通提示</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> </span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> 这里写说明。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">!warning</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">] 风险提醒</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> </span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> 执行前先备份。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">!important</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">] 关键步骤</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> </span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">> 完成后再继续。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">==需要重点记住的内容==</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">~~已经过时的说法~~</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">- [ ] 尚未完成</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">- [</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">x</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">] 已完成</span></span></code></pre></figure>
+<p>本站使用 Obsidian callout，不要继续新增 MkDocs Material 的 <code>!!!</code> 或旧的 <code>///</code> 提示块语法。任务列表可以渲染，但当前没有开启点击复选框来保存笔记的功能，修改状态仍应编辑 Markdown。</p>
+<p>本站当前没有在 <code>quartz.config.ts</code> 中启用 <code>Plugin.Latex()</code>；不要仅凭通用教程就假定数学公式插件已经生效。需要添加新的语法插件时，先了解依赖和构建影响，再单独验证。</p>
+<h3 id="54-标题文件名和网址是三件事">5.4 标题、文件名和网址是三件事<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#54-标题文件名和网址是三件事" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>源文件：content/Rust/所有权.md</span></span>
+<span data-line><span>文章名：由 title 决定</span></span>
+<span data-line><span>常规网址：https://richard-code200.github.io/quartz-site/Rust/所有权.html</span></span>
+<span data-line><span>分类页：https://richard-code200.github.io/quartz-site/Rust/</span></span></code></pre></figure>
+<p>修改 <code>title</code> 通常不会改变网址；修改文件名或移动目录会改变网址，也会影响已有链接。</p>
+<p>对于<strong>迁移后新增的文章</strong>，若确实要从 <code>Rust/复习方法.md</code> 改名为 <code>Rust/复习清单.md</code>，可以在新文件中保留旧的内容路径别名，片段如下：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="yaml" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">aliases</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">:</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  - </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">Rust/复习方法</span></span></code></pre></figure>
+<p>当前别名生成器会为这个额外路径输出 <code>.html</code> 跳转页。别名不带域名、不写 <code>content/</code>，也不要与现有页面冲突。改完更新站内链接并验证旧地址。</p>
+<p>**不要直接套用这个办法随意改名迁移清单中的原站文章。**原站文件位置、旧目录网址和标题锚点受 <code>migration/manifest.json</code> 约束，移动它们需要同步评估兼容性。</p>
+<h2 id="6-分类导航和阅读顺序">6. 分类、导航和阅读顺序<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-分类导航和阅读顺序" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>本站有几套名字相近、但相互独立的“导航”：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>你看到的位置</th><th>谁控制</th><th>新文章是否自动出现</th></tr></thead><tbody><tr><td>左侧目录树“笔记导航”</td><td>内容目录 + <code>sortNavigation</code></td><td>会，重新构建即可</td></tr><tr><td>“学习笔记”页面正文</td><td><code>content/笔记导航.md</code></td><td>手写链接不会自动追加</td></tr><tr><td>分类页顶部介绍、推荐链接</td><td><code>content/某分类/index.md</code></td><td>手写部分不会自动追加</td></tr><tr><td>分类页下方文章列表</td><td>Quartz 的 <code>FolderPage</code></td><td>会</td></tr><tr><td>首页顶部菜单和学习卡片</td><td><code>HybridHome.tsx</code></td><td>不会自动增加入口</td></tr></tbody></table></div>
+<p>分类页出现手写文章链接，又在下面出现自动列表，是这两种内容同时存在，不一定是构建错误。</p>
+<h3 id="61-新建一个分类">6.1 新建一个分类<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#61-新建一个分类" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>假设以后需要“网站维护”分类：</p>
+<ol>
+<li>在 <code>content/</code> 新建 <code>网站维护/</code> 文件夹。</li>
+<li>创建 <code>网站维护/index.md</code>，设置 <code>title</code> 并写几句分类介绍。</li>
+<li>把新笔记放在这个文件夹中。</li>
+<li>在 <code>content/笔记导航.md</code> 增加分类链接：<code>[网站维护](网站维护/index.md)</code>。</li>
+<li>希望固定侧栏位置时，再把分类加入 <code>site.navigation.json</code> 并生成排序函数。</li>
+<li>需要首页卡片时，另外修改首页组件；新分类本身不要求修改首页。</li>
+</ol>
+<p>分类 <code>index.md</code> 示例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="markdown" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">---</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">title</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">网站维护</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">---</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">记录网站的写作流程与维护经验。</span></span></code></pre></figure>
+<p>当前“学习笔记”页仍有迁移时手写的“53 篇”及分类篇数，不是实时统计。增加文章后如要维护它们，应重新清点；也可以把介绍改成不含固定篇数的文字，避免长期失真。不要把旧数字当作最新实际数量。</p>
+<h3 id="62-调整左侧栏的顺序">6.2 调整左侧栏的顺序<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#62-调整左侧栏的顺序" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>编辑 <code>site.navigation.json</code>：</p>
+<ul>
+<li>最外层数组的先后决定已登记分类的顺序。</li>
+<li>各分类 <code>files</code> 数组的先后决定已登记文章的顺序。</li>
+<li>路径相对于 <code>content/</code>，包含 <code>.md</code>，大小写要与实际路径相同。</li>
+<li>未登记文章仍然显示，通常排在其分类已登记文章后，再按名称比较；未登记分类也不会因此消失。</li>
+</ul>
+<p>下面是<strong>一项分类的片段</strong>，不是完整 JSON 文件：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="json" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">{</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  &quot;title&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Rust&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  &quot;folder&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Rust&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  &quot;files&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: [</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;Rust/所有权.md&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;Rust/引用与借用.md&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">    &quot;Rust/复习方法.md&quot;</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  ]</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<p>只登记实际存在的文件。JSON 必须用双引号，不允许注释，最后一项后面不加逗号。</p>
+<p>修改后运行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">python3</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> scripts/build_navigation.py</span></span></code></pre></figure>
+<p>它会更新 <code>quartz/util/navigation.ts</code>。如果要提交排序调整，<strong>JSON 和生成后的 TypeScript 文件一起提交</strong>。</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>这个脚本不负责生成分类正文 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>build_navigation.py</code> 只生成侧栏排序函数，不会重写 <code>content/笔记导航.md</code> 或各分类 <code>index.md</code>。
+当前排序逻辑也不读取 JSON 的 <code>title</code> 来重命名侧栏；分类显示名称通常应在对应 <code>index.md</code> 的 <code>title</code> 中调整。</p>
+</div>
+</blockquote>
+<p>侧栏顺序、分类正文中的手写顺序、分类页自动列表的顺序并不相同。自动列表目前优先文件夹，再按配置的日期倒序等规则排序；改 <code>site.navigation.json</code> 不会同步改变它。</p>
+<h2 id="7-修改全站基础配置">7. 修改全站基础配置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-修改全站基础配置" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>打开 <code>quartz.config.ts</code>。它是 TypeScript，不是纯 JSON：可以有注释，字符串通常用引号，布尔值是 <code>true</code> / <code>false</code>，对象条目间用逗号分隔。</p>
+<h3 id="71-常用设置对照表">7.1 常用设置对照表<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#71-常用设置对照表" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>以下都在 <code>configuration</code> 对象中：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>设置</th><th>当前值</th><th>修改效果 / 注意事项</th></tr></thead><tbody><tr><td><code>pageTitle</code></td><td><code>Richard的个人博客</code></td><td>首页品牌名、侧栏站名等；不等于首页大字 <code>RICHARD</code></td></tr><tr><td><code>pageTitleSuffix</code></td><td><code> · Richard的个人博客</code></td><td>浏览器标签页标题后缀，注意保留或调整前导分隔符</td></tr><tr><td><code>locale</code></td><td><code>zh-CN</code></td><td>Quartz 界面翻译和日期格式，不会翻译笔记正文</td></tr><tr><td><code>baseUrl</code></td><td>默认 <code>richard-code200.github.io/quartz-site</code></td><td>分享链接、RSS、站点地图等绝对地址基础；不带 <code>https://</code></td></tr><tr><td><code>enableSPA</code></td><td><code>true</code></td><td>站内切换时减少整页重载；自定义交互需要适配 SPA 生命周期</td></tr><tr><td><code>enablePopovers</code></td><td><code>true</code></td><td>鼠标悬停站内链接显示预览</td></tr><tr><td><code>analytics</code></td><td><code>null</code></td><td>当前不启用访问统计；不需要就保持原样</td></tr><tr><td><code>ignorePatterns</code></td><td><code>private</code>、<code>templates</code>、<code>.obsidian</code></td><td>构建时忽略对应模式；不是 Git 忽略或访问权限设置</td></tr><tr><td><code>defaultDateType</code></td><td><code>created</code></td><td>组件取日期的默认类型，影响最近随记和列表排序等</td></tr></tbody></table></div>
+<p>例如，只想关闭悬浮预览，就把现有这一行改为：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">enablePopovers: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">false</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span></code></pre></figure>
+<p>这是对象内部片段，不要单独粘贴到文件结尾，也不要把整份配置替换成这一行。保存后重新构建并检查文章链接的悬停行为。</p>
+<h3 id="72-环境变量是什么">7.2 环境变量是什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#72-环境变量是什么" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当前 <code>baseUrl</code> 这样定义：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">baseUrl: </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">process</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">.</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">env</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">.</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">QUARTZ_BASE_URL</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> ?? </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;richard-code200.github.io/quartz-site&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span></code></pre></figure>
+<p>意思是：本次构建提供了 <code>QUARTZ_BASE_URL</code> 就使用它，否则使用正式网址。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">QUARTZ_BASE_URL</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">localhost:8082/quartz-site</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> build</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --output</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> .preview</span></span></code></pre></figure>
+<p>在 Bash 中，这种前缀只对这条命令生效，不会永久修改网站配置。不要为了预览把正式默认网址改成 localhost，也尽量不要在 shell 中永久 <code>export QUARTZ_BASE_URL=localhost:...</code>。</p>
+<p>如果不确定当前终端是否残留了变量，可以检查：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">printenv</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> QUARTZ_BASE_URL</span></span></code></pre></figure>
+<p>没有输出通常表示未设置；若存在不想要的临时覆盖，在当前终端执行 <code>unset QUARTZ_BASE_URL</code> 后再构建生产版本。</p>
+<h3 id="73-域名或仓库名变化不是只改一个字段">7.3 域名或仓库名变化，不是只改一个字段<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#73-域名或仓库名变化不是只改一个字段" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>未来更名仓库、改项目路径或启用自定义域名时，至少检查：</p>
+<ul>
+<li><code>quartz.config.ts</code> 的正式 <code>baseUrl</code>。</li>
+<li><code>quartz.layout.ts</code> 的 GitHub、RSS 页脚链接。</li>
+<li><code>package.json</code> 的 <code>homepage</code>、<code>repository</code> 等项目元信息。</li>
+<li><code>scripts/serve.sh</code>、<code>scripts/serve.mjs</code> 的默认预览子路径。</li>
+<li><code>scripts/validate_site.py</code> 中 <code>BASE</code>、<code>SITE_URL</code>、<code>REPOSITORY_URL</code>。</li>
+<li>浏览器验收脚本、README 和笔记里明确写出的站点网址。</li>
+<li>Git 远程、GitHub Pages 设置、自定义域名及旧地址跳转方案。</li>
+</ul>
+<p>这是跨文件和线上配置变更，应先备份、列出旧新地址映射并单独验证。<strong>只改 <code>baseUrl</code> 并不构成完整迁移</strong>，也不应为了让验收通过而随意删掉网址检查。</p>
+<h2 id="8-首页视觉页面与-markdown-摘要要区分">8. 首页：视觉页面与 Markdown 摘要要区分<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8-首页视觉页面与-markdown-摘要要区分" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="81-为什么改首页-markdown画面可能没变">8.1 为什么改首页 Markdown，画面可能没变<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#81-为什么改首页-markdown画面可能没变" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>本站根首页使用定制组件，不是直接渲染 <code>content/index.md</code> 的正文：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>想修改什么</th><th>应修改哪里</th></tr></thead><tbody><tr><td>首页摘要、搜索描述、文字链接关系</td><td><code>content/index.md</code></td></tr><tr><td>大字 <code>RICHARD</code>、介绍、按钮文案、关于区文字</td><td><code>quartz/components/HybridHome.tsx</code></td></tr><tr><td>顶部“学习笔记 / 随记 / 排版预览”菜单</td><td>同文件的 <code>HomeHeader</code> 部分</td></tr><tr><td>三张学习分类卡片</td><td>同文件顶部的 <code>topics</code> 数组</td></tr><tr><td>首页字号、颜色、间距、手机排版</td><td><code>quartz/components/styles/hybridHome.scss</code></td></tr><tr><td>文章页是否显示侧栏、目录、日期等</td><td><code>quartz.layout.ts</code></td></tr></tbody></table></div>
+<p>**变更首页入口或主要介绍时，两处要同步：**视觉组件和 <code>content/index.md</code>。否则浏览器看到的内容可能与搜索摘要、链接关系不一致。</p>
+<p>只改首页文案时，在编辑器里搜索现有文字并小范围替换，避免误删 <code>&lt;div></code>、<code>&lt;/section></code>、花括号或括号。</p>
+<h3 id="82-修改学习卡片">8.2 修改学习卡片<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#82-修改学习卡片" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>HybridHome.tsx</code> 顶部的 <code>topics</code> 每个对象代表一张卡片，以当前 Rust 卡片为例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">{</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  slug: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Rust/index&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  prefix: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Rust/&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  title: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Rust&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  description: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;从所有权到切片，理解语言背后的规则。&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  category: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;编程语言&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">},</span></span></code></pre></figure>
+<ul>
+<li><code>slug</code>：点击卡片去哪里，<strong>不带 <code>.md</code>、<code>.html</code> 或 <code>content/</code></strong>。</li>
+<li><code>prefix</code>：统计哪些笔记，末尾的 <code>/</code> 用来匹配该分类路径。</li>
+<li><code>title</code>：卡片标题。</li>
+<li><code>description</code>：简介。</li>
+<li><code>category</code>：卡片底部显示的分类文案，不负责创建真实目录。</li>
+</ul>
+<p>改变现有卡片文字和目标路径，比盲目复制整个组件更容易维护。若要新增第四张卡片，还要检查渲染中的 <code>[&quot;Rs&quot;, &quot;$_&quot;, &quot;//&quot;][index]</code> 对应的装饰标记数组，并检查网格与手机布局；<code>topics</code> 并不是唯一涉及卡片数量的地方。</p>
+<p>卡片的篇数按组件筛选后的文章与 <code>prefix</code> 自动统计，不是直接统计磁盘文件总数。</p>
+<h3 id="83-最近记录显示规则">8.3 “最近记录”显示规则<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#83-最近记录显示规则" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当前首页不是“全站最近文章”，而是：</p>
+<ol>
+<li>筛出 <code>随记/</code> 下符合首页文章筛选条件的笔记。</li>
+<li>按 <code>getDate</code> 取得的日期倒序排列，当前默认是 <code>created</code>。</li>
+<li>使用 <code>.slice(0, 2)</code> 只取两篇。</li>
+</ol>
+<p>想显示四篇，把这一处 <code>.slice(0, 2)</code> 改成 <code>.slice(0, 4)</code>；这只是数量调整。其他分类的文章不会因为日期最新就出现在这里。</p>
+<p>想按修改日期显示，需要同时理解全站 <code>defaultDateType</code> 的影响，不要为了首页需求直接改掉所有列表的日期规则。</p>
+<h3 id="84-首页全站图谱">8.4 首页全站图谱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#84-首页全站图谱" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>首页图谱复用 Quartz 的站点索引，包含分类页和孤立页面；不会扫描 <code>content/</code> 之外的个人文件。新文章需要重新构建，线上还需要发布后才会出现。</p>
+<p>首页组件里的图谱设置包括：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="typescript" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">localGraph: { depth: -</span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, showTags: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">false</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, focusOnHover: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, autoResize: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, autoFit: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> },</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">globalGraph: { showTags: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">false</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, autoResize: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, autoFit: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> },</span></span></code></pre></figure>
+<ul>
+<li><code>depth: -1</code>：内嵌区域展示全站范围。</li>
+<li><code>showTags: false</code>：不显示标签节点。</li>
+<li><code>autoResize</code>：跟随容器尺寸变化。</li>
+<li><code>autoFit</code>：初始视野尽量容纳全图；用户操作后保留视野。</li>
+</ul>
+<p>首页图谱高度在首页 SCSS 的 <code>.preview-graph</code> → <code>.graph-outer</code> 中配置，桌面当前为 <code>460px</code>，手机规则下为 <code>320px</code>。文章页图谱是另一份布局配置，不要混淆。</p>
+<h2 id="9-文章布局搜索侧栏目录页脚">9. 文章布局：搜索、侧栏、目录、页脚<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#9-文章布局搜索侧栏目录页脚" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>打开 <code>quartz.layout.ts</code>，可以把它理解成“把现有组件放进页面的哪个区域”。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>配置部分</th><th>控制什么</th></tr></thead><tbody><tr><td><code>sharedPageComponents</code></td><td>公共 head、顶部 header、页脚等</td></tr><tr><td><code>defaultContentPageLayout</code></td><td>普通文章页布局</td></tr><tr><td><code>defaultListPageLayout</code></td><td>文件夹、标签等列表页布局</td></tr><tr><td><code>beforeBody</code></td><td>正文之前，例如面包屑、标题、日期、标签</td></tr><tr><td><code>left</code></td><td>左侧站名、搜索、阅读模式、文件目录树</td></tr><tr><td><code>right</code></td><td>右侧图谱、文章目录、反向链接</td></tr></tbody></table></div>
+<p><code>noteOnly(...)</code> 是本项目的包装函数：根首页不输出这些文章页组件。不要为了让文章页出现某个组件，直接删除首页条件判断。</p>
+<h3 id="91-常见小调整">9.1 常见小调整<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#91-常见小调整" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>**默认展开侧栏文件夹：**把 <code>Component.Explorer</code> 中 <code>folderDefaultState: &quot;collapsed&quot;</code> 改为 <code>&quot;open&quot;</code>。</li>
+<li>**调整侧栏标题：**修改同一处的 <code>title: &quot;笔记导航&quot;</code>。</li>
+<li>**关闭某篇文章目录：**优先在该篇元数据设 <code>enableToc: false</code>，不必改全站布局。</li>
+<li>**调整所有文章目录范围：**在 <code>quartz.config.ts</code> 的 <code>Plugin.TableOfContents()</code> 配置 <code>maxDepth</code>；当前默认收集到三级标题。</li>
+<li>**修改页脚 GitHub / RSS：**改 <code>Component.Footer({ links: ... })</code>。</li>
+<li>**移除某个侧栏组件：**只移除对应数组里的那一项，并确认逗号、括号保持成对。</li>
+</ul>
+<p>目录默认需要超过一个符合范围的标题条目才生成，且文章目录组件套了 <code>DesktopOnly</code>：手机上没有右侧目录，并不一定是内容有错。</p>
+<p>调整布局后，不仅检查文章页，也要检查首页、分类页和手机宽度。不要把“桌面文章页正常”当成全站都正常。</p>
+<h2 id="10-外观与字体从最小改动开始">10. 外观与字体：从最小改动开始<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#10-外观与字体从最小改动开始" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="101-调整正文字号与行距">10.1 调整正文字号与行距<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#101-调整正文字号与行距" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>打开 <code>quartz/styles/custom.scss</code>，先找到现有规则，例如：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="scss" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="scss" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">article</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> { </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">font-size</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">15</span><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">px</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">line-height</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1.85</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; }</span></span>
+<span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">article</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> p</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">, </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">article</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> li</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> { </span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">line-height</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1.85</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">; }</span></span></code></pre></figure>
+<p>想稍微放大正文，可以把现有 <code>15px</code> 改为 <code>16px</code>。若修改行距，记得同时检查段落、列表的单独规则；只改第一条可能仍被第二条覆盖。</p>
+<p>文件底部还有手机媒体查询，当前文章字号为 <code>14px</code>。桌面改了不代表手机同步改变。代码块和表格也有独立字号，不会完全跟随 <code>article</code>。</p>
+<p>建议一次只改一类属性，重新构建，然后打开<a href="./排版预览" class="internal alias" data-slug="排版预览">排版预览</a>和一篇真实长文章检查。</p>
+<h3 id="102-为什么只改主题色可能没效果">10.2 为什么只改主题色可能没效果<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#102-为什么只改主题色可能没效果" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>本站是定制的 Gruvbox Dark，颜色不只来自一处：</p>
+<ol>
+<li><code>quartz.config.ts</code> 的 <code>colors</code> 为 Quartz 组件提供主题变量。</li>
+<li><code>quartz/styles/custom.scss</code> 有直接写出的正文、标题、代码块等色值。</li>
+<li><code>hybridHome.scss</code> 有首页自己的背景、文字和卡片颜色。</li>
+<li><code>quartz/static/styles/gruvbox_dark.css</code> 保留原站基础样式。</li>
+<li><code>quartz/util/previewTheme.ts</code> 决定代码 token 的高亮颜色。</li>
+</ol>
+<p>所以只修改 <code>secondary</code> 不会让所有黄色标题都跟着变。先确认想改的是哪个区域，再改对应规则。</p>
+<p>当前浅色和深色配置使用相同色值，并在 <code>Head.tsx</code> 中固定深色；这不是一个能靠添加切换按钮就完成的浅色主题。要支持真正的浅色模式，需要整体处理固定色值和主题初始化，属于另外一项改造。</p>
+<h3 id="103-字体维护">10.3 字体维护<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#103-字体维护" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当前字体搭配：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>用途</th><th>字体</th></tr></thead><tbody><tr><td>西文正文</td><td>MonaspiceAr</td></tr><tr><td>西文标题</td><td>MonaspiceXe</td></tr><tr><td>代码</td><td>MonaspiceNe</td></tr><tr><td>代码注释与文档字符串</td><td>MonaspiceRn 斜体</td></tr><tr><td>中文与后备字符</td><td>Sarasa Term SC（更纱黑体）</td></tr></tbody></table></div>
+<p>字体由站点自身提供，访客不必安装。本地普通构建也不需要安装字体转换工具。</p>
+<p>**写新汉字通常无需重新生成字体。**已有 Sarasa 分包覆盖源字体支持的字符，并通过 <code>unicode-range</code> 按需加载。</p>
+<p>如果只是改字号、行距，不要运行字体生成脚本。真正更换字体时需要同时考虑：</p>
+<ul>
+<li><code>quartz.config.ts</code> 的字体设置。</li>
+<li><code>custom.scss</code> 中的字体栈。</li>
+<li>字体文件、<code>font_faces.css</code> 和 <code>code_fonts.css</code>。</li>
+<li>字体许可证与源字体版本。</li>
+<li><code>migration/manifest.json</code> 的字体校验记录。</li>
+</ul>
+<p>详细操作在仓库 <code>scripts/字体资源维护.md</code>。更换字体或重分包会触发校验变化，应先确认差异符合预期，再维护回归记录，不要直接删除校验项。</p>
+<h3 id="104-图标与分享图">10.4 图标与分享图<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#104-图标与分享图" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>默认分享图来自 <code>quartz/static/og-image.png</code>；当前 <code>Head.tsx</code> 使用这一固定路径。</li>
+<li><code>Plugin.Favicon()</code> 从 <code>quartz/static/icon.png</code> 生成图标，同时页面头部还声明了 <code>preview-favicon.svg</code>。</li>
+<li>因此只替换 <code>icon.png</code>，浏览器标签上的 SVG 图标可能仍保持原样；需要核对两种资源及头部引用。</li>
+<li>首页字母标志是 <code>HybridHome.tsx</code> 内的 SVG，不等于浏览器标签页图标。</li>
+</ul>
+<p>修改后重新构建，并用强制刷新或新标签页检查。分享平台和浏览器可能缓存旧图，不应仅凭一次旧缩略图判断构建失败。</p>
+<h2 id="11-插件知道它们负责什么即可">11. 插件：知道它们负责什么即可<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#11-插件知道它们负责什么即可" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>quartz.config.ts</code> 的 <code>plugins</code> 按三个阶段组织：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>transformers：读取、加工 Markdown 和元数据</span></span>
+<span data-line><span>      ↓</span></span>
+<span data-line><span>filters：决定哪些文章可以发布</span></span>
+<span data-line><span>      ↓</span></span>
+<span data-line><span>emitters：输出网页、索引、资源和兼容跳转</span></span></code></pre></figure>
+<h3 id="当前已启用的主要功能">当前已启用的主要功能<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#当前已启用的主要功能" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>插件 / 功能</th><th>作用</th></tr></thead><tbody><tr><td><code>FrontMatter</code></td><td>读取标题、标签、日期等元数据</td></tr><tr><td><code>CreatedModifiedDate</code></td><td>优先使用元数据，其次使用文件系统日期</td></tr><tr><td><code>SyntaxHighlighting</code></td><td>代码高亮，使用本站 <code>previewTheme</code></td></tr><tr><td><code>ObsidianFlavoredMarkdown</code></td><td>双链、callout、高亮等 Obsidian 风格语法</td></tr><tr><td><code>GitHubFlavoredMarkdown</code></td><td>表格、删除线、任务列表等</td></tr><tr><td><code>LegacyAnchors</code></td><td>保留旧站标题锚点</td></tr><tr><td><code>TableOfContents</code></td><td>提取文章小节目录</td></tr><tr><td><code>CrawlLinks</code></td><td>处理站内链接与图谱关系，当前采用内容库根路径解析</td></tr><tr><td><code>Description</code></td><td>提供内容摘要</td></tr><tr><td><code>RemoveDrafts</code></td><td>过滤 <code>draft: true</code> 的文章</td></tr><tr><td><code>ContentPage</code> + <code>HybridHome</code></td><td>生成文章，并为根首页使用定制页面</td></tr><tr><td><code>FolderPage</code>、<code>TagPage</code></td><td>生成分类 / 文件夹页和标签页</td></tr><tr><td><code>ContentIndex</code></td><td>搜索与图谱索引、RSS、站点地图</td></tr><tr><td><code>Assets</code>、<code>Static</code></td><td>复制笔记附件和全站静态资源</td></tr><tr><td><code>AliasRedirects</code></td><td>为文章别名生成跳转页</td></tr><tr><td><code>Favicon</code>、<code>NotFoundPage</code></td><td>图标与 404 页面</td></tr><tr><td><code>LegacyRoutes</code></td><td>保留旧站目录形式的网址</td></tr></tbody></table></div>
+<p>日常写笔记不需要改插件。不要因为不熟悉就删除 <code>LegacyAnchors</code> 或 <code>LegacyRoutes</code>；它们承担历史链接兼容。</p>
+<h2 id="12-旧网址兼容哪些可以保留哪些不会自动保留">12. 旧网址兼容：哪些可以保留，哪些不会自动保留<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#12-旧网址兼容哪些可以保留哪些不会自动保留" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>普通文章当前以 <code>.html</code> 为规范网址，例如：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>当前文章：/quartz-site/Rust/所有权.html</span></span>
+<span data-line><span>原站路径：/quartz-site/Rust/所有权/</span></span></code></pre></figure>
+<p>迁移文章的旧目录路径会通过兼容页跳转到当前文章，并保留查询参数和标题锚点。旧标题锚点由 <code>LegacyAnchors</code> 补充，新的 Quartz 锚点也能使用。原首页旧标题会转到“关于本站”对应位置。</p>
+<p>但是：</p>
+<ul>
+<li><code>/quartz-site/</code> 下的旧文章路径兼容，不代表过去的 <code>/mkdocs-site/</code> 项目前缀也会自动跳转。</li>
+<li>GitHub 仓库更名，不会自动为所有旧 Pages 路径提供转发。</li>
+<li>新文章不需要添加到迁移清单；迁移清单不是当前全部文章的总目录。</li>
+<li><code>scripts/migrate_mkdocs.py</code> 是首次迁移工具，不是更新站点命令；日常不要重跑。</li>
+</ul>
+<p>需要恢复或修改迁移逻辑时，先读 <code>migration/迁移说明.md</code>，并保留原文、旧新路径映射和备份。</p>
+<h2 id="13-改完之后怎样验证">13. 改完之后，怎样验证<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#13-改完之后怎样验证" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="131-标准三步">13.1 标准三步<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#131-标准三步" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> check</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> build</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> validate</span></span></code></pre></figure>
+<p>按顺序运行，前一步失败就先处理，不要把旧产物的验证成功当作本次修改成功。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>能发现什么</th><th>不能替代什么</th></tr></thead><tbody><tr><td><code>npm run check</code></td><td>TypeScript 配置或组件的类型问题</td><td>不检查笔记内容正确性，也不检查视觉效果</td></tr><tr><td><code>npm run build</code></td><td>Markdown / 配置 / 资源能否生成网站</td><td>不保证每个链接都正确，也不保证好看</td></tr><tr><td><code>npm run validate</code></td><td>输出中的本地引用、锚点、旧内容覆盖、旧路径、字体和正式网址等回归</td><td>不逐一访问外部网站，不代替浏览器交互检查</td></tr></tbody></table></div>
+<p><code>validate</code> 默认检查 <code>public/</code>。如需额外检查已经构建的预览目录：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> run</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> validate</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --output</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> .preview</span></span></code></pre></figure>
+<p>预览目录验证不能代替正式构建验证；某些正式网址和索引要求只在 <code>public/</code> 验收时检查。</p>
+<p>修改 TypeScript 逻辑时，还可以运行单元测试：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">npm</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> test</span></span></code></pre></figure>
+<h3 id="132-浏览器检查清单">13.2 浏览器检查清单<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#132-浏览器检查清单" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>构建并启动本机预览后，至少检查：</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> 首页能打开，顶部菜单、搜索和主要按钮正常。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 新文章可以从侧栏找到，搜索标题也能找到。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 文章中的站内链接、图片、代码块和提示块正常。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 分类页内容合理，手写链接没有遗漏或过时。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 关系图节点可以点击，新加的站内链接产生合理关联。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 用浏览器缩窄到手机宽度，导航、代码和表格没有把整页撑坏。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 如果改了外观，打开排版预览并检查长段落、中文、代码注释。</li>
+<li class="task-list-item"><input type="checkbox" disabled/> 如果改了兼容或文件位置，旧网址与旧标题链接仍能访问。</li>
+</ul>
+<p>仓库还有首页浏览器回归脚本，需要本机已有 <code>agent-browser</code>，并先启动预览：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">node</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> scripts/verify_homepage.mjs</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">node</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> scripts/verify_home_graph.mjs</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> http://localhost:8082/quartz-site/</span></span></code></pre></figure>
+<p>这不是部署命令，也不是写一篇普通笔记必须安装的额外工具。截图输出在被 Git 忽略的 <code>artifacts/</code> 中。</p>
+<h2 id="14-从本机修改到正式发布">14. 从本机修改到正式发布<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#14-从本机修改到正式发布" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="141-当前发布机制">14.1 当前发布机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#141-当前发布机制" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>本地编辑 → 检查与预览 → git commit → git push 到 main</span></span>
+<span data-line><span>                                            ↓</span></span>
+<span data-line><span>                                  GitHub Actions 自动运行</span></span>
+<span data-line><span>                                            ↓</span></span>
+<span data-line><span>                                安装依赖 → 类型检查</span></span>
+<span data-line><span>                                            ↓</span></span>
+<span data-line><span>                                  构建 → 静态验证</span></span>
+<span data-line><span>                                            ↓</span></span>
+<span data-line><span>                                public/ 发布到 gh-pages</span></span>
+<span data-line><span>                                            ↓</span></span>
+<span data-line><span>                                    GitHub Pages 展示</span></span></code></pre></figure>
+<p>对应配置：<code>.github/workflows/publish.yml</code>。当前工作流在推送 <code>main</code> 时触发，也支持在 GitHub Actions 页面手动触发。它使用 Node.js 22，发布至已有 <code>gh-pages</code> 分支。</p>
+<p>GitHub 仓库 Settings → Pages 应沿用 <strong>Deploy from a branch</strong> 的分支发布方式，分支为 <code>gh-pages</code>，目录为根目录 <code>/</code>。不要仅因为源码中存在 Actions 工作流，就擅自把 Pages 来源切换成另一套发布模式。</p>
+<h3 id="142-发布前确认自己提交了什么">14.2 发布前确认自己提交了什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#142-发布前确认自己提交了什么" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>先查看当前分支和改动：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> branch</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --show-current</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> status</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --short</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> diff</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --stat</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> diff</span></span></code></pre></figure>
+<p>注意：<code>git diff</code> 默认不显示未跟踪文件的内容；新增文章要在编辑器中打开检查。已有暂存内容还要用 <code>git diff --cached</code> 查看。</p>
+<p>如果当前不是 <code>main</code>，不要在有未保存工作时随意切分支；先明确分支的合并方式。不要用 <code>git add .</code> 盲目把他人的修改、私人资料或实验文件全部加入。</p>
+<p>下面是<strong>未来确认发布本文时</strong>可参考的一组命令，只有这些确实是本次想提交的文件时才执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> add</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> content/网站配置与使用指南.md</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> content/笔记导航.md</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> README.md</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> diff</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --cached</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --stat</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> diff</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --cached</span></span></code></pre></figure>
+<p>确认暂存区里没有无关或敏感文件，再执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> commit</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -m</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;添加网站配置与使用指南&quot;</span></span></code></pre></figure>
+<p><code>commit</code> 完成后仍只在本机。<strong>下面的命令会把 <code>main</code> 分支推到远程并触发上线</strong>，只有你确实要发布、且已确认当前分支与待推送提交时才执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> push</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> origin</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> main</span></span></code></pre></figure>
+<p>如果此前已暂存其他文件，它们也会进入同一次提交，不能只看本次 <code>git add</code> 的几个路径。推送还可能带上本地尚未发布的其他提交，执行前应一并确认。</p>
+<h3 id="143-怎样确认线上真的更新了">14.3 怎样确认线上真的更新了<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#143-怎样确认线上真的更新了" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>打开仓库的 Actions 页面，找到本次提交对应的“构建并发布笔记网站”。</li>
+<li>确认安装、检查、构建、验证、发布各步骤成功；失败时看第一处错误。</li>
+<li>检查 Pages 的发布记录，再打开正式网站的新文章地址。</li>
+<li>强制刷新，核对本次修改的文字或功能，而不只是确认首页能打开。</li>
+</ol>
+<p>工作流成功不等于你已经人工验收线上页面。不要把“本地构建通过”写成“线上已发布成功”。</p>
+<h2 id="15-改错了怎样撤销先保护当前内容">15. 改错了怎样撤销：先保护当前内容<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#15-改错了怎样撤销先保护当前内容" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="151-局部修改的最安全习惯">15.1 局部修改的最安全习惯<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#151-局部修改的最安全习惯" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>每次只做一个目标，例如先改字号，再改首页卡片，不要把依赖升级、文章搬迁和样式重做混在一次修改里。</p>
+<p>开始前：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> status</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --short</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">git</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> diff</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> quartz.config.ts</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> quartz.layout.ts</span></span></code></pre></figure>
+<p>Git <strong>不会自动保护尚未提交的修改、未跟踪文件和被忽略的文件</strong>。如果准备改配置，而文件里已经有重要的未提交内容，先单独备份。</p>
+<p>例如备份当前主配置与布局到仓库外；这只是需要时手动执行的示例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="bash" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">backup</span><span style="--shiki-light:#F38019;--shiki-dark:#F38019;">=</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$HOME</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">/workspace/backups/quartz-site/$(</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">date</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> +%Y%m%d-%H%M%S-%N)--config-edit&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">mkdir</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> -p</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$backup</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">cp</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> quartz.config.ts</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> quartz.layout.ts</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$backup</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">/&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">cmp</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> quartz.config.ts</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$backup</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">/quartz.config.ts&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">cmp</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> --</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> quartz.layout.ts</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$backup</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">/quartz.layout.ts&quot;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">printf</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> '备份位置：%s\n'</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;"> &quot;</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">$backup</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;</span></span></code></pre></figure>
+<p><code>cmp</code> 成功时通常没有输出。要改首页，还应备份首页组件、首页样式和 <code>content/index.md</code>；要改其他文件，按实际范围增加，而不是假定上面的两个文件足够。</p>
+<p>大范围变更应在同一备份目录写一份 README，记录时间、目的、原路径、已备份文件、验证结果和恢复方法；不要把令牌等凭据写进去。不要覆盖旧备份。</p>
+<h3 id="152-根据情况选择撤销方式">15.2 根据情况选择撤销方式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#152-根据情况选择撤销方式" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>情况</th><th>更稳妥的办法</th></tr></thead><tbody><tr><td>刚在编辑器中改错几行</td><td>用撤销，或者对照差异恢复这几行</td></tr><tr><td>改动尚未提交，但原来就有其他未提交修改</td><td>只撤销本次改动；不要整文件恢复到 Git 版本</td></tr><tr><td>有本次修改前的文件备份</td><td>核对备份版本、后续修改后再恢复对应文件</td></tr><tr><td>已有独立提交，但尚未 / 已经发布</td><td>阅读差异后考虑 <code>git revert</code> 创建反向提交，不重写历史</td></tr><tr><td>生成物不对，但源文件是正确的</td><td>重新构建，无需手改生成网页</td></tr></tbody></table></div>
+<p>不要把 <code>git reset --hard</code>、<code>git clean -fd</code> 当作普通修复命令：它们可能丢弃工作区或未跟踪文件。即使 <code>git restore 某文件</code> 也可能覆盖该文件中别的未提交内容。</p>
+<p>从备份恢复前，停止正在重建网站的进程，核对原文件是否已有后续修改；恢复后重新执行检查、构建、验证和预览。不要为了“试一试回退是否有效”直接操作线上版本。</p>
+<h3 id="153-撤销本次指南本身">15.3 撤销本次指南本身<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#153-撤销本次指南本身" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>本次指南只新增 <code>content/网站配置与使用指南.md</code>，并在 <code>content/笔记导航.md</code> 和 <code>README.md</code> 各增加入口；没有改变网站配置或发布流程。若以后不需要，先确认没有新增引用或后续编辑，再移除指南及这两个入口并重新构建验证；不要整文件回退，避免覆盖其他笔记维护内容。</p>
+<h2 id="16-常见问题先找原因再动手">16. 常见问题：先找原因，再动手<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#16-常见问题先找原因再动手" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>现象</th><th>优先检查</th><th>不要先做什么</th></tr></thead><tbody><tr><td>保存后网页没变</td><td>是否重建 <code>.preview/</code>，是否等构建结束再刷新</td><td>不要先重装依赖</td></tr><tr><td>正式构建通过，但本地还是旧内容</td><td><code>npm run build</code> 写入 <code>public/</code>，预览读取 <code>.preview/</code></td><td>不要直接修改预览 HTML</td></tr><tr><td>预览打不开</td><td>终端是否显示就绪、端口是否正确、路径是否含 <code>/quartz-site/</code></td><td>不要先改正式域名</td></tr><tr><td>报端口占用</td><td>换用 <code>PORT=8083 npm run serve</code></td><td>不要结束不认识的系统进程</td></tr><tr><td>新文章找不到</td><td>文件是否在 <code>content/</code>、扩展名是否 <code>.md</code>、是否为草稿或被忽略、是否重新构建</td><td>不要以为必须先注册到 JSON</td></tr><tr><td>新文章没出现在首页最近记录</td><td>是否位于 <code>随记/</code>，<code>created</code> 是否正确，是否进入前两篇</td><td>不要改全站日期规则碰运气</td></tr><tr><td>关系图有点没有线</td><td>是否真的写了指向其他文章的站内链接</td><td>标签相同不一定会自动连线</td></tr><tr><td>链接 / 图片 404</td><td>路径是否从内容库根开始、大小写是否一致、文件是否实际存在</td><td>不要加入本机绝对路径</td></tr><tr><td>文章没有右侧目录</td><td>是否至少有两个范围内标题、是否关闭目录、是否在手机宽度</td><td>不要立刻改框架代码</td></tr><tr><td>修改主题色无效</td><td>是否被正文或首页 SCSS 的固定色值覆盖</td><td>不要批量替换所有颜色</td></tr><tr><td>中文新字显示异常</td><td>字体资源请求是否成功、浏览器字体加载是否报错</td><td>不要先重新生成全部字体</td></tr><tr><td><code>npm ci</code> 因版本失败</td><td>Node / npm 是否符合要求，锁文件是否与依赖一致</td><td>不要随意删除锁文件或用 <code>sudo npm</code></td></tr><tr><td><code>sharp</code> 尝试源码编译</td><td>是否按说明设置了 <code>SHARP_IGNORE_GLOBAL_LIBVIPS=1</code></td><td>不要先修改系统 libvips</td></tr><tr><td><code>check</code> 失败</td><td>输出中的第一个文件和行号，最近是否破坏括号或字段类型</td><td>不要忽略错误继续发布</td></tr><tr><td><code>build</code> 失败</td><td>第一个错误，YAML 格式、代码围栏、组件语法、资源引用</td><td>不要只看日志最后一句</td></tr><tr><td><code>validate</code> 报错</td><td>错误给出的具体页面、资源、锚点或校验项</td><td>不要通过删验收规则来掩盖错误</td></tr><tr><td>本地通过但线上没变</td><td>是否已推送 <code>main</code>、Actions 是否成功、Pages 是否完成、缓存是否过期</td><td>不要把本地成功当线上成功</td></tr><tr><td>生产验证提示分享 / RSS 网址错误</td><td><code>baseUrl</code> 是否被环境变量覆盖，项目路径是否一致</td><td>不要把 localhost 当正式地址</td></tr></tbody></table></div>
+<p>排错时先记下：执行的命令、第一处错误、最近改了哪些文件、预期与实际差异。一次只验证一个原因，能显著减少反复试错。</p>
+<h2 id="17-不建议日常随手执行的操作">17. 不建议日常随手执行的操作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#17-不建议日常随手执行的操作" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>npm run format</code>：当前命令会格式化整个仓库，容易引入大量无关差异；只调整排版时应指定目标文件。</li>
+<li>旧教程中的 <code>mkdocs build</code>：本站已经不靠 MkDocs 构建。</li>
+<li>Quartz 的整站初始化、上游同步或自动推送命令：可能覆盖当前定制或改变 Git 状态；本站日常使用本文的 npm 命令即可。</li>
+<li><code>npm update</code>、<code>npm audit fix --force</code>：会改变依赖，不是修复文章排版的工具。</li>
+<li>重新运行 <code>scripts/migrate_mkdocs.py</code>：这是历史迁移工具，不是同步笔记工具。</li>
+<li>删除 <code>migration/</code>、替换整个 <code>quartz/</code>、批量重命名原站文章：会影响长期兼容与恢复能力。</li>
+<li>把 <code>.env</code>、私人备份、密钥或本地 AI 运行记录提交到公开仓库。</li>
+</ul>
+<p>依赖升级应作为独立任务：确认改动范围、备份未提交工作、审查锁文件差异，并完整运行测试、构建、静态验收和浏览器检查。</p>
+<h2 id="18-最后保留一张操作速查表">18. 最后保留一张操作速查表<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#18-最后保留一张操作速查表" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>想做什么</th><th>先打开 / 先运行</th></tr></thead><tbody><tr><td>写文章</td><td><code>content/对应分类/文章名.md</code></td></tr><tr><td>加图片</td><td><code>content/assets/</code> 下放附件，再在笔记中引用</td></tr><tr><td>修改分类介绍</td><td><code>content/对应分类/index.md</code></td></tr><tr><td>修改“学习笔记”入口</td><td><code>content/笔记导航.md</code></td></tr><tr><td>调整侧栏顺序</td><td><code>site.navigation.json</code> → <code>python3 scripts/build_navigation.py</code></td></tr><tr><td>改站名</td><td><code>quartz.config.ts</code> 的 <code>pageTitle</code> 与标题后缀</td></tr><tr><td>改首页大字、菜单、卡片</td><td><code>quartz/components/HybridHome.tsx</code>，同步摘要</td></tr><tr><td>改最近随记数量</td><td>首页组件的 <code>.slice(0, 2)</code></td></tr><tr><td>改正文外观</td><td><code>quartz/styles/custom.scss</code></td></tr><tr><td>改首页外观</td><td><code>quartz/components/styles/hybridHome.scss</code></td></tr><tr><td>改代码高亮颜色</td><td><code>quartz/util/previewTheme.ts</code></td></tr><tr><td>改布局或页脚</td><td><code>quartz.layout.ts</code></td></tr><tr><td>本地预览</td><td><code>npm run serve</code></td></tr><tr><td>确认能否发布</td><td><code>npm run check</code> → <code>npm run build</code> → <code>npm run validate</code>，再浏览器验收</td></tr><tr><td>正式上线</td><td>审查改动 → 提交 → 确认推送 <code>main</code> → 看 Actions / Pages → 线上核验</td></tr></tbody></table></div>
+<p><strong>最小维护闭环：找到源文件 → 小范围修改 → 重新构建 → 验证 → 预览 → 自己决定是否发布。</strong></p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="全站关系图"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-45" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#1-先理解这个网站是怎么运行的" data-for="1-先理解这个网站是怎么运行的">1. 先理解：这个网站是怎么运行的</a></li><li class="depth-1"><a href="#三个经常混淆的位置" data-for="三个经常混淆的位置">三个经常混淆的位置</a></li><li class="depth-0"><a href="#2-目录地图每个位置负责什么" data-for="2-目录地图每个位置负责什么">2. 目录地图：每个位置负责什么</a></li><li class="depth-1"><a href="#21-经常会用到的文件" data-for="21-经常会用到的文件">2.1 经常会用到的文件</a></li><li class="depth-1"><a href="#22-需要调整外观时再看" data-for="22-需要调整外观时再看">2.2 需要调整外观时再看</a></li><li class="depth-1"><a href="#23-维护回归与生成物" data-for="23-维护回归与生成物">2.3 维护、回归与生成物</a></li><li class="depth-0"><a href="#3-第一次启动与日常预览" data-for="3-第一次启动与日常预览">3. 第一次启动与日常预览</a></li><li class="depth-1"><a href="#31-核对运行环境" data-for="31-核对运行环境">3.1 核对运行环境</a></li><li class="depth-1"><a href="#32-首次安装依赖" data-for="32-首次安装依赖">3.2 首次安装依赖</a></li><li class="depth-1"><a href="#33-启动预览" data-for="33-启动预览">3.3 启动预览</a></li><li class="depth-1"><a href="#34-改完文件怎样看到新效果" data-for="34-改完文件怎样看到新效果">3.4 改完文件，怎样看到新效果</a></li><li class="depth-0"><a href="#4-写一篇新笔记完整示例" data-for="4-写一篇新笔记完整示例">4. 写一篇新笔记：完整示例</a></li><li class="depth-1"><a href="#41-选择分类并新建文件" data-for="41-选择分类并新建文件">4.1 选择分类并新建文件</a></li><li class="depth-1"><a href="#42-复制这个起步模板" data-for="42-复制这个起步模板">4.2 复制这个起步模板</a></li><li class="depth-1"><a href="#43-元数据常用字段" data-for="43-元数据常用字段">4.3 元数据常用字段</a></li><li class="depth-1"><a href="#44-写完后会自动发生什么" data-for="44-写完后会自动发生什么">4.4 写完后会自动发生什么</a></li><li class="depth-1"><a href="#45-草稿与隐私不是一回事" data-for="45-草稿与隐私不是一回事">4.5 草稿与隐私不是一回事</a></li><li class="depth-0"><a href="#5-链接图片与常用写法" data-for="5-链接图片与常用写法">5. 链接、图片与常用写法</a></li><li class="depth-1"><a href="#51-站内链接以-content-为根目录" data-for="51-站内链接以-content-为根目录">5.1 站内链接以 content/ 为根目录</a></li><li class="depth-1"><a href="#52-图片与附件" data-for="52-图片与附件">5.2 图片与附件</a></li><li class="depth-1"><a href="#53-提示块强调和任务列表" data-for="53-提示块强调和任务列表">5.3 提示块、强调和任务列表</a></li><li class="depth-1"><a href="#54-标题文件名和网址是三件事" data-for="54-标题文件名和网址是三件事">5.4 标题、文件名和网址是三件事</a></li><li class="depth-0"><a href="#6-分类导航和阅读顺序" data-for="6-分类导航和阅读顺序">6. 分类、导航和阅读顺序</a></li><li class="depth-1"><a href="#61-新建一个分类" data-for="61-新建一个分类">6.1 新建一个分类</a></li><li class="depth-1"><a href="#62-调整左侧栏的顺序" data-for="62-调整左侧栏的顺序">6.2 调整左侧栏的顺序</a></li><li class="depth-0"><a href="#7-修改全站基础配置" data-for="7-修改全站基础配置">7. 修改全站基础配置</a></li><li class="depth-1"><a href="#71-常用设置对照表" data-for="71-常用设置对照表">7.1 常用设置对照表</a></li><li class="depth-1"><a href="#72-环境变量是什么" data-for="72-环境变量是什么">7.2 环境变量是什么</a></li><li class="depth-1"><a href="#73-域名或仓库名变化不是只改一个字段" data-for="73-域名或仓库名变化不是只改一个字段">7.3 域名或仓库名变化，不是只改一个字段</a></li><li class="depth-0"><a href="#8-首页视觉页面与-markdown-摘要要区分" data-for="8-首页视觉页面与-markdown-摘要要区分">8. 首页：视觉页面与 Markdown 摘要要区分</a></li><li class="depth-1"><a href="#81-为什么改首页-markdown画面可能没变" data-for="81-为什么改首页-markdown画面可能没变">8.1 为什么改首页 Markdown，画面可能没变</a></li><li class="depth-1"><a href="#82-修改学习卡片" data-for="82-修改学习卡片">8.2 修改学习卡片</a></li><li class="depth-1"><a href="#83-最近记录显示规则" data-for="83-最近记录显示规则">8.3 “最近记录”显示规则</a></li><li class="depth-1"><a href="#84-首页全站图谱" data-for="84-首页全站图谱">8.4 首页全站图谱</a></li><li class="depth-0"><a href="#9-文章布局搜索侧栏目录页脚" data-for="9-文章布局搜索侧栏目录页脚">9. 文章布局：搜索、侧栏、目录、页脚</a></li><li class="depth-1"><a href="#91-常见小调整" data-for="91-常见小调整">9.1 常见小调整</a></li><li class="depth-0"><a href="#10-外观与字体从最小改动开始" data-for="10-外观与字体从最小改动开始">10. 外观与字体：从最小改动开始</a></li><li class="depth-1"><a href="#101-调整正文字号与行距" data-for="101-调整正文字号与行距">10.1 调整正文字号与行距</a></li><li class="depth-1"><a href="#102-为什么只改主题色可能没效果" data-for="102-为什么只改主题色可能没效果">10.2 为什么只改主题色可能没效果</a></li><li class="depth-1"><a href="#103-字体维护" data-for="103-字体维护">10.3 字体维护</a></li><li class="depth-1"><a href="#104-图标与分享图" data-for="104-图标与分享图">10.4 图标与分享图</a></li><li class="depth-0"><a href="#11-插件知道它们负责什么即可" data-for="11-插件知道它们负责什么即可">11. 插件：知道它们负责什么即可</a></li><li class="depth-1"><a href="#当前已启用的主要功能" data-for="当前已启用的主要功能">当前已启用的主要功能</a></li><li class="depth-0"><a href="#12-旧网址兼容哪些可以保留哪些不会自动保留" data-for="12-旧网址兼容哪些可以保留哪些不会自动保留">12. 旧网址兼容：哪些可以保留，哪些不会自动保留</a></li><li class="depth-0"><a href="#13-改完之后怎样验证" data-for="13-改完之后怎样验证">13. 改完之后，怎样验证</a></li><li class="depth-1"><a href="#131-标准三步" data-for="131-标准三步">13.1 标准三步</a></li><li class="depth-1"><a href="#132-浏览器检查清单" data-for="132-浏览器检查清单">13.2 浏览器检查清单</a></li><li class="depth-0"><a href="#14-从本机修改到正式发布" data-for="14-从本机修改到正式发布">14. 从本机修改到正式发布</a></li><li class="depth-1"><a href="#141-当前发布机制" data-for="141-当前发布机制">14.1 当前发布机制</a></li><li class="depth-1"><a href="#142-发布前确认自己提交了什么" data-for="142-发布前确认自己提交了什么">14.2 发布前确认自己提交了什么</a></li><li class="depth-1"><a href="#143-怎样确认线上真的更新了" data-for="143-怎样确认线上真的更新了">14.3 怎样确认线上真的更新了</a></li><li class="depth-0"><a href="#15-改错了怎样撤销先保护当前内容" data-for="15-改错了怎样撤销先保护当前内容">15. 改错了怎样撤销：先保护当前内容</a></li><li class="depth-1"><a href="#151-局部修改的最安全习惯" data-for="151-局部修改的最安全习惯">15.1 局部修改的最安全习惯</a></li><li class="depth-1"><a href="#152-根据情况选择撤销方式" data-for="152-根据情况选择撤销方式">15.2 根据情况选择撤销方式</a></li><li class="depth-1"><a href="#153-撤销本次指南本身" data-for="153-撤销本次指南本身">15.3 撤销本次指南本身</a></li><li class="depth-0"><a href="#16-常见问题先找原因再动手" data-for="16-常见问题先找原因再动手">16. 常见问题：先找原因，再动手</a></li><li class="depth-0"><a href="#17-不建议日常随手执行的操作" data-for="17-不建议日常随手执行的操作">17. 不建议日常随手执行的操作</a></li><li class="depth-0"><a href="#18-最后保留一张操作速查表" data-for="18-最后保留一张操作速查表">18. 最后保留一张操作速查表</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-2" class="overflow"><li><a href="./笔记导航" class="internal">学习笔记</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/Richard-code200/quartz-site">GitHub</a></li><li><a href="https://richard-code200.github.io/quartz-site/index.xml">RSS</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="./postscript.js" type="module" data-persist="true"></script></html>

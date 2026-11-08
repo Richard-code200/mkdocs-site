@@ -6,65 +6,65 @@
       <description>最近的10条笔记 on Richard的个人博客</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>开源项目学习</title>
-    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid>
-    <description><![CDATA[ 开源项目学习分类下的学习记录。 流程指南 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>字体与排版预览</title>
-    <link>https://richard-code200.github.io/quartz-site/%E6%8E%92%E7%89%88%E9%A2%84%E8%A7%88</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E6%8E%92%E7%89%88%E9%A2%84%E8%A7%88</guid>
-    <description><![CDATA[ 这页展示本站的字体、配色与 Markdown 排版。字体直接复用原文件，Gruvbox 色值来自原主题。 正文与链接 正文西文使用 MonaspiceAr，标题西文使用 MonaspiceXe，中文使用 Sarasa Term SC（更纱黑体）。这是粗体 Rust 所有权 / ownership，这是斜体 学习与实践 / learning by doing。 行内代码：cargo test、find src -type f。删除线：旧的方法。这是 Quartz 原生支持的高亮文本。 阅读所有权笔记 查看随记列表 回到首页 一点一点地记录，比等到全部理解再动笔更容易坚持。 三级标题 · Mona... ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>操作系统原理</title>
-    <link>https://richard-code200.github.io/quartz-site/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</guid>
-    <description><![CDATA[ 操作系统原理分类下的学习记录。 第一章 课程信息 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>学习笔记</title>
-    <link>https://richard-code200.github.io/quartz-site/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA</guid>
-    <description><![CDATA[ 按主题慢慢积累，也通过链接把知识连起来。现有 53 篇分类笔记，原首页内容另存于关于本站。 MarkDown：1 篇笔记。 Rust：19 篇笔记。 Zed：2 篇笔记。 Git使用指南：9 篇笔记。 常用工具：7 篇笔记。 开源协议：1 篇笔记。 开源项目学习：1 篇笔记。 操作系统原理：2 篇笔记。 算法笔记：1 篇笔记。 费曼学习法：1 篇笔记。 随记：7 篇笔记。 Linux：1 篇笔记。 AI Agent：1 篇笔记。 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>算法笔记</title>
-    <link>https://richard-code200.github.io/quartz-site/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
-    <description><![CDATA[ 算法笔记分类下的学习记录。 分发饼干 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>费曼学习法</title>
-    <link>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</guid>
-    <description><![CDATA[ 费曼学习法分类下的学习记录。 学习方法 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
+    <title>网站配置与使用指南</title>
+    <link>https://richard-code200.github.io/quartz-site/%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97</guid>
+    <description><![CDATA[ 从目录结构、写笔记和本地预览开始，逐步掌握本站的导航、首页、外观、发布、排错与撤销方法。 ]]></description>
+    <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>随记</title>
     <link>https://richard-code200.github.io/quartz-site/%E9%9A%8F%E8%AE%B0/</link>
     <guid>https://richard-code200.github.io/quartz-site/%E9%9A%8F%E8%AE%B0/</guid>
     <description><![CDATA[ 随记分类下的学习记录。 2026-09-12-ghostty段错误复查与默认配置恢复 2026-6-9 2026-6-1 2026-5-19 2026-4-27 ghostty-segfault-问题排查 Keygen(注册机) . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>Git使用指南</title>
-    <link>https://richard-code200.github.io/quartz-site/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
-    <guid>https://richard-code200.github.io/quartz-site/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
-    <description><![CDATA[ Git使用指南分类下的学习记录。 Git基础概念 初始设置 基本操作命令 工作区暂存 忽略文件配置 分支管理 远程仓库操作 标签管理 撤销与回退 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
-  </item><item>
-    <title>学到一点，就记录一点</title>
-    <link>https://richard-code200.github.io/quartz-site/</link>
-    <guid>https://richard-code200.github.io/quartz-site/</guid>
-    <description><![CDATA[ 这里是 Richard 的学习笔记与随记，整理编程、工具实践和日常思考。 ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
   </item><item>
     <title>常用工具</title>
     <link>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</link>
     <guid>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</guid>
     <description><![CDATA[ 常用工具分类下的学习记录。 bat eza find_fd grep_rg late_sh_zh uv 终端快捷键 . ]]></description>
-    <pubDate>Sun, 08 Nov 2026 12:14:39 GMT</pubDate>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>开源协议</title>
+    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</guid>
+    <description><![CDATA[ 开源协议分类下的学习记录。 开源协议概念总结 . ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>开源项目学习</title>
+    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid>
+    <description><![CDATA[ 开源项目学习分类下的学习记录。 流程指南 . ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>字体与排版预览</title>
+    <link>https://richard-code200.github.io/quartz-site/%E6%8E%92%E7%89%88%E9%A2%84%E8%A7%88</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E6%8E%92%E7%89%88%E9%A2%84%E8%A7%88</guid>
+    <description><![CDATA[ 这页展示本站的字体、配色与 Markdown 排版。字体直接复用原文件，Gruvbox 色值来自原主题。 正文与链接 正文西文使用 MonaspiceAr，标题西文使用 MonaspiceXe，中文使用 Sarasa Term SC（更纱黑体）。这是粗体 Rust 所有权 / ownership，这是斜体 学习与实践 / learning by doing。 行内代码：cargo test、find src -type f。删除线：旧的方法。这是 Quartz 原生支持的高亮文本。 阅读所有权笔记 查看随记列表 回到首页 一点一点地记录，比等到全部理解再动笔更容易坚持。 三级标题 · Mona... ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>操作系统原理</title>
+    <link>https://richard-code200.github.io/quartz-site/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</guid>
+    <description><![CDATA[ 操作系统原理分类下的学习记录。 第一章 课程信息 . ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>学习笔记</title>
+    <link>https://richard-code200.github.io/quartz-site/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA</guid>
+    <description><![CDATA[ 按主题慢慢积累，也通过链接把知识连起来。现有 53 篇分类笔记，原首页内容另存于关于本站。 需要自己维护本站时，先看网站配置与使用指南：从写笔记、本地预览到导航、外观和发布，按任务逐步操作。 MarkDown：1 篇笔记。 Rust：19 篇笔记。 Zed：2 篇笔记。 Git使用指南：9 篇笔记。 常用工具：7 篇笔记。 开源协议：1 篇笔记。 开源项目学习：1 篇笔记。 操作系统原理：2 篇笔记。 算法笔记：1 篇笔记。 费曼学习法：1 篇笔记。 随记：7 篇笔记。 Linux：1 篇笔记。 AI Agent：1 篇笔记。 . ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>算法笔记</title>
+    <link>https://richard-code200.github.io/quartz-site/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
+    <description><![CDATA[ 算法笔记分类下的学习记录。 分发饼干 . ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
+  </item><item>
+    <title>费曼学习法</title>
+    <link>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</guid>
+    <description><![CDATA[ 费曼学习法分类下的学习记录。 学习方法 . ]]></description>
+    <pubDate>Sun, 08 Nov 2026 18:21:32 GMT</pubDate>
   </item>
     </channel>
   </rss>
