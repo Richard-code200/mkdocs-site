@@ -10,7 +10,7 @@ tags: ["常用工具"]
 
 `grep` 用于在文件内容或命令输出中搜索匹配的行，适合日常开发中的日志定位与代码查找。
 
-按名称、类型或路径找文件见 [find 与 fd 笔记](常用工具/find_fd.md)。本笔记的 rg 作为 grep 的替代工具子章节，速查与示例分别组织。
+我把 grep 和它的替代工具 rg 放在一起记录，速查与示例分开，方便对照复习。按名称、类型或路径找文件的用法另记在 [find 与 fd 笔记](常用工具/find_fd.md)。
 
 ## grep 速查
 
@@ -314,7 +314,7 @@ fd -t f -e log '' logs -X rg -HciF 'error'
 cd /home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/basic
 ```
 
-尝试不看速查表完成下面几题，再把命令和输出发给助手检查：
+我复习时先不看速查表完成下面几题，再把命令和输出交给助手检查：
 
 1. 搜索 `src` 及其子目录中的 `TODO`，显示文件路径和行号。
 2. 只列出 `src` 中内容包含 `TODO` 的文件名。
@@ -324,7 +324,7 @@ cd /home/errorichard/workspace/projects/learning/linux/tools-practice/datasets/b
 
 完整的 11 道 grep 练习见场地中的 `exercises/grep.md`，rg 综合题见 `exercises/rg.md`，其他工具入口见场地根目录 `README.md`。混合素材进阶题需切换到 `datasets/mixed`。
 
-本次练习已完成文件过滤、反选、上下文、计数与完整单词匹配，并用 `rg` 完成了“同一文件同时满足两个条件”的筛选。复习时重点回忆：`-l` 只列文件名、`-i` 才忽略大小写、文件过滤不能替代 `-v`，以及 `rg -r` 不是递归。
+我在这轮练习中完成了文件过滤、反选、上下文、计数与完整单词匹配，也用 `rg` 完成了“同一文件同时满足两个条件”的筛选。复习时我需要重点回忆：`-l` 只列文件名、`-i` 才忽略大小写、文件过滤不能替代 `-v`，以及 `rg -r` 不是递归。
 
 ## 查阅资料
 

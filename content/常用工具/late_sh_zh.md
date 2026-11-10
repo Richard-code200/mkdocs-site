@@ -14,7 +14,7 @@ tags: ["常用工具"]
 ssh late.sh
 ```
 
-`late.sh` 是一个终端优先的社交应用：实时聊天、音乐、游戏、新闻、个人资料，以及一个你可以通过任何 SSH 客户端进入的始终在线的共享空间。
+`late.sh` 是一个终端优先的社交应用，包含实时聊天、音乐、游戏、新闻和个人资料。我可以通过 SSH 客户端进入这个始终在线的共享空间。下面先记下功能和运行方式，不代表我已经完成自部署。
 
 ## 功能包含
 
@@ -45,13 +45,13 @@ cd late-sh
 make start
 ```
 
-然后连接到你的本地实例：
+如果我按上面的方式启动了本地实例，再用下面的命令连接：
 
 ```bash
 ssh localhost -p 2222
 ```
 
-就这么简单。PostgreSQL、Icecast 和 Liquidsoap 都会自动启动。
+这套启动方式会自动启动 PostgreSQL、Icecast 和 Liquidsoap。
 
 ## 伴随 CLI
 
@@ -104,7 +104,7 @@ export CARGO_HOME=$HOME/.cargo
 
 ## 验证
 
-提交 PR 之前运行：
+如果以后准备提交 PR，我需要先运行：
 
 ```bash
 make check

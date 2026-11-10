@@ -3,6 +3,6 @@ title: "Linux"
 _generated_navigation: true
 ---
 
-Linux分类下的学习记录。
+这里收录我的 Linux 学习笔记。
 
 - [安全特性](Linux/安全特性.md)

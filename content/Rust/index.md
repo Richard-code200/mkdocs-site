@@ -3,7 +3,7 @@ title: "Rust"
 _generated_navigation: true
 ---
 
-Rust分类下的学习记录。
+这里记录我对 Rust 基础概念的理解、项目实践和后续学习计划。
 
 - [基本语法与数据类型](Rust/基本语法与数据类型.md)
 - [函数与控制流](Rust/函数与控制流.md)

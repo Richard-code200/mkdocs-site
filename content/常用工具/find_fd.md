@@ -12,7 +12,7 @@ tags: ["常用工具"]
 
 ## find 速查
 
-传统 `find` 使用路径和条件表达式查找条目，不自动读取 `.gitignore`，默认也会搜索隐藏条目。下面是对照用的基础语法；本轮实际练习主要使用 fd。
+传统 `find` 使用路径和条件表达式查找条目，不自动读取 `.gitignore`，默认也会搜索隐藏条目。下面是对照用的基础语法；我这轮实际练习主要使用 fd。
 
 ```bash
 find 搜索目录 [条件表达式]
@@ -183,13 +183,13 @@ fd -t f -e py -e js -e sh -E tests '' . -X rg -wlF 'FIXME'
 
 题目分别位于 `linux-tools-practice/exercises/fd.md` 和 `fd-advanced.md`。题目与素材分开放，先阅读题目，再进入对应 datasets 目录。
 
-独立作答已验证类型、扩展名、目录排除、隐藏、空文件、大小和批量搜索的组合使用。复习重点是明确搜索起点、区分 `-a` / `-p`、记得 `-F`，以及区分小写 `-x` 逐个执行与大写 `-X` 批量执行。
+我在独立作答时验证了类型、扩展名、目录排除、隐藏、空文件、大小和批量搜索的组合使用。复习时需要明确搜索起点、区分 `-a` / `-p`、记得 `-F`，以及区分小写 `-x` 逐个执行与大写 `-X` 批量执行。
 
 ### 详细参考
 
-下面保留原 fd 笔记的详细资料。涉及解压、格式化、删除的命令不是本轮只读练习要求，不要在素材目录直接运行。
+下面是我保留的 fd 详细参考资料，包含上游用法示例和基准数据，不代表我都实际运行过。解压、格式化、删除的命令不属于这轮只读练习，我不会直接在素材目录运行。
 
-`fd` 是一个在你文件系统中查找条目的程序。它是一个简单、快速、友好的 [`find`](https://www.gnu.org/software/findutils/) 替代品。虽然它的目标不是支持 `find` 的所有强大功能，但它为大多数的使用情况提供了合理的（有意见的）默认值。
+`fd` 用于在文件系统中查找条目。它是一个简单、快速、友好的 [`find`](https://www.gnu.org/software/findutils/) 替代品。虽然它的目标不是支持 `find` 的所有强大功能，但它为大多数的使用情况提供了合理的（有意见的）默认值。
 
 快速浏览：
 
@@ -215,7 +215,7 @@ fd -t f -e py -e js -e sh -E tests '' . -X rg -wlF 'FIXME'
 
 - 默认忽略隐藏目录和文件
 
-- 默认忽略你 `.gitignore` 文件中的模式
+- 默认忽略 `.gitignore` 文件中的模式
 
 - 该命令比 `find` 短了 50% [\*](https://github.com/ggreer/the_silver_searcher) :-)
 
@@ -225,11 +225,11 @@ fd -t f -e py -e js -e sh -E tests '' . -X rg -wlF 'FIXME'
 
 #### 如何使用 <a name="how-to-use"></a>
 
-首先，为了了解所有可用的命令行选项概况，你可以运行 [`fd -h`](#command-line-options) 获得简明的帮助信息，或者运行 `fd --help` 获得更详细的版本。
+我需要了解命令行选项概况时，可以运行 [`fd -h`](#command-line-options) 获得简明的帮助信息，或者运行 `fd --help` 获得更详细的版本。
 
 ##### 简单搜索
 
-_fd_ 被设计用来在你的文件系统中寻找条目。你可以进行的最基本的搜索，_fd_ 只带一个参数：搜索模式。例如，假设你想找到你的一个旧脚本（它名字包含 `netflix`）：
+_fd_ 最基本的搜索只需要一个参数：搜索模式。例如，假设我想找一个名字包含 `netflix` 的旧脚本，可以参考下面的示例：
 
 ```bash
 > fd netfl
@@ -240,7 +240,7 @@ Software/python/imdb-ratings/netflix-details.py
 
 ##### 正则表达式搜索
 
-搜索模式被当作一个正则表达式来处理。这里，我们搜索以 `x` 开头、以 `rc` 结尾的条目：
+搜索模式被当作一个正则表达式来处理。下面的示例搜索以 `x` 开头、以 `rc` 结尾的条目：
 
 ```bash
 > cd /etc
@@ -253,7 +253,7 @@ X11/xinit/xserverrc
 
 ##### 指定根目录
 
-如果我们想搜索一个特定的目录，可以把它作为 _fd_ 的第二个参数：
+如果我想搜索特定目录，可以把它作为 _fd_ 的第二个参数：
 
 ```bash
 > fd passwd /etc
@@ -274,7 +274,7 @@ testenv/mod.rs
 tests.rs
 ```
 
-如果你想使用这个功能来列出一个给定目录中的所有文件，你必须使用一个全包模式，如 `.`或 `^`：
+如果我想用这个功能列出给定目录中的所有文件，需要使用一个全包模式，如 `.`或 `^`：
 
 ```bash
 > fd . fd/tests/
@@ -285,7 +285,7 @@ tests.rs
 
 ##### 搜索一个特定的文件扩展名
 
-通常，我们对某一特定类型的所有文件感兴趣。这可以用 `-e`（或 `--extension`）选项来完成。在这里，我们搜索 _fd_ 资源库中的所有 Markdown 文件：
+我只关心某一类型的文件时，可以用 `-e`（或 `--extension`）筛选。下面以搜索 _fd_ 仓库中的 Markdown 文件为例：
 
 ```bash
 > cd fd
@@ -315,7 +315,7 @@ tests/testenv/mod.rs
 
 ##### 隐藏和忽略的文件
 
-默认情况下，_fd_ 不搜索隐藏目录，也不在搜索结果中显示隐藏文件。要禁用这种行为，我们可以使用 `-H`（或 `--hidden`）选项：
+默认情况下，_fd_ 不搜索隐藏目录，也不在搜索结果中显示隐藏文件。我需要包含隐藏条目时，可以使用 `-H`（或 `--hidden`）选项：
 
 ```bash
 > fd pre-commit
@@ -323,7 +323,7 @@ tests/testenv/mod.rs
 .git/hooks/pre-commit.sample
 ```
 
-如果我们在一个属于 Git 仓库（或包括 Git 仓库）的目录中工作，fd 不会搜索符合 .gitignore 模式之一的文件夹（也不会显示文件）。要禁用这种行为，我们可以使用 `-I`（或 `--no-ignore`）选项：
+如果我在一个属于 Git 仓库（或包括 Git 仓库）的目录中工作，fd 不会搜索符合 .gitignore 模式之一的文件夹（也不会显示文件）。我需要关闭忽略规则时，可以使用 `-I`（或 `--no-ignore`）选项：
 
 ```bash
 > fd num_cpu
@@ -335,7 +335,7 @@ target/debug/deps/libnum_cpus-f5ce7ef99006aa05.rlib
 
 ##### 匹配完整路径
 
-默认情况下，_fd_ 只匹配每个文件的文件名。然而，使用 `--full-path` 或 `-p` 选项，你可以对全路径进行匹配：
+默认情况下，_fd_ 只匹配每个文件的文件名。然而，使用 `--full-path` 或 `-p` 选项，我可以对全路径进行匹配：
 
 ```bash
 > fd -p -g '**/.git/config'
@@ -344,7 +344,7 @@ target/debug/deps/libnum_cpus-f5ce7ef99006aa05.rlib
 
 ##### 命令执行 <a name="command-execution"></a>
 
-比起只是显示搜索结果，你往往还想对它们做另一些事情。`fd` 提供了两种方法来为你的每一个搜索结果执行外部命令
+我需要对搜索结果继续执行操作时，可以用 `fd` 的两种外部命令调用方式：
 
 - `-x`/`--exec` 选项为每个搜索结果运行一个外部命令（并行）。
 
@@ -366,23 +366,23 @@ fd -e zip -x unzip
 fd -e h -e cpp -x clang-format -i
 ```
 
-注意 `clang-format` 的 `-i` 选项可以作为一个单独的参数传递。这就是为什么我们把 `-x` 选项放在最后。
+注意 `clang-format` 的 `-i` 选项可以作为一个单独的参数传递。所以我需要把 `-x` 选项放在最后。
 
-找到所有`test_*.py`文件，用你喜欢的编辑器打开它们：
+找到所有`test_*.py`文件，用指定的编辑器打开它们：
 
 ```bash
 fd -g 'test_*.py' -X vim
 ```
 
-注意，在这里我们使用大写的 `-X` 来打开一个vim实例。如果有两个这样的文件，`test_basic.py` 和 `lib/test_advanced.py`，这将运行 `vim test_basic.py lib/test_advanced.py`。
+这里使用大写 `-X`，只打开一个 Vim 实例。如果有两个这样的文件，`test_basic.py` 和 `lib/test_advanced.py`，这将运行 `vim test_basic.py lib/test_advanced.py`。
 
-要查看文件权限、所有者、文件大小等细节，你可以告诉`fd`通过对每个结果运行`ls`来显示它们：
+要查看文件权限、所有者、文件大小等细节，我可以让 `fd` 对每个结果运行 `ls` 来显示详情：
 
 ```bash
 fd … -X ls -lhd --color=always
 ```
 
-这个模式非常有用，`fd` 提供了一个快捷方式。你可以使用 `-l`/`--list-details` 选项，以这种方式执行ls：`fd … -l`。
+这个模式非常有用，`fd` 提供了一个快捷方式。我也可以使用 `-l`/`--list-details` 选项，以这种方式执行ls：`fd … -l`。
 
 当把 `fd` 和 [ripgrep](https://github.com/BurntSushi/ripgrep/)（`rg`）结合起来时，`-X` 选项也很有用，可以在某一类文件中搜索，比如所有的 C++ 源代码文件：
 
@@ -406,7 +406,7 @@ fd -tf -x md5sum > file_checksums.txt
 
 ###### 占位符语法
 
-`-x` 和 `-X` 选项将一个命令模板作为一系列参数（而不是一个单一的字符串）。如果你想在命令模板之后给fd添加额外的选项，你可以用 `\;` 来终止它。
+`-x` 和 `-X` 选项将一个命令模板作为一系列参数（而不是一个单一的字符串）。如果我需要在命令模板之后给 fd 添加额外选项，可以用 `\;` 来终止它。
 
 生成命令的语法与 [GNU Parallel](https://www.gnu.org/software/parallel/) 类似：
 
@@ -420,21 +420,21 @@ fd -tf -x md5sum > file_checksums.txt
 
 - `{/.}`：去掉扩展名的基本名（party）。
 
-如果你不包括占位符，_fd_ 会自动在末尾添加一个 `{}`。
+如果我没有写占位符，_fd_ 会自动在末尾添加一个 `{}`。
 
 ###### 并行执行与串行执行
 
-对于 `-x`/`--exec`，你可以通过使用 `-j`/`--threads` 选项控制并行作业的数量。使用 `--threads=1` 进行串行执行。
+对于 `-x`/`--exec`，我可以用 `-j`/`--threads` 控制并行作业的数量。使用 `--threads=1` 进行串行执行。
 
 ##### 排除特定的文件或目录
 
-有时我们想忽略来自特定子目录的搜索结果。例如，我们可能想搜索所有隐藏的文件和目录（`-H`），但排除所有来自 `.git` 目录的匹配。我们可以使用 `-E`（或 `--exclude`）选项来实现这一点。它需要一个任意的 glob 模式作为参数：
+如果我需要搜索隐藏文件和目录（`-H`），但排除 `.git` 目录，可以使用 `-E`（或 `--exclude`）选项来实现这一点。它需要一个任意的 glob 模式作为参数：
 
 ```bash
 > fd -H -E .git …
 ```
 
-我们也可以用它来跳过挂载的目录：
+我也可以用它跳过挂载目录：
 
 ```bash
 > fd -E /mnt/external-drive …
@@ -446,7 +446,7 @@ fd -tf -x md5sum > file_checksums.txt
 > fd -E '*.bak' …
 ```
 
-为了使排除模式永久化，你可以创建一个 `.fdignore` 文件。它们的工作方式与 `.gitignore` 文件类似，但都是针对 `fd` 的。比如说：
+我需要持久保存排除模式时，可以创建 `.fdignore` 文件。它们的工作方式与 `.gitignore` 文件类似，但都是针对 `fd` 的。比如说：
 
 ```bash
 > cat ~/.fdignore
@@ -456,25 +456,25 @@ fd -tf -x md5sum > file_checksums.txt
 
 注意：`fd` 也支持其他程序使用的 `.ignore` 文件，如 `rg` 或 `ag` 。
 
-如果你想让 `fd` 在全局范围内忽略这些模式，你可以把它们放在 `fd` 的全局忽略文件中。在 macOS 或 Linux 中，这个文件通常位于 `~/.config/fd/ignore`，在Windows中则位于 `%APPDATA%\fd/ignore`。
+如果我希望 `fd` 在全局范围忽略这些模式，可以把它们放在 `fd` 的全局忽略文件中。在 macOS 或 Linux 中，这个文件通常位于 `~/.config/fd/ignore`，在Windows中则位于 `%APPDATA%\fd/ignore`。
 
 ##### 删除文件
 
-你可以使用 `fd` 来删除所有与你的搜索模式相匹配的文件和目录。如果你只想删除文件，你可以使用 `--exec-batch`/`-X` 选项来调用 `rm`。例如，要递归地删除所有 `.DS_Store` 文件，请运行：
+`fd` 可以配合外部命令删除匹配的文件和目录。如果我只想删除文件，可以使用 `--exec-batch`/`-X` 选项来调用 `rm`。例如，递归删除 `.DS_Store` 文件的命令如下，实际执行前需要先确认匹配结果：
 
 ```bash
 > fd -H '^\.DS_Store$' -tf -X rm
 ```
 
-如果你不确定是否需要删除，请先调用不带 `-X rm` 的 `fd`。或者，使用 `rm` 的 “interactive” 选项：
+如果我不确定是否需要删除，就先运行不带 `-X rm` 的 `fd`。或者，使用 `rm` 的 “interactive” 选项：
 
 ```bash
 > fd -H '^\.DS_Store$' -tf -X rm -i
 ```
 
-如果你还想删除某类目录，可以使用相同的技巧。你必须使用 `rm` 的 `--recursive`/`-r` 标志来删除目录。
+如果我需要删除某类目录，也可以采用相同方式，但必须使用 `rm` 的 `--recursive`/`-r` 标志来删除目录。
 
-注意：在某些情况下，使用 `fd … -X rm -r` 会导致竞争条件：如果你有一个像 `.../foo/bar/foo/...` 的路径，并且想删除所有名为 `foo` 的目录，那么你可能会首先删除外部的 `foo` 目录，从而在 `rm` 调用中导致（无害的）_"'foo/bar/foo': No such file or directory"_ 错误产生。
+注意：在某些情况下，使用 `fd … -X rm -r` 会导致竞争条件：对于 `.../foo/bar/foo/...` 这样的嵌套路径，删除所有名为 `foo` 的目录时，可能先删除外部的 `foo` 目录，从而在 `rm` 调用中导致（无害的）_"'foo/bar/foo': No such file or directory"_ 错误产生。
 
 ##### 命令行选项 <a name="command-line-options"></a>
 
@@ -516,9 +516,9 @@ Options:
 
 #### 基准测试 <a name="benchmark"></a>
 
-让我们在我的主文件夹中搜索以 `[0-9].jpg` 结尾的文件。它包含大约190,000个子目录和一百万个文件。对于平均数和统计分析，我使用了[hyperfine](https://github.com/sharkdp/hyperfine)。以下基准测试是使用 "warm"/pre-filled 磁盘缓存执行的（"cold" 磁盘缓存的结果显示相同的趋势）。
+这里保留的是上游作者的基准，不是我的实测。测试在作者的主文件夹中搜索以 `[0-9].jpg` 结尾的文件，目录中约有 190,000 个子目录和一百万个文件。平均数和统计分析使用[hyperfine](https://github.com/sharkdp/hyperfine)。以下基准测试是使用 "warm"/pre-filled 磁盘缓存执行的（"cold" 磁盘缓存的结果显示相同的趋势）。
 
-让我们从 `find` 开始：
+先看 `find` 的结果：
 
 ```bash
 Benchmark #1: find ~ -iregex '.*[0-9]\.jpg$'
@@ -538,7 +538,7 @@ Benchmark #2: find ~ -iname '*[0-9].jpg'
   Range (min … max):    3.876 s …  3.964 s
 ```
 
-现在让我们对 `fd` 做同样的尝试。注意，`fd` 默认执行正则表达式搜索，也可以用 `-g` 切换为 glob。为了进行公平的比较，需要有选项 `--hidden` 和 `--no-ignore`，否则 `fd` 就不遍历隐藏的文件夹和忽略的路径（见下文）：
+再看 `fd` 的同类测试。注意，`fd` 默认执行正则表达式搜索，也可以用 `-g` 切换为 glob。为了进行公平的比较，需要有选项 `--hidden` 和 `--no-ignore`，否则 `fd` 就不遍历隐藏的文件夹和忽略的路径（见下文）：
 
 ```bash
 Benchmark #3: fd -HI '.*[0-9]\.jpg$' ~
@@ -550,7 +550,7 @@ Benchmark #3: fd -HI '.*[0-9]\.jpg$' ~
 
 对于这个特定的例子，`fd` 比 `find -iregex` 快了大约9倍，比 `find -iname` 快了大约5倍。顺便说一下，两个工具都找到了完全相同的20880个文件 😄。
 
-最后，让我们在没有 `--hidden` 和 `--no-ignore` 的情况下运行 `fd`（当然，这会导致不同的搜索结果）。如果 `fd` 不必遍历隐藏的和 git 忽略的文件夹，它几乎快了一个数量级：
+最后是未使用 `--hidden` 和 `--no-ignore` 的 `fd` 测试（当然，这会导致不同的搜索结果）。如果 `fd` 不必遍历隐藏的和 git 忽略的文件夹，它几乎快了一个数量级：
 
 ```bash
 Benchmark #4: fd '[0-9]\.jpg$' ~
@@ -560,7 +560,7 @@ Benchmark #4: fd '[0-9]\.jpg$' ~
   Range (min … max):   118.8 ms … 140.0 ms
 ```
 
-**注意**：这是一个特定机器上的一个特定基准。虽然我已经进行了相当多的不同测试（并发现了一致的结果），但对你来说，情况可能会有所不同！我鼓励大家自己尝试。我鼓励大家自己去尝试。所有必要的脚本请见[这个仓库](https://github.com/sharkdp/fd-benchmarks)。
+**注意**：这只是特定机器上的一组基准，不能当作我本机的性能结论。如果以后需要比较，我可以用配套脚本在自己的环境重新测试。脚本见[这个仓库](https://github.com/sharkdp/fd-benchmarks)。
 
 关于 _fd_ 的速度，主要归功于 `regex` 和 `ignore` 模块，它们也被用在 [ripgrep](https://github.com/BurntSushi/ripgrep) 中（快来看看吧！）。
 
@@ -568,13 +568,13 @@ Benchmark #4: fd '[0-9]\.jpg$' ~
 
 ##### 彩色化输出
 
-`fd` 可以按扩展名给文件着色，就像 `ls` 一样。为了使其发挥作用，环境变量 [`LS_COLORS`](https://linux.die.net/man/5/dir_colors) 必须被设置。通常，这个变量的值是由 `dircolors` 命令设置的，它提供了一个方便的配置格式来定义不同文件格式的颜色。在大多数发行版上，`LS_COLORS` 应该已经被设置了。如果你是在 Windows 系统上，或者你在寻找其他更完整（或更多彩）的变体，请看[这里](https://github.com/sharkdp/vivid)、[这里](https://github.com/seebi/dircolors-solarized)或[这里](https://github.com/trapd00r/LS_COLORS)。
+`fd` 可以按扩展名给文件着色，就像 `ls` 一样。为了使其发挥作用，环境变量 [`LS_COLORS`](https://linux.die.net/man/5/dir_colors) 必须被设置。通常，这个变量的值是由 `dircolors` 命令设置的，它提供了一个方便的配置格式来定义不同文件格式的颜色。在大多数发行版上，`LS_COLORS` 应该已经被设置了。如果以后在 Windows 上使用，或需要更完整的配色方案，我可以参考[这里](https://github.com/sharkdp/vivid)、[这里](https://github.com/seebi/dircolors-solarized)或[这里](https://github.com/trapd00r/LS_COLORS)。
 
 `fd` 也遵守 `NO_COLOR` 环境变量的规定。
 
 ##### fd没有找到我的文件
 
-记住，`fd` 默认会忽略隐藏的目录和文件。它还会忽略 `.gitignore` 文件的模式。如果你想确保绝对找到所有可能的文件，一定要使用选项 `-H` 和 `-I` 来禁用这两个功能：
+记住，`fd` 默认会忽略隐藏的目录和文件。它还会忽略 `.gitignore` 文件的模式。如果我需要包含隐藏和被忽略的条目，就要使用选项 `-H` 和 `-I` 来禁用这两个功能：
 
 ```bash
 > fd -HI …
@@ -597,28 +597,28 @@ Benchmark #4: fd '[0-9]\.jpg$' ~
 
 ##### 执行`alias`或shell函数提示 “Command not found”
 
-Shell `alias` 和 shell 函数不能通过 `fd -x` 或 `fd -X` 命令执行。在 `zsh` 中，你可以通过 `alias -g myalias="... "` 使别名成为全局的。在 `bash` 中，你可以使用 `export -f my_function` 使子进程可用。你仍然需要调用 `fd -x bash -c 'my_function "$1"' bash`。对于其他用例或shell，可以使用一个（临时）shell脚本。
+Shell `alias` 和 shell 函数不能通过 `fd -x` 或 `fd -X` 命令执行。在 `zsh` 中，我可以通过 `alias -g myalias="... "` 使别名成为全局的。在 `bash` 中，我可以使用 `export -f my_function` 使子进程可用。仍然需要显式调用 `fd -x bash -c 'my_function "$1"' bash`。对于其他用例或shell，可以使用一个（临时）shell脚本。
 
 #### 与其他项目的整合
 
 ##### 与 `fzf` 一起使用
 
-您可以使用 _fd_ 为命令行模糊查找器 [fzf](https://github.com/junegunn/fzf) 生成输入：
+我可以用 _fd_ 为命令行模糊查找器 [fzf](https://github.com/junegunn/fzf) 生成输入：
 
 ```bash
 export FZF_DEFAULT_COMMAND='fd --type file'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ```
 
-然后，你可以在终端上键入 `vim <Ctrl-T>` 以打开 fzf 并搜索 fd 结果。
+配置后，我可以在终端输入 `vim <Ctrl-T>` 以打开 fzf 并搜索 fd 结果。
 
-或者，你可能希望遵循符号链接并包含隐藏文件（但不包括.git文件夹）：
+如果我需要跟随符号链接并包含隐藏文件（但不包括.git文件夹）：
 
 ```bash
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 ```
 
-你甚至可以通过以下设置在 fzf 中使用 fd 的彩色输出：
+如果我需要在 fzf 中显示 fd 的彩色输出，可以参考下面的设置：
 
 ```bash
 export FZF_DEFAULT_COMMAND="fd --type file --color=always"
@@ -633,7 +633,7 @@ export FZF_DEFAULT_OPTS="--ansi"
 
 ###### 例子
 
-在 `$HOME` 目录下创建一个不区分大小写的可搜索PDF 文件的多选列表，并用你配置的PDF查看器打开选择。要想列出所有文件类型，请删除-e pdf参数。
+在 `$HOME` 目录下创建一个不区分大小写的可搜索PDF 文件的多选列表，并用系统配置的 PDF 查看器打开所选文件。要想列出所有文件类型，请删除-e pdf参数。
 
 ```bash
 fd --type f -e pdf . $HOME | rofi -keep-right -dmenu -i -p FILES -multi-select | xargs -I {} xdg-open {}
@@ -643,7 +643,7 @@ fd --type f -e pdf . $HOME | rofi -keep-right -dmenu -i -p FILES -multi-select |
 
 emacs 包 [find-file-in-project](https://github.com/technomancy/find-file-in-project) 可以使用 _fd_ 来查找文件。
 
-安装 find-file-in-project 后，在你的 `~/.emacs` 或 `~/.emacs.d/init.el` 文件中添加一行`(setq ffip-use-rust-fd t)`。
+安装 find-file-in-project 后，在 `~/.emacs` 或 `~/.emacs.d/init.el` 文件中添加一行`(setq ffip-use-rust-fd t)`。
 
 在 emacs 中，运行 `M-x find-file-in-project-by-selected` 来寻找匹配的文件。或者，运行 `M-x find-file-in-project` 来列出项目中所有可用的文件。
 
@@ -670,7 +670,7 @@ fd | as-tree
 
 ##### 与 `xargs` 或 `parallel` 一起使用
 
-请注意，`fd` 有一个内置的[命令执行](#command-execution)功能，即它的`-x`/`--exec` 和 `-X`/`--exec-batch` 选项。如果你愿意，你仍然可以将它与 `xargs` 结合使用：
+请注意，`fd` 有一个内置的[命令执行](#command-execution)功能，即它的`-x`/`--exec` 和 `-X`/`--exec-batch` 选项。我也可以按需把它与 `xargs` 结合使用：
 
 ```bash
 > fd -0 -e rs | xargs -0 wc -l
