@@ -4,6 +4,7 @@ description: 我当前 Pi 与 Pi-Bolt 环境的配置、常用功能、扩展和
 created: "2026-11-11"
 modified: "2026-11-11"
 tags: [ai, agent, 工具, 快捷键]
+aliases: [ai-agents/pi-agent]
 ---
 
 我把当前环境里的 Pi 和 Pi-Bolt 配置整理在这里，方便日常使用与后续维护。先列高频操作，再记录配置关系、扩展和快捷键；只记录核查得到的状态，不把已安装功能当成全部验证通过。
@@ -462,7 +463,7 @@ pi update --models
 
 环境核查只读取配置和运行检查命令，没有主动修改 Pi / Pi-Bolt 配置、安装或升级包、开启服务，也没有直接读取或复制认证文件内容。CLI 自身的缓存 / 运行状态不作为不可变保证。
 
-本文纳入 Quartz 的 `content/ai-agents/pi-agent.md`，分类入口位于 `content/ai-agents/index.md`。只撤销这篇站点笔记时，移除文章和分类入口后重新构建发布即可，不涉及 Pi 运行环境回滚；恢复前先核对后续内容修改。
+本文暂存于 Quartz 的 `content/常用工具/pi-agent.md`，分类入口位于 `content/常用工具/index.md`，以后再进一步整理。原路径 `content/ai-agents/pi-agent.md` 已迁至此处，旧网址通过 `aliases` 保留跳转。只撤销这篇站点笔记时，移除文章和分类入口后重新构建发布即可，不涉及 Pi 运行环境回滚；恢复前先核对后续内容修改。
 
 ### 8.4 内容来源
 
