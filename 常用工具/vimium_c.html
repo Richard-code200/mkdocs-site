@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Vimium C 快捷键 · Richard的个人博客</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Richard的个人博客"/><meta property="og:title" content="Vimium C 快捷键 · Richard的个人博客"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Vimium C 快捷键 · Richard的个人博客"/><meta name="twitter:description" content="我把自己这套 Vimium C 配置的快捷键整理在这里，方便日常查阅和后续精简。最常用的是 f、A / D、h/j/k/l、q/w/e/a/s/d、g、t 和 z；因此先列高频速查，再按功能整理其他绑定，低频和维护功能放在后面。 这份记录依据 2026-11-11 整理的修改版配置，而不是 Vimium C 的默认键位表。原始导出的环境是 Linux、Firefox 159、Vimium C 2.12.3。当前文件包含 129 个实际按键绑定和 2 个内部虚拟入口；这里列全绑定，但不把尚未验证的功能写成已经可用。 按键约定 Ctrl、Alt、Shift 是修饰键；Ctrl-Shift-d 表示..."/><meta property="og:description" content="我把自己这套 Vimium C 配置的快捷键整理在这里，方便日常查阅和后续精简。最常用的是 f、A / D、h/j/k/l、q/w/e/a/s/d、g、t 和 z；因此先列高频速查，再按功能整理其他绑定，低频和维护功能放在后面。 这份记录依据 2026-11-11 整理的修改版配置，而不是 Vimium C 的默认键位表。原始导出的环境是 Linux、Firefox 159、Vimium C 2.12.3。当前文件包含 129 个实际按键绑定和 2 个内部虚拟入口；这里列全绑定，但不把尚未验证的功能写成已经可用。 按键约定 Ctrl、Alt、Shift 是修饰键；Ctrl-Shift-d 表示..."/><meta property="og:image:alt" content="我把自己这套 Vimium C 配置的快捷键整理在这里，方便日常查阅和后续精简。最常用的是 f、A / D、h/j/k/l、q/w/e/a/s/d、g、t 和 z；因此先列高频速查，再按功能整理其他绑定，低频和维护功能放在后面。 这份记录依据 2026-11-11 整理的修改版配置，而不是 Vimium C 的默认键位表。原始导出的环境是 Linux、Firefox 159、Vimium C 2.12.3。当前文件包含 129 个实际按键绑定和 2 个内部虚拟入口；这里列全绑定，但不把尚未验证的功能写成已经可用。 按键约定 Ctrl、Alt、Shift 是修饰键；Ctrl-Shift-d 表示..."/><meta property="og:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:url" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta name="twitter:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="richard-code200.github.io/quartz-site"/><meta property="og:url" content="https://richard-code200.github.io/quartz-site/常用工具/vimium_c"/><meta property="twitter:url" content="https://richard-code200.github.io/quartz-site/常用工具/vimium_c"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="我把自己这套 Vimium C 配置的快捷键整理在这里，方便日常查阅和后续精简。最常用的是 f、A / D、h/j/k/l、q/w/e/a/s/d、g、t 和 z；因此先列高频速查，再按功能整理其他绑定，低频和维护功能放在后面。 这份记录依据 2026-11-11 整理的修改版配置，而不是 Vimium C 的默认键位表。原始导出的环境是 Linux、Firefox 159、Vimium C 2.12.3。当前文件包含 129 个实际按键绑定和 2 个内部虚拟入口；这里列全绑定，但不把尚未验证的功能写成已经可用。 按键约定 Ctrl、Alt、Shift 是修饰键；Ctrl-Shift-d 表示..."/><meta name="generator" content="Quartz"/><script>document.documentElement.setAttribute("saved-theme", "dark")</script><link rel="icon" type="image/svg+xml" href="../static/preview-favicon.svg"/><link rel="stylesheet" data-persist="true" href="../static/styles/gruvbox_dark.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/font_faces.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/code_fonts.css"/><link href="../index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvcXVhcnR6LXNpdGUvcXVhcnR6LXNpdGUvcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="../prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://richard-code200.github.io/quartz-site/index.xml"/></head><body data-slug="常用工具/vimium_c"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Richard的个人博客</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>搜索</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索些什么" placeholder="搜索些什么"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>{let order={MarkDown:1e3,\&quot;MarkDown/MarkDown\&quot;:1001,Rust:2e3,\&quot;Rust/\\u57FA\\u672C\\u8BED\\u6CD5\\u4E0E\\u6570\\u636E\\u7C7B\\u578B\&quot;:2001,\&quot;Rust/\\u51FD\\u6570\\u4E0E\\u63A7\\u5236\\u6D41\&quot;:2002,\&quot;Rust/\\u683C\\u5F0F\\u5316\\u8F93\\u51FA\&quot;:2003,\&quot;Rust/\\u6240\\u6709\\u6743\&quot;:2004,\&quot;Rust/\\u5F15\\u7528\\u4E0E\\u501F\\u7528\&quot;:2005,\&quot;Rust/\\u5207\\u7247\&quot;:2006,\&quot;Rust/\\u7ED3\\u6784\\u4F53\&quot;:2007,\&quot;Rust/Enum\\u548C\\u6A21\\u5F0F\\u5339\\u914D\&quot;:2008,\&quot;Rust/\\u96C6\\u5408\&quot;:2009,\&quot;Rust/\\u8FED\\u4EE3\\u5668\\u4E0E\\u95ED\\u5305\&quot;:2010,\&quot;Rust/\\u6CDB\\u578B\\u4E0E\\u7279\\u5F81\&quot;:2011,\&quot;Rust/\\u751F\\u547D\\u5468\\u671F\&quot;:2012,\&quot;Rust/\\u9519\\u8BEF\\u5904\\u7406\&quot;:2013,\&quot;Rust/\\u6A21\\u5757\\u7CFB\\u7EDF\&quot;:2014,\&quot;Rust/\\u6D4B\\u8BD5\&quot;:2015,\&quot;Rust/Cargo\\u5DE5\\u4F5C\\u533A\\u4E0E\\u4F9D\\u8D56\\u7BA1\\u7406\&quot;:2016,\&quot;Rust/\\u9879\\u76EE\\u4EE3\\u7801\\u7EC4\\u7EC7\&quot;:2017,\&quot;Rust/\\u547D\\u4EE4\\u884C\\u6587\\u4EF6\\u641C\\u7D22\\u5B9E\\u8DF5\&quot;:2018,\&quot;Rust/\\u5B66\\u4E60\\u9879\\u76EE\\u8BA1\\u5212\&quot;:2019,Zed:3001,\&quot;Zed/\\u5FEB\\u6377\\u952E\&quot;:3002,git\\u4F7F\\u7528\\u6307\\u5357:4e3,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/Git\\u57FA\\u7840\\u6982\\u5FF5\&quot;:4001,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u521D\\u59CB\\u8BBE\\u7F6E\&quot;:4002,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u57FA\\u672C\\u64CD\\u4F5C\\u547D\\u4EE4\&quot;:4003,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5DE5\\u4F5C\\u533A\\u6682\\u5B58\&quot;:4004,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5FFD\\u7565\\u6587\\u4EF6\\u914D\\u7F6E\&quot;:4005,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5206\\u652F\\u7BA1\\u7406\&quot;:4006,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u8FDC\\u7A0B\\u4ED3\\u5E93\\u64CD\\u4F5C\&quot;:4007,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u6807\\u7B7E\\u7BA1\\u7406\&quot;:4008,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u64A4\\u9500\\u4E0E\\u56DE\\u9000\&quot;:4009,\\u5E38\\u7528\\u5DE5\\u5177:5e3,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/bat\&quot;:5001,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/eza\&quot;:5002,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/find_fd\&quot;:5003,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/grep_rg\&quot;:5004,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/late_sh_zh\&quot;:5005,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/uv\&quot;:5006,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/\\u7EC8\\u7AEF\\u5FEB\\u6377\\u952E\&quot;:5007,\\u5F00\\u6E90\\u534F\\u8BAE:6e3,\&quot;\\u5F00\\u6E90\\u534F\\u8BAE/\\u5F00\\u6E90\\u534F\\u8BAE\\u6982\\u5FF5\\u603B\\u7ED3\&quot;:6001,\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60:7e3,\&quot;\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60/\\u6D41\\u7A0B\\u6307\\u5357\&quot;:7001,\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406:8e3,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u7B2C\\u4E00\\u7AE0\&quot;:8001,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u8BFE\\u7A0B\\u4FE1\\u606F\&quot;:8002,\\u7B97\\u6CD5\\u7B14\\u8BB0:9e3,\&quot;\\u7B97\\u6CD5\\u7B14\\u8BB0/\\u5206\\u53D1\\u997C\\u5E72\&quot;:9001,\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5:1e4,\&quot;\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5/\\u5B66\\u4E60\\u65B9\\u6CD5\&quot;:10001,\\u968F\\u8BB0:11e3,\&quot;\\u968F\\u8BB0/2026-09-12-ghostty\\u6BB5\\u9519\\u8BEF\\u590D\\u67E5\\u4E0E\\u9ED8\\u8BA4\\u914D\\u7F6E\\u6062\\u590D\&quot;:11001,\&quot;\\u968F\\u8BB0/2026-6-9\&quot;:11002,\&quot;\\u968F\\u8BB0/2026-6-1\&quot;:11003,\&quot;\\u968F\\u8BB0/2026-5-19\&quot;:11004,\&quot;\\u968F\\u8BB0/2026-4-27\&quot;:11005,\&quot;\\u968F\\u8BB0/ghostty-segfault-\\u95EE\\u9898\\u6392\\u67E5\&quot;:11006,\&quot;\\u968F\\u8BB0/Keygen(\\u6CE8\\u518C\\u673A)\&quot;:11007,Linux:12e3,\&quot;Linux/\\u5B89\\u5168\\u7279\\u6027\&quot;:12001,\\u7B14\\u8BB0\\u5BFC\\u822A:1,\\u5173\\u4E8E\\u672C\\u7AD9:99e3,\\u6392\\u7248\\u9884\\u89C8:99001},aSlug=a.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),bSlug=b.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),aRank=order[aSlug]??(order[aSlug.split(\&quot;/\&quot;)[0]]??9e4)+900,bRank=order[bSlug]??(order[bSlug.split(\&quot;/\&quot;)[0]]??9e4)+900;return aRank-bRank||a.displayName.localeCompare(b.displayName,\&quot;zh-CN\&quot;,{numeric:!0})}&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" aria-label="笔记导航" data-mobile="true" aria-controls="explorer-77"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>笔记导航</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-77" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><header></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">首页</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../常用工具/">常用工具</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Vimium C 快捷键</a></div></nav><h1 class="article-title">Vimium C 快捷键</h1><p show-comma="true" class="content-meta"><time datetime="2026-11-11T00:00:00.000Z">2026年11月11日</time><span>20分钟阅读</span></p><ul class="tags"><li><a href="../tags/常用工具" class="internal tag-link">常用工具</a></li><li><a href="../tags/浏览器" class="internal tag-link">浏览器</a></li><li><a href="../tags/快捷键" class="internal tag-link">快捷键</a></li></ul></div></div><article class="popover-hint"><p>我把自己这套 Vimium C 配置的快捷键整理在这里，方便日常查阅和后续精简。最常用的是 <code>f</code>、<code>A</code> / <code>D</code>、<code>h/j/k/l</code>、<code>q/w/e/a/s/d</code>、<code>g</code>、<code>t</code> 和 <code>z</code>；因此先列高频速查，再按功能整理其他绑定，低频和维护功能放在后面。</p>
+<p>这份记录依据 2026-11-11 整理的修改版配置，而不是 Vimium C 的默认键位表。原始导出的环境是 Linux、Firefox 159、Vimium C 2.12.3。当前文件包含 <strong>129 个实际按键绑定和 2 个内部虚拟入口</strong>；这里列全绑定，但不把尚未验证的功能写成已经可用。</p>
+<h2 id="按键约定">按键约定<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#按键约定" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>Ctrl</code>、<code>Alt</code>、<code>Shift</code> 是修饰键；<code>Ctrl-Shift-d</code> 表示同时按下三个键。</li>
+<li>大写字母需要配合 <code>Shift</code>。<code>H</code> 就是 <code>Shift-h</code>，与小写 <code>h</code> 不同。</li>
+<li><strong>空格表示依次按下</strong>：<code>G g</code> 是先按 <code>Shift-g</code>，松开 Shift，再按小写 <code>g</code>；对应配置中的 <code>Gg</code>。</li>
+<li><code>G G</code> 是连续输入两个大写 <code>G</code>，对应配置中的 <code>GG</code>。<code>G t</code> 与 <code>G T</code> 也不是同一条命令。</li>
+<li><code>C T</code> 是依次输入两个大写字母，<strong>不是 <code>Ctrl-t</code></strong>。<code>F Alt-e</code> 则是先输入大写 <code>F</code>，再按 <code>Alt-e</code>。</li>
+<li>表格里的 <code>/</code> 用于分隔可选按键；只有单独写出的 <code>/</code> 才是页内查找键。</li>
+<li>以下默认在网页普通模式下使用。输入框、浏览器地址栏、插入模式、排除站点以及浏览器或桌面环境截获按键时，行为可能不同。</li>
+<li>使用了 <code>unmapAll</code>，不能再假定未列出的 Vimium C 默认绑定仍然存在。部分命令支持数字前缀，次数会改变操作范围；关闭标签类命令尤其需要留意。</li>
+</ul>
+<h2 id="高频速查我常用的操作">高频速查：我常用的操作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#高频速查我常用的操作" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>f</code></td><td>显示链接／元素提示，输入提示字母执行点击</td><td>核心入口</td></tr><tr><td><code>A</code> / <code>D</code></td><td>后退 / 前进</td><td>即 <code>Shift-a</code> / <code>Shift-d</code></td></tr><tr><td><code>h</code> / <code>a</code></td><td>向左滚动</td><td>两套键位并存</td></tr><tr><td><code>j</code> / <code>e</code></td><td>向下滚动</td><td>两套键位并存</td></tr><tr><td><code>k</code> / <code>q</code></td><td>向上滚动</td><td>两套键位并存</td></tr><tr><td><code>l</code> / <code>d</code></td><td>向右滚动</td><td>两套键位并存</td></tr><tr><td><code>w</code> / <code>s</code></td><td>向上 / 向下翻半页</td><td>与小步滚动区分</td></tr><tr><td><code>g</code></td><td>打开地址／搜索框，偏好在新标签打开结果</td><td>不是换搜索引擎</td></tr><tr><td><code>t</code></td><td>搜索并切换已打开的标签</td><td>查找已有页面</td></tr><tr><td><code>z</code></td><td>恢复最近关闭的标签／窗口</td><td>恢复数量受次数影响</td></tr><tr><td><code>H</code></td><td>搜索历史记录，在新标签打开结果</td><td>从原来的小写 <code>h</code> 移到这里</td></tr><tr><td><code>G g</code></td><td>显示链接提示，在新标签打开选中的链接</td><td>不是鼠标悬停</td></tr></tbody></table></div>
+<p>当前 <code>scrollStepSize</code> 为 <strong>140</strong>，原值是 200。这是单次滚动步长，不是动画速度；<code>w/s</code> 的半页滚动方式不变。</p>
+<h2 id="日常操作页面搜索和标签">日常操作：页面、搜索和标签<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#日常操作页面搜索和标签" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="页面导航与刷新">页面导航与刷新<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#页面导航与刷新" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>W</code> / <code>S</code></td><td>滚到页面顶部 / 底部</td><td>大写字母</td></tr><tr><td><code>Q</code> / <code>E</code></td><td>寻找并跳转到上一页 / 下一页链接</td><td>根据链接文字、选择器等识别，不是浏览历史</td></tr><tr><td><code>u</code></td><td>返回网址上一级路径</td><td>不等同于浏览器后退</td></tr><tr><td><code>U U</code></td><td>前往网站根目录</td><td>配置写作 <code>UU</code></td></tr><tr><td><code>U u</code></td><td>返回网址上一级，并保留结尾斜杠</td><td>配置写作 <code>Uu</code></td></tr><tr><td><code>Alt-Shift-a</code></td><td>在新前台标签打开后退目标</td><td>不替换当前页</td></tr><tr><td><code>r</code></td><td>刷新当前页面／框架</td><td><code>reload</code></td></tr><tr><td><code>Alt-r</code></td><td>刷新标签</td><td><code>reloadTab</code>，次数可扩大范围</td></tr><tr><td><code>R</code></td><td>刷新指定标签</td><td><code>reloadGivenTab</code>，可配合次数定位</td></tr><tr><td><code>Alt-Shift-r</code></td><td>关闭并重新打开当前标签</td><td><code>reopenTab</code>，留意未保存输入和临时页面状态</td></tr></tbody></table></div>
+<h3 id="地址书签和标签搜索">地址、书签和标签搜索<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#地址书签和标签搜索" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>o</code></td><td>打开地址／搜索框，默认在当前标签打开结果</td><td>与 <code>g</code> 区分</td></tr><tr><td><code>Alt-g</code></td><td>打开地址／搜索框，在新标签打开结果</td><td><code>g</code> 还额外设置了偏好新建标签</td></tr><tr><td><code>T</code></td><td>搜索当前窗口标签，按标签关系组织候选</td><td>小写 <code>t</code> 不限于此范围</td></tr><tr><td><code>b</code></td><td>打开 Bing 搜索入口</td><td>注意这不是 <code>G b</code></td></tr><tr><td><code>B</code></td><td>搜索书签，在新标签打开结果</td><td>大写字母</td></tr><tr><td><code>F e</code></td><td>打开当前网址供编辑</td><td><code>Vomnibar.activateUrl</code></td></tr><tr><td><code>G n</code></td><td>切换地址／搜索框的深色样式</td><td>不切换网页本身主题</td></tr></tbody></table></div>
+<h3 id="标签切换创建和恢复">标签切换、创建和恢复<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#标签切换创建和恢复" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>c</code> / <code>Alt-c</code></td><td>切换到左侧标签</td><td>两个入口</td></tr><tr><td><code>v</code> / <code>Alt-v</code> / <code>Alt-Shift-c</code></td><td>切换到右侧标签</td><td>三个入口，不是复制粘贴</td></tr><tr><td><code>p</code></td><td>切回上次访问的标签</td><td>可跨窗口，不是左侧标签</td></tr><tr><td><code>Alt-t</code></td><td>新建标签</td><td>可能与浏览器菜单键冲突</td></tr><tr><td><code>Ctrl-Shift-d</code></td><td>复制当前标签</td><td>可能与浏览器“收藏所有标签”冲突</td></tr><tr><td><code>Z</code></td><td>恢复按编号选定的最近关闭项</td><td>与恢复最近若干项的 <code>z</code> 区分</td></tr><tr><td><code>&lt;</code> / <code>></code></td><td>将当前标签向左 / 向右移动</td><td>改变标签顺序</td></tr><tr><td><code>P p</code></td><td>固定／取消固定当前标签</td><td>配置写作 <code>Pp</code></td></tr><tr><td><code>Alt-m</code></td><td>静音／取消静音当前标签</td><td>不是静音整个浏览器</td></tr></tbody></table></div>
+<h3 id="关闭标签误触风险较高">关闭标签：误触风险较高<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#关闭标签误触风险较高" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>x</code></td><td>关闭当前标签；多选时可能关闭多个选中标签</td><td>带 <code>highlighted</code> 参数</td></tr><tr><td><code>X x</code></td><td>关闭右侧标签</td><td>可配合次数</td></tr><tr><td><code>X z</code></td><td>关闭左侧标签</td><td>当前显式设置 <code>$count=-1</code>，默认一个</td></tr><tr><td><code>X c</code></td><td>关闭右侧标签</td><td>当前显式设置 <code>$count=1</code>，默认一个</td></tr><tr><td><code>X a</code></td><td>关闭其他标签</td><td>可能一次关闭很多页面</td></tr></tbody></table></div>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>普通按键也可能关闭多个标签 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>x</code> 的配置是 <code>removeTab goto=&quot;previous,near&quot; highlighted</code>，不是严格的“永远只关闭当前标签”。多选标签或输入数字前缀后，关闭范围可能扩大。当前保留了这个行为，没有擅自精简。</p>
+</div>
+</blockquote>
+<h3 id="输入框与临时按键透传">输入框与临时按键透传<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#输入框与临时按键透传" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>i</code></td><td>定位并聚焦输入框</td><td>包含主框架回退和站点选择器适配</td></tr><tr><td><code>Alt-/</code></td><td>进入插入模式，将按键交给网页</td><td>不是永久禁用扩展</td></tr><tr><td><code>Alt-?</code></td><td>进入插入模式，指定 <code>Alt-?</code> 为退出键</td><td>常见键盘上即 <code>Alt-Shift-/</code></td></tr><tr><td><code>P n</code></td><td>将下一个按键交给网页</td><td><code>passNextKey</code></td></tr><tr><td><code>P m</code></td><td>临时按普通模式处理下一次命令</td><td><code>passNextKey normal</code>，与透传方向相反</td></tr></tbody></table></div>
+<h3 id="页内查找与文字选择">页内查找与文字选择<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#页内查找与文字选择" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>/</code></td><td>开始页内查找</td><td>按 Escape 后保留查找结果处理</td></tr><tr><td><code>.</code> / <code>,</code></td><td>下一个 / 上一个匹配</td><td>使用已有查找词</td></tr><tr><td><code>Alt-.</code></td><td>换用另一条查找记录继续查找</td><td><code>performAnotherFind</code></td></tr><tr><td><code>;</code> / <code>F8</code></td><td>进入可视文字选择模式</td><td>两个绑定相同</td></tr><tr><td><code>:</code></td><td>进入整行选择模式</td><td>通常需要 <code>Shift-;</code></td></tr><tr><td><code>Alt-Shift-h</code></td><td>清除页内查找历史</td><td>不是清除浏览器浏览历史</td></tr></tbody></table></div>
+<h2 id="扩展操作链接图片和下载">扩展操作：链接、图片和下载<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展操作链接图片和下载" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>以下大多需要先进入提示模式，再输入目标上的提示字母。</p>
+<h3 id="打开和连续操作">打开和连续操作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#打开和连续操作" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>F q</code></td><td>连续选择并打开多个链接</td><td>队列模式</td></tr><tr><td><code>F g</code></td><td>强制在新标签打开链接</td><td>复用 <code>G g</code>，增加 <code>newtab=&quot;force&quot;</code></td></tr><tr><td><code>F I</code></td><td>在隐私／隐身窗口打开链接</td><td>需要相应权限与浏览器支持</td></tr><tr><td><code>F r</code></td><td>对目标执行右键操作</td><td>是否出现菜单取决于页面和浏览器</td></tr><tr><td><code>F f</code></td><td>模拟鼠标悬停</td><td>另含 B 站播放器控制层适配</td></tr><tr><td><code>F z</code></td><td>取消目标的悬停状态</td><td><code>Leave</code> / <code>UNHOVER</code></td></tr></tbody></table></div>
+<h3 id="复制和搜索链接内容">复制和搜索链接内容<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#复制和搜索链接内容" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>F a</code></td><td>复制链接地址</td><td>不是复制链接文字</td></tr><tr><td><code>F t</code> / <code>F c</code></td><td>复制链接文字</td><td>两个绑定相同</td></tr><tr><td><code>F s</code></td><td>搜索链接文字</td><td>使用搜索配置</td></tr><tr><td><code>F b</code></td><td>用 Bing 搜索链接文字</td><td>依赖 <code>bing</code> 引擎关键词</td></tr><tr><td><code>F C</code></td><td>复制图片</td><td>第二个字母也要大写</td></tr></tbody></table></div>
+<h3 id="图片下载和编辑">图片、下载和编辑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#图片下载和编辑" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>F i</code></td><td>打开图片</td><td>与 <code>F I</code> 区分</td></tr><tr><td><code>F d</code></td><td>下载链接目标</td><td>需要浏览器允许下载</td></tr><tr><td><code>F D</code></td><td>下载图片</td><td>第二个字母大写</td></tr><tr><td><code>F Alt-e</code></td><td>聚焦可编辑元素</td><td><code>LinkHints.activateEdit</code></td></tr><tr><td><code>F T</code></td><td>将目标内容放入地址／搜索框编辑</td><td><code>OpenVomnibar</code></td></tr><tr><td><code>F E</code></td><td>编辑目标链接地址</td><td><code>action=&quot;edit-url&quot;</code></td></tr><tr><td><code>F v</code></td><td>选择目标文字，进入可视模式</td><td><code>Select</code></td></tr><tr><td><code>Alt-Shift-f</code></td><td>切换链接提示字符集</td><td>备用为 <code>hjklyuiopnm</code>，当前主字符集为 <code>dsavewrqcxz</code></td></tr></tbody></table></div>
+<h2 id="扩展操作复制剪贴板与选中文字">扩展操作：复制、剪贴板与选中文字<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展操作复制剪贴板与选中文字" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>C t</code></td><td>复制当前标签信息</td><td><code>copyWindowInfo type=&quot;tab&quot;</code></td></tr><tr><td><code>C a</code></td><td>复制当前框架的网址</td><td>不一定是最外层页面网址</td></tr><tr><td><code>C c</code></td><td>复制选中文字；没有选区时复制网址，并解码</td><td><code>autoCopy url decode</code></td></tr><tr><td><code>C s</code></td><td>用当前搜索页的引擎搜索选中文字／剪贴板</td><td>需要识别当前搜索引擎</td></tr><tr><td><code>C v</code></td><td>打开或搜索选中文字／剪贴板</td><td><code>autoOpen</code></td></tr><tr><td><code>C g</code></td><td>用 Google 处理选中文字／剪贴板</td><td>依赖 <code>google</code> 引擎关键词</td></tr><tr><td><code>V</code></td><td>在当前标签打开剪贴板网址</td><td>会替换当前页，留意未保存输入</td></tr><tr><td><code>Ctrl-v</code></td><td>在新标签打开剪贴板中的网址，支持多个</td><td>普通模式下会覆盖原生粘贴行为</td></tr><tr><td><code>C T</code></td><td>用 <code>t</code> 引擎处理剪贴板，在新标签打开</td><td>不是 <code>Ctrl-t</code>；<code>t</code> 的含义取决于引擎定义</td></tr><tr><td><code>C d</code> / <code>Alt-F3</code></td><td>用 <code>dict</code> 引擎查询选中文字／剪贴板</td><td>引擎定义待核实</td></tr><tr><td><code>C b</code></td><td>以弹出窗口方式进行 Bing 词典查询</td><td>复用 <code>C d</code>，替换目标网址；依赖配套引擎设置</td></tr><tr><td><code>C e</code></td><td>用 <code>v.math-copy</code> 处理剪贴板</td><td>自定义引擎定义待核实，不保证当前能用</td></tr></tbody></table></div>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>搜索引擎依赖不是快捷键本身 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>导出文件没有 <code>searchEngines</code> 字段，不能仅凭这些绑定确认浏览器里所有搜索引擎的实际定义。尤其是 <code>dict</code>、<code>t.e</code>、<code>v.math-copy</code>，官方当前默认设置中未找到对应定义；它们目前保留在配置中，但需要在扩展设置页核实，不能直接当作已可用的词典、翻译或计算功能。</p>
+</div>
+</blockquote>
+<h2 id="低频操作沿用当前搜索词换引擎">低频操作：沿用当前搜索词换引擎<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#低频操作沿用当前搜索词换引擎" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>这组用于<strong>提取当前搜索结果页网址里的搜索词，再换引擎搜索</strong>，默认在当前标签打开。它们不是搜索框入口，也不会直接读取选中文字。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>引擎关键词</th><th>按官方默认配置解释的用途</th></tr></thead><tbody><tr><td><code>G G</code></td><td><code>g</code></td><td>用 Google 重新搜索</td></tr><tr><td><code>G d</code></td><td><code>d</code></td><td>用 DuckDuckGo 重新搜索</td></tr><tr><td><code>G b</code></td><td><code>b</code></td><td>用百度重新搜索，不是 Bing</td></tr><tr><td><code>G s</code></td><td><code>g.s</code></td><td>用 Google Scholar 重新搜索</td></tr><tr><td><code>G t</code></td><td><code>t</code></td><td>中文默认通常为淘宝，不能直接理解成翻译</td></tr><tr><td><code>G T</code></td><td><code>t.e</code></td><td>自定义引擎，定义待核实</td></tr></tbody></table></div>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>区分 <code>g</code>、<code>G g</code> 和 <code>G G</code></p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li><code>g</code>：打开地址／搜索框，偏好新标签打开结果。</li>
+<li><code>G g</code>：出现链接提示，在新标签打开选中的链接。</li>
+<li><code>G G</code>：从当前页面网址提取搜索词，用 Google 重新搜索。</li>
+<li>单独的大写 <code>G</code> 没有绑定，只是前缀；<code>gg</code> 也没有独立绑定，小写 <code>g</code> 本身已能打开搜索框。</li>
+<li>按完大写 <code>G</code> 后是否松开 Shift，会影响下一键：<code>G t</code> 与 <code>G T</code>、<code>G g</code> 与 <code>G G</code> 都不同。</li>
+</ul>
+</div>
+</blockquote>
+<p>如果右下角提示“未能识别搜索词”，说明命令没有从当前网址解析出搜索词。普通网页、搜索首页，或无法识别网址格式的搜索结果页，都可能出现该提示。可以改用 <code>g</code> 输入搜索内容；这条提示本身不说明 <code>G…</code> 的按键映射损坏。</p>
+<h2 id="低频操作窗口框架和位置标记">低频操作：窗口、框架和位置标记<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#低频操作窗口框架和位置标记" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="窗口与页面框架">窗口与页面框架<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#窗口与页面框架" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>N</code></td><td>将当前标签移到新窗口</td><td>大写字母</td></tr><tr><td><code>I</code></td><td>将当前标签移到隐私／隐身窗口</td><td>与聚焦输入框的小写 <code>i</code> 区分</td></tr><tr><td><code>Alt-n</code></td><td>将当前／选中标签移到下一个窗口</td><td>带 <code>tabs</code> 参数</td></tr><tr><td><code>n</code></td><td>切换到下一个页面框架</td><td>不是下一个查找结果</td></tr><tr><td><code>U f</code></td><td>切换到父框架</td><td>配置写作 <code>Uf</code></td></tr><tr><td><code>Ctrl-m</code></td><td>切换到主框架</td><td>主页面框架</td></tr></tbody></table></div>
+<h3 id="位置标记">位置标记<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#位置标记" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>m</code> / <code>`</code></td><td>进入位置标记跳转</td><td>后续输入标记名，带交换位置选项</td></tr><tr><td><code>M</code> / <code>~</code></td><td>创建位置标记</td><td>后续输入标记名</td></tr><tr><td><code>Alt-`</code></td><td>清除当前页面的本地标记</td><td>不等同于删除书签</td></tr><tr><td><code>Alt-~</code></td><td>清除全局标记</td><td>留意误触</td></tr></tbody></table></div>
+<h3 id="精细滚动和特殊焦点操作">精细滚动和特殊焦点操作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#精细滚动和特殊焦点操作" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>Ctrl-Up</code> / <code>Ctrl-Down</code></td><td>向上 / 向下小幅像素滚动</td><td>与步长为 140 的滚动区分</td></tr><tr><td><code>Ctrl-Left</code> / <code>Ctrl-Right</code></td><td>向左 / 向右小幅像素滚动</td><td>取决于当前可滚动元素</td></tr><tr><td><code>F1</code></td><td>模拟退格操作</td><td><code>simBackspace</code></td></tr><tr><td><code>Shift-F1</code></td><td>切换焦点，并按配置选中整行</td><td><code>switchFocus select=&quot;all-line&quot;</code></td></tr></tbody></table></div>
+<h2 id="低频操作帮助和维护">低频操作：帮助和维护<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#低频操作帮助和维护" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>快捷键</th><th>功能</th><th>备注</th></tr></thead><tbody><tr><td><code>?</code></td><td>显示快捷键帮助</td><td>可在设置页核对当前生效键位</td></tr><tr><td><code>Shift-F12</code></td><td>打开 Vimium C 设置页</td><td>优先复用当前窗口中的设置页</td></tr><tr><td><code>Alt-Shift-F12</code></td><td>打开扩展后台调试入口</td><td>一般不需要</td></tr><tr><td><code>F F</code></td><td>显示“可能开启了 Caps Lock”的提示</td><td>防止误把大写前缀当小写命令</td></tr></tbody></table></div>
+<h2 id="配置现状与后续精简">配置现状与后续精简<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置现状与后续精简" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="已完成的局部调整">已完成的局部调整<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#已完成的局部调整" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>保留 <code>hjkl</code> 与 <code>qweasd</code> 两套操作：<code>h/a</code> 左、<code>j/e</code> 下、<code>k/q</code> 上、<code>l/d</code> 右，<code>w/s</code> 翻半页。</li>
+<li>历史记录搜索移到 <code>H</code>，保留新标签打开结果的行为。</li>
+<li>滚动步长由 200 调低至 140。</li>
+<li>删除下表四项，其他绑定保留；没有修改 <code>G…</code> 功能。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>已删除的快捷键</th><th>原命令</th><th>删除原因</th></tr></thead><tbody><tr><td><code>Ctrl-i</code></td><td><code>toggleCS</code></td><td>Firefox 不支持对应的内容设置功能</td></tr><tr><td><code>Ctrl-Shift-i</code></td><td><code>enableCSTemp</code></td><td>Firefox 不支持，且与开发者工具快捷键冲突</td></tr><tr><td><code>Alt-Shift-i</code></td><td><code>clearCS</code></td><td>Firefox 不支持对应功能</td></tr><tr><td><code>Alt-Shift-d</code></td><td><code>closeDownloadBar</code></td><td>官方当前实现中，Firefox 会回退为将标签移到新窗口，容易误触</td></tr></tbody></table></div>
+<p>删除的是 Vimium C 对这些键的绑定，不是禁用浏览器原生快捷键。例如删除 <code>Ctrl-Shift-i</code> 后，浏览器仍可将它用于开发者工具。</p>
+<h3 id="不能直接删掉的内部依赖">不能直接删掉的内部依赖<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#不能直接删掉的内部依赖" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>&lt;v-lh></code> 和 <code>&lt;v-sia></code> 是内部虚拟入口，不是键盘上可以直接按出的快捷键，因此不计入 129 个实际绑定。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="text" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span>run &lt;v-lh> LinkHints.activate$s mask=</span></span>
+<span data-line><span>run &lt;v-sia> searchInAnother##keyword=$s mask</span></span></code></pre></figure>
+<ul>
+<li><code>j/k</code> 复用 <code>e/q</code>；如果以后删除左手操作而保留 <code>j/k</code>，需要先改成直接映射。</li>
+<li><code>Alt-c</code>、<code>Alt-v</code>、<code>Alt-Shift-c</code> 复用 <code>c/v</code>。</li>
+<li><code>F c</code> 复用 <code>F t</code>；<code>F b</code> 复用 <code>F s</code>；<code>F r</code>、<code>F E</code> 复用 <code>f</code>。</li>
+<li><code>F g</code> 复用 <code>G g</code>，后者和多数 <code>F…</code> 功能依赖 <code>&lt;v-lh></code>。</li>
+<li><code>g</code>、<code>b</code> 复用 <code>Alt-g</code>；<code>T</code> 复用 <code>t</code>。</li>
+<li><code>C d</code>、<code>C g</code> 复用 <code>C v</code>；<code>C b</code>、<code>Alt-F3</code> 又复用 <code>C d</code>。</li>
+<li><code>C T</code> 复用 <code>Ctrl-v</code>；<code>C e</code> 复用 <code>V</code>。</li>
+<li><code>P m</code> 复用 <code>P n</code>；<code>F8</code> 复用 <code>;</code>。</li>
+<li><code>M</code>、反引号和 <code>~</code> 最终复用 <code>m</code> 的位置标记入口。</li>
+<li>换引擎搜索的 <code>G G</code>、<code>G t</code>、<code>G T</code>、<code>G d</code>、<code>G b</code>、<code>G s</code> 依赖 <code>&lt;v-sia></code>。</li>
+</ul>
+<p>后续精简时，我会先确认不再使用的功能，再一起处理别名和内部依赖，避免出现表面上保留了快捷键、实际却无法执行的情况。批量关闭、重开标签和隐私窗口操作需要优先留意误触风险。</p>
+<h3 id="配置文件与验证边界">配置文件与验证边界<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置文件与验证边界" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>修改版配置：<code>~/workspace/杂项/vimium-c/vimium-c-custom.json</code>。</li>
+<li>原始导出保留未修改：<code>~/下载/Browser_Download/vimium_c-20261110_233818.json</code>。</li>
+<li>调整与恢复说明：<code>~/workspace/杂项/vimium-c/README.md</code>。</li>
+<li>导入前先导出浏览器当前设置；导入整份旧配置可能覆盖导出后新增的调整。</li>
+<li>笔记按配置文件整理，不等同于逐键浏览器验收。搜索引擎、剪贴板、下载、隐私窗口和系统快捷键冲突，需要在实际环境中确认。</li>
+<li>排除规则会让部分站点禁用 Vimium C 或将指定按键交给网页；输入框自动聚焦限制也可能影响操作上下文。</li>
+</ul>
+<p>本次修改版只保存在本地文件中；导入 Vimium C 后才会生效，不能仅凭笔记更新时间判断浏览器里正在使用哪个版本。</p>
+<p>相关记录：<a href="../常用工具/终端快捷键" class="internal alias" data-slug="常用工具/终端快捷键">终端快捷键</a>。</p>
+<p>参考：<a href="https://github.com/gdh1995/vimium-c" class="external">Vimium C 项目<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>、<a href="https://github.com/gdh1995/vimium-c/blob/master/background/settings.ts" class="external">官方默认设置<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>、<a href="https://github.com/gdh1995/vimium-c/blob/master/background/all_commands.ts" class="external">官方命令实现<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。官方当前源码可能与导出中的版本不同，实际行为以安装版本和生效配置为准。</p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="全站关系图"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-40" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#按键约定" data-for="按键约定">按键约定</a></li><li class="depth-0"><a href="#高频速查我常用的操作" data-for="高频速查我常用的操作">高频速查：我常用的操作</a></li><li class="depth-0"><a href="#日常操作页面搜索和标签" data-for="日常操作页面搜索和标签">日常操作：页面、搜索和标签</a></li><li class="depth-1"><a href="#页面导航与刷新" data-for="页面导航与刷新">页面导航与刷新</a></li><li class="depth-1"><a href="#地址书签和标签搜索" data-for="地址书签和标签搜索">地址、书签和标签搜索</a></li><li class="depth-1"><a href="#标签切换创建和恢复" data-for="标签切换创建和恢复">标签切换、创建和恢复</a></li><li class="depth-1"><a href="#关闭标签误触风险较高" data-for="关闭标签误触风险较高">关闭标签：误触风险较高</a></li><li class="depth-1"><a href="#输入框与临时按键透传" data-for="输入框与临时按键透传">输入框与临时按键透传</a></li><li class="depth-1"><a href="#页内查找与文字选择" data-for="页内查找与文字选择">页内查找与文字选择</a></li><li class="depth-0"><a href="#扩展操作链接图片和下载" data-for="扩展操作链接图片和下载">扩展操作：链接、图片和下载</a></li><li class="depth-1"><a href="#打开和连续操作" data-for="打开和连续操作">打开和连续操作</a></li><li class="depth-1"><a href="#复制和搜索链接内容" data-for="复制和搜索链接内容">复制和搜索链接内容</a></li><li class="depth-1"><a href="#图片下载和编辑" data-for="图片下载和编辑">图片、下载和编辑</a></li><li class="depth-0"><a href="#扩展操作复制剪贴板与选中文字" data-for="扩展操作复制剪贴板与选中文字">扩展操作：复制、剪贴板与选中文字</a></li><li class="depth-0"><a href="#低频操作沿用当前搜索词换引擎" data-for="低频操作沿用当前搜索词换引擎">低频操作：沿用当前搜索词换引擎</a></li><li class="depth-0"><a href="#低频操作窗口框架和位置标记" data-for="低频操作窗口框架和位置标记">低频操作：窗口、框架和位置标记</a></li><li class="depth-1"><a href="#窗口与页面框架" data-for="窗口与页面框架">窗口与页面框架</a></li><li class="depth-1"><a href="#位置标记" data-for="位置标记">位置标记</a></li><li class="depth-1"><a href="#精细滚动和特殊焦点操作" data-for="精细滚动和特殊焦点操作">精细滚动和特殊焦点操作</a></li><li class="depth-0"><a href="#低频操作帮助和维护" data-for="低频操作帮助和维护">低频操作：帮助和维护</a></li><li class="depth-0"><a href="#配置现状与后续精简" data-for="配置现状与后续精简">配置现状与后续精简</a></li><li class="depth-1"><a href="#已完成的局部调整" data-for="已完成的局部调整">已完成的局部调整</a></li><li class="depth-1"><a href="#不能直接删掉的内部依赖" data-for="不能直接删掉的内部依赖">不能直接删掉的内部依赖</a></li><li class="depth-1"><a href="#配置文件与验证边界" data-for="配置文件与验证边界">配置文件与验证边界</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-2" class="overflow"><li><a href="../常用工具/" class="internal">常用工具</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/Richard-code200/quartz-site">GitHub</a></li><li><a href="https://richard-code200.github.io/quartz-site/index.xml">RSS</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="../postscript.js" type="module" data-persist="true"></script></html>
