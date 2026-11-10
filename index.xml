@@ -6,65 +6,65 @@
       <description>最近的10条笔记 on Richard的个人博客</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>Evcxr REPL：在终端交互式学习 Rust</title>
-    <link>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/evcxr_repl</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/evcxr_repl</guid>
-    <description><![CDATA[ Evcxr REPL 让你在终端输入 Rust 代码，立即编译、执行并查看结果，还能在后续输入中继续使用变量、函数和类型。REPL 是 Read–Eval–Print Loop，即“读取 → 求值 → 输出 → 循环”。 它适合验证一个语法点、试用标准库方法或第三方 crate，不必每次都新建 Cargo 项目。本文只介绍终端 REPL，不涉及同一项目中的 Jupyter 内核。 它仍然会编译代码，也不完全等同于普通 Rust 项目 Evcxr 在每次求值时组织并编译代码，再保存可持久化的状态。它不是逐行解释器，首次执行或加载依赖可能较慢。跨次输入的借用有额外限制；涉及生命周期、模块组织和完整... ]]></description>
-    <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>费曼学习法</title>
-    <link>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</guid>
-    <description><![CDATA[ 费曼学习法分类下的学习记录。 学习方法 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
-  </item><item>
-    <title>随记</title>
-    <link>https://richard-code200.github.io/quartz-site/%E9%9A%8F%E8%AE%B0/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E9%9A%8F%E8%AE%B0/</guid>
-    <description><![CDATA[ 随记分类下的学习记录。 2026-09-12-ghostty段错误复查与默认配置恢复 2026-6-9 2026-6-1 2026-5-19 2026-4-27 ghostty-segfault-问题排查 Keygen(注册机) . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
-  </item><item>
-    <title>常用工具</title>
-    <link>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</guid>
-    <description><![CDATA[ 常用工具分类下的学习记录。 bat eza Evcxr REPL：在终端交互式学习 Rust find_fd grep_rg grex：从样本生成正则表达式 late_sh_zh uv 终端快捷键 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
-  </item><item>
-    <title>开源协议</title>
-    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</guid>
-    <description><![CDATA[ 开源协议分类下的学习记录。 开源协议概念总结 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
-  </item><item>
-    <title>开源项目学习</title>
-    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link>
-    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid>
-    <description><![CDATA[ 开源项目学习分类下的学习记录。 流程指南 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
-  </item><item>
     <title>字体与排版预览</title>
     <link>https://richard-code200.github.io/quartz-site/%E6%8E%92%E7%89%88%E9%A2%84%E8%A7%88</link>
     <guid>https://richard-code200.github.io/quartz-site/%E6%8E%92%E7%89%88%E9%A2%84%E8%A7%88</guid>
-    <description><![CDATA[ 这页展示本站的字体、配色与 Markdown 排版。字体直接复用原文件，Gruvbox 色值来自原主题。 正文与链接 正文西文使用 MonaspiceAr，标题西文使用 MonaspiceXe，中文使用 Sarasa Term SC（更纱黑体）。这是粗体 Rust 所有权 / ownership，这是斜体 学习与实践 / learning by doing。 行内代码：cargo test、find src -type f。删除线：旧的方法。这是 Quartz 原生支持的高亮文本。 阅读所有权笔记 查看随记列表 回到首页 一点一点地记录，比等到全部理解再动笔更容易坚持。 三级标题 · Mona... ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
+    <description><![CDATA[ 我用这一页检查本站的字体、配色与 Markdown 排版。字体直接复用原文件，Gruvbox 色值来自原主题。 正文与链接 正文西文使用 MonaspiceAr，标题西文使用 MonaspiceXe，中文使用 Sarasa Term SC（更纱黑体）。这是粗体 Rust 所有权 / ownership，这是斜体 学习与实践 / learning by doing。 行内代码：cargo test、find src -type f。删除线：旧的方法。这是 Quartz 原生支持的高亮文本。 阅读所有权笔记 查看随记列表 回到首页 一点一点地记录，比等到全部理解再动笔更容易坚持。 三级标题 · M... ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
   </item><item>
     <title>操作系统原理</title>
     <link>https://richard-code200.github.io/quartz-site/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</link>
     <guid>https://richard-code200.github.io/quartz-site/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</guid>
-    <description><![CDATA[ 操作系统原理分类下的学习记录。 第一章 课程信息 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
+    <description><![CDATA[ 这里记录我学习操作系统原理时整理的课程信息和概念。 第一章 课程信息 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
   </item><item>
     <title>学习笔记</title>
     <link>https://richard-code200.github.io/quartz-site/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA</link>
     <guid>https://richard-code200.github.io/quartz-site/%E7%AC%94%E8%AE%B0%E5%AF%BC%E8%88%AA</guid>
-    <description><![CDATA[ 按主题慢慢积累，也通过链接把知识连起来。现有 53 篇分类笔记，原首页内容另存于关于本站。 需要自己维护本站时，先看网站配置与使用指南：从写笔记、本地预览到导航、外观和发布，按任务逐步操作。 MarkDown：1 篇笔记。 Rust：19 篇笔记。 Zed：2 篇笔记。 Git使用指南：9 篇笔记。 常用工具：7 篇笔记。 开源协议：1 篇笔记。 开源项目学习：1 篇笔记。 操作系统原理：2 篇笔记。 算法笔记：1 篇笔记。 费曼学习法：1 篇笔记。 随记：7 篇笔记。 Linux：1 篇笔记。 AI Agent：1 篇笔记。 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
+    <description><![CDATA[ 我按主题慢慢积累笔记，也通过链接把知识连起来。迁移时共有 53 篇分类笔记，原首页内容另存于关于本站。 我把本站的维护方法记在网站配置与使用指南里：从写笔记、本地预览到导航、外观和发布，需要时按任务查阅。 MarkDown：1 篇笔记。 Rust：19 篇笔记。 Zed：2 篇笔记。 Git使用指南：9 篇笔记。 常用工具：7 篇笔记。 开源协议：1 篇笔记。 开源项目学习：1 篇笔记。 操作系统原理：2 篇笔记。 算法笔记：1 篇笔记。 费曼学习法：1 篇笔记。 随记：7 篇笔记。 Linux：1 篇笔记。 AI Agent：1 篇笔记。 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
   </item><item>
     <title>算法笔记</title>
     <link>https://richard-code200.github.io/quartz-site/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
     <guid>https://richard-code200.github.io/quartz-site/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
-    <description><![CDATA[ 算法笔记分类下的学习记录。 分发饼干 . ]]></description>
-    <pubDate>Mon, 09 Nov 2026 16:51:13 GMT</pubDate>
+    <description><![CDATA[ 这里记录我的算法学习过程，包括题目、解题思路和代码。 分发饼干 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
+  </item><item>
+    <title>费曼学习法</title>
+    <link>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E8%B4%B9%E6%9B%BC%E5%AD%A6%E4%B9%A0%E6%B3%95/</guid>
+    <description><![CDATA[ 这里记录我对费曼学习法的理解，以及准备怎样用它检查自己的知识盲区。 学习方法 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
+  </item><item>
+    <title>随记</title>
+    <link>https://richard-code200.github.io/quartz-site/%E9%9A%8F%E8%AE%B0/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E9%9A%8F%E8%AE%B0/</guid>
+    <description><![CDATA[ 这里放我的零散想法、课堂记录和问题排查笔记。 2026-09-12-ghostty段错误复查与默认配置恢复 2026-6-9 2026-6-1 2026-5-19 2026-4-27 ghostty-segfault-问题排查 Keygen(注册机) . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
+  </item><item>
+    <title>常用工具</title>
+    <link>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</guid>
+    <description><![CDATA[ 这里记录我学习常用工具时整理的用法、速查表和练习心得。 bat eza Evcxr REPL：在终端交互式学习 Rust find_fd grep_rg grex：从样本生成正则表达式 late_sh_zh uv 终端快捷键 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
+  </item><item>
+    <title>开源协议</title>
+    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</guid>
+    <description><![CDATA[ 这里记录我对常见开源协议的理解，方便选用和比较时查阅。 开源协议概念总结 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
+  </item><item>
+    <title>开源项目学习</title>
+    <link>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</link>
+    <guid>https://richard-code200.github.io/quartz-site/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</guid>
+    <description><![CDATA[ 这里记录我准备怎样阅读开源项目、理解源码并逐步参与贡献。 流程指南 . ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
+  </item><item>
+    <title>Agent 中的 Context、Prompts 与 Skills</title>
+    <link>https://richard-code200.github.io/quartz-site/ai-agents/Context%E3%80%81Prompts-%E4%B8%8E-Skills</link>
+    <guid>https://richard-code200.github.io/quartz-site/ai-agents/Context%E3%80%81Prompts-%E4%B8%8E-Skills</guid>
+    <description><![CDATA[ 我对 AI Agent 中上下文、提示词和技能的含义、关系与常见误区的理解。 ]]></description>
+    <pubDate>Tue, 10 Nov 2026 08:02:37 GMT</pubDate>
   </item>
     </channel>
   </rss>
