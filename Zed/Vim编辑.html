@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Vim 编辑与 Zed Vim 模式 · Richard的个人博客</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Richard的个人博客"/><meta property="og:title" content="Vim 编辑与 Zed Vim 模式 · Richard的个人博客"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Vim 编辑与 Zed Vim 模式 · Richard的个人博客"/><meta name="twitter:description" content="Vim 的移动、文本对象、范围编辑与重复操作，以及 Zed Vim 模式中的结构化编辑和语言服务。"/><meta property="og:description" content="Vim 的移动、文本对象、范围编辑与重复操作，以及 Zed Vim 模式中的结构化编辑和语言服务。"/><meta property="og:image:alt" content="Vim 的移动、文本对象、范围编辑与重复操作，以及 Zed Vim 模式中的结构化编辑和语言服务。"/><meta property="og:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:url" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta name="twitter:image" content="https://richard-code200.github.io/quartz-site/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="richard-code200.github.io/quartz-site"/><meta property="og:url" content="https://richard-code200.github.io/quartz-site/Zed/Vim编辑"/><meta property="twitter:url" content="https://richard-code200.github.io/quartz-site/Zed/Vim编辑"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Vim 的移动、文本对象、范围编辑与重复操作，以及 Zed Vim 模式中的结构化编辑和语言服务。"/><meta name="generator" content="Quartz"/><script>document.documentElement.setAttribute("saved-theme", "dark")</script><link rel="icon" type="image/svg+xml" href="../static/preview-favicon.svg"/><link rel="stylesheet" data-persist="true" href="../static/styles/gruvbox_dark.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/font_faces.css"/><link rel="stylesheet" data-persist="true" href="../static/styles/code_fonts.css"/><link href="../index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvcXVhcnR6LXNpdGUvcXVhcnR6LXNpdGUvcXVhcnR6L2NvbXBvbmVudHMvc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><script src="../prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://richard-code200.github.io/quartz-site/index.xml"/></head><body data-slug="Zed/Vim编辑"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Richard的个人博客</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>搜索</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索些什么" placeholder="搜索些什么"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>{let order={MarkDown:1e3,\&quot;MarkDown/MarkDown\&quot;:1001,Rust:2e3,\&quot;Rust/\\u57FA\\u672C\\u8BED\\u6CD5\\u4E0E\\u6570\\u636E\\u7C7B\\u578B\&quot;:2001,\&quot;Rust/\\u51FD\\u6570\\u4E0E\\u63A7\\u5236\\u6D41\&quot;:2002,\&quot;Rust/\\u683C\\u5F0F\\u5316\\u8F93\\u51FA\&quot;:2003,\&quot;Rust/\\u6240\\u6709\\u6743\&quot;:2004,\&quot;Rust/\\u5F15\\u7528\\u4E0E\\u501F\\u7528\&quot;:2005,\&quot;Rust/\\u5207\\u7247\&quot;:2006,\&quot;Rust/\\u7ED3\\u6784\\u4F53\&quot;:2007,\&quot;Rust/Enum\\u548C\\u6A21\\u5F0F\\u5339\\u914D\&quot;:2008,\&quot;Rust/\\u96C6\\u5408\&quot;:2009,\&quot;Rust/\\u8FED\\u4EE3\\u5668\\u4E0E\\u95ED\\u5305\&quot;:2010,\&quot;Rust/\\u6CDB\\u578B\\u4E0E\\u7279\\u5F81\&quot;:2011,\&quot;Rust/\\u751F\\u547D\\u5468\\u671F\&quot;:2012,\&quot;Rust/\\u9519\\u8BEF\\u5904\\u7406\&quot;:2013,\&quot;Rust/\\u6A21\\u5757\\u7CFB\\u7EDF\&quot;:2014,\&quot;Rust/\\u6D4B\\u8BD5\&quot;:2015,\&quot;Rust/Cargo\\u5DE5\\u4F5C\\u533A\\u4E0E\\u4F9D\\u8D56\\u7BA1\\u7406\&quot;:2016,\&quot;Rust/\\u9879\\u76EE\\u4EE3\\u7801\\u7EC4\\u7EC7\&quot;:2017,\&quot;Rust/\\u547D\\u4EE4\\u884C\\u6587\\u4EF6\\u641C\\u7D22\\u5B9E\\u8DF5\&quot;:2018,\&quot;Rust/\\u5B66\\u4E60\\u9879\\u76EE\\u8BA1\\u5212\&quot;:2019,Zed:3001,\&quot;Zed/\\u5FEB\\u6377\\u952E\&quot;:3002,git\\u4F7F\\u7528\\u6307\\u5357:4e3,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/Git\\u57FA\\u7840\\u6982\\u5FF5\&quot;:4001,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u521D\\u59CB\\u8BBE\\u7F6E\&quot;:4002,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u57FA\\u672C\\u64CD\\u4F5C\\u547D\\u4EE4\&quot;:4003,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5DE5\\u4F5C\\u533A\\u6682\\u5B58\&quot;:4004,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5FFD\\u7565\\u6587\\u4EF6\\u914D\\u7F6E\&quot;:4005,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u5206\\u652F\\u7BA1\\u7406\&quot;:4006,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u8FDC\\u7A0B\\u4ED3\\u5E93\\u64CD\\u4F5C\&quot;:4007,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u6807\\u7B7E\\u7BA1\\u7406\&quot;:4008,\&quot;git\\u4F7F\\u7528\\u6307\\u5357/\\u64A4\\u9500\\u4E0E\\u56DE\\u9000\&quot;:4009,\\u5E38\\u7528\\u5DE5\\u5177:5e3,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/bat\&quot;:5001,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/eza\&quot;:5002,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/find_fd\&quot;:5003,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/grep_rg\&quot;:5004,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/late_sh_zh\&quot;:5005,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/uv\&quot;:5006,\&quot;\\u5E38\\u7528\\u5DE5\\u5177/\\u7EC8\\u7AEF\\u5FEB\\u6377\\u952E\&quot;:5007,\\u5F00\\u6E90\\u534F\\u8BAE:6e3,\&quot;\\u5F00\\u6E90\\u534F\\u8BAE/\\u5F00\\u6E90\\u534F\\u8BAE\\u6982\\u5FF5\\u603B\\u7ED3\&quot;:6001,\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60:7e3,\&quot;\\u5F00\\u6E90\\u9879\\u76EE\\u5B66\\u4E60/\\u6D41\\u7A0B\\u6307\\u5357\&quot;:7001,\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406:8e3,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u7B2C\\u4E00\\u7AE0\&quot;:8001,\&quot;\\u64CD\\u4F5C\\u7CFB\\u7EDF\\u539F\\u7406/\\u8BFE\\u7A0B\\u4FE1\\u606F\&quot;:8002,\\u7B97\\u6CD5\\u7B14\\u8BB0:9e3,\&quot;\\u7B97\\u6CD5\\u7B14\\u8BB0/\\u5206\\u53D1\\u997C\\u5E72\&quot;:9001,\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5:1e4,\&quot;\\u8D39\\u66FC\\u5B66\\u4E60\\u6CD5/\\u5B66\\u4E60\\u65B9\\u6CD5\&quot;:10001,\\u968F\\u8BB0:11e3,\&quot;\\u968F\\u8BB0/2026-09-12-ghostty\\u6BB5\\u9519\\u8BEF\\u590D\\u67E5\\u4E0E\\u9ED8\\u8BA4\\u914D\\u7F6E\\u6062\\u590D\&quot;:11001,\&quot;\\u968F\\u8BB0/2026-6-9\&quot;:11002,\&quot;\\u968F\\u8BB0/2026-6-1\&quot;:11003,\&quot;\\u968F\\u8BB0/2026-5-19\&quot;:11004,\&quot;\\u968F\\u8BB0/2026-4-27\&quot;:11005,\&quot;\\u968F\\u8BB0/ghostty-segfault-\\u95EE\\u9898\\u6392\\u67E5\&quot;:11006,\&quot;\\u968F\\u8BB0/Keygen(\\u6CE8\\u518C\\u673A)\&quot;:11007,Linux:12e3,\&quot;Linux/\\u5B89\\u5168\\u7279\\u6027\&quot;:12001,\\u7B14\\u8BB0\\u5BFC\\u822A:1,\\u5173\\u4E8E\\u672C\\u7AD9:99e3,\\u6392\\u7248\\u9884\\u89C8:99001},aSlug=a.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),bSlug=b.slug.replace(/\\/index$/,\&quot;\&quot;).replace(/\\/$/,\&quot;\&quot;),aRank=order[aSlug]??(order[aSlug.split(\&quot;/\&quot;)[0]]??9e4)+900,bRank=order[bSlug]??(order[bSlug.split(\&quot;/\&quot;)[0]]??9e4)+900;return aRank-bRank||a.displayName.localeCompare(b.displayName,\&quot;zh-CN\&quot;,{numeric:!0})}&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" aria-label="笔记导航" data-mobile="true" aria-controls="explorer-57"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>笔记导航</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-57" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><header></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">首页</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../Zed/">Zed</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Vim 编辑与 Zed Vim 模式</a></div></nav><h1 class="article-title">Vim 编辑与 Zed Vim 模式</h1><p show-comma="true" class="content-meta"><time datetime="2026-11-10T00:00:00.000Z">2026年11月10日</time><span>15分钟阅读</span></p><ul class="tags"><li><a href="../tags/Zed" class="internal tag-link">Zed</a></li><li><a href="../tags/Vim" class="internal tag-link">Vim</a></li><li><a href="../tags/编辑器" class="internal tag-link">编辑器</a></li></ul></div></div><article class="popover-hint"><p>Vim 编辑的重点是先确定范围，再选择操作。常用的组合包括修改单词、处理括号内的内容，以及重复上一次修改；在 Zed 中，还可以配合语言服务和语法结构完成重命名、参数编辑与代码导航。</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>适用范围 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>通用编辑部分面向 Vim / Neovim；标注为 Zed 的操作依赖其 Vim 模式、语言服务或语法支持。Surround 在 Zed 中内置，在 Vim / Neovim 中通常需要插件。
+原稿整理日期为 2026-11-10。以下 Zed 键位按默认方案记录，不等于本机配置已逐项实测。</p>
+</div>
+</blockquote>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>本机自定义键位优先 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>本机键位见 <a href="../Zed/快捷键" class="internal alias" data-slug="Zed/快捷键">Zed 快捷键</a>。其中 <code>c a</code> 已绑定为 Code Actions，会影响 <code>caw</code>、<code>ca(</code> 等以 <code>ca</code> 开始的文本对象操作；<code>g s a</code> / <code>g s d</code> / <code>g s r</code> 则是自定义 Surround 入口，也可能影响默认的 <code>gs</code> 行为。
+符号重命名可优先使用本机的 <code>Space r n</code>，代码操作用 <code>Space c a</code>。下面的默认键位和本机自定义键位不要混记。</p>
+</div>
+</blockquote>
+<h2 id="1-核心思路操作符--范围">1. 核心思路：操作符 + 范围<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-核心思路操作符--范围" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>常见组合：<code>[次数] + 操作符 + 文本对象或移动命令</code>。次数也可以放在操作符之后。</p>
+<p>例如，<code>ciw</code> 依次按下 <code>c</code>、<code>i</code>、<code>w</code>：<code>c</code> 是 change，表示修改并进入插入模式；<code>i</code> 是 inside，不包含外围；<code>w</code> 是 word，表示单词。<code>d3w</code> 则删除连续三个 <code>w</code> 移动范围。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作符</th><th>作用</th><th>示例</th></tr></thead><tbody><tr><td><code>c</code></td><td>修改并进入插入模式</td><td><code>ciw</code></td></tr><tr><td><code>d</code></td><td>删除</td><td><code>diw</code></td></tr><tr><td><code>y</code></td><td>复制（yank）</td><td><code>yiw</code></td></tr><tr><td><code>v</code></td><td>进入字符可视选择</td><td><code>viw</code></td></tr><tr><td><code>></code> / <code>&lt;</code></td><td>增加 / 减少缩进</td><td><code>>ip</code> / <code>&lt;ip</code></td></tr><tr><td><code>gU</code> / <code>gu</code></td><td>转大写 / 转小写</td><td><code>gUiw</code> / <code>guiw</code></td></tr></tbody></table></div>
+<p><code>i</code> 是 inside，<code>a</code> 是 around。<code>iw</code> 通常不含相邻空格，<code>aw</code> 会连带适当空白。<code>w</code> 按 Vim 的单词规则划分；<code>W</code> 按空白分隔的 <em>WORD</em> 划分。</p>
+<p>连续字母表示依次按键，例如 <code>ciw</code>；<code>Ctrl-r</code> 表示同时按下修饰键和字母。除特别说明外，编辑命令从普通模式开始。</p>
+<h2 id="2-快速移动和定位">2. 快速移动和定位<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-快速移动和定位" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td><code>h</code> / <code>j</code> / <code>k</code> / <code>l</code></td><td>左 / 下 / 上 / 右</td></tr><tr><td><code>w</code> / <code>b</code> / <code>e</code></td><td>下一单词开头 / 上一单词开头 / 单词结尾</td></tr><tr><td><code>0</code> / <code>^</code> / <code>$</code></td><td>行首 / 首个非空白字符 / 行尾</td></tr><tr><td><code>gg</code> / <code>G</code></td><td>文件开头 / 文件末尾</td></tr><tr><td><code>f&lt;char></code> / <code>F&lt;char></code></td><td>在当前行向右 / 向左查找字符，停在字符上</td></tr><tr><td><code>t&lt;char></code> / <code>T&lt;char></code></td><td>在当前行向右 / 向左查找字符，停在目标前一个 / 后一个字符上</td></tr><tr><td><code>;</code> / <code>,</code></td><td>按相同 / 相反方向重复最近一次 <code>f/F/t/T</code> 查找</td></tr><tr><td><code>%</code></td><td>跳到匹配的括号等配对位置</td></tr><tr><td><code>/pattern</code> / <code>?pattern</code></td><td>向文件末尾 / 开头方向搜索</td></tr><tr><td><code>n</code> / <code>N</code></td><td>沿原搜索方向 / 反方向继续搜索</td></tr><tr><td><code>*</code> / <code>#</code></td><td>向文件末尾 / 开头方向搜索光标下的单词</td></tr></tbody></table></div>
+<p>例如，<code>let result = calculate(first, second, third);</code>，光标在 <code>first</code> 开头时：</p>
+<ul>
+<li><code>ct,</code>：修改到下一个逗号之前，保留逗号，进入插入模式。</li>
+<li><code>dt,</code>：删除到下一个逗号之前，留在普通模式。</li>
+<li><code>cf,</code>：修改到下一个逗号，包含逗号。</li>
+<li><code>f)</code>：移动到本行的右括号。</li>
+</ul>
+<h2 id="3-快速进入插入模式与编辑整行">3. 快速进入插入模式与编辑整行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-快速进入插入模式与编辑整行" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td><code>i</code> / <code>a</code></td><td>在光标前 / 后插入</td></tr><tr><td><code>I</code> / <code>A</code></td><td>在本行首个非空白字符前 / 行尾插入</td></tr><tr><td><code>o</code> / <code>O</code></td><td>在下一行 / 上一行新建行并插入</td></tr><tr><td><code>dd</code> / <code>yy</code> / <code>cc</code></td><td>删除 / 复制 / 修改当前行</td></tr><tr><td><code>D</code> / <code>C</code></td><td>删除 / 修改至行尾，分别相当于 <code>d$</code> / <code>c$</code></td></tr><tr><td><code>S</code></td><td>修改整行，相当于 <code>cc</code></td></tr><tr><td><code>J</code></td><td>合并当前行和下一行</td></tr><tr><td><code>>></code> / <code>&lt;&lt;</code> / <code>==</code></td><td>增加缩进 / 减少缩进 / 重新缩进当前行</td></tr><tr><td><code>5dd</code> / <code>3yy</code></td><td>删除五行 / 复制三行</td></tr><tr><td><code>x</code> / <code>s</code></td><td>删除当前字符 / 删除当前字符并插入</td></tr><tr><td><code>r&lt;char></code> / <code>R</code></td><td>替换一个字符 / 进入连续替换模式</td></tr><tr><td><code>xp</code></td><td>交换光标处与后一个字符的位置，常用于纠正打字顺序</td></tr><tr><td><code>~</code></td><td>切换光标下字符的大小写</td></tr><tr><td><code>p</code> / <code>P</code></td><td>在光标后 / 前粘贴；复制整行时按行粘贴</td></tr></tbody></table></div>
+<h2 id="4-文本对象单词段落括号字符串">4. 文本对象：单词、段落、括号、字符串<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-文本对象单词段落括号字符串" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td><code>ciw</code> / <code>caw</code></td><td>修改单词 / 修改单词及相邻空白</td></tr><tr><td><code>diw</code> / <code>daw</code></td><td>删除单词 / 删除单词及相邻空白</td></tr><tr><td><code>yiw</code> / <code>viw</code></td><td>复制 / 选中当前单词</td></tr><tr><td><code>ciW</code></td><td>修改当前以空白字符分隔的 WORD</td></tr><tr><td><code>cip</code> / <code>dap</code></td><td>修改段落内部 / 删除段落，连带适当空白</td></tr><tr><td><code>ci(</code> / <code>ca(</code></td><td>修改圆括号内内容 / 修改圆括号及其内容</td></tr><tr><td><code>ci{</code> / <code>ca{</code></td><td>修改花括号内内容 / 修改花括号及其内容</td></tr><tr><td><code>ci[</code></td><td>修改方括号内内容</td></tr><tr><td><code>ci&quot;</code> / <code>ca&quot;</code></td><td>修改双引号内部 / 修改双引号及其内容</td></tr><tr><td><code>ci'</code> / <code>di(</code> / <code>yi{</code></td><td>修改单引号内部 / 删除圆括号内部 / 复制花括号内部</td></tr></tbody></table></div>
+<p>光标位于字符串内，执行 <code>ci&quot;</code>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;Hello, Rust!&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#928374;--shiki-light-font-style:italic;--shiki-dark:#928374;--shiki-dark-font-style:italic;">// 执行 ci&quot; 后，字符串内容被清空，双引号保留：</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span></code></pre></figure>
+<p><code>ci{</code> 可以直接修改代码块内部，不必先用可视模式手动选择。包含外围的 <code>ca…</code> 操作在本机 Zed 中可能受前述自定义键位影响。</p>
+<h2 id="5-基于移动范围组合编辑">5. 基于移动范围组合编辑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-基于移动范围组合编辑" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td><code>dw</code> / <code>d3w</code></td><td>删除到下一单词起点 / 连续三个单词移动范围</td></tr><tr><td><code>d0</code> / <code>d^</code></td><td>删除到行首 / 删除到首个非空白字符</td></tr><tr><td><code>d$</code> / <code>c$</code></td><td>删除 / 修改至行尾</td></tr><tr><td><code>ct;</code> / <code>cf;</code></td><td>修改到下一个分号之前 / 包含分号</td></tr><tr><td><code>dt)</code></td><td>删除到下一个右括号之前</td></tr><tr><td><code>dG</code></td><td>删除到文件末尾</td></tr><tr><td><code>ggVG</code></td><td>从文件开头按行选中整个文件</td></tr></tbody></table></div>
+<p>先判断范围是“单词、括号、函数”，还是“从当前位置到某个字符”，再选文本对象或移动命令。</p>
+<h2 id="6-撤销重复宏与批量替换">6. 撤销、重复、宏与批量替换<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-撤销重复宏与批量替换" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td><code>u</code> / <code>Ctrl-r</code></td><td>撤销 / 重做</td></tr><tr><td><code>.</code></td><td>重复上一次修改</td></tr><tr><td><code>qa</code> → 操作 → <code>q</code></td><td>将一系列操作录制到寄存器 <code>a</code></td></tr><tr><td><code>@a</code> / <code>10@a</code></td><td>执行宏 <code>a</code> 一次 / 十次</td></tr><tr><td><code>:%s/old/new/g</code></td><td>替换整个文件中每行的所有匹配</td></tr><tr><td><code>:%s/old/new/gc</code></td><td>Vim / Neovim 中逐个确认替换；Zed 对 <code>c</code> 标志的支持需另行确认</td></tr></tbody></table></div>
+<p>例如，给下面三个变量添加相同前缀：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> apple</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">1</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> banana</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">2</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> orange</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">3</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span></code></pre></figure>
+<p>在 <code>apple</code> 开头按 <code>inew_</code>、<code>Esc</code>，再移到 <code>banana</code>、<code>orange</code> 的开头分别按 <code>.</code>，就会重复插入 <code>new_</code>。<code>.</code> 重复的是相同编辑内容，不会自动生成不同的新名字。</p>
+<p>宏适合“移动 + 删除 + 插入”等多步重复编辑；简单修改优先用 <code>.</code>。</p>
+<h2 id="7-surround快速操作包围符号">7. Surround：快速操作包围符号<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-surround快速操作包围符号" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>内置功能与插件的区别 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Zed Vim 模式内置 <code>ys</code> / <code>cs</code> / <code>ds</code>。原生 Vim 不内置这些键位；Neovim 通常需要 <code>nvim-surround</code> 等插件。
+下表是默认 Surround 操作。本机另外配置了 <code>g s a</code> / <code>g s d</code> / <code>g s r</code>，具体上下文见 <a href="../Zed/快捷键" class="internal alias" data-slug="Zed/快捷键">Zed 快捷键</a>。</p>
+</div>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td><code>ysiw&quot;</code></td><td>为当前单词添加双引号</td></tr><tr><td><code>ysiw)</code></td><td>添加紧凑圆括号：<code>word</code> → <code>(word)</code></td></tr><tr><td><code>ysiw(</code></td><td>添加带内侧空格的圆括号：<code>word</code> → <code>( word )</code></td></tr><tr><td><code>cs&quot;'</code></td><td>将外围双引号改成单引号</td></tr><tr><td><code>ds&quot;</code></td><td>删除外围双引号</td></tr><tr><td><code>cs)]</code></td><td>将圆括号改成紧凑方括号</td></tr><tr><td><code>cs([</code></td><td>将圆括号改成内侧带空格的方括号</td></tr></tbody></table></div>
+<p>Rust 字符串使用 <code>cs&quot;'</code> 后可能变成不合法的 Rust 代码；这里演示的是包围符号的文本变换，不是代码转换。</p>
+<h2 id="8-zed-专用智能重命名与多光标">8. Zed 专用：智能重命名与多光标<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8-zed-专用智能重命名与多光标" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>同名文本不一定是同一变量的引用。修改符号名称时，优先使用语言服务的重命名，而不是直接多选所有同名文本。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>默认键位</th><th>作用</th><th>用途</th></tr></thead><tbody><tr><td><code>cd</code></td><td>通过语言服务器重命名符号</td><td>变量、函数、类型重命名</td></tr><tr><td><code>ga</code></td><td>选中当前单词的全部匹配文本</td><td>批量修改字面文本</td></tr><tr><td><code>gl</code> / <code>gL</code></td><td>添加下一个 / 上一个同名单词选区</td><td>逐个扩大多光标选择</td></tr><tr><td><code>g></code> / <code>g&lt;</code></td><td>跳过最近的匹配选择并向后 / 向前查找</td><td>排除不需要修改的位置</td></tr><tr><td><code>gA</code></td><td>可视模式中在每行末添加光标；普通模式中查看引用</td><td>多行编辑 / 引用查询，依赖上下文</td></tr></tbody></table></div>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="rust" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#FB4934;--shiki-dark:#FB4934;">fn</span><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;"> main</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">() {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> count</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">10</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    println!</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">(</span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;{count}&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">);</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    let</span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;"> total</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> = </span><span style="--shiki-light:#83A598;--shiki-dark:#83A598;">count</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;"> + </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">5</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">;</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<p>将 <code>count</code> 重命名为 <code>number</code>，默认方案下把光标放在 <code>count</code> 上按 <code>cd</code>，再输入新名字；本机可用 <code>Space r n</code>。rust-analyzer 会根据语义识别引用。<code>ga</code> 是文本层面的多选，可能影响注释、字符串或其他作用域中同名的内容。</p>
+<h2 id="9-zed-专用tree-sitter-结构化编辑">9. Zed 专用：Tree-sitter 结构化编辑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#9-zed-专用tree-sitter-结构化编辑" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>这些操作依赖对应语言的语法结构定义。Rust 等支持良好的语言更适合使用，实际范围仍与光标位置和语言支持有关。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>默认键位</th><th>作用</th></tr></thead><tbody><tr><td><code>via</code> / <code>cia</code> / <code>daa</code></td><td>选中参数 / 修改参数 / 删除参数及适当的分隔符</td></tr><tr><td><code>vaf</code> / <code>vif</code></td><td>选中整个函数 / 函数内部</td></tr><tr><td><code>daf</code> / <code>cif</code></td><td>删除整个函数 / 修改函数内部</td></tr><tr><td><code>vai</code></td><td>按当前缩进范围及其前一行选中，即 <code>a i</code> 对象</td></tr><tr><td><code>vii</code></td><td>选中当前缩进层级，即 <code>i i</code> 对象</td></tr><tr><td><code>]m</code> / <code>[m</code></td><td>下一个 / 上一个函数或方法</td></tr><tr><td><code>]M</code> / <code>[M</code></td><td>下一个 / 上一个函数或方法结尾</td></tr><tr><td><code>] ]</code> / <code>[ [</code></td><td>下一个 / 上一个 section / 定义边界</td></tr><tr><td><code>[x</code> / <code>]x</code></td><td>扩大 / 缩小语法节点选择</td></tr><tr><td><code>gcc</code> / 可视模式 <code>gc</code></td><td>注释或取消注释一行 / 选中范围，Zed 内置</td></tr></tbody></table></div>
+<p>语法级操作需要与经典 Vim 的通用文本对象区分。<code>daf</code> 等命令中的 <code>a</code> 也属于文本对象，并非插入模式命令。</p>
+<h2 id="10-zed-专用语言服务与代码导航">10. Zed 专用：语言服务与代码导航<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#10-zed-专用语言服务与代码导航" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>默认键位</th><th>功能</th></tr></thead><tbody><tr><td><code>gd</code> / <code>gD</code></td><td>跳转到定义 / 声明</td></tr><tr><td><code>gy</code> / <code>gI</code></td><td>跳转到类型定义 / 实现</td></tr><tr><td><code>gA</code></td><td>普通模式中查看所有引用</td></tr><tr><td><code>gs</code> / <code>gS</code></td><td>查找当前文件 / 整个项目中的符号</td></tr><tr><td><code>]d</code> / <code>[d</code></td><td>下一个 / 上一个诊断</td></tr><tr><td><code>gh</code></td><td>查看诊断或悬浮信息</td></tr><tr><td><code>g.</code></td><td>打开 Code Actions 菜单</td></tr><tr><td><code>Ctrl-x Ctrl-o</code></td><td>插入模式中打开补全菜单</td></tr><tr><td><code>Ctrl-x Ctrl-l</code></td><td>插入模式中打开 Code Actions 菜单</td></tr></tbody></table></div>
+<p>Zed 的语言服务能力不属于 Vim / Neovim 的原生默认键位。尤其是 <code>gs</code>，需要留意本机 <code>g s …</code> 自定义绑定的覆盖；本机的常用入口包括 <code>g r</code> 查看引用、<code>Space c a</code> 打开代码操作。</p>
+<h2 id="11-zed-vim-模式配置与兼容性">11. Zed Vim 模式配置与兼容性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#11-zed-vim-模式配置与兼容性" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>在 Zed 的 <code>settings.json</code> 中开启 Vim 模式，配置示例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="mkdocs-gruvbox mkdocs-gruvbox"><code data-language="json" data-theme="mkdocs-gruvbox mkdocs-gruvbox" style="display:grid;"><span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">{</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  &quot;vim_mode&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">  &quot;vim&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: {</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    &quot;default_mode&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;normal&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    &quot;use_system_clipboard&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#B8BB26;--shiki-dark:#B8BB26;">&quot;on_yank&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    &quot;toggle_relative_line_numbers&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">true</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">,</span></span>
+<span data-line><span style="--shiki-light:#FABD2F;--shiki-dark:#FABD2F;">    &quot;highlight_on_yank_duration&quot;</span><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">: </span><span style="--shiki-light:#D3869B;--shiki-dark:#D3869B;">200</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">  }</span></span>
+<span data-line><span style="--shiki-light:#EBDBB2;--shiki-dark:#EBDBB2;">}</span></span></code></pre></figure>
+<ul>
+<li><code>use_system_clipboard</code> 取值包括 <code>always</code>（默认）、<code>on_yank</code>、<code>never</code>。</li>
+<li>Zed 模拟常见 Vim 操作，但不是完整的 Vim / Neovim 运行时，也不能直接运行 Neovim 的 Lua 插件。</li>
+<li>Zed 的块选择使用多光标系统，宏使用 Zed 自身的录制能力。</li>
+<li><code>:%s</code> 的正则细节不同：Vim 中捕获组常写作 <code>\(...\)</code>，替换引用是 <code>\1</code>；Zed 对应正则引擎的写法是 <code>(...)</code>、<code>$1</code>。Zed 对部分 Vim 风格替换命令提供转换，复杂规则仍需确认。</li>
+<li>键位无响应时，先检查当前模式、语言支持、Zed 版本和 <code>keymap.json</code> 的自定义覆盖。</li>
+</ul>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>配置示例不是完整配置文件 </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>上面的 JSON 只展示 Vim 相关设置。需要合并到现有设置中，不要直接覆盖整份 <code>settings.json</code>。这里不修改本机配置，也不将示例当成当前配置。</p>
+</div>
+</blockquote>
+<h2 id="12-日常练习优先级">12. 日常练习优先级<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#12-日常练习优先级" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>按操作类型逐步练习，不必一次记住所有键位：</p>
+<ol>
+<li><strong>精准定位</strong>：<code>A</code>、<code>I</code>、<code>f/t</code>、<code>;</code>、<code>%</code>、<code>*</code>。</li>
+<li><strong>范围编辑</strong>：<code>ciw</code>、<code>ci&quot;</code>、<code>ci(</code>、<code>ci{</code>、<code>ct,</code>。</li>
+<li><strong>重复与批量</strong>：<code>.</code>、<code>qa</code> / <code>@a</code>、<code>:%s</code>。</li>
+<li><strong>结构编辑</strong>：<code>ys</code> / <code>cs</code> / <code>ds</code>、<code>cia</code>、<code>vaf</code>、<code>cif</code>。</li>
+<li><strong>Zed 语义操作</strong>：<code>cd</code>（本机可用 <code>Space r n</code>）、<code>ga</code>、<code>gd</code>、<code>gI</code>、<code>]d</code>、<code>g.</code>。</li>
+</ol>
+<p>先确定要编辑的范围，再决定移动和操作的组合。</p>
+<h2 id="相关笔记">相关笔记<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#相关笔记" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../Zed/快捷键" class="internal alias" data-slug="Zed/快捷键">Zed 快捷键</a>：本机自定义键位、上下文与冲突说明。</li>
+<li><a href="../常用工具/终端快捷键" class="internal alias" data-slug="常用工具/终端快捷键">终端快捷键</a>：Ghostty、tmux 和 zsh 的键位，注意与编辑器的按键处理区分。</li>
+</ul>
+<h2 id="参考资料">参考资料<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#参考资料" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://zed.dev/docs/vim" class="external">Zed 官方 Vim 模式文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/zed-industries/zed/blob/main/assets/keymaps/vim.json" class="external">Zed 默认 Vim 键位实现<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://vimhelp.org/" class="external">Vim 官方帮助文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="全站关系图"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-20" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#1-核心思路操作符--范围" data-for="1-核心思路操作符--范围">1. 核心思路：操作符 + 范围</a></li><li class="depth-0"><a href="#2-快速移动和定位" data-for="2-快速移动和定位">2. 快速移动和定位</a></li><li class="depth-0"><a href="#3-快速进入插入模式与编辑整行" data-for="3-快速进入插入模式与编辑整行">3. 快速进入插入模式与编辑整行</a></li><li class="depth-0"><a href="#4-文本对象单词段落括号字符串" data-for="4-文本对象单词段落括号字符串">4. 文本对象：单词、段落、括号、字符串</a></li><li class="depth-0"><a href="#5-基于移动范围组合编辑" data-for="5-基于移动范围组合编辑">5. 基于移动范围组合编辑</a></li><li class="depth-0"><a href="#6-撤销重复宏与批量替换" data-for="6-撤销重复宏与批量替换">6. 撤销、重复、宏与批量替换</a></li><li class="depth-0"><a href="#7-surround快速操作包围符号" data-for="7-surround快速操作包围符号">7. Surround：快速操作包围符号</a></li><li class="depth-0"><a href="#8-zed-专用智能重命名与多光标" data-for="8-zed-专用智能重命名与多光标">8. Zed 专用：智能重命名与多光标</a></li><li class="depth-0"><a href="#9-zed-专用tree-sitter-结构化编辑" data-for="9-zed-专用tree-sitter-结构化编辑">9. Zed 专用：Tree-sitter 结构化编辑</a></li><li class="depth-0"><a href="#10-zed-专用语言服务与代码导航" data-for="10-zed-专用语言服务与代码导航">10. Zed 专用：语言服务与代码导航</a></li><li class="depth-0"><a href="#11-zed-vim-模式配置与兼容性" data-for="11-zed-vim-模式配置与兼容性">11. Zed Vim 模式配置与兼容性</a></li><li class="depth-0"><a href="#12-日常练习优先级" data-for="12-日常练习优先级">12. 日常练习优先级</a></li><li class="depth-0"><a href="#相关笔记" data-for="相关笔记">相关笔记</a></li><li class="depth-0"><a href="#参考资料" data-for="参考资料">参考资料</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-2" class="overflow"><li><a href="../Zed/" class="internal">Zed</a></li><li><a href="../Zed/快捷键" class="internal">Zed 快捷键</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/Richard-code200/quartz-site">GitHub</a></li><li><a href="https://richard-code200.github.io/quartz-site/index.xml">RSS</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="../postscript.js" type="module" data-persist="true"></script></html>
