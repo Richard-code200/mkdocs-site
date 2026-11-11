@@ -11,9 +11,9 @@ tags: ["常用工具"]
 uv 是一个用 Rust 编写的极快的 Python 包和项目管理器，由 [Astral](https://astral.sh)（Ruff 的开发者）出品。一个工具就能替代 `pip`、`pip-tools`、`pipx`、`poetry`、`pyenv`、`twine`、`virtualenv` 等多个工具，速度比 `pip` 快 10–100 倍。
 
 
-> [!info] 我的本机环境记录（2026-09）
+> [!info] 本机环境（2026-09）
 > - uv 0.12.9，安装在 `~/.local/bin/uv`
-> - 我已安装 uv 托管的 Python 3.11.15（位于 `~/.local/share/uv/python`），系统另有 Python 3.14.7
+> - 已安装 uv 托管的 Python 3.11.15（位于 `~/.local/share/uv/python`），系统另有 Python 3.14.7
 > - uv 默认优先使用托管的 Python，因此默认会选 3.11.15 而不是系统的 3.14.7
 
 
@@ -117,7 +117,7 @@ uv pip sync requirements.txt
 uv pip compile requirements.in --output-file requirements.txt
 ```
 
-我的使用思路是：老项目先用 `uv pip` 过渡，新项目优先考虑 uv 的项目管理方式。
+老项目先用 `uv pip` 过渡，新项目优先考虑 uv 的项目管理方式。
 
 ## 实用配置
 

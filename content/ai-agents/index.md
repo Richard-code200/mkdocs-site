@@ -1,9 +1,9 @@
 ---
 title: AI Agent
-description: 我对 AI Agent 基础概念、提示词、上下文与技能的学习记录。
+description: AI Agent 基础概念、提示词、上下文与技能的学习记录。
 ---
 
-我在这里整理 AI Agent 的基础概念与使用方法，逐步积累对上下文、提示词、技能和工具的理解。
+AI Agent 的基础概念与使用方法，包括上下文、提示词、技能和工具。
 
 ## 基础概念
 

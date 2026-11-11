@@ -1,13 +1,13 @@
 ---
 title: Pi Agent 使用笔记
-description: 我当前 Pi 与 Pi-Bolt 环境的配置、常用功能、扩展和快捷键速查，区分专属功能与未实测事项。
+description: 本机 Pi 与 Pi-Bolt 的配置、常用功能、扩展和快捷键速查。
 created: "2026-11-11"
 modified: "2026-11-11"
 tags: [ai, agent, 工具, 快捷键]
 aliases: [ai-agents/pi-agent]
 ---
 
-我把当前环境里的 Pi 和 Pi-Bolt 配置整理在这里，方便日常使用与后续维护。先列高频操作，再记录配置关系、扩展和快捷键；只记录核查得到的状态，不把已安装功能当成全部验证通过。
+本机 Pi 和 Pi-Bolt 的配置速查。先列高频操作，再看配置关系、扩展和快捷键；未实测的部分单独标注。
 
 > 核查日期：2026-11-11（本机环境快照）。
 > 本文的「Pi」指命令 `pi`，即 `@earendil-works/pi-coding-agent`；本机没有单独的 `pi-agent` 可执行命令。

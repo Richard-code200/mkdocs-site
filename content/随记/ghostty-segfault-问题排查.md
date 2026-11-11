@@ -11,7 +11,7 @@ tags: ["随记"]
 **日期**: 2026-05-20 初查 / 2026-05-21 修复完善  
 **环境**: Fedora 44, Wayland (niri), ghostty 1.3.1-2.fc44, clash-verge 2.5.1
 
-这篇保留我在 2026 年 5 月排查时的现象、判断和临时处理，不能当作今天的配置建议。
+2026 年 5 月的排查记录，包含当时的判断和临时方案，不作为当前配置建议。
 
 ## 现象
 
@@ -30,7 +30,7 @@ warning(glib): WARNING: Adwaita: The resource style-hc-dark.css is deprecated ..
 zsh: segmentation fault (core dumped)  ghostty
 ```
 
-我通过 `coredumpctl` 确认，当时每次启动都会产生 SIGSEGV core dump。
+通过 `coredumpctl` 确认，当时每次启动都会产生 SIGSEGV core dump。
 
 ## 根因分析
 
@@ -74,7 +74,7 @@ Fedora 43→44 升级将 `glycin-libs` 从 2.0.x 升级到 2.1.1，新版本中 
 
 ## 临时解决方案
 
-我当时采用的临时方案是设置 `GLYCIN_DATA_DIR`，让 glycin 绕过导致崩溃的代码路径。
+当时的临时方案是设置 `GLYCIN_DATA_DIR`，让 glycin 绕过导致崩溃的代码路径。
 
 ### 方法
 
@@ -133,7 +133,7 @@ GLYCIN_DATA_DIR=/tmp/glycin-data ghostty
 
 ### 现象
 
-我设置 `~/.zshrc` 后，从 alacritty 终端执行 `ghostty` 能正常启动，但通过 vicinae 启动仍然 segfault。
+设置 `~/.zshrc` 后，从 alacritty 终端执行 `ghostty` 能正常启动，但通过 vicinae 启动仍然 segfault。
 
 ### 原因
 
@@ -183,7 +183,7 @@ cat /proc/$(cat /run/user/1000/vicinae/vicinae-data-control-server.pid)/environ 
 
 ### 现象
 
-我设置 `GLYCIN_DATA_DIR` 后，又遇到了 clash-verge 启动崩溃：
+设置 `GLYCIN_DATA_DIR` 后，又出现 clash-verge 启动崩溃：
 
 ```
 Gtk:ERROR:../gtk/gtkiconhelper.c:495:ensure_surface_for_gicon: assertion failed (error == NULL):
@@ -233,7 +233,7 @@ pb = GdkPixbuf.Pixbuf.new_from_file('/path/to/icon.svg')  # OK
 
 #### 尝试一：在 GLYCIN_DATA_DIR 下补齐 glycin 配置
 
-我先尝试在 `~/.cache/glycin-data/` 下创建 glycin 加载器配置目录，再从系统复制配置文件：
+先在 `~/.cache/glycin-data/` 下创建 glycin 加载器配置目录，再从系统复制配置文件：
 
 ```sh
 mkdir -p ~/.cache/glycin-data/glycin-loaders/2+/conf.d/
@@ -254,7 +254,7 @@ ghostty 重新崩溃的原因：glycin 能正常初始化后，在创建 bwrap �
 
 glycin SVG loader 配置中的 `Fontconfig=true` 指示 glycin 在沙箱中挂载字体缓存目录，这正是触发 `FcConfigGetCacheDirs()` 的代码路径。
 
-**我当时最终采用的方案**：拷贝系统配置到 `GLYCIN_DATA_DIR` 后，**移除 `Fontconfig=true`**：
+**当时最终采用的方案**：拷贝系统配置到 `GLYCIN_DATA_DIR` 后，**移除 `Fontconfig=true`**：
 
 ```ini
 # ~/.cache/glycin-data/glycin-loaders/2+/conf.d/glycin-svg.conf
@@ -280,7 +280,7 @@ ExposeBaseDir=true
 
 ### 环境变量
 
-我当时保留了三个层级中的 `GLYCIN_DATA_DIR` 设置：
+当时保留了三个层级中的 `GLYCIN_DATA_DIR` 设置：
 
 | 文件                                  | 配置                                                     |
 | ------------------------------------- | -------------------------------------------------------- |

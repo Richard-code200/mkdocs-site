@@ -3,7 +3,7 @@ title: "常用工具"
 _generated_navigation: true
 ---
 
-这里记录我学习常用工具时整理的用法、速查表和练习心得。
+常用工具的用法、配置和练习记录。
 
 - [bat](常用工具/bat.md)
 - [eza](常用工具/eza.md)

@@ -8,7 +8,7 @@ modified: "2026-05-25T23:57:52+08:00"
 tags: ["常用工具"]
 ---
 
-我把 bat 的用法记在这里,方便查看文件时查阅。它类似 cat,但带有 Git 集成和语法高亮。
+`bat` 类似 `cat`，多了 Git 集成和语法高亮。
 
 ## 优点
 
@@ -26,7 +26,7 @@ tags: ["常用工具"]
 
 ### 不可打印(non-printable)字符可视化
 
-添加`-A`/`--show-all`参数可以文件文件中的不可打印字符:
+加上 `-A` / `--show-all` 可以查看文件中的不可打印字符：
 
 ![Non-printable character example](https://i.imgur.com/WndGp9H.png)
 
@@ -34,8 +34,8 @@ tags: ["常用工具"]
 
 `bat`会在一般情况下将大于屏幕可显示范围的内容输出到分页器(pager, e.g. `less`)。
 
-我不需要分页时，可以添加 `--paging=never` 参数，让 `bat` 像 `cat` 一样直接输出。
-如果以后想把 `cat` 设为 `bat` 的别名，可以在 shell 配置文件中添加 `alias cat='bat --paging=never'`。
+不需要分页时，加上 `--paging=never`，像 `cat` 一样直接输出。
+给 `cat` 设置别名时，可以在 shell 配置文件中添加 `alias cat='bat --paging=never'`。
 
 #### 智能输出
 
@@ -90,7 +90,7 @@ bat f - g  # 输出 f，接着是标准输入流，最后 g
 
 #### `fzf`
 
-我可以把 `bat` 用作 `fzf` 的预览器。这需要在`bat`后添加`--color=always`选项，以及`--line-range` 选项来限制大文件的加载次数。
+`bat` 可以用作 `fzf` 的预览器。这需要在`bat`后添加`--color=always`选项，以及`--line-range` 选项来限制大文件的加载次数。
 
 ```bash
 fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'
@@ -100,7 +100,7 @@ fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'
 
 #### `find` 或 `fd`
 
-我用 `find` 查找文件时，可以通过 `-exec` 调用 `bat` 预览结果：
+`find` 的搜索结果可以通过 `-exec` 交给 `bat` 预览：
 
 ```bash
 find … -exec bat {} +
@@ -150,7 +150,7 @@ batdiff() {
 
 该功能也作为独立工具提供，可以在[`bat-extras`](https://github.com/eth-p/bat-extras)中找到`batdiff`。
 
-我需要进一步了解 Git 和 diff 时，可以查阅[`delta`](https://github.com/dandavison/delta)。
+Git diff 的显示也可以参考[`delta`](https://github.com/dandavison/delta)。
 
 #### `xclip`
 
@@ -171,9 +171,9 @@ export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08
 man 2 select
 ```
 
-（如果我使用 Debian 或 Ubuntu，需要将 `batcat` 替换为 `bat`。）
+（如果使用 Debian 或 Ubuntu，需要将 `batcat` 替换为 `bat`。）
 
-如果我想把它包装成独立命令，也可以考虑 [`batman`](https://github.com/eth-p/bat-extras/blob/master/doc/batman.md)。
+需要独立命令时，可以考虑 [`batman`](https://github.com/eth-p/bat-extras/blob/master/doc/batman.md)。
 
 > [!WARNING]
 > 在使用 Mandoc 的 `man` 实现时，这[无法](https://github.com/sharkdp/bat/issues/1145)直接工作。
@@ -203,7 +203,7 @@ man 2 select
 bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
 ```
 
-`bat`在默认情况下能够在黑色主题背景下获得较好的效果，如果以后改用亮色终端，我可以试试`GitHub`或`OneHalfLight`。想要添加自定义主题可以参考[添加主题](#添加主题)。
+`bat`在默认情况下能够在黑色主题背景下获得较好的效果，亮色终端可以试试`GitHub`或`OneHalfLight`。想要添加自定义主题可以参考[添加主题](#添加主题)。
 
 ### 8-bit 主题
 
@@ -214,7 +214,7 @@ bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
   它使用 4-bit 色彩（带有亮度的 3-bit 色彩）。
   根据 [base16 styling guidelines](https://github.com/tinted-theming/home/blob/main/styling.md) 制作。
 - `base16-25`专为 [base16-shell](https://github.com/tinted-theming/base16-shell) 设计。
-  它把部分亮色替换为 8-bit 色彩。我需要先确认自己的 256 色终端是否使用 base16-shell，再决定是否使用这个主题。
+  它把部分亮色替换为 8-bit 色彩。使用前先确认 256 色终端是否采用 base16-shell。
 
 尽管这些主题具有诸多限制，但具有一些 truecolor 主题不具有的三个优点：
 
@@ -224,16 +224,16 @@ bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
 
 ### 输出样式
 
-我可以用 `--style` 参数控制 `bat` 的输出样式。使用`--style=numbers,changes`可以只开启 Git 修改和行号显示而不添加其他内容。`BAT_STYLE`环境变量具有相同功能。
+`--style` 控制输出样式。使用`--style=numbers,changes`可以只开启 Git 修改和行号显示而不添加其他内容。`BAT_STYLE`环境变量具有相同功能。
 
 ### 添加新的语言和语法
 
-如果现有的 `bat` 不支持我需要的语言或语法，可以自行添加。
+现有版本不支持的语言或语法，可以自行添加。
 
 `bat`使用`syntect`库来支持语法高亮，该库使用 [Sublime Text `.sublime-syntax` 语法文件](https://www.sublimetext.com/docs/3/syntax.html)和主题。
 而后者中的大部分可以在 [Package Control](https://packagecontrol.io/) 找到。
 
-我找到合适的语法文件后，可以按下面的步骤添加：
+找到合适的语法文件后，按以下步骤添加：
 
 1. 创建包含语法描述文件的目录：
 
@@ -258,7 +258,7 @@ bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
    bat cache --clear
    ```
 
-4. 如果我认为 `bat` 有必要自带该语法支持，可以在阅读[指导](https://github.com/sharkdp/bat/blob/master/doc/assets.md)后向仓库提交 [Syntax Request](https://github.com/sharkdp/bat/issues/new?labels=syntax-request&template=syntax_request.md)。
+4. 需要向上游申请加入语法支持时，先阅读[指导](https://github.com/sharkdp/bat/blob/master/doc/assets.md)，再向仓库提交 [Syntax Request](https://github.com/sharkdp/bat/issues/new?labels=syntax-request&template=syntax_request.md)。
 
 ### 添加主题
 
@@ -279,11 +279,11 @@ bat cache --build
 
 ### 添加或修改文件关联
 
-我可以用 `--map-syntax` 参数添加或修改文件名模板。
+`--map-syntax` 用于添加或修改文件名模板。
 它需要一个类似`pattern:syntax`的参数来指定，其中`pattern`是 glob 文件匹配模板，
 `syntax`则是支持的语法的完整名（使用`bat --list-languages`来查看获取一份清单）。
 
-如果我需要反复使用同一组参数，可以写入配置文件，不必每次都在命令行中传递。
+经常使用的参数可以写入配置文件，不必每次都在命令行中传递。
 
 以下展示了把“INI”关联到具有`.conf`扩展名的文件
 
@@ -324,11 +324,11 @@ export BAT_PAGER="less -RF"
 
 `bat` 使用四个空格宽的制表符，而不受分页器影响，同时也可以用`--tabs`参数来自定义。
 
-注意：通过其他方法针对分页器的制表符设置不会生效（例如通过`bat`的`--pager`参数传递或`less`使用的`LESS`环境变量）。因为在输出提交给分页器之前，内容中的制表符就已经被`bat`替换为了特定长度的空格以避免由于边栏导致的缩进问题。我可以给 `bat` 传递 `--tabs=0`，取消这项设定，让分页器处理制表符。
+注意：通过其他方法针对分页器的制表符设置不会生效（例如通过`bat`的`--pager`参数传递或`less`使用的`LESS`环境变量）。因为在输出提交给分页器之前，内容中的制表符就已经被`bat`替换为了特定长度的空格以避免由于边栏导致的缩进问题。加上 `--tabs=0` 可以取消这项设定，让分页器处理制表符。
 
 ### 暗色模式
 
-如果以后在 macOS 上使用 `bat`，我可以参考下面的按系统明暗模式切换主题的方式。如下所示操作会让`bat`在系统处于亮色模式时加载`GitHub`主题和暗色模式时加载`default`主题。
+macOS 下可以按系统明暗模式切换主题。如下所示操作会让`bat`在系统处于亮色模式时加载`GitHub`主题和暗色模式时加载`default`主题。
 
 ```bash
 alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
@@ -340,7 +340,7 @@ alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /de
 bat --config-file
 ```
 
-我也可以通过 `BAT_CONFIG_PATH` 为 `bat` 指定自定义位置的配置文件：
+`BAT_CONFIG_PATH` 可以指定配置文件的位置：
 
 ```bash
 export BAT_CONFIG_PATH="/path/to/bat.conf"
@@ -354,7 +354,7 @@ bat --generate-config-file
 
 ### 格式
 
-配置文件其实是一份按行分割的命令行参数列表。需要确认参数和可用值时，我可以查 `bat --help`。配置文件中`#`打头的行会被视为注释而不生效。
+配置文件其实是一份按行分割的命令行参数列表。完整参数和可用值见 `bat --help`。配置文件中`#`打头的行会被视为注释而不生效。
 
 以下是一份示例：
 

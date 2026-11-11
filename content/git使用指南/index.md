@@ -3,7 +3,7 @@ title: "Git使用指南"
 _generated_navigation: true
 ---
 
-这里记录我学习和使用 Git 时整理的基础概念与常用命令。
+Git 基础概念与常用命令速查。
 
 - [Git基础概念](git使用指南/Git基础概念.md)
 - [初始设置](git使用指南/初始设置.md)
